@@ -1,0 +1,128 @@
+﻿\section{Полиграммный шифр замены Хилла}
+
+Если при шифровании преобразуются более двух букв открытого текста, то шифр называется \textbf{полиграммным}. Лестер С. Хилл изобрел полиграммный шифр замены в 1929 г. Это был первый шифр, который позволял оперировать более чем с тремя символами за один такт.
+
+В шифре \textbf{Хилла} предварительно текст преобразуют в цифровую форму и разбивают на последовательности (блоки) по $n$ последовательных цифр. Такие последовательности называются $n$-граммами. Выбирают обратимую по модулю $m$  $(n \times n)$-матрицу $\mathbf{A} = (a_{ij})$, где  $m$ -- число букв в алфавите. Выбирают случайный $n$-вектор $\mathbf{f} = (f_1,  \dots,  f_n)$. После чего  $n$-грамма открытого текста $\mathbf{x} = (x_1, x_2,  \dots,  x_n)$ заменяется $n$-граммой шифрованного текста $\mathbf{y} = (y_1, y_2,  \dots,  y_n)$ по формуле
+    \[ \mathbf{y} = \mathbf{x} \mathbf{A} + \mathbf{f} \mod m. \]
+Расшифрование проводится по правилу
+    \[ \mathbf{x} = (\mathbf{y} - \mathbf{f}) \mathbf{A}^{-1} \mod m. \]
+
+\example
+Приведем пример шифрования с помощью шифра Хилла. Преобразуем английский алфавит в числовую форму (m = 26) следующим образом:
+\[ \text{a} \rightarrow 0, ~ \text{b} \rightarrow 1, \text{c} \rightarrow 2, \dots, \text{z} \rightarrow 25. \]
+%\[ \begin{array}{cccccccccccccc}
+%    a & b & c & d & e & f & g & h & i & j &  k &  l &  m &  n \\
+%    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13
+%\end{array} \]
+%\[ \begin{array}{cccccccccccc}
+%     o &  p &  q &  r &  s &  t &  u &  v &  w &  x &  y &  z  \\
+%    14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25
+%\end{array} \]
+
+Выберем для примера $n=2$. Запишем фразу <<Wheatstone was the inventor>> из предыдущего примера (первая строка таблицы). Каждой букве поставим в соответствие ее номер в алфавите (вторая строка):
+\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|cccccccccccc|}
+    \hline
+    w,h & e,a & t,s & t,o & n,e & w,a & s,t & h,e & i,n & v,e & n,t & o,r \\
+    \hline
+    22,7 & 4,0 & 19,18 & 19,14 & 13,4 & 22,0 & 18,19 & 7,4 & 8,13 & 21,4 & 13,19 & 14,17 \\
+    \hline
+\end{tabular} } \end{center}
+
+Выберем матрицу шифрования $A$ в виде
+\[
+    \mathbf{A} = \left( \begin{array}{cc}
+        5 & 8 \\
+        3 & 5 \\
+    \end{array} \right).
+\]
+
+Эта матрица обратима по $\mod 26$, так как ее определитель равен $1$ и взаимно прост с числом букв английского алфавита $m=26$. Обратная матрица равна
+\[
+    \mathbf{A}^{-1} = \left( \begin{array}{cc}
+        5  & 18 \\
+        23 & 5
+    \end{array} \right) \mod 26.
+\]
+
+Выберем вектор $\mathbf{f} = (4, 2)$. Первая числовая пара открытого текста  $\mathbf{x} = (\text{w}, \text{h}) = (22, 7)$  зашифрована в виде
+\[
+    \mathbf{y} = \mathbf{x} \mathbf{A} + \mathbf{f} =
+        (22, 7)
+        \left( \begin{array}{cc}
+            5 & 8 \\
+            3 & 5
+        \end{array} \right) +
+        (4, 2) = (14, 3) \mod 26
+\]
+или в буквенном виде  $(\text{o}, \text{d})$.
+
+Повторяя вычисления для всех пар, получим полный шифрованный текст в числовом виде (третья строка) или в буквенном виде (четвертая строка):
+\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|cccccccccccc|}
+    \hline
+    w,h & e,a & t,s & t,o & n,e & w,a & s,t & h,e & i,n & v,e & n,t & o,r \\
+    22,7 & 4,0 & 19,18 & 19,14 & 13,4 & 22,0 & 18,19 & 7,4 & 8,13 & 21,4 & 13,19 & 14,17 \\
+    \hline
+    14,3 & 24,22 & 9,21 & 3,9 & 23,1 & 10,8 & 12,19 & 19,23 & 18,3 & 11,15 & 13,20 & 2,19 \\
+    o,d & y,w & j,v & d,j & x,b & k,i & m,t & t,x & s,d & l,p & n,u & c,t \\
+    \hline
+\end{tabular} } \end{center}
+\exampleend
+
+Криптосистема Хилла уязвима к частотному криптоанализу\index{криптоанализ!частотный}, который основан на вычислении частот  последовательностей символов. Рассмотрим пример взлома простого варианта криптосистемы Хилла.
+
+\example В английском языке $m = 26$,
+    \[ a \rightarrow 0, ~ b \rightarrow 1, ~ \dots, ~ z \rightarrow 25. \]
+При шифровании использована криптосистема Хилла с матрицей второго порядка c нулевым вектором $\mathbf{f}$. Наиболее часто встречающиеся в шифротексте биграммы -- RH и NI, в то время как в исходном языке они TH и HE (артикль THE). Найдем матрицу секретного ключа, составив уравнения
+\[
+    \begin{array}{l}
+        R = 17 = -9 \mod 26, ~~ H = 7 \mod 26, ~~ N = 13 \mod 26, \\
+        I = 8 \mod 26, ~~ T = 19 = -7 \mod 26, ~~ E=4 \mod 26; \\
+    \end{array}
+\] \[
+    \left( \begin{array}{cc}
+        \text{R} & \text{H} \\
+        \text{N} & \text{I}
+    \end{array} \right) =
+    \left( \begin{array}{cc}
+        \text{T} & \text{H} \\
+        \text{H} & \text{E}
+    \end{array} \right) \cdot
+    \left( \begin{array}{cc}
+        k_{1,1} & k_{1,2} \\
+        k_{2,1} & k_{2,2}
+    \end{array} \right) \mod 26;
+\] \[
+    \left( \begin{array}{cc}
+        -9 & 7 \\
+        13 & 8
+    \end{array} \right) =
+    \left( \begin{array}{cc}
+        -7 & 7 \\
+        7 & 4
+    \end{array} \right) \cdot
+    \left( \begin{array}{cc}
+        k_{1,1} & k_{1,2} \\
+        k_{2,1} & k_{2,2}
+    \end{array} \right) \mod 26;
+\]
+
+Стоит обратить внимание на то, что числа 4, 8, 13 не имеют обратных по модулю 26.
+
+\[
+    D = \det \left( \begin{array}{cc} -7 & 7 \\ 7 & 4 \end{array} \right) = -7 \cdot 4 - 7 \cdot 7 = 1 \mod 26.
+\] \[
+    \left( \begin{array}{cc} -7 & 7 \\ 7 & 4 \end{array} \right)^{-1} =
+    D^{-1} \left( \begin{array}{cc} 4 & -7 \\ -7 & -7 \end{array} \right) =
+    \left( \begin{array}{cc} 4 & -7 \\ -7 & -7 \end{array} \right) \mod 26.
+\] \[
+    \left( \begin{array}{cc} k_{1,1} & k_{1,2} \\ k_{2,1} & k_{2,2} \end{array} \right) =
+    \left( \begin{array}{cc} 4 & -7 \\ -7 & -7 \end{array} \right) \cdot
+    \left( \begin{array}{cc} -9 & 7 \\ 13 & 8 \end{array} \right) =
+\] \[
+    = \left( \begin{array}{cc} 3 & -2 \\ -2 & -1 \end{array} \right) \mod 26.
+\]
+Найденный секретный ключ
+\[
+    \left( \begin{array}{cc} \text{D} & \text{Y} \\ \text{Y} & \text{Z} \end{array} \right).
+\]
+\exampleend

@@ -1,0 +1,75 @@
+﻿\section{Шифр гаммирования Виженера}
+
+Шифр, который известен под именем Виженера, впервые описал Джованни Батиста Беллазо (Giovan Battista Bellasо) в своей книге <<La cifra>>.
+
+Рассмотрим один из вариантов этого шифра. В самом простом случае квадратом \textbf{Виженера}  называется таблица из циклически сдвинутых копий латинского алфавита, в которой  буквы J и V исключены. Первая строка и первый столбец -- буквы латинского алфавита в их обычном порядке. В строках таблицы порядок букв сохраняется, за исключением циклических переносов. Представим эту таблицу.
+
+\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|c|cccccccccccccccccccccccc|}
+    \hline
+    $\quad \downarrow ~ \rightarrow$ & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{E} & \textbf{F} & \textbf{G} & \textbf{H} & \textbf{I} & \textbf{K} & \textbf{L} & \textbf{M} & \textbf{N} & \textbf{O} & \textbf{P} & \textbf{Q} & \textbf{R} & \textbf{S} & \textbf{T} & \textbf{U} & \textbf{X} & \textbf{Y} & \textbf{Z} & \textbf{W} \\
+    \hline
+    \textbf{A} & A & B & C & D & E & F & G & H & I & K & L & M & N & O & P & Q & R & S & T & U & X & Y & Z & W \\
+    \textbf{B} & B & C & D & E & F & G & H & I & K & L & M & N & O & P & Q & R & S & T & U & X & Y & Z & W & A \\
+    \textbf{C} & C & D & E & F & G & H & I & K & L & M & N & O & P & Q & R & S & T & U & X & Y & Z & W & A & B \\
+    \textbf{D} & D & E & F & G & H & I & K & L & M & N & O & P & Q & R & S & T & U & X & Y & Z & W & A & B & C \\
+    \textbf{E} & E & F & G & H & I & K & L & M & N & O & P & Q & R & S & T & U & X & Y & Z & W & A & B & C & D \\
+    \textbf{F} & F & G & H & I & K & L & M & N & O & P & Q & R & S & T & U & X & Y & Z & W & A & B & C & D & E \\
+    \textbf{G} & G & H & I & K & L & M & N & O & P & Q & R & S & T & U & X & Y & Z & W & A & B & C & D & E & F \\
+    \textbf{H} & H & I & K & L & M & N & O & P & Q & R & S & T & U & X & Y & Z & W & A & B & C & D & E & F & G \\
+    \textbf{I} & I & K & L & M & N & O & P & Q & R & S & T & U & X & Y & Z & W & A & B & C & D & E & F & G & H \\
+    \textbf{K} & K & L & M & N & O & P & Q & R & S & T & U & X & Y & Z & W & A & B & C & D & E & F & G & H & I \\
+    \textbf{L} & L & M & N & O & P & Q & R & S & T & U & X & Y & Z & W & A & B & C & D & E & F & G & H & I & K \\
+    \textbf{M} & M & N & O & P & Q & R & S & T & U & X & Y & Z & W & A & B & C & D & E & F & G & H & I & K & L \\
+    \textbf{N} & N & O & P & Q & R & S & T & U & X & Y & Z & W & A & B & C & D & E & F & G & H & I & K & L & M \\
+    \textbf{O} & O & P & Q & R & S & T & U & X & Y & Z & W & A & B & C & D & E & F & G & H & I & K & L & M & N \\
+    \textbf{P} & P & Q & R & S & T & U & X & Y & Z & W & A & B & C & D & E & F & G & H & I & K & L & M & N & O \\
+    \textbf{Q} & Q & R & S & T & U & X & Y & Z & W & A & B & C & D & E & F & G & H & I & K & L & M & N & O & P \\
+    \textbf{R} & R & S & T & U & X & Y & Z & W & A & B & C & D & E & F & G & H & I & K & L & M & N & O & P & Q \\
+    \textbf{S} & S & T & U & X & Y & Z & W & A & B & C & D & E & F & G & H & I & K & L & M & N & O & P & Q & R \\
+    \textbf{T} & T & U & X & Y & Z & W & A & B & C & D & E & F & G & H & I & K & L & M & N & O & P & Q & R & S \\
+    \textbf{U} & U & X & Y & Z & W & A & B & C & D & E & F & G & H & I & K & L & M & N & O & P & Q & R & S & T \\
+    \textbf{X} & X & Y & Z & W & A & B & C & D & E & F & G & H & I & K & L & M & N & O & P & Q & R & S & T & U \\
+    \textbf{Y} & Y & Z & W & A & B & C & D & E & F & G & H & I & K & L & M & N & O & P & Q & R & S & T & U & X \\
+    \textbf{Z} & Z & W & A & B & C & D & E & F & G & H & I & K & L & M & N & O & P & Q & R & S & T & U & X & Y \\
+    \textbf{W} & W & A & B & C & D & E & F & G & H & I & K & L & M & N & O & P & Q & R & S & T & U & X & Y & Z \\
+    \hline
+\end{tabular} } \end{center}
+
+Здесь первый столбец используется для ключевой последовательности, а первая строка -- для открытого текста. Общая схема шифрования такова: выбирается некоторая ключевая последовательность, которая периодически повторяется в виде длинной строки. Под ней соответственно каждой букве записываются буквы открытого текста в виде второй строки. Буква ключевой последовательности указывает строку в квадрате Виженера, буква открытого текста указывает столбец в квадрате. Соответствующая буква, стоящая в квадрате на пересечении этой строки и столбца, заменяет букву открытого текста в шифротексте. Приведем примеры.
+
+\example
+Ключевая последовательность состоит из периодически повторяющегося ключевого слова, известного обеим сторонам. Пусть ключевая последовательность состоит из периодически повторяющегося слова THIS, а открытый текст -- слова COMMUNICATIONSYSTEMS (см. таблицу). Пробелы между словами опущены.
+\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|l|cccccccccccccccccccc|}
+    \hline
+    Ключ            & T & H & I & S & T & H & I & S & T & H & I & S & T & H & I & S & T & H & I & S \\
+    Открытый текст  & C & O & M & M & U & N & I & C & A & T & I & O & N & S & Y & S & T & E & M & S \\
+    Шифротекст      & X & X & U & E & O & U & R & U & T & B & R & G & G & A & F & L & N & M & U & L \\
+    \hline
+\end{tabular} } \end{center}
+Результат шифрования приведен в третьей строке: на пересечении строки $T$ и столбца $C$ стоит буква $X$, на пересечении строки $H$ и столбца $O$ стоит буква $X$, на пересечении строки $I$ и столбца  $M$ стоит буква $U$ и т.д.
+\exampleend
+
+Виженер считал возможным в качестве ключевой последовательности использовать открытый текст с добавлением начальной буквы, известной легальным пользователям. Это вариант используется во втором примере.
+
+\example
+Ключевая последовательность образуется с помощью открытого текста. Стороны договариваются о первой букве ключа, а следующие буквы состоят из открытого текста. Пусть в качестве первой буквы выбрана буква  $T$. Тогда для предыдущего примера таблица шифрования имеет вид
+\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|l|cccccccccccccccccccc|}
+    \hline
+    Ключ            & T & C & O & M & M & U & N & I & C & A & T & I & O & N & S & Y & S & T & E & M \\
+    Открытый текст  & C & O & M & M & U & N & I & C & A & T & I & O & N & S & Y & S & T & E & M & S \\
+    Шифротекст      & X & Q & A & Z & G & H & X & L & C & T & C & Y & B & F & P & P & M & Z & Q & E \\
+    \hline
+\end{tabular} } \end{center}
+\exampleend
+
+\example
+Пусть ключевая последовательность образуется с помощью шифротекста. Стороны договариваются о первой букве ключа. В отличие от предыдущего случая следующая буква ключа -- это результат
+шифрования первой буквы текста и т.д. Пусть в качестве первой буквы выбрана буква  $T$. Тогда приведенная в предыдущем примере таблица шифрования примет такой вид:
+\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|l|cccccccccccccccccccc|}
+    \hline
+    Ключ            & T & X & K & X & H & C & P & Z & A & A & T & C & Q & D & X & S & L & E & I & U \\
+    Открытый текст  & C & O & M & M & U & N & I & C & A & T & I & O & N & S & Y & S & T & E & M & S \\
+    Шифротекст      & X & K & X & H & C & P & Z & A & A & T & C & Q & D & X & S & L & E & I & U & N \\
+    \hline
+\end{tabular} } \end{center}
+\exampleend

@@ -1,0 +1,31 @@
+﻿\section[SQL инъекции с исполнением кода вебсервером]{SQL инъекции с исполнением кода \protect\\ базой данных интернет-сервиса}
+
+Второй классической уязвимостью веб-приложений являются SQL-инъекции, когда пользователь имеет возможность поменять смысл запроса к базе данных веб-сервера. Запрос делается в виде текстовой строки на скриптовом языке SQL.  Например, выражение
+\begin{verbatim}
+s = "SELECT * FROM Users WHERE Name = '" + username + "';"
+\end{verbatim}
+предназначено для получения информации о пользователе \texttt{username}. Однако если пользователь вместо имени введет строку вида
+\begin{center} \begin{verbatim}
+john';  DELETE * FROM Users;  SELECT * FROM Users WHERE
+  Name = 'john,
+\end{verbatim} \end{center}
+то выражение превратится в три SQL-операции:
+%{\color{red} Проверить в каких системах будет работать. В JDBC PrepareStatement требует одно выражение, а ExecutableStatement использовать нельзя, так-как он не возвращает значения.}
+\begin{verbatim}
+-- запрос о пользователе john
+SELECT * FROM Users WHERE Name = 'john';
+-- удаление всех пользователей
+DELETE FROM Users;
+-- запрос о пользователе john
+SELECT * FROM Users WHERE Name = 'john';
+\end{verbatim}
+При исполнении этого SQL-выражения базой данных все записи пользователей будут удалены.
+
+Уязвимости в SQL-выражениях связаны с отсутствием а) экранирования специальных символов \texttt{"},  \texttt{'},  \texttt{;}, б) контроля над типом введенных данных.
+
+Метод защиты так же заключается в \emph{разделении} кода и данных. Для защиты от приведенных атак на базу данных следует использовать параметрические запросы к базе данных с \emph{фиксированным} SQL-выражением. Например, в JDBC
+\begin{verbatim}
+PreparedStatement p = conn.prepareStatement(
+    "SELECT * FROM Users WHERE Name=?");
+p.setString(1, username);
+\end{verbatim}

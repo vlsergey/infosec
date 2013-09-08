@@ -1,0 +1,162 @@
+﻿\section{Защищенное интернет-соединение SSL/TLS}
+
+Протокол SSL (Secure Socket Layer) был разработан компанией Netscape. Начиная с версии 3, протокол развивается как открытый стандарт TLS (Transport Layer Security). Протокол SSL/TLS обеспечивает защищенное соединение по незащищенному каналу связи на транспортном уровне в модели OSI. Протокол встраивается между уровнем TCP и уровнями HTTP, FTP, SMTP, POP3, IMAP и т.д. Применение протокола обозначается добавлением суффикса 'S': HTTPS, FTPS, POP3S, IMAPS и т.д.
+
+Протокол обеспечивает следующее.
+\begin{itemize}
+    \item Одностороннюю или взаимную аутентификацию клиента и сервера по открытым ключам сертификата X.509. В Интернете, как правило, делается \textbf{односторонняя} аутентификация веб-сервера браузеру клиента, то есть только веб-сервер предъявляет сертификат (открытый ключ и ЭЦП к нему от вышележащего УЦ).
+    \item Создание сеансовых симметричных ключей для шифрования и кода аутентификации сообщения для передачи данных в обе стороны.
+    \item Конфиденциальность -- блоковое или потоковое шифрование передаваемых данных в обе стороны.
+    \item Целостность -- аутентификацию отправляемых сообщений в обе стороны кодом аутентификации сообщений $\HMAC(K,M)$, описанном ранее.
+\end{itemize}
+
+Рассмотрим протокол TLS последней версии 1.2.
+
+
+\subsection{Протокол <<рукопожатия>>}
+
+Протокол <<рукопожатия>> (handshake protocol) производит аутентификацию и создание сеансовых ключей между клиентом $C$ и сервером $S$.
+
+\begin{enumerate}
+    \item $C \rightarrow S$:
+        \begin{enumerate}
+            \item ClientHello: ~ 1) URI сервера, ~ 2) Одноразовая метка $N_C$\index{одноразовая метка}, 3) ~ поддерживаемые алгоритмы шифрования, кода аутентификации сообщений, хэширования, ЭЦП и сжатия.
+        \end{enumerate}
+
+    \item $C \leftarrow S$:
+        \begin{enumerate}
+            \item ServerHello: одноразовая метка $N_S$, поддерживаемые алгоритмы сервера.
+
+            После обмена набором желательных алгоритмов сервер и клиент по единому правилу выбирают общий набор алгоритмов.
+            \item Server Certificate: сертификат X.509v3 сервера с запрошенным URI (URI нужен в случае нескольких виртуальных веб-серверов с разными URI на одном узле c одним IP адресом).
+            \item Server Key Exchange Message: информация для создания предварительного общего секрета $premaster$ длиной 48 байтов в виде: ~ 1) либо обмена по протоколу Диффи--Хеллмана с клиентом (сервер отсылает $(g, g^a)$), ~ 2) либо по другому алгоритму с открытым ключом, ~ 3) либо разрешения клиенту выбрать ключ.
+            \item Электронно-цифровая подпись к Server Key Exchange Message на ключе сертификата сервера для аутентификации сервера клиенту.
+            \item Certificate Request: опциональный запрос сервером сертификата клиента.
+            \item Server Hello Done: идентификатор конца транзакции.
+        \end{enumerate}
+
+    \item $C \rightarrow S$:
+        \begin{enumerate}
+            \item Client Certificate: сертификат X.509v3 клиента, если он был запрошен сервером.
+            \item Client Key Exchange Message: информация для создания предварительного общего секрета $premaster$ длиной 48 байтов в виде: ~ 1) либо обмена по протоколу Диффи--Хеллмана с сервером (клиент отсылает $g^b$, в результате обе стороны вычисляют ключ $premaster = g^{ab}$), ~ 2) либо по другому алгоритму, ~ 3) либо ключа, выбранного клиентом и зашифрованного на открытом ключе из сертификата сервера.
+            \item Электронно-цифровая подпись к Client Key Exchange Message на ключе сертификата клиента для аутентификации клиента серверу (если клиент использует сертификат).
+            \item Certificate Verify: результат проверки сертификата сервера.
+            \item Change Cipher Spec: уведомление о смене сеансовых ключей.
+            \item Finished: идентификатор конца транзакции.
+        \end{enumerate}
+
+    \item $C \leftarrow S$:
+        \begin{enumerate}
+            \item Change Cipher Spec: уведомление о смене сеансовых ключей.
+            \item Finished: идентификатор конца транзакции.
+        \end{enumerate}
+\end{enumerate}
+
+%      http://tools.ietf.org/html/rfc5246#page-37
+
+%      struct {
+%          ProtocolVersion client_version;
+%          Random random;
+%          SessionID session_id;
+%          CipherSuite cipher_suites<2..2^16-2>;
+%          CompressionMethod compression_methods<1..2^8-1>;
+%          select (extensions_present) {
+%              case false:
+%                  struct {};
+%              case true:
+%                  Extension extensions<0..2^16-1>;
+%          };
+%      } ClientHello;
+
+%      struct {
+%          ProtocolVersion server_version;
+%          Random random;
+%          SessionID session_id;
+%          CipherSuite cipher_suite;
+%          CompressionMethod compression_method;
+%          select (extensions_present) {
+%              case false:
+%                  struct {};
+%              case true:
+%                  Extension extensions<0..2^16-1>;
+%          };
+%      } ServerHello;
+
+%      struct {
+%          ASN.1Cert certificate_list<0..2^24-1>;
+%      } Certificate;
+
+%      struct {
+%          select (KeyExchangeAlgorithm) {
+%              case dh_anon:
+%                  ServerDHParams params;
+%              case dhe_dss:
+%              case dhe_rsa:
+%                  ServerDHParams params;
+%                  digitally-signed struct {
+%                      opaque client_random[32];
+%                      opaque server_random[32];
+%                      ServerDHParams params;
+%                  } signed_params;
+%              case rsa:
+%              case dh_dss:
+%              case dh_rsa:
+%                  struct {} ;
+%                 /* message is omitted for rsa, dh_dss, and dh_rsa */
+%              /* may be extended, e.g., for ECDH -- see [TLSECC] */
+%          };
+%      } ServerKeyExchange;
+
+%      struct {
+%          ClientCertificateType certificate_types<1..2^8-1>;
+%          SignatureAndHashAlgorithm
+%            supported_signature_algorithms<2^16-1>;
+%          DistinguishedName certificate_authorities<0..2^16-1>;
+%      } CertificateRequest;
+
+%      struct {
+%          select (KeyExchangeAlgorithm) {
+%              case rsa:
+%                  EncryptedPreMasterSecret;
+%              case dhe_dss:
+%              case dhe_rsa:
+%              case dh_dss:
+%              case dh_rsa:
+%              case dh_anon:
+%                  ClientDiffieHellmanPublic;
+%          } exchange_keys;
+%      } ClientKeyExchange;
+
+%      struct {
+%           digitally-signed struct {
+%               opaque handshake_messages[handshake_messages_length];
+%           }
+%      } CertificateVerify;
+
+%      struct {
+%          opaque verify_data[verify_data_length];
+%      } Finished;
+
+Одноразовые метки $N_C, N_S$ состоят из 32 байтов. Первые 4 байта -- текущее время, оставшиеся байты -- псевдослучайные. Псевдослучайная битовая строка формируется криптографическим псевдослучайным генератором чисел $PRF$.
+
+Предварительный общий секрет $premaster$ длиной 48 байтов вместе с одноразовыми метками используется как инициализирующее значение генератора $PRF$ для получения общего секрета $master$ тоже длиной 48 байтов:
+    \[ master = PRF(premaster, ~\text{текст ''master secret''}, ~ N_C + N_S) .\]
+
+И наконец, уже из секрета $master$ таким же способом генерируется 6 окончательных сеансовых ключей, следующие друг за другом в битовой строке:
+    \[ \{ (K_{E,1} ~\|~ K_{E,2}) ~\|~ (K_{\MAC,1} ~\|~ K_{\MAC,2}) ~\|~ (IV_1 ~\|~ IV_2) \} = \]
+        \[ = PRF(master, ~\text{текст ''key expansion''}, ~ N_C + N_S), \]
+где $K_{E,1}, ~ K_{E,2}$ -- два ключа симметричного шифрования, ~ $K_{\MAC,1}, ~ K_{\MAC,2}$ -- два ключа кода аутентификации сообщения, ~ $IV_1, ~IV_2$ -- два инициализирующих вектора режима сцепления блоков\index{вектор инициализации}. Ключи с индексом 1 используются для коммуникации от клиента к серверу, с индексом 2 -- от сервера к клиенту.
+
+
+\subsection{Протокол записи}
+
+Протокол записи (record protocol) определяет формат TLS-пакетов для вложения в TCP-пакеты.
+
+\begin{enumerate}
+    \item Исходными сообщениями $M$ для шифрования являются пакеты протокола следующего уровня в модели OSI: HTTP, FTP, IMAP и т.д.
+    \item Сообщение $M$ разбивается на блоки $m_i$ не более 16 кБ.
+    \item Блоки $m_i$ сжимаются алгоритмом компрессии в блоки $z_i$.
+    \item Вычисляется код аутентификации сообщения для каждого блока $z_i$ и добавляется в конец блоков: $a_i = z_i ~\|~ \HMAC(K_{\MAC}, z_i)$.
+    \item Блоки $a_i$ шифруются симметричным алгоритмом с ключом $K_E$ в некотором режиме сцепления блоков с инициализирующим вектором $IV$ в полное сжатое аутентифицированное зашифрованное сообщение $C$.
+    \item К шифротексту $C$ добавляется заголовок протокола записи TLS и в результате получается TLS-пакет для вложения в TCP-пакет.
+\end{enumerate}

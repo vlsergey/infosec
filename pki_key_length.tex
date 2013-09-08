@@ -1,0 +1,89 @@
+﻿\section{Длины ключей}
+
+В табл. \ref{tab:recommended-key-lengths} приведены битовые длины ключей для криптосистем.
+%Традиционные рекомендации основаны на аппроксимации существующих алгоритмов для взлома на 10-30 лет вперед.
+
+\begin{table}[h!]
+    \centering
+    \caption{Минимальные длины ключей в битах по стандартам России и США\label{tab:recommended-key-lengths}}
+    \resizebox{\textwidth}{!}{ \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        & \multirow{2}{*}{\parbox{1.5cm}{Блоковые шифры, $K$}} & \multicolumn{3}{|c|}{Схема ЭЦП} \\
+        \cline{3-5}
+        & & \parbox{1.5cm}{RSA, $n$} & \parbox{2.3cm}{Эллипт. кривые, порядок точки} & \parbox{3.5cm}{Эль-Гамаль $\mod p$: модуль / порядок (под)группы} \\
+        \hline \hline
+        \multicolumn{5}{|c|}{Взломано} \\
+        \hline
+        Биты & 56 & 663 & 109 & 503  \\
+        Конкурс & \textsc{DesChal} & RSA-200 & ECC2K-108 &  \\
+        Год & 1997 & 2005 & 2000 &  \\
+        \hline \hline
+        \multicolumn{5}{|c|}{Стандарт России} \\
+        \hline
+        Биты & 256 &  & 255 & \\
+        ГОСТ & 28147—89 & - & 34.10-2001 & - \\
+        Год & 1989 & & 2001 & \\
+%       \hline
+%       \multicolumn{2}{|l|}{\parbox{4cm}{Россия: нелицензируемая деятельность}} & \multicolumn{4}{c|}{40} \\
+        \hline \hline
+        \multicolumn{5}{|c|}{Стандарт США} \\
+        \hline
+        Биты & 128-256 & 1024-3072 & 151-480 & 1024-3072/160-256 \\
+        FIPS № & 197 & draft 186-3 & draft 186-3 & draft 186-3 \\
+        Год & 2001 & 2006 & 2006 & 2006 \\
+%       \hline
+%       \multicolumn{2}{|l|}{\parbox{4cm}{США: экспортные ограничения до 2001 г.}} & 56 & 512 & 112 & 512/112 \\
+%       \hline \hline
+%       \multicolumn{2}{|l|}{Традиционные} & 80 & 1024 & 160 & 1024/160 \\
+%       \cline{3-6}
+%       \multicolumn{2}{|l|}{рекомендации} & 112 & 2048 & 224 & 2048/224 \\
+%       \hline
+%       \multicolumn{2}{|l|}{\parbox{4cm}{Рекомендация Lenstra, Verheul для 2010 г.}} & 78 & 1369 & 146-160 & 1369/138 \\
+        \hline
+    \end{tabular} }
+\end{table}
+%}\end{center}
+
+
+\subsection*{Скорость вычисления ЭЦП}
+
+Сравним производительность схем ЭЦП, чтобы продемонстрировать преимущества ЭЦП вида Эль-Гамаля перед RSA для больших ключей. В приложении показано, что в модульной арифметике по модулю числа $n$ с битовой длиной $k \simeq \log_2 n$ операции имеют битовую сложность:
+\[ \begin{array}{lcl}
+    a^b \mod n & - & O(k^3), \\
+    ab \mod n, ~ a^{-1} \mod n & - & O(k^2), \\
+    a+b \mod n & - & O(k). \\
+\end{array} \]
+
+Так как все описанные схемы ЭЦП используют возведение в степень по модулю, то битовая сложность -- $O(k^3)$. Оценки количества целочисленных $t$-разрядных  умножений при вычислении ЭЦП имеют вид:
+\begin{enumerate}
+    \item RSA:
+        \[ (2 \log_2 n) \cdot \left( \frac{\log_2 n}{t} \right)^2; \]
+    \item DSA (digital signature algorithm, американский стандарт), вычисляемая по принципу Эль-Гамаля по модулю $p$ и с порядком циклической подгруппы $q$:
+        \[ (2 \log_2 q) \cdot \left( \frac{\log_2 p}{t} \right)^2; \]
+    \item ГОСТ Р 34.10-2001 и ECDSA (elliptic curve DSA, американский стандарт), вычисляемые по принципу Эль-Гамаля в группе точек эллиптической кривой по модулю $p$:
+        \[ (2 \log_2 p) \cdot 4 \cdot \left( \frac{\log_2 p}{t} \right)^2; \]
+\end{enumerate}
+В табл. \ref{tab:signature-rate} приведены оценки скорости вычисления ЭЦП (оценки числа умножений 64-битовых слов).
+
+\begin{table}[h!]
+    \centering
+    \caption{Оценочное число 64-битовых умножений для вычисления ЭЦП\label{tab:signature-rate}}
+    \begin{tabular}{|c|l|c|}
+        \hline
+        ЭЦП & Оценочное число 64-битовых умножений \\
+        \hline \hline
+        RSA 1024 & $(2 \cdot 1024) \cdot \left( \frac{1024}{64} \right)^2 \approx$ 500 000 \\
+        RSA 2048 & 4 000 000 \\
+        RSA 3072 & 14 000 000 \\
+        RSA 4096 & 34 000 000 \\
+        \hline \hline
+        DSA 1024/160 & $(2 \cdot 160) \cdot \left( \frac{1024}{64} \right)^2 \approx$ 82 000 \\
+        DSA 3072/256 & 1 200 000 \\
+        \hline \hline
+        ECDSA 160 & $(2 \cdot 160) \cdot 4 \cdot \left( \frac{160}{64} \right)^2 \approx$ 8 000 \\
+        ECDSA 512 & 260 000 \\
+        \hline \hline
+        ГОСТ Р 34.10-2001 & $(2 \cdot 256) \cdot 4 \cdot \left( \frac{256}{64} \right)^2 \approx$ 33 000 \\
+        \hline
+    \end{tabular}
+\end{table}

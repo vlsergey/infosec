@@ -1,0 +1,58 @@
+﻿\subsection{Структура сертификата X.509}
+
+Ниже приведен пример сертификата X.509\index{X509.3} интернет сервиса mail.google.com, используемый для защищенного SSL-соединения в 2009 г. Сертификат напечатан командой \texttt{openssl x509 -in file.crt -noout -text}:
+
+{\small \begin{verbatim}
+Certificate:
+Data:
+  Version: 3 (0x2)
+  Serial Number:
+    6e:df:0d:94:99:fd:45:33:dd:12:97:fc:42:a9:3b:e1
+  Signature Algorithm: sha1WithRSAEncryption
+  Issuer: C=ZA, O=Thawte Consulting (Pty) Ltd.,
+    CN=Thawte SGC CA
+  Validity
+    Not Before: Mar 25 16:49:29 2009 GMT
+    Not After : Mar 25 16:49:29 2010 GMT
+  Subject: C=US, ST=California, L=Mountain View, O=Google Inc,
+    CN=mail.google.com
+  Subject Public Key Info:
+    Public Key Algorithm: rsaEncryption
+    RSA Public Key: (1024 bit)
+      Modulus (1024 bit):
+        00:c5:d6:f8:92:fc:ca:f5:61:4b:06:41:49:e8:0a:
+        2c:95:81:a2:18:ef:41:ec:35:bd:7a:58:12:5a:e7:
+        6f:9e:a5:4d:dc:89:3a:bb:eb:02:9f:6b:73:61:6b:
+        f0:ff:d8:68:79:1f:ba:7a:f9:c4:ae:bf:37:06:ba:
+        3e:ea:ee:d2:74:35:b4:dd:cf:b1:57:c0:5f:35:1d:
+        66:aa:87:fe:e0:de:07:2d:66:d7:73:af:fb:d3:6a:
+        b7:8b:ef:09:0e:0c:c8:61:a9:03:ac:90:dd:98:b5:
+        1c:9c:41:56:6c:01:7f:0b:ee:c3:bf:f3:91:05:1f:
+        fb:a0:f5:cc:68:50:ad:2a:59
+      Exponent: 65537 (0x10001)
+  X509v3 extensions:
+    X509v3 Extended Key Usage: TLS Web Server
+      Authentication, TLS Web Client Authentication,
+      Netscape Server Gated Crypto
+    X509v3 CRL Distribution Points:
+    URI:http://crl.thawte.com/ThawteSGCCA.crl
+    Authority Information Access:
+    OCSP - URI:http://ocsp.thawte.com
+    CA Issuers - URI:http://www.thawte.com/repository/
+        Thawte_SGC_CA.crt
+    X509v3 Basic Constraints: critical
+    CA:FALSE
+Signature Algorithm: sha1WithRSAEncryption
+  62:f1:f3:05:0e:bc:10:5e:49:7c:7a:ed:f8:7e:24:d2:f4:a9:
+  86:bb:3b:83:7b:d1:9b:91:eb:ca:d9:8b:06:59:92:f6:bd:2b:
+  49:b7:d6:d3:cb:2e:42:7a:99:d6:06:c7:b1:d4:63:52:52:7f:
+  ac:39:e6:a8:b6:72:6d:e5:bf:70:21:2a:52:cb:a0:76:34:a5:
+  e3:32:01:1b:d1:86:8e:78:eb:5e:3c:93:cf:03:07:22:76:78:
+  6f:20:74:94:fe:aa:0e:d9:d5:3b:21:10:a7:65:71:f9:02:09:
+  cd:ae:88:43:85:c8:82:58:70:30:ee:15:f3:3d:76:1e:2e:45:
+  a6:bc
+\end{verbatim}}
+
+Как видно, сертификат действителен с 26.03.2009 до 25.03.2010, открытый ключ представляет собой ключ RSA с длиной модуля $n=$ 1024 бит и экспонентой $e = 65537$ и принадлежит компании Google Inc. Открытый ключ предназначен для взаимной аутентификации веб-сервера mail.google.com и веб-клиента в протоколе SSL/TLS. Сертификат подписан секретным ключом удостоверяющего центра Thawte SGC CA, подпись вычислена с помощью криптографического хэша SHA-1 и алгоритма RSA. В свою очередь сертификат с открытым ключом Thawte SGC CA для проверки значения ЭЦП данного сертификата расположен по адресу http://www.thawte.com/repository/Thawte\_SGC\_CA.crt.
+
+ЭЦП вычисляется от всех полей сертификата, кроме самого значения подписи.
