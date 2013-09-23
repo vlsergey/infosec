@@ -125,7 +125,7 @@
             \lambda = \left\{ \begin{array}{l}
                 \frac{y_2 - y_1}{x_2 - x_1} \mod p, ~ \text{ если } P \ne Q, \\
                 \\
-                \frac{3 x_1^2 + a}{2 y_1^2} \mod p, ~ \text{ если } P = Q. \\
+                \frac{3 x_1^2 + a}{2 y_1} \mod p, ~ \text{ если } P = Q. \\
             \end{array} \right.
         \]
     \item Сложение точки $P=(x,y)$ c противоположной точкой \\
@@ -227,7 +227,7 @@
         2 & $2 P = P + P = 2 \cdot (-8,7) = (-8,7) + (-8,7) = R$, \\
         & $\lambda = \frac{3 x_P^2 + a}{2y_P} = \frac{3 \cdot (-8)^2 + 5}{2 \cdot 7} = 8 \mod 17$, \\
         & $x_R = \lambda^2 - 2x_P = 8^2 - 2 \cdot (-8) = -5 \mod 17$, \\
-        & $y_R = \lambda (x_P - x_R) - y = 8 \cdot ((-8) - (-5)) - 7 = 3 \mod 17$, \\
+        & $y_R = \lambda (x_P - x_R) - y_P = 8 \cdot ((-8) - (-5)) - 7 = 3 \mod 17$, \\
         & $R = 2P = (-5, 3)$ \\
         \hline
         3 & $3 P = 2 P + P = Q + P = R$, \\
