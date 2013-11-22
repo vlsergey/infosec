@@ -5,7 +5,7 @@
 
 Рассмотрим один из вариантов этого шифра. В самом простом случае квадратом \textbf{Виженера}  называется таблица из циклически сдвинутых копий латинского алфавита, в которой  буквы J и V исключены. Первая строка и первый столбец -- буквы латинского алфавита в их обычном порядке. В строках таблицы порядок букв сохраняется, за исключением циклических переносов. Представим эту таблицу.
 
-\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|c|cccccccccccccccccccccccc|}
+\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|c|*{24}c|}
     \hline
     $\quad \downarrow ~ \rightarrow$ & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{E} & \textbf{F} & \textbf{G} & \textbf{H} & \textbf{I} & \textbf{K} & \textbf{L} & \textbf{M} & \textbf{N} & \textbf{O} & \textbf{P} & \textbf{Q} & \textbf{R} & \textbf{S} & \textbf{T} & \textbf{U} & \textbf{X} & \textbf{Y} & \textbf{Z} & \textbf{W} \\
     \hline
@@ -40,7 +40,7 @@
 
 \example
 Ключевая последовательность состоит из периодически повторяющегося ключевого слова, известного обеим сторонам. Пусть ключевая последовательность состоит из периодически повторяющегося слова THIS, а открытый текст -- слова COMMUNICATIONSYSTEMS (см. таблицу). Пробелы между словами опущены.
-\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|l|cccccccccccccccccccc|}
+\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|l|*{20}c|}
     \hline
     Ключ            & T & H & I & S & T & H & I & S & T & H & I & S & T & H & I & S & T & H & I & S \\
     Открытый текст  & C & O & M & M & U & N & I & C & A & T & I & O & N & S & Y & S & T & E & M & S \\
@@ -54,7 +54,7 @@
 
 \example
 Ключевая последовательность образуется с помощью открытого текста. Стороны договариваются о первой букве ключа, а следующие буквы состоят из открытого текста. Пусть в качестве первой буквы выбрана буква  $T$. Тогда для предыдущего примера таблица шифрования имеет вид
-\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|l|cccccccccccccccccccc|}
+\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|l|*{20}c|}
     \hline
     Ключ            & T & C & O & M & M & U & N & I & C & A & T & I & O & N & S & Y & S & T & E & M \\
     Открытый текст  & C & O & M & M & U & N & I & C & A & T & I & O & N & S & Y & S & T & E & M & S \\
@@ -66,7 +66,7 @@
 \example
 Пусть ключевая последовательность образуется с помощью шифротекста. Стороны договариваются о первой букве ключа. В отличие от предыдущего случая следующая буква ключа -- это результат
 шифрования первой буквы текста и т.д. Пусть в качестве первой буквы выбрана буква  $T$. Тогда приведенная в предыдущем примере таблица шифрования примет такой вид:
-\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|l|cccccccccccccccccccc|}
+\begin{center} \resizebox{\textwidth}{!}{ \begin{tabular}{|l|*{20}c|}
     \hline
     Ключ            & T & X & K & X & H & C & P & Z & A & A & T & C & Q & D & X & S & L & E & I & U \\
     Открытый текст  & C & O & M & M & U & N & I & C & A & T & I & O & N & S & Y & S & T & E & M & S \\
