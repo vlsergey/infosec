@@ -24,7 +24,7 @@
     \item Центр  $T$ вычисляет открытые ключи для $A$ и $B$ и также по надежному каналу передает им:
         \[ \begin{array}{ll}
             A \leftarrow T: & ~ \PK_A = (g^{-\SK_A} - I_A)^{\SK_T} = (g^{-a} - I_A)^d \mod n, \\
-            B \leftarrow T: & ~ \PK_B = (g^{-\SK_B} - I_B)^{\SK_T} = (g^{-b} - I_B)^d \mod n, \\
+            B \leftarrow T: & ~ \PK_B = (g^{-\SK_B} - I_B)^{\SK_T} = (g^{-b} - I_B)^d \mod n. \\
         \end{array} \]
     \item Теперь стороны $A$ и $B$ могут создать общий секретный симметричный сеансовый ключ. Например, $A$ находит:
         \[ \begin{array}{ll}
