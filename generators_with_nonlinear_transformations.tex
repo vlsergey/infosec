@@ -3,12 +3,12 @@
 
 Известно, что любая булева функция $f(x_1, x_2,  \dots, x_M)$ может быть единственным образом записана многочленом Жегалкина\index{многочлен!Жегалкина}:
 \[ \begin{array}{ll}
-    f(x_1, x_2, \dots, x_M) & = ~c~ + \\
-    & + \sum\limits_{1 \leq i \leq M} c_i x_i + \\
-    & + \sum\limits_{1 \leq i < j \leq M} c_{i,j} x_i x_j + \\
-    & + \sum\limits_{1 \leq i < j < k \leq M} c_{i,j,k} x_i x_j x_k + \\
-    & + \dots + \\
-    & + ~ c_{1,2,\dots,M} ~ x_1 x_2 \dots x_M.
+    f(x_1, x_2, \dots, x_M) & = ~c~ \oplus \\
+    & \oplus \sum\limits_{1 \leq i \leq M} c_i x_i \oplus \\
+    & \oplus \sum\limits_{1 \leq i < j \leq M} c_{i,j} x_i x_j \oplus \\
+    & \oplus \sum\limits_{1 \leq i < j < k \leq M} c_{i,j,k} x_i x_j x_k \oplus \\
+    & \oplus \dots \oplus \\
+    & \oplus ~ c_{1,2,\dots,M} ~ x_1 x_2 \dots x_M.
 \end{array} \]
 
 %Криптографу рекомендуется выбирать булеву функцию с возможно большим числом ненулевых коэффициентов при квадратичных членах полинома Жегалкина.
