@@ -55,12 +55,10 @@
 int hamming_distance(unsigned a1, unsigned a2, char *text,
                      size_t textsize) {
   char buf[32];
-  unsigned distance = 0;
+  unsigned distance;
   unsigned diff = a1 ^ a2;
-  while (diff) {
-    if (diff & 1) distance++;
-    diff >>= 1;
-  }
+  for (distance = 0; diff; distance++)
+    diff &= diff - 1;
   memcpy(buf, text, textsize);
   printf("%s: %i\n", buf, distance);
   return distance;
