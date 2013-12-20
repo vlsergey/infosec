@@ -6,7 +6,7 @@ Version=4
 MainFile=Information Security.tex
 UseBibTeX=1
 UseMakeIndex=1
-ActiveProfile=LaTeX ⇨ PDF
-ProjectLanguage=
-ProjectDialect=
+ActiveProfile=LaTeX => PDF
+ProjectLanguage=ru
+ProjectDialect=RU
 
