@@ -26,19 +26,19 @@
 
 \begin{enumerate}
     \item При $D>0$ график эллиптической кривой состоит из двух частей (см. рис. \ref{fig:elliptic-curve-1}). Прямая, проходящая через точки $P(x_1, y_1)$ и $Q(x_2, y_2)$, обязательно пересечет вторую часть кривой в точке с координатами $(x_3, \widetilde{y}_3)$, отображением которой является точка $R(x_3, y_3)$, где $y_3 = - \widetilde{y}_3$. Любые точки на кривой при $D>0$ являются элементами группы по сложению.
-        \begin{figure}[h!]
+        \begin{figure}[!ht]
         	\centering
         	\includegraphics[width=0.5\textwidth]{pic/elliptic-curve-1}
             \caption{Эллиптическая кривая с дискриминантом $D>0$\label{fig:elliptic-curve-1}}
         \end{figure}
     \item Если $D=0$, то левая и правая части касаются в одной точке (см. рис. \ref{fig:elliptic-curve-2}). Эти кривые называются сингулярными и не рассматриваются.
-        \begin{figure}[h!]
+        \begin{figure}[!ht]
         	\centering
         	\includegraphics[width=0.5\textwidth]{pic/elliptic-curve-2}
             \caption{Эллиптическая кривая с дискриминантом $D = 0$\label{fig:elliptic-curve-2}}
         \end{figure}
     \item Если $D<0$, то записанное выше уравнение \ref{Wer} описывает одну кривую, представленную на рис. \ref{fig:elliptic-curve-3}.
-        \begin{figure}[h!]
+        \begin{figure}[!ht]
         	\centering
         	\includegraphics[width=0.5\textwidth]{pic/elliptic-curve-3}
             \caption{Эллиптическая кривая с дискриминантом $D < 0$\label{fig:elliptic-curve-3}}
@@ -219,7 +219,7 @@
     \[ y^2 = x^3 + 5 x + 6 \mod 17. \]
 Проверяются только степени точки, равные всем делителям порядка группы 12: 2, 3, 4, 6. Найденный порядок точки $(-8,7)$ равен 12, следовательно, она -- генератор всей группы.
 
-\begin{table}[h!]
+\begin{table}[!ht]
     \centering
     \caption{Пример нахождения порядка точки\label{tab:ellipic-point-order-sample}}
     \resizebox{\textwidth}{!}{ \begin{tabular}{|c|p{0.9\textwidth}|}
@@ -254,7 +254,7 @@
     \[ \Gr^{(2)}, ~ \Gr^{(3)}, ~ \Gr^{(4)}, ~ \Gr^{(6)}, \]
 верхний индекс обозначает порядок подгруппы.
 
-\begin{table}[h!]
+\begin{table}[!ht]
     \centering
     \caption{Генераторы и циклические подгруппы группы точек эллиптической кривой\label{tab:elliptic-group-sample}}
     \resizebox{\textwidth}{!}{

@@ -123,7 +123,7 @@ IPsec определяет:
 
 Протокол ESP\index{протокол!ESP} определяет шифрование и аутентификацию вложенных в IP-пакет сообщений в формате, показанном на рис. \ref{fig:ipsec-esp}.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{pic/ipsec-esp}
 	\caption{Формат ESP пакета\label{fig:ipsec-esp}}
@@ -133,7 +133,7 @@ IPsec определяет:
 
 Аутентификатор сообщения определяется как усеченное до 96 бит значение $\HMAC(Ka', m)$, вычисленное стандартным способом.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{pic/ipsec-esp-modes}
 	\caption{Применение ESP протокола к пакету IPv6\label{fig:ipsec-esp-modes}}
@@ -146,7 +146,7 @@ IPsec определяет:
 
 Протокол AH определяет аутентификацию всего IP пакета в формате, показанном на рис. \ref{fig:ipsec-ah}.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.7\textwidth]{pic/ipsec-ah}
 	\caption{Заголовок AH пакета\label{fig:ipsec-ah}}
@@ -154,7 +154,7 @@ IPsec определяет:
 
 Аутентификатор сообщения определяется так же, как и в протоколе ESP --  усеченное до 96 бит значение $\HMAC(Ka', m)$, вычисленное стандартным способом.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{pic/ipsec-ah-modes}
 	\caption{Применение протокола AH к пакету IPv6\label{fig:ipsec-ah-modes}}
