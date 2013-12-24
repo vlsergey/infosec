@@ -172,14 +172,7 @@
 
 \section{Классификация криптосистем и шифров}
 
-%\subsection{Секретные и открытые ключи}
-
-%Различают два класса криптосистем -- с секретным и с открытым ключом.
-
-%\sub
-\input{secret-key_cryptosystem}
-
-\input{public-key_cryptosystems}
+\input{classification_by_symmetry}
 
 \subsection{Шифры замены и перестановки}
 
@@ -228,7 +221,7 @@
 
 \input{information_theory}
 
-\chapter{Блоковые шифры}
+\chapter{Блоковые шифры}\label{chapter-block-ciphers}
 
 \input{Feistel_cipher}
 
@@ -248,7 +241,7 @@
 
 \input{double_and_triple_ciphering}
 
-\chapter{Потоковые шифры}
+\chapter{Потоковые шифры}\label{chapter-stream-ciphers}
 
 \input{per-char_encryption}
 
@@ -280,23 +273,9 @@
 
 \input{majority_generators}
 
-\chapter{Криптографические хэш-функции}
+\input{hash-functions}
 
-\input{hash-function_properties}
-
-\input{GOST_R_34.11-94.tex}
-
-\input{MAC}
-
-\section{Коллизии в хэш-функциях}
-
-\input{birthdays_paradox}
-
-\input{collisions_probability}
-
-\input{hash-functions_combinations}
-
-\chapter{Криптосистемы с открытым ключом}
+\chapter{Криптосистемы с открытым ключом}\label{chapter-public-key}
 
 \textbf{Криптосистемой с открытым ключом} (public-key cryptosystem, PKC) называется криптографическое преобразование, использующее два ключа -- открытый и секретный. Пара из \textbf{секретного}\index{ключ!секретный} (private key, secret key, SK) и \textbf{открытого}\index{ключ!открытый} (public key, PK) ключей создается пользователем, который свой секретный ключ держит в секрете, а открытый ключ делает общедоступным для всех пользователей. Криптографическое преобразование в одну сторону (шифрование) можно выполнить зная только открытый ключ, а в другую (расшифрование) -- только зная секретный ключ. Во многих криптосистемах из секретного ключа можно вычислить открытый ключ.
 
