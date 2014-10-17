@@ -1054,10 +1054,12 @@ NIST использует следующие рекомендации для о�
 \addcontentsline{toc}{chapter}{Предметный указатель}
 \printindex
 
-\clearpage
-\phantomsection
+\chapter*{Литература}
 \addcontentsline{toc}{chapter}{Литература}
+\begingroup
+\renewcommand{\chapter}[2]{}%
 \bibliographystyle{ugost2008s}
 \bibliography{bibliography}
+\endgroup
 
 \end{document}
