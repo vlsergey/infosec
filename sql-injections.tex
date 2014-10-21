@@ -11,7 +11,7 @@ john';  DELETE * FROM Users;  SELECT * FROM Users WHERE
   Name = 'john,
 \end{verbatim} \end{center}
 то выражение превратится в три SQL-операции:
-%{\color{red} Проверить в каких системах будет работать. В JDBC PrepareStatement требует одно выражение, а ExecutableStatement использовать нельзя, так-как он не возвращает значения.}
+%{\color{red} Проверить в каких системах будет работать. В JDBC PrepareStatement требует одно выражение, а ExecutableStatement использовать нельзя, так как он не возвращает значения.}
 \begin{verbatim}
 -- запрос о пользователе john
 SELECT * FROM Users WHERE Name = 'john';
