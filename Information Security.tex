@@ -3,7 +3,7 @@
 %\usepackage{a4wide}
 % Для векторых русских шрифтов в PDF не забудьте установить пакеты cm-super & cm-unicode
 \usepackage{cmap}                       % Поддержка поиска русских слов в PDF (pdflatex)
-%\usepackage[X2, T2A]{fontenc}
+\usepackage[X2, T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
 \usepackage{indentfirst}                % Красная строка в первом абзаце
@@ -27,9 +27,20 @@
 \usepackage[totoc=true]{idxlayout}      % балансировка индексов на последней странице, индекс в ToC
 \usepackage{enumerate}
 \usepackage{fancybox}                   % страница в рамке
-%\usepackage{fancyhdr}                   % глава и секция вверху страницы
+%\usepackage{fancyhdr}                  % глава и секция вверху страницы
 %\usepackage{layout}
 \usepackage[left=1.84cm, right=1.5cm, paperwidth=14cm, top=1.8cm, bottom=2cm, height=19.8cm, paperheight=20cm]{geometry}
+\usepackage[parentracker=true,
+  backend=biber,
+  hyperref=auto,
+  language=auto,
+  babel=other,
+  citestyle=gost-numeric,
+  defernumbers=true,
+  bibstyle=gost-numeric,
+  sortlocale=ru_RU
+]{biblatex}								% библиография по ГОСТу
+\addbibresource{bibliography.bib}
 
 % поддержка гиперссылок; гиперссылки в pdf, должен быть последним загруженным пакетом
 \ifx\pdfoutput\undefined
@@ -1061,8 +1072,9 @@ NIST использует следующие рекомендации для о�
 \addcontentsline{toc}{chapter}{Литература}
 \begingroup
 \renewcommand{\chapter}[2]{}%
-\bibliographystyle{ugost2008s}
-\bibliography{bibliography}
+%\bibliographystyle{ugost2008s}
+%\bibliography{bibliography}
+\printbibliography
 \endgroup
 
 \end{document}
