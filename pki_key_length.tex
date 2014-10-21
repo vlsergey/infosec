@@ -57,11 +57,11 @@
 
 Так как все описанные схемы ЭП используют возведение в степень по модулю, то битовая сложность -- $O(k^3)$. Оценки количества целочисленных $t$-разрядных умножений при вычислении ЭП имеют вид:
 \begin{enumerate}
-    \item RSA\index{криптосистема!RSA}:
+    \item RSA\index{электронная подпись!RSA}:
         \[ (2 \log_2 n) \cdot \left( \frac{\log_2 n}{t} \right)^2; \]
-    \item DSA\index{DSA} (Digital Signature Algorithm, стандарт США~\cite{FIPS-PUB-186-4}), вычисляемая по принципу Эль-Гамаля\index{криптосистема!Эль-Гамаля} по модулю $p$ и с порядком циклической подгруппы $q$:
+    \item DSA\index{электронная подпись!DSA} (Digital Signature Algorithm, стандарт США~\cite{FIPS-PUB-186-4}), вычисляемая по принципу Эль-Гамаля\index{криптосистема!Эль-Гамаля} по модулю $p$ и с порядком циклической подгруппы $q$:
         \[ (2 \log_2 q) \cdot \left( \frac{\log_2 p}{t} \right)^2; \]
-    \item ГОСТ Р 34.10-2001\index{ГОСТ Р 34.10-2001} (стандарт России~\cite{GOST-2001}) и ECDSA\index{ECDSA} (Elliptic Curve Digital Signature Algorithm, стандарт США~\cite{FIPS-PUB-186-4}), вычисляемые по принципу Эль-Гамаля\index{криптосистема!Эль-Гамаля} в группе точек эллиптической кривой по модулю $p$:
+    \item ГОСТ Р 34.10-2001\index{электронная подпись!ГОСТ Р 34.10-2001} (стандарт России~\cite{GOST-2001}) и ECDSA\index{электронная подпись!ECDSA} (Elliptic Curve Digital Signature Algorithm, стандарт США~\cite{FIPS-PUB-186-4}), вычисляемые по принципу Эль-Гамаля\index{криптосистема!Эль-Гамаля} в группе точек эллиптической кривой по модулю $p$:
         \[ (2 \log_2 p) \cdot 4 \cdot \left( \frac{\log_2 p}{t} \right)^2; \]
 \end{enumerate}
 
@@ -74,18 +74,18 @@
         \hline
         ЭП & Оценочное число 64-битовых умножений \\
         \hline \hline
-        RSA\index{криптосистема!RSA} 1024 & $(2 \cdot 1024) \cdot \left( \frac{1024}{64} \right)^2 \approx$ 500 000 \\
-        RSA\index{криптосистема!RSA} 2048 & 4 000 000 \\
-        RSA\index{криптосистема!RSA} 3072 & 14 000 000 \\
-        RSA\index{криптосистема!RSA} 4096 & 34 000 000 \\
+        RSA\index{электронная подпись!RSA} 1024 & $(2 \cdot 1024) \cdot \left( \frac{1024}{64} \right)^2 \approx$ 500 000 \\
+        RSA\index{электронная подпись!RSA} 2048 & 4 000 000 \\
+        RSA\index{электронная подпись!RSA} 3072 & 14 000 000 \\
+        RSA\index{электронная подпись!RSA} 4096 & 34 000 000 \\
         \hline \hline
-        DSA 1024/160 & $(2 \cdot 160) \cdot \left( \frac{1024}{64} \right)^2 \approx$ 82 000 \\
-        DSA 3072/256 & 1 200 000 \\
+        DSA\index{электронная подпись!DSA} 1024/160 & $(2 \cdot 160) \cdot \left( \frac{1024}{64} \right)^2 \approx$ 82 000 \\
+        DSA\index{электронная подпись!DSA} 3072/256 & 1 200 000 \\
         \hline \hline
-        ECDSA 160 & $(2 \cdot 160) \cdot 4 \cdot \left( \frac{160}{64} \right)^2 \approx$ 8 000 \\
-        ECDSA 512 & 260 000 \\
+        ECDSA\index{электронная подпись!ECDSA} 160 & $(2 \cdot 160) \cdot 4 \cdot \left( \frac{160}{64} \right)^2 \approx$ 8 000 \\
+        ECDSA\index{электронная подпись!ECDSA} 512 & 260 000 \\
         \hline \hline
-        ГОСТ Р 34.10-2001 & $(2 \cdot 256) \cdot 4 \cdot \left( \frac{256}{64} \right)^2 \approx$ 33 000 \\
+        ГОСТ Р 34.10-2001\index{электронная подпись!ГОСТ Р 34.10-2001} & $(2 \cdot 256) \cdot 4 \cdot \left( \frac{256}{64} \right)^2 \approx$ 33 000 \\
         \hline
     \end{tabular}
 \end{table}
