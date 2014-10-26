@@ -1,106 +1,124 @@
-\subsection{Китайская теорема об остатках}
+\subsection{Китайская теорема об остатках}\index{теорема!китайская об остатках}
 \selectlanguage{russian}
 
-Пусть
-    \[ n = \prod\limits_{i=1}^{r} n_i, ~ \gcd(n_i, n_j) = 1. \]
+Китайская теорема об остатках (Chinese Remainder Theorem, CRT), приписываемая китайскому математику Сунь Цзы (пиньинь: S\={u}n Z\v{i}, примерно III~век~до~н.~э.) утверждает о существовании и единственности (с точностью до некоторого модуля) числа $x$, заданного по множеству остатков от деления на попарно взаимно простые числа $n_1, n_2, n_3, \dots, n_k$.
 
- \textbf{Китайская теорема об остатках}\index{теорема!китайская об остатках} (Chinese Remainder Theorem, CRT) для взаимно простых $\gcd(n_i,n_j) = 1, ~ i \neq j$, утверждает:
-\begin{enumerate}
-    \item Между
-        \[ a \mod n \]
-        и вектором
-        \[ (a_1 = a \mod n_1, ~~ a_2 = a \mod n_2,  \dots,  a_r = a \mod n_r) \]
-        существует взаимно однозначное соответствие.
-    \item Сохраняются операции сложения и умножения:
-        \[ (a \pm b \mod n) ~\Leftrightarrow~ (a_1 \pm b_1 \mod n_1,  \dots,  a_r \pm b_r \mod n_r), \]
-        \[ (a b \mod n) ~\Leftrightarrow~ (a_1 b_1 \mod n_1,  \dots,  a_r b_r \mod n_r). \]
-\end{enumerate}
+\begin{theorem} Если натуральные числа $n_1, n_2, n_3, \dots, n_k$ попарно взаимно просты, то для любых целых $r_1, r_2, r_3, \dots, r_k$ таких, что $0 \leq r_i < n_i$, найдётся число $x$, которое при делении на $n_i$ даёт остаток $r_i$ для всех $1 \leq i \leq k$. Более того, любые два таких числа $x_1$ и $x_2$, имеющие одинаковые остатки $r_1, r_2, \dots, r_k$, удовлетворяют сравнению:
+\[ \begin{array}{l}
+	x_1 \equiv x_2 \mod n, \\
+	n = n_1 \times n_2 \times \dots \times n_k.
+\end{array} \]
+\end{theorem}
 
-Китайская теорема означает, что
-    \[ a \mod n ~~\equiv~~ (a \mod n_1, ~ a \mod n_2, ~ \dots, ~ a \mod n_r) \]
-и все вычисления по $\mod n$ (сложение, умножение, вычисление обратного элемента) эквиваленты вычислениям по $\mod n_i$.
+А формула, приведённая в труде другого китайского математика Циня Цзюшао (пиньинь: Q\'{i}n Ji\v{u}sh\'{a}o, XIII~век~н.~э.), позволяет найти искомое число.
 
-Чтобы от вектора (остатков) перейти к числу, следует произвести следующие вычисления:
-        \[ N_i = \frac{n}{n_i}, \]
-        \[ M_i = N_i^{-1} \mod n_i, \]
-        \[ a = \sum\limits_{i=1}^{r} a_i M_i N_i \mod n. \]
-        Для проверки равенства достаточно найти вычет (остаток от деления) последнего уравнения по $\mod n_i$.
+\[ \begin{array}{l}
+	x = \sum\limits_{i=1}^k r_i \cdot e_i, \\
+	e_i = \frac{n}{n_i} \cdot \left( \left(\frac{n}{n_i}\right)^{-1} \mod n_i \right), i = 1, \dots, k.
+\end{array} \]
 
-        Сложность перехода в векторную форму имеет порядок:
-        \[ O(k^2), ~ k = \lceil \log_2 n \rceil. \]
+Китайская теорема об остатках позволяет рассматривать набор попарно взаимно простых чисел $n_1, n_2, n_3, \dots, n_k$ как некоторый <<базис>>, в котором число $0 \leq x < n$ можно задать с помощью <<координат>> $r_1, r_2, r_3, \dots, r_k$. При этом операции сложения и умножения чисел можно выразить через операции сложения и умножения соответствующих остатков:
+
+\[ \begin{array}{l}
+	\forall a, b, c, \begin{array}{l}
+		a_i = a \mod n_i, \\
+		b_i = b \mod n_i, \\
+		c_i = c \mod n_i
+	\end{array}: \\
+	\left( c \equiv a + b \mod n \right) \Leftrightarrow \left( c_i \equiv a_i + b_i \mod n_i, i = 1, \dots, k \right), \\
+	\left( c \equiv a \times b \mod n \right) \Leftrightarrow \left( c_i \equiv a_i \times b_i \mod n_i, i = 1, \dots, k \right).
+\end{array} \]
+
+Сложность перехода в векторную форму имеет порядок:
+        \[ O( \lceil \log_2 n \rceil ^2). \]
+
 Теорема используется для решения систем линейных модульных уравнений и для ускорения вычислений.
 
-Пусть битовая длина $n$ равна $k$, и пусть все $n_i$ имеют одинаковую битовую длину $k / r$. Тогда операция умножения в векторном виде будет в
-    \[ \frac{k^2}{r \left( k \middle/ r \right)^2 } = r \]
+Пусть битовая длина $n$ равна $l$, и пусть все $n_i$ имеют одинаковую битовую длину $k / r$. Тогда операция умножения в векторном виде будет в
+    \[ \frac{l^2}{r \left( l \middle/ r \right)^2 } = r \]
 раз быстрее.
 
-Операция $c = m^e \mod n$ занимает $O(k^3)$ битовых операций. Если перейти к вычислениям по модулям $n_i$, то возведение в степень можно вычислить в
-    \[ \frac{k^3}{r \left( k \middle/ r \right)^3 } = r^2 \]
+Операция $c = m^e \mod n$ занимает $O(l^3)$ битовых операций. Если перейти к вычислениям по модулям $n_i$, то возведение в степень можно вычислить в
+    \[ \frac{l^3}{r \left( l \middle/ r \right)^3 } = r^2 \]
 раз быстрее, коэффициенты результирующего вектора равны
-    \[ c_i ~=~ \left( m \mod n_i \right)^{e \mod \varphi(n_i)} \mod n_i, ~ i = 1, \dots, r. \]
-Заметим, однако, что для криптографических приложений модули с большим количеством сомножителей применять нельзя из-за катастрофического снижения криптостойкости (снижения сложности разложения модуля на множители).
+    \[ c_i ~=~ \left( m \mod n_i \right)^{e \mod \varphi(n_i)} \mod n_i, ~ i = 1, \dots, k. \]
 
-
-\subsection[Решение систем линейных уравнений]{Решение систем линейных уравнений}
+\subsection{Решение систем линейных уравнений}
 
 \example
 Решим для примера систему линейных уравнений. Применим CRT и а) для разложения одного уравнения по составному модулю на систему по взаимно простым модулям, и б) для нахождения конечного решения по системе уравнений:
 \[
     \begin{cases}
-        9 x = 8 \mod 11, \\
-        5 x = 7 \mod 12, \\
-        x = 5 \mod 6, \\
-        122 x = 118 \mod 240; \\
+        9 x \equiv 8 \mod 11, \\
+        5 x \equiv 7 \mod 12, \\
+        x \equiv 5 \mod 6, \\
+        122 x \equiv 118 \mod 240; \\
     \end{cases}
     \Rightarrow ~~
     \begin{cases}
-        x = 8 \cdot 9^{-1} \mod 11, \\
-        x = 7 \cdot 5^{-1} \mod 12, \\
-        x = 5 \mod 6, \\
-        x = 59 \cdot 61^{-1} \mod 120; \\
-    \end{cases}
-    \Rightarrow
-\] \[
-    \Rightarrow ~~
-    \begin{cases}
-        x = -4 \mod 11, \\
-        x = -1 \mod 12, \\
-        x = -1 \mod 6, \\
-        x = -1 \mod 120; \\
-    \end{cases}
-    \Rightarrow ~~
-    \begin{cases}
-        x = -4 \mod 11, \\
-        \begin{cases}
-            x = -1 \mod 3, \\
-            x = -1 \mod 4, \\
-        \end{cases} \\
-        \begin{cases}
-            x = -1 \mod 3, \\
-            x = -1 \mod 2, \\
-        \end{cases} \\
-        \begin{cases}
-            x = -1 \mod 8, \\
-            x = -1 \mod 3, \\
-            x = -1 \mod 5; \\
-        \end{cases} \\
+        x \equiv 8 \cdot 9^{-1} \mod 11, \\
+        x \equiv 7 \cdot 5^{-1} \mod 12, \\
+        x \equiv 5 \mod 6, \\
+        x \equiv 59 \cdot 61^{-1} \mod 120; \\
     \end{cases}
     \Rightarrow
 \] \[
     \Rightarrow ~~
     \begin{cases}
-        x = -4 \mod 11, \\
-        x = -1 \mod 3, \\
-        x = -1 \mod 8, \\
-        x = -1 \mod 5. \\
+        x \equiv -4 \mod 11, \\
+        x \equiv -1 \mod 12, \\
+        x \equiv -1 \mod 6, \\
+        x \equiv -1 \mod 120; \\
+    \end{cases}
+    \Rightarrow ~~
+    \begin{cases}
+        x \equiv -4 \mod 11, \\
+        \begin{cases}
+            x \equiv -1 \mod 3, \\
+            x \equiv -1 \mod 4, \\
+        \end{cases} \\
+        \begin{cases}
+            x \equiv -1 \mod 3, \\
+            x \equiv -1 \mod 2, \\
+        \end{cases} \\
+        \begin{cases}
+            x \equiv -1 \mod 8, \\
+            x \equiv -1 \mod 3, \\
+            x \equiv -1 \mod 5; \\
+        \end{cases} \\
+    \end{cases}
+    \Rightarrow
+\] \[
+    \Rightarrow ~~
+    \begin{cases}
+        x \equiv -4 \mod 11, \\
+        x \equiv -1 \mod 3, \\
+        x \equiv -1 \mod 8, \\
+        x \equiv -1 \mod 5. \\
     \end{cases}
 \]
-Все модули попарно взаимно простые, поэтому применима китайская теорема об остатках:
-    \[ n_1 = 11, ~ n_2 = 3, ~ n_3 = 8, ~ n_4 = 5, \]
-    \[ n = n_1 n_2 n_3 n_4 = 1320, \]
-    \[ N_i = \frac{n}{n_i} ~~ \Rightarrow ~~ N_1 = 120, ~ N_2 = 440, ~ N_3 = 165, ~ N_4 = 264, \]
-    \[ M_i = N_i^{-1} \mod n_i, ~~ \Rightarrow ~~ M_1 = 10, ~ M_2 = 2, ~ M_3 = 5, ~ M_4 = 4, \]
-    \[ a_1 = -4, ~ a_2 = -1, ~ a_3 = -1, ~ a_4 = -1, \]
-    \[ x ~=~ \sum_{i=1}^4 a_i N_i M_i \mod n ~=~ 359 \mod 1320. \]
-Ответ: $x ~=~ 359 \mod 1320$.
+Все модули попарно взаимно простые, поэтому применима китайская теорема об остатках\index{теорема!китайская об остатках}:
+\[\begin{array}{l}
+	n_1 = 11, ~ n_2 = 3, ~ n_3 = 8, ~ n_4 = 5, \\
+	n = n_1 \times n_2 \times n_3 \times n_4 = 1320, \\
+	n / n_i  = \left\{ 120, 440, 165, 264 \right\}, \\
+	\left( n / n_i \right)^{-1} \mod n_i = \left\{ 10, 2, 5, 4 \right\}, \\
+	e_i = \left\{ 1200, 880, 825, 1056 \right\}, \\
+	x = -4 \cdot 1200 - 1 \cdot 880 - 1 \cdot 825 - 1 \cdot 1056 = -7561, \\
+	x \equiv 359 \mod 1320.
+\end{array}\]
+
+Аналогично, если переписать последнюю систему с положительными остатками:
+\[\begin{array}{l}
+	\begin{cases}
+		x \equiv 7 \mod 11, \\
+		x \equiv 2 \mod 3, \\
+		x \equiv 7 \mod 8, \\
+		x \equiv 4 \mod 5 \\
+	\end{cases}, \\
+	x = 7 \cdot 1200 + 2 \cdot 880 + 7 \cdot 825 + 4 \cdot 1056 = 20159, \\
+	x \equiv 359 \mod 1320.
+\end{array}\]
+
+Ответ: $x \equiv 359 \mod 1320$.
 \exampleend
