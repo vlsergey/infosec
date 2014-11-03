@@ -39,9 +39,6 @@
     \usepackage[pdftex,colorlinks,unicode,bookmarks]{hyperref}
 \fi
 
-%\paperwidth=16.8cm \oddsidemargin=0cm \evensidemargin=0cm \hoffset=-0.33cm \textwidth=13.2cm
-%\paperheight=24cm \voffset=-0.4cm \topmargin=0cm \headsep=0cm \headheight=0cm \textheight=19.8cm \footskip=0.9cm
-
 % параметры PDF файла
 \hypersetup{
     pdftitle={Защита информации},
@@ -56,46 +53,8 @@
 \def\numberline#1{\hb@xt@\@tempdima{#1\if&#1&\else.\fi\hfil}}
 \makeatother
 
-% перенос слов с тире
-%\lccode`\-=`\-
-%\defaulthyphenchar=127
-
-% изменить подписи к рисункам, таблицам и т.~д.
-\captionsetup{labelsep=period}          % заменить : на .
-\captionsetup{textformat=period}        % Подписи завершать точкой
-%\captionsetup[table]{position=above}    % вертикальные отступы подписи таблицы для случая, когда подпись вверху
-%\captionsetup[figure]{position=below}   % вертикальные отступы подписи рисунка для случая, когда подпись внизу
-
-%% стиль главы и секции вверху страницы
-%\pagestyle{fancy}
-%%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-%\renewcommand{\sectionmark}[1]{\markright{#1}{}}
-%
-%%\fancyhf{}
-%%\fancyfoot[СE,CO]{\thepage}
-%%\fancyhead[LE]{\textsc{\nouppercase{\leftmark}}}
-%\fancyhead[RO]{\textsc{\nouppercase{\rightmark}}}
-%
-%\fancypagestyle{plain}{ %
-%\fancyhf{}                              % remove everything
-%\renewcommand{\headrulewidth}{0pt}      % remove lines as well
-%\renewcommand{\footrulewidth}{0pt}}
-
 % запретить выходить за границы страницы
 \sloppy
-
-\newtheorem{theorem}{Теорема}[section]
-\newtheorem{lemma}[theorem]{Лемма}
-\newtheorem{definition}[theorem]{Определение}
-\newtheorem{property}[theorem]{Утверждение}
-\newtheorem{corollary}[theorem]{Следствие}
-%\newtheorem{algorithm}[theorem]{Алгоритм}
-\newtheorem{remark}[theorem]{Замечание}
-\newcommand{\proof}{\noindent\textsc{Доказательство.\ }}
-
-%\newtheorem{example}{\textsc{\textbf{Пример}}}
-\newcommand{\example}{\textsc{\textbf{Пример.}} }
-\newcommand{\exampleend}
 
 \newcommand{\set}[1]{\mathbb{#1}}
 \newcommand{\group}[1]{\mathbb{#1}}
@@ -110,44 +69,10 @@
 \newcommand{\PK}{\textrm{PK}}
 \newcommand{\SK}{\textrm{SK}}
 
-\newcommand{\langde}[1]{нем. \foreignlanguage{german}{\textit{#1}}}
-\newcommand{\langen}[1]{англ. \foreignlanguage{english}{\textit{#1}}}
-\newcommand{\langit}[1]{итал. \foreignlanguage{italian}{\textit{#1}}}
-\newcommand{\langlat}[1]{лат. \foreignlanguage{latin}{\textit{#1}}}
-
 % Для раздела с задачами
 \newcommand{\taskinit}{\newcounter{task-section}\setcounter{task-section}{0}\newcounter{task-number}}
 \newcommand{\tasksection}{\addtocounter{task-section}{1}\setcounter{task-number}{0}}
 \newcommand{\tasknumber}{\textbf{№ \addtocounter{task-number}{1}\arabic{task-section}.\arabic{task-number}.}~~}
-
-%Наконец, существует способ дублировать знаки операций, который мы приведем безо всяких пояснений. Включив
-%\newcommand*{\hm}[1]{#1\nobreak\discretionary{}{\hbox{\mathsurround=0pt #1}}{}}
-%в преамбулу, можно написать $a\hm+b\hm+c\hm+d$, при этом в формуле a\hm+b\hm+c\hm+d при переносе знак + будет продублирован.
-
-% Дублирование символов бинарных операций ("+", "-", "="), набранных в строчных формулах, при переносе на другую строку:
-%%begin{latexonly}
-%\renewcommand\ne{\mathchar"3236\mathchar"303D\nobreak
-%      \discretionary{}{\usefont
-%      {OMS}{cmsy}{m}{n}\char"36\usefont
-%      {OT1}{cmr}{m}{n}\char"3D}{}}
-%\begingroup
-%\catcode`\+\active\gdef+{\mathchar8235\nobreak\discretionary{}%
-% {\usefont{OT1}{cmr}{m}{n}\char43}{}}
-%\catcode`\-\active\gdef-{\mathchar8704\nobreak\discretionary{}%
-% {\usefont{OMS}{cmsy}{m}{n}\char0}{}}
-%\catcode`\=\active\gdef={\mathchar12349\nobreak\discretionary{}%
-% {\usefont{OT1}{cmr}{m}{n}\char61}{}}
-%\endgroup
-%\def\cdot{\mathchar8705\nobreak\discretionary{}%
-% {\usefont{OMS}{cmsy}{m}{n}\char1}{}}
-%\def\times{\mathchar8706\nobreak\discretionary{}%
-% {\usefont{OMS}{cmsy}{m}{n}\char2}{}}
-%\mathcode`\==32768
-%\mathcode`\+=32768
-%\mathcode`\-=32768
-%%end{latexonly}
-
-\makeindex
 
 \begin{document}
 \selectlanguage{russian}
