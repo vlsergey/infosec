@@ -239,7 +239,7 @@ AES -- это раундовый\index{шифр!раундовый} блоков
         \FOR{ $i = \mathsf{Nk}$ \TO $4 \cdot (\mathsf{Nr} + 1) - 1$}
             \STATE $\mathsf{temp} = \mathsf{W}[i-1]$;
             \IF{ ($i = 0 \mod \mathsf{Nk}$)}
-                \STATE $\mathsf{temp} = \mathsf{SubWord}(\mathsf{RotWord}(\mathsf{temp})) ~ \oplus ~ \mathsf{Rcon}[i / \mathsf{Nk}]$;
+                \STATE $\mathsf{temp} = \mathsf{SubWord}(\mathsf{RotWord}(\mathsf{temp})) ~ \oplus ~ \mathsf{Rcon}[i ~/~ \mathsf{Nk}]$;
             \ENDIF
             \STATE $\mathsf{W}[i] = \mathsf{W}[i - \mathsf{Nk}] ~ \oplus ~ \mathsf{temp}$;
         \ENDFOR
