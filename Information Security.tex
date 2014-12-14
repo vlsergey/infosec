@@ -194,9 +194,15 @@
 %\lhead[\leftmark]{}
 %\rhead[]{\rightmark}
 
+\let\oldleftmark=\leftmark
+\let\oldrightmark=\rightmark
+\renewcommand{\leftmark}{ПРЕДИСЛОВИЕ}
+\renewcommand{\rightmark}{ПРЕДИСЛОВИЕ}
 \input{foreword}
 
 \chapter{Основные понятия и определения}
+\let\leftmark=\oldleftmark
+\let\rightmark=\oldrightmark
 
 \input{Short_history_of_cryptography}
 
