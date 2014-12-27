@@ -86,19 +86,13 @@
     \[ P_m  = \left\{ {p_{m1},p_{m2} ,  \ldots , p_{mA} } \right\}. \]
 
 Для вычисления вероятности того, что в случайно выбранной паре позиций будут одинаковые буквы, выполним суммирование по различным парам внутри строк и по парам между различными строками. Аналогично предыдущему случаю получим:
-{ \small
-\[
-    I(\mathcal{P}_1, \mathcal{P}_2, \ldots, \mathcal{P}_m ) ~=
-\] \[
-    =~ \frac{2}{L(L - 1)} \left( \frac{1}{2} \frac{L}{m} \left( \frac{L}{m} - 1 \right) k_{p_1} ~+~
-        \frac{1}{2} \frac{L}{m} \left( \frac{L}{m} - 1 \right) k_{p_2} ~+ \right.
-\] \[
-        +~ \dots ~+~ \left. \frac{1}{2} \frac{L}{m} \left( \frac{L}{m} - 1 \right) k_{p_m} \right) ~+
-\] \[
-       +~ \frac{2}{L(L - 1)} \left( \left( \frac{L}{m} \right)^2 k_{p_1, p_2} +
-         \left( \frac{L}{m} \right)^2 k_{p_1, p_3} + \dots +
-        \left( \frac{L}{m} \right)^2 k_{p_{m - 1}, p_m } \right).
-\] }
+\[\begin{array}{l}
+	I(\mathcal{P}_1, \mathcal{P}_2, \ldots, \mathcal{P}_m ) ~= \\
+	~=~ \frac{2}{L(L - 1)} \left( \frac{L}{2m} \left( \frac{L}{m} - 1 \right) k_{p_1} ~+~ \frac{L}{2m} \left( \frac{L}{m} - 1 \right) k_{p_2} ~+ \right. \\
+	~~+~ \dots ~+~ \left. \frac{L}{2m} \left( \frac{L}{m} - 1 \right) k_{p_m} \right) ~+ \\
+	~~+~ \frac{2}{L(L - 1)} \left( \left( \frac{L}{m} \right)^2 k_{p_1, p_2} + \left( \frac{L}{m} \right)^2 k_{p_1, p_3} + \dots + \left( \frac{L}{m} \right)^2 k_{p_{m - 1}, p_m } \right).
+\end{array}\]
+
 Первая сумма содержит $m$ слагаемых, вторая -- $ \frac{m(m-1)}{2}$ слагаемых. Полагая
     \[ k_{p_1} = k_{p_2} = \dots = k_{p_m} = k_p, \]
     \[ k_{p_i p_j } = k_r = \frac{1}{A}, ~ i \ne j, \]
