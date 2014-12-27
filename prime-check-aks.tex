@@ -43,7 +43,7 @@
         \IF{~$n = a^b, ~a, b \in \group{N}, ~ b > 1$, для некоторых $a, b$~}
            \STATE \textbf{return} \textsc{Составное}.
         \ENDIF
-        \STATE \textbf{Найти} наименьшее $r \in \group{N}$ с порядком $ord_n(r) > \log_2^2 n$. Порядок числа $r$ по модулю $n$ определяется как минимальное число $ord_n(r) \in \group{N}$: \\
+        \STATE \textbf{Найти} наименьшее $r \in \group{N}$ с порядком $ord_n(r) > \log_2^2 n$. Порядок числа $r$ по модулю $n$ определяется как минимальное число $\ord_n(r) \in \group{N}$: \\
             \indent ~~~~~~~~~~~~~~~~~~~~~~~~~~~ $r^{ord_n(r)} = 1 \mod n$.
         \IF{~$\gcd(a,n) \neq 1$ для некоторого $a \in \group{N}, ~a < r$~}
            \STATE \textbf{return} \textsc{Составное}.
