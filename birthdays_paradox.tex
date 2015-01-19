@@ -5,7 +5,7 @@
 
 Найдём вероятность $P(n)$ того, что в группе из $n$ человек хотя бы двое имеют день рождения в один день года. Вероятность того, что $n$ человек ($n < N = 365$) не имеют общего дня рождения, есть
 \[
-    \bar{P}(n) = 1 \cdot \left( 1 - \frac{1}{N} \right) \cdot \left(1 - \frac{2}{N} \right)  \dots  \left( 1 - \frac{n-1}{N} \right) = \prod\limits_{i=0}^{n-1} \left( 1 - \frac{i}{N} \right).
+    \bar{P}(n) = 1 \cdot \left( 1 - \frac{1}{N} \right) \cdot \left(1 - \frac{2}{N} \right)\cdot \dots \cdot  \left( 1 - \frac{n-1}{N} \right) = \prod\limits_{i=0}^{n-1} \left( 1 - \frac{i}{N} \right).
 \]
 
 Аппроксимируя $1-x \leq e^{-x}$, находим
