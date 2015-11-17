@@ -35,9 +35,9 @@
 
 \[\begin{array}{ll}
 	g_i & := \left\lfloor r_{i-2} / r_{i-1} \right\rfloor, \\
-	r_i & := r_{i-2} - g_i \times r_{i-1}, \\
-	y_i & := y_{i-2} - g_i \times y_{i-1} , \\
-	x_i & := x_{i-2} - g_i \times x_{i-1} . \\
+	r_i & := r_{i-2} - g_i \cdot r_{i-1}, \\
+	y_i & := y_{i-2} - g_i \cdot y_{i-1} , \\
+	x_i & := x_{i-2} - g_i \cdot x_{i-1} . \\
 \end{array}\]
 
 Алгоритм останавливается, когда $r_i = 0$.
