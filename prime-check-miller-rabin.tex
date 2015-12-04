@@ -14,7 +14,7 @@
     \begin{algorithmic}
         \STATE Вход: нечётное $n>1$ для проверки на простоту и $t$ -- параметр надёжности.
         \STATE Выход: \textsc{Составное} или \textsc{Псевдопростое}.
-        \STATE $n - 1 = 2^s r, ~ r$ -- нечётное.
+        \STATE $n - 1 = 2^s r, ~ r$~--- нечётное.
         \FOR{~$j = 1$ ~\textbf{to}~ $t$~}
             \STATE Выбрать случайное число $a \in [2, n-2]$.
             \IF{~$(a_0 = a^r ~\neq~ \pm 1 \mod n)$ ~\textbf{and} \\
