@@ -141,7 +141,7 @@
 % Для раздела с задачами
 \newcommand{\taskinit}{\newcounter{task-section}\setcounter{task-section}{0}\newcounter{task-number}}
 \newcommand{\tasksection}{\addtocounter{task-section}{1}\setcounter{task-number}{0}}
-\newcommand{\tasknumber}{\textbf{№ \addtocounter{task-number}{1}\arabic{task-section}.\arabic{task-number}.}~~}
+\newcommand{\tasknumber}{\textbf{\No\addtocounter{task-number}{1}\arabic{task-section}.\arabic{task-number}.}~~}
 
 %Наконец, существует способ дублировать знаки операций, который мы приведём безо всяких пояснений. Включив
 %\newcommand*{\hm}[1]{#1\nobreak\discretionary{}{\hbox{\mathsurround=0pt #1}}{}}
