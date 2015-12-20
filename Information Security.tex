@@ -147,6 +147,14 @@
 %\newcommand*{\hm}[1]{#1\nobreak\discretionary{}{\hbox{\mathsurround=0pt #1}}{}}
 %в преамбулу, можно написать $a\hm+b\hm+c\hm+d$, при этом в формуле a\hm+b\hm+c\hm+d при переносе знак + будет продублирован.
 
+% Русская типографика
+\renewcommand\leq{\leqslant}
+\renewcommand\geq{\geqslant}
+\renewcommand\emptyset{\varnothing}
+\renewcommand\kappa{\varkappa}
+\renewcommand\epsilon{\varepsilon}
+\renewcommand\phi{\varphi}
+
 % Дублирование символов бинарных операций ("+", "-", "="), набранных в строчных формулах, при переносе на другую строку:
 %%begin{latexonly}
 %\renewcommand\ne{\mathchar"3236\mathchar"303D\nobreak
