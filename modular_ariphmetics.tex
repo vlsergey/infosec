@@ -41,7 +41,7 @@
 Алгоритм~\ref{alg:power-mod-left-to-right} сводится к вычислению следующей формулы:
 \[ c = \left( \left( \left( \left( \left( 1 \cdot a^{b_k} \right)^2 \cdot a^{b_{k-1}} \right)^2 \cdot a^{b_{k-2}} \right)^2 \dots \right)^2 \cdot a^{b_2} \right)^2 \cdot a^{b_1} \mod n.\]
 
-\begin{algorithm}[iht]
+\begin{algorithm}[ht]
 	\caption{Простая двоичная схема возведения в степень типа <<слева направо>>\label{alg:power-mod-left-to-right}}
 	\begin{algorithmic}
 		\STATE $c := a$;
@@ -99,7 +99,7 @@ c & = a^b = \\
   & = \prod\limits_{i=1}^{k} \left(a^{2^{i-1}}\right)^{b_i}
 \end{array}\]
 
-\begin{algorithm}[iht]
+\begin{algorithm}[ht]
 	\caption{Простая двоичная схема возведения в степень типа <<справа налево>>\label{alg:power-mod-right-to-left}}
 	\begin{algorithmic}
 		\STATE $c := 1$;

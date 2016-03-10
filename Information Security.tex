@@ -41,6 +41,7 @@
 \usepackage{tikz}                       % векторная графика внутри TeX
 \usepackage{tablefootnote}		% footnote в таблицах
 \usepackage{wrapfig}			% sub figures
+\usepackage{textcomp}                   % \No support
 
 \usepackage[left=1.84cm, right=1.5cm, paperwidth=14cm, top=1.8cm, bottom=2cm, height=19.8cm, paperheight=20cm]{geometry}
 \usepackage[parentracker=true,
@@ -138,6 +139,15 @@
 \newcommand{\langit}[1]{итал. \foreignlanguage{italian}{\textit{#1}}}
 \newcommand{\langlat}[1]{лат. \foreignlanguage{latin}{\textit{#1}}}
 
+% Русская типографика
+\renewcommand\leq{\leqslant}
+\renewcommand\geq{\geqslant}
+\renewcommand\emptyset{\varnothing}
+\renewcommand\kappa{\varkappa}
+\renewcommand\epsilon{\varepsilon}
+\renewcommand\phi{\varphi}
+\newcommand*{\No}{\textnumero}
+
 % Для раздела с задачами
 \newcommand{\taskinit}{\newcounter{task-section}\setcounter{task-section}{0}\newcounter{task-number}}
 \newcommand{\tasksection}{\addtocounter{task-section}{1}\setcounter{task-number}{0}}
@@ -146,14 +156,6 @@
 %Наконец, существует способ дублировать знаки операций, который мы приведём безо всяких пояснений. Включив
 %\newcommand*{\hm}[1]{#1\nobreak\discretionary{}{\hbox{\mathsurround=0pt #1}}{}}
 %в преамбулу, можно написать $a\hm+b\hm+c\hm+d$, при этом в формуле a\hm+b\hm+c\hm+d при переносе знак + будет продублирован.
-
-% Русская типографика
-\renewcommand\leq{\leqslant}
-\renewcommand\geq{\geqslant}
-\renewcommand\emptyset{\varnothing}
-\renewcommand\kappa{\varkappa}
-\renewcommand\epsilon{\varepsilon}
-\renewcommand\phi{\varphi}
 
 % Дублирование символов бинарных операций ("+", "-", "="), набранных в строчных формулах, при переносе на другую строку:
 %%begin{latexonly}
