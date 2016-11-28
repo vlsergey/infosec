@@ -1,6 +1,6 @@
 # Защита информации
 
-Учебное пособие по [защите информации](http://wikimipt.org/wiki/%D0%97%D0%B0%D1%89%D0%B8%D1%82%D0%B0_%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%B8) кафедры радиотехники и систем управления МФТИ
+Учебное пособие по [защите информации](http://wikimipt.org/wiki/%D0%97%D0%B0%D1%89%D0%B8%D1%82%D0%B0_%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%B8) кафедры радиотехники и систем управления МФТИ.
 
 * [Габидулин Эрнст Мухамедович](http://wikimipt.org/wiki/%D0%93%D0%B0%D0%B1%D0%B8%D0%B4%D1%83%D0%BB%D0%B8%D0%BD_%D0%AD%D1%80%D0%BD%D1%81%D1%82_%D0%9C%D1%83%D1%85%D0%B0%D0%BC%D0%B5%D0%B4%D0%BE%D0%B2%D0%B8%D1%87)
 * [Кшевецкий Александр Сергеевич](http://wikimipt.org/wiki/%D0%9A%D1%88%D0%B5%D0%B2%D0%B5%D1%86%D0%BA%D0%B8%D0%B9_%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80_%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B5%D0%B2%D0%B8%D1%87)
@@ -10,28 +10,33 @@
 [![PDF Status](https://www.sharelatex.com/github/repos/vlsergey/infosec/builds/latest/badge.svg)](https://www.sharelatex.com/github/repos/vlsergey/infosec/builds/latest/output.pdf)
 
 ## Инструкция по сборке
-### Linux (Debian)
-1. Установка TeXLive и языков
+### Установка необходимых компонент
 
-    ```
-    $ sudo apt-get install texlive-latex-base \
-        texlive-latex-recommended \
-        texlive-latex-extra \
-        texlive-science \
-        texlive-bibtex-extra \
-        texlive-fonts-recommended
+#### Linux (Debian, Ubuntu)
+Установка TeXLive и языков:
+```
+$ sudo apt-get install texlive-latex-base \
+    texlive-latex-recommended \
+    texlive-latex-extra \
+    texlive-science \
+    texlive-bibtex-extra \
+    texlive-fonts-recommended
 
-    $ sudo apt-get install texlive-lang-german \
-        texlive-lang-italian \
-        texlive-lang-german \
-        texlive-lang-european \
-        texlive-lang-cyrillic
-    ```
+$ sudo apt-get install texlive-lang-german \
+    texlive-lang-italian \
+    texlive-lang-german \
+    texlive-lang-european \
+    texlive-lang-cyrillic
+```
 
-2. Клонирование и сборка
+#### OS X:
 
-    ```
-    $ git clone https://github.com/vlsergey/infosec
-    $ cd infosec
-    $ pdflatex Information\ Security.tex'
-    ```
+Скачиваем дистрибутив **MacTeX**: https://www.tug.org/mactex/ (2Gb). Пакета **BasicTeX** будет недостаточно. При установке MacTeX Вы можете отказаться от GUI-программ, чтобы сэкономить место на жестком диске.
+
+### Клонирование и сборка
+
+```
+$ git clone https://github.com/vlsergey/infosec
+$ cd infosec
+$ pdflatex Information\ Security.tex'
+```
