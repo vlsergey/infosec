@@ -557,22 +557,22 @@ NIST использует следующие рекомендации для о�
     \caption{Атаки на радужных таблицах на \emph{одном} ПК\label{tab:rainbow-tables}}
     \resizebox{\textwidth}{!}{ \begin{tabular}{|c|c|c|c|c|c|c|}
         \hline
-        \multirow{2}{*}{\parbox{1.0cm}{Длина, биты}} & \multicolumn{3}{|c|}{Пароль или ключ} &
-            \multicolumn{3}{|c|}{Радужная таблица} \\
+        \multirow{2}{*}{\parbox{1.0cm}{\medskip\medskip \centering Длина, биты}} & \multicolumn{3}{|c|}{\parbox{5.4cm}{\centering Пароль или ключ}} &
+            \multicolumn{3}{|c|}{\parbox{5.83cm}{\centering Радужная таблица}} \\
         \cline{2-7}
-        & \parbox{1.2cm}{Длина, симв.} & \parbox{1cm}{Множе- ство} & \parbox{1cm}{Мощ- ность} &
-            объём & \parbox{1.5cm}{Время вычисления таблиц} & \parbox{1.3cm}{Время поиска} \\
+        & \parbox{1.8cm}{\centering Длина,\\ симв.} & \parbox{1.8cm}{\centering Множество} & \parbox{1.8cm}{\centering Мощность} &
+            \parbox{1.8cm}{\centering Объём} & \parbox{2.23cm}{\medspace \centering Время вычисления таблиц} & \parbox{1.8cm}{\centering Время поиска} \\
         \hline \hline
         \multicolumn{7}{|c|}{Хэш LM} \\
         \hline
-        \multirow{3}{*}{$2 \times 56$} & \multirow{3}{*}{14} &
+        \rule{0pt}{2.5ex}\multirow{3}{*}{$2 \times 56$} & \multirow{3}{*}{14} &
             A--Z & $2^{33}$ & 610 MB &  & 6 с \\
         & & A--Z, 0-9 & $2^{36}$ & 3 GB &  & 15 с \\
-        & & все & $2^{43}$ & 64 GB & \parbox{1.5cm}{несколько лет} & 7 мин \\
+        & & все & $2^{43}$ & 64 GB & \parbox{2.23cm}{несколько лет} & 7 мин \\
         \hline \hline
         \multicolumn{7}{|c|}{Хэш MD5} \\
         \hline
-        128 & 8 & A-Z, 0-9 & $2^{41}$ & 36 GiB & - & 4 мин \\
+        \rule{0pt}{2.5ex} 128 & 8 & A-Z, 0-9 & $2^{41}$ & 36 GiB & - & 4 мин \\
         \hline
     \end{tabular} }
 \end{table}
