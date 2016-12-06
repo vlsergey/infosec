@@ -27,7 +27,7 @@
 Вероятность того, что случайное \emph{нечётное} число не будет иметь общих делителей с первыми $L$ простыми числами, равна
     \[ P(L) = \prod \limits_{3 \leq p \leq p_L} \left( 1 - \frac{1}{p} \right). \]
 Используя приближение $1-x \leq e^{-x}$, получаем:
-   \[ P(L) ~\lesssim~ \operatorname{exp}( {-\sum\limits_{3 \leq p \leq p_L} \frac{1}{p}}) = \operatorname{exp}( {\frac{1}{2} ~ - \sum\limits_{p \leq p_L} \frac{1}{p}}). \]
+   \[ P(L) ~\lesssim~ \operatorname{exp}\left(-\sum\limits_{3 \leq p \leq p_L} \frac{1}{p}\right) = \operatorname{exp}\left(\frac{1}{2}  - \sum\limits_{p \leq p_L} \frac{1}{p}\right). \]
 Существует предел
     \[ \lim \limits_{n \rightarrow \infty} \left( \sum \limits_{p \leq n} \frac{1}{p} - \ln \ln n \right) = M, \]
 называемый константой Мейсселя~---~Мертенса:\index{константа!Мейсселя~---~Мертенса}
