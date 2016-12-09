@@ -40,8 +40,10 @@
 
 \begin{definition}\label{perfect_by_enthropy}
 Будем называть криптосистему \emph{совершенно криптостойкой}, если условная энтропия сообщения\index{энтропия!условная}\index{энтропия!открытого текста} при известном шифротексте равна безусловной:
-	\[H \left( M | C \right) = H \left( M \right),\]
-	\[I \left( M; C \right) = 0.\]
+\begin{gather*}
+	H \left( M | C \right) = H \left( M \right),\\
+	I \left( M; C \right) = 0.
+\end{gather*}
 \end{definition}
 
 Можно показать, что определения~\ref{perfect_by_probabilities} и~\ref{perfect_by_enthropy} тождественны.
