@@ -38,5 +38,5 @@ $ sudo apt-get install texlive-lang-german \
 ```
 $ git clone https://github.com/vlsergey/infosec
 $ cd infosec
-$ pdflatex Information\ Security.tex'
+$ pdflatex Information\ Security.tex
 ```
