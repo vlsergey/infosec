@@ -47,27 +47,22 @@
     \[ \mathcal{P}_1  = \left\{ {p_{11} ,p_{12} , \ldots , p_{1A} } \right\}, \]
 а одинаково распределённые случайные буквы во второй строке имеют другое распределение
     \[ \mathcal{P}_2  = \left\{ {p_{21} ,p_{22} , \ldots , p_{2A} } \right\}. \]
+
 В этом случае сумму по всем парам мы разделяем на три суммы: по парам внутри позиций первой строки, по парам внутри позиций второй строки и по парам, в которых первая позиция берётся из первой строки, а вторая -- из второй:
-{ \small
-\[
-    I(\mathcal{P}_1, \mathcal{P}_2) =
+\begin{multline*}
+I(\mathcal{P}_1, \mathcal{P}_2) =
         \frac{2}{L(L - 1)} \cdot \left(
-        \sum \limits_{1 \leq k < j \leq L/2} P( X_k  = X_j \mid ( k,j )) ~~ + \right.
-\] \[
-        \left. + \sum\limits_{1 \leq k < j \leq L/2} P(Y_k  = Y_j \mid (k,j)) ~~+~~
+        \sum \limits_{1 \leq k < j \leq L/2} P( X_k  = X_j \mid ( k,j )) + \right.
+\\
+        \left. + \sum\limits_{1 \leq k < j \leq L/2} P(Y_k  = Y_j \mid (k,j)) +
             \sum\limits_{k=1}^{L/2} \sum\limits_{j=1}^{L/2} {P(X_k = Y_j \mid (k,j))} \right) =
-\] \[
-    = \frac{2}{L(L - 1)} \left( \frac{1}{2} \frac{L}{2} \left( \frac{L}{2} - 1 \right) k_{p_1} +
-        \frac{1}{2} \frac{L}{2} \left( \frac{L}{2} - 1 \right) k_{p_2} +
-        \left( \frac{L}{2} \right)^2 \sum \limits_{i = 1}^A p_{1,i} p_{2,i} \right) =
-\] \[
+\\
     = \frac{2}{L(L - 1)} \left( \frac{1}{2} \frac{L}{2} \left( \frac{L}{2} - 1 \right) k_{p_1} +
         \frac{1}{2} \frac{L}{2} \left( \frac{L}{2} - 1 \right) k_{p_2} +
         \left( \frac{L}{2} \right)^2 k_{p_1, p_2} \right),
-\] }
+\end{multline*}
 где обозначено
     \[ k_{p_1, p_2}  = \sum\limits_{i=1}^A p_{1,i} p_{2,i}. \]
-
 
 В общем случае рассмотрим последовательность, представленную в виде матрицы, состоящей из $m$ строк и $\frac{L}{m}$ столбцов, где
 \[
