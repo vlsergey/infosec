@@ -21,11 +21,10 @@
 Так как число различных пар равно $\frac{L(L - 1)}{2}$, то вероятность случайного выбора пары $(k,j)$ равна
     \[ P_{(K,J)} (k,j) = \frac{2}{L(L - 1)}. \]
 Следовательно,
-\[
-    I(\mathcal{P}_1) ~= \sum \limits_{1 \leq k < j \leq L} P_{(K,J)}(k,j) ~\cdot~ P(X_k  = X_j \mid (k,j)) =
-\] \[
+\begin{multline*}
+    I(\mathcal{P}_1) ~= \sum \limits_{1 \leq k < j \leq L} P_{(K,J)}(k,j) ~\cdot~ P(X_k  = X_j \mid (k,j)) =\\
     = \sum \limits_{1 \leq k < j \leq L} \frac{2}{L(L - 1)} k_{p_1} = k_{p_1}.
-\]
+\end{multline*}
 
 Найдём теперь аналогичную вероятность $I\left( {\mathcal{P}_1 ,\mathcal{P}_2 } \right)$ для случая, когда последовательность независимых случайных букв может быть представлена в виде
 \[
