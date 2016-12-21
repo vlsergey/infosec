@@ -34,7 +34,6 @@
 \usepackage{float}			% sub figures
 \usepackage[totoc=true]{idxlayout}      % балансировка индексов на последней странице, индекс в ToC
 \usepackage{lscape}                     % поддержка поворота страниц на 90 градусов для широких таблиц
-\usepackage{makeidx}                    % index
 \usepackage{multicol}                   % поддержка колонок
 \setlength{\columnsep}{0.1cm}
 \usepackage{multirow}                   % multirow cells in tables
@@ -57,6 +56,17 @@
 ]{biblatex}								% библиография по ГОСТу
 \addbibresource{bibliography.bib}
 
+\usepackage[xindy]{imakeidx}
+\makeindex[program=texindy, options=-M mystyle.xdy -L russian -C utf8]
+
+\let\oldindex\index
+
+\makeatletter
+\renewcommand{\index}[2][\imki@jobname]{%
+	\oldindex[#1]{\detokenize{#2}}%
+}
+\makeatother
+
 % поддержка гиперссылок; гиперссылки в pdf, должен быть последним загруженным пакетом
 \ifx\pdfoutput\undefined
     \usepackage[unicode,dvips]{hyperref}
@@ -74,6 +84,28 @@
     pdfsubject=учебное пособие,
     pdfkeywords={защита информации, криптография, МФТИ}
 }
+
+\usepackage{filecontents}
+\begin{filecontents*}{mystyle.xdy}
+	;;; xindy style file
+	(markup-locclass-list :open "\dotfill" :sep "")	
+	
+	(define-letter-groups
+	("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m"
+	"n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"))
+	
+	(require
+	"rules/latin-tolower.xdy")
+	
+	(use-rule-set
+	:run 0
+	:rule-set ("latin-tolower"))
+	
+	(markup-letter-group
+	:open-head "~n~n  \textbf {\Large "
+		:close-head "}~n  \nopagebreak"
+	:capitalize)
+\end{filecontents*}
 
 % добавить точку после номера секции, раздела и~т.\,д.
 \makeatletter
@@ -183,8 +215,6 @@
 %\mathcode`\+=32768
 %\mathcode`\-=32768
 %%end{latexonly}
-
-\makeindex
 
 \begin{document}
 \selectlanguage{russian}
