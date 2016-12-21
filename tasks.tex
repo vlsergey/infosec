@@ -68,23 +68,23 @@
 \begin{itemize}\itemsep1pt \parskip0pt \parsep0pt
 \item Каков размер этого множества?
 \item Сколько времени потребуется на взлом шифротекста, зашифрованного данным паролем, если предположить, что во взломе участвуют все компьютеры мира (7~млрд.), а средний компьютер перебирает 300~000 паролей в секунду?\footnote{См. скорости перебора MD5-хэшей\index{хэш-функция!MD5} на странице \texttt{http://openwall.info\hspace{0pt}/wiki\hspace{0pt}/john\hspace{0pt}/benchmarks}}
-\item Каковы затраты электроэнергии в денежном эквиваленте, если средний компьютер потребляет мощность 400~Вт, а стоимость 1~кВт$\times$час составляет 4,68~рубля?
+\item Каковы затраты электроэнергии в денежном эквиваленте, если средний компьютер потребляет мощность 400~Вт, а стоимость 1~кВт$\times$час составляет 4.68~рубля?
 \end{itemize}
 \medbreak
 \textbf{Решение:}
 \begin{itemize}\itemsep1pt \parskip0pt \parsep0pt
 	\item общее количество символов: $26 + 26 + 10 = 62$;
-	\item общее количество паролей: $62^{12} \approx 3{,}226\times 10^{21}$;
-	\item время на перебор: $62^{12} / (3 \times 10^5) / (7 \times 10^9 ) \approx 1{,}54 \times 10^{6}$ сек.;
+	\item общее количество паролей: $62^{12} \approx 3.226\times 10^{21}$;
+	\item время на перебор: $62^{12} / (3 \times 10^5) / (7 \times 10^9 ) \approx 1.54 \times 10^{6}$ сек.;
 	\begin{itemize}\itemsep1pt \parskip0pt \parsep0pt
 		\item в минутах: $\approx 25605$;
 		\item в часах: $\approx 427$;
 		\item в днях: $\approx 18$;
 	\end{itemize}
-	\item стоимость: $427 \times (7 \times 10^9 ) \times 0{,}4 \times 4{,}68 \approx 5{,}59 \times 10^{12}$ руб.
+	\item стоимость: $427 \times (7 \times 10^9 ) \times 0.4 \times 4.68 \approx 5.59 \times 10^{12}$ руб.
 \end{itemize}
 \medbreak
-\textbf{Ответ:} паролей $3{,}226 \times 10^{21}$; на перебор нужно $1{,}54 \times 10^6$ секунд ($\approx 18$ дней); затраты -- 5,6 триллиона рублей.
+\textbf{Ответ:} паролей $3.226 \times 10^{21}$; на перебор нужно $1.54 \times 10^6$ секунд ($\approx 18$ дней); затраты -- 5.6 триллиона рублей.
 \bigbreak
 
 \tasknumber Источник открытого текста характеризуется случайной величиной $X$, принимающей два значения $x_1$ и $x_2$ с вероятностями $p \left( x = x_1 \right) = 1/5$ и $p \left( x = x_2 \right) = 4/5$ соответственно. Источник ключей характеризуется случайной величиной $Z$, независимой от величины $X$, принимающей два значения $z_1$ и $z_2$ с вероятностями $p \left( z = z_1 \right) = 1/6$ и $p \left( z = z_2 \right) = 5/6$ соответственно. Функция шифрования $E_{z} \left( x \right)$ задаётся следующими правилами: $\left( x_1, z_1 \right) \to y_1$, $\left( x_1, z_2 \right) \to y_2$, $\left( x_2, z_1 \right) \to y_2$, $\left( x_2, z_2 \right) \to y_1$.
@@ -99,9 +99,9 @@
 \medbreak
 \textbf{Ответ:}
 \begin{itemize}\itemsep1pt \parskip0pt \parsep0pt
-	\item $I \left( x_1 \right) = \log_2 5 = 2{,}322$ бит; $I \left( x_2 \right) = \log_2 5/4 = 0{,}322$ бит;
-	\item $H \left( X \right) = 0{,}722$ бит; $H \left( Z \right) = 0{,}650$ бит; $H \left( Y \right) = 0{,}881$ бит;
-	\item $I \left( X ; Z \right) = 0$ бит; $I \left( X; Y \right) = 0{,}231$ бит; $I \left( Y; Z \right) = 0{,}159$ бит;
+	\item $I \left( x_1 \right) = \log_2 5 = 2.322$ бит; $I \left( x_2 \right) = \log_2 5/4 = 0.322$ бит;
+	\item $H \left( X \right) = 0.722$ бит; $H \left( Z \right) = 0.650$ бит; $H \left( Y \right) = 0.881$ бит;
+	\item $I \left( X ; Z \right) = 0$ бит; $I \left( X; Y \right) = 0.231$ бит; $I \left( Y; Z \right) = 0.159$ бит;
 	\item $p \left( x_1 | y_1 \right) = 1/21$; $p \left( x_2 | y_1 \right) = 20/21$; $p \left( x_1 | y_2 \right) = 5/9$; $p \left( x_2 | y_2 \right) = 4/9$; не является.
 \end{itemize}
 
