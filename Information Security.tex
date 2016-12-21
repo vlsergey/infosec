@@ -85,28 +85,6 @@
     pdfkeywords={защита информации, криптография, МФТИ}
 }
 
-\usepackage{filecontents}
-\begin{filecontents*}{mystyle.xdy}
-	;;; xindy style file
-	(markup-locclass-list :open "\dotfill" :sep "")	
-	
-	(define-letter-groups
-	("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m"
-	"n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"))
-	
-	(require
-	"rules/latin-tolower.xdy")
-	
-	(use-rule-set
-	:run 0
-	:rule-set ("latin-tolower"))
-	
-	(markup-letter-group
-	:open-head "~n~n  \textbf {\Large "
-		:close-head "}~n  \nopagebreak"
-	:capitalize)
-\end{filecontents*}
-
 % добавить точку после номера секции, раздела и~т.\,д.
 \makeatletter
 \def\@seccntformat#1{\csname the#1\endcsname.\quad}
