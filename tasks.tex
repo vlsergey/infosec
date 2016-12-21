@@ -151,32 +151,32 @@
 	\end{tikzpicture}
 \end{center}
 \medbreak
-\textbf{Решение:}
+\textbf{Решение.}
 \begin{itemize}\itemsep1pt \parskip0pt \parsep0pt
 	\item Из коэффициентов многочлена $m\left(x\right)$ получаем формулу предыдущего элемента:
 		\[ m\left(x\right) = \sum\limits_{i = 5 \dots 1} {a_i x^i } + 1 = x^{5} + x^{3} + 1; \]
 		\[ b_0 = a_5 b_5 \oplus \dots \oplus a_1 b_1 = b_{5} \oplus b_{3}.\]
-		Это формула бита, который на следующей итерации станет битом $b_1$, то есть значение функции обратной связи регистра;
-	\item $b_5 = b_0\oplus b_{3}$ -- формула выходного бита, если известны остальные биты и значение функции обратной связи;
+		Это формула бита, который на следующей итерации станет битом $b_1$, то есть значение функции обратной связи регистра.
+	\item $b_5 = b_0\oplus b_{3}$ -- формула выходного бита, если известны остальные биты и значение функции обратной связи.
 	\item За счёт последних 5 бит выхода восстанавливаем состояние регистра $\overrightarrow{s_{1}}=\left(b_{1}, b_{2}, b_{3}, b_{4}, b_{5}\right) = \left(1, 0, 1, 0, 1\right)$. Далее начинаем отматывать время назад.
 	\item $\overrightarrow{s_{1}}=\left(1, 0, 1, 0, 1\right)$. $\overrightarrow {s_{0}} = \left(0, 1, 0, 1, ? \right)$ и $b_0 = 1$. \\
 		$b_5 = b_0\oplus b_{3}=1 \oplus 0=1$. $\overrightarrow{s_{0}}=\left(0, 1, 0, 1, 1\right)$. \\
-		Выход — 1;
+		Выход — 1.
 	\item $\overrightarrow{s_{0}}=\left(0, 1, 0, 1, 1\right)$. $\overrightarrow {s_{-1}} = \left(1, 0, 1, 1, ? \right)$ и $b_0 = 0$. \\
 		$b_5 = b_0\oplus b_{3}=0 \oplus 1=1$. $\overrightarrow{s_{-1}}=\left(1, 0, 1, 1, 1\right)$. \\
-		Выход — 1;
+		Выход — 1.
 	\item $\overrightarrow{s_{-1}}=\left(1, 0, 1, 1, 1\right)$. $\overrightarrow {s_{-2}} = \left(0, 1, 1, 1, ? \right)$ и $b_0 = 1$. \\
 		$b_5 = b_0\oplus b_{3}=1 \oplus 1=0$. $\overrightarrow{s_{-2}}=\left(0, 1, 1, 1, 0\right)$. \\
-		Выход — 0;
+		Выход — 0.
 	\item $\overrightarrow{s_{-2}}=\left(0, 1, 1, 1, 0\right)$. $\overrightarrow {s_{-3}} = \left(0, 0, 1, 1, ? \right)$ и $b_0 = 0$. \\
 		$b_5 = b_0\oplus b_{3}=0 \oplus 1=1$. $\overrightarrow{s_{-3}}=\left(1, 1, 1, 0, 1\right)$. \\
-		Выход — 1;
+		Выход — 1.
 	\item $\overrightarrow{s_{-3}}=\left(1, 1, 1, 0, 1\right)$. $\overrightarrow {s_{-4}} = \left(0, 1, 0, 1, ? \right)$ и $b_0 = 1$. \\
 		$b_5 = b_0\oplus b_{3}=1 \oplus 0=1$. $\overrightarrow{s_{-4}}=\left(1, 1, 0, 1, 1\right)$. \\
-		Выход — 1;
+		Выход — 1.
 	\item $\overrightarrow{s_{-4}}=\left(1, 1, 0, 1, 1\right)$. $\overrightarrow {s_{-5}} = \left(0, 1, 1, 0, ? \right)$ и $b_0 = 1$. \\
 		$b_5 = b_0\oplus b_{3}=1 \oplus 1=0$. $\overrightarrow{s_{-5}}=\left(1, 0, 1, 1, 0\right)$. \\
-		Выход — 0;
+		Выход — 0.
 	\item Ответ (в порядке выдачи бит генератором): $0, 1, 1, 0, 1$.
 	\item Краткое оформление второй части задачи можно увидеть в таблице~\ref{table:task-lfsr-1-short-solution}. Таблица заполняется снизу вверх (так как нам нужны предыдущие биты, а не следующие). Самая последняя строка таблицы соответствует последнему известному состоянию регистра -- последним 5 битам последовательности. Столбцы таблицы связаны формулой $b_{5} \oplus b_{3} = b_0 $. Ответ находится в первых 5 элементах первого столбца. Последние 1 элемента соответствуют вспомогательным битам, данным в решении (первые 1 в последовательности бит из условия).
 	\begin{table}[!thb]
@@ -203,7 +203,7 @@
 
 \tasknumber Укажите характеристический полином и приведите следующие 5 бит выхода генератора псевдослучайной последовательности, основанного на регистре сдвига с линейной обратной связью, если известно, что степень характеристического полинома регистра -- $m\left(x\right)$ -- равна 5, а предыдущая последовательность такова: $0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1$. Порядок бит в последовательности соответствует порядку их генерации РСЛОС.
 \medbreak
-\textbf{Решение:}
+\textbf{Решение.}
 \begin{itemize}\itemsep1pt \parskip0pt \parsep0pt
 	\item Каждый бит выходной последовательности есть функция 5 предыдущих выходных бит вида $b_0 = f\left( b_{5} \dots b_1 \right) $. В данных обозначениях $b_{5}$ является наиболее ранним битом, а $b_1$ -- последним, который сгенерировал РСЛОС непосредственно перед генерацией бита $b_0$.  Вид функции задаётся характеристическим многочленом, который и нужно найти.
 	\[\begin{array}{l}
@@ -220,18 +220,18 @@
 	\end{array}\]
 	\item Это приводит к системе уравнений:
 	\[\left\{ {\begin{array}{*{20}c}
-		f\left(0,1,0,0,1\right) = 0 \oplus \left( a_{4} \cdot 1\right) \oplus \left( a_{3} \cdot 0\right) \oplus \left( a_{2} \cdot 0\right) \oplus \left( a_{1} \cdot 1\right) = 1 \\
-		f\left(1,0,0,1,1\right) = 1 \oplus \left( a_{4} \cdot 0\right) \oplus \left( a_{3} \cdot 0\right) \oplus \left( a_{2} \cdot 1\right) \oplus \left( a_{1} \cdot 1\right) = 0 \\
-		f\left(0,0,1,1,0\right) = 0 \oplus \left( a_{4} \cdot 0\right) \oplus \left( a_{3} \cdot 1\right) \oplus \left( a_{2} \cdot 1\right) \oplus \left( a_{1} \cdot 0\right) = 0 \\
-		f\left(0,1,1,0,0\right) = 0 \oplus \left( a_{4} \cdot 1\right) \oplus \left( a_{3} \cdot 1\right) \oplus \left( a_{2} \cdot 0\right) \oplus \left( a_{1} \cdot 0\right) = 0 \\
-		f\left(1,1,0,0,0\right) = 1 \oplus \left( a_{4} \cdot 1\right) \oplus \left( a_{3} \cdot 0\right) \oplus \left( a_{2} \cdot 0\right) \oplus \left( a_{1} \cdot 0\right) = 0 \\
-		f\left(1,0,0,0,0\right) = 1 \oplus \left( a_{4} \cdot 0\right) \oplus \left( a_{3} \cdot 0\right) \oplus \left( a_{2} \cdot 0\right) \oplus \left( a_{1} \cdot 0\right) = 1 \\
+		f\left(0,1,0,0,1\right) = 0 \oplus \left( a_{4} \cdot 1\right) \oplus \left( a_{3} \cdot 0\right) \oplus \left( a_{2} \cdot 0\right) \oplus \left( a_{1} \cdot 1\right) = 1, \\
+		f\left(1,0,0,1,1\right) = 1 \oplus \left( a_{4} \cdot 0\right) \oplus \left( a_{3} \cdot 0\right) \oplus \left( a_{2} \cdot 1\right) \oplus \left( a_{1} \cdot 1\right) = 0, \\
+		f\left(0,0,1,1,0\right) = 0 \oplus \left( a_{4} \cdot 0\right) \oplus \left( a_{3} \cdot 1\right) \oplus \left( a_{2} \cdot 1\right) \oplus \left( a_{1} \cdot 0\right) = 0, \\
+		f\left(0,1,1,0,0\right) = 0 \oplus \left( a_{4} \cdot 1\right) \oplus \left( a_{3} \cdot 1\right) \oplus \left( a_{2} \cdot 0\right) \oplus \left( a_{1} \cdot 0\right) = 0, \\
+		f\left(1,1,0,0,0\right) = 1 \oplus \left( a_{4} \cdot 1\right) \oplus \left( a_{3} \cdot 0\right) \oplus \left( a_{2} \cdot 0\right) \oplus \left( a_{1} \cdot 0\right) = 0, \\
+		f\left(1,0,0,0,0\right) = 1 \oplus \left( a_{4} \cdot 0\right) \oplus \left( a_{3} \cdot 0\right) \oplus \left( a_{2} \cdot 0\right) \oplus \left( a_{1} \cdot 0\right) = 1. \\
 	\end{array} } \right.\]
 	\[\left\{ {\begin{array}{*{20}l}
-		a_{4} \oplus a_{1} = 1 \\
-		a_{2} \oplus a_{1} = 1 \\
-		a_{3} \oplus a_{2} = 0 \\
-		a_{4} \oplus a_{3} = 0 \\
+		a_{4} \oplus a_{1} = 1, \\
+		a_{2} \oplus a_{1} = 1, \\
+		a_{3} \oplus a_{2} = 0, \\
+		a_{4} \oplus a_{3} = 0. \\
 		a_{4} = 1 \\
 	\end{array} } \right.\]
 	\item Найденные из системы уравнения коэффициенты $\left(a_{4}, a_{3}, a_{2}, a_{1}\right) = \left(1 , 1 , 1 , 0\right)$.
@@ -278,18 +278,18 @@
 	\end{center}
 	\item Теперь, когда характеристический полином известен, восстанавливаем состояния регистра по последним 5 выходам:
 	\begin{itemize}\itemsep1pt \parskip0pt \parsep0pt
-		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 0, 0, 0, 1\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 0 \oplus 0 \oplus 0=0$. Следующее состояние $\left(0, 0, 0, 1, 0\right)$, а текущий выход $b_{5}=0$.
-		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 0, 0, 1, 0\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 0 \oplus 0 \oplus 1=1$. Следующее состояние $\left(0, 0, 1, 0, 1\right)$, а текущий выход $b_{5}=0$.
-		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 0, 1, 0, 1\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 0 \oplus 1 \oplus 0=1$. Следующее состояние $\left(0, 1, 0, 1, 1\right)$, а текущий выход $b_{5}=0$.
-		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 1, 0, 1, 1\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 1 \oplus 0 \oplus 1=0$. Следующее состояние $\left(1, 0, 1, 1, 0\right)$, а текущий выход $b_{5}=0$.
+		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 0, 0, 0, 1\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 0 \oplus 0 \oplus 0=0$. Следующее состояние $\left(0, 0, 0, 1, 0\right)$, а текущий выход $b_{5}=0$;
+		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 0, 0, 1, 0\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 0 \oplus 0 \oplus 1=1$. Следующее состояние $\left(0, 0, 1, 0, 1\right)$, а текущий выход $b_{5}=0$;
+		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 0, 1, 0, 1\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 0 \oplus 1 \oplus 0=1$. Следующее состояние $\left(0, 1, 0, 1, 1\right)$, а текущий выход $b_{5}=0$;
+		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 1, 0, 1, 1\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 1 \oplus 0 \oplus 1=0$. Следующее состояние $\left(1, 0, 1, 1, 0\right)$, а текущий выход $b_{5}=0$;
 		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(1, 0, 1, 1, 0\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=1 \oplus 0 \oplus 1 \oplus 1=1$. Следующее состояние $\left(0, 1, 1, 0, 1\right)$, а текущий выход $b_{5}=1$.
 	\end{itemize}
 	\item Следующие итерации, дающие нужный ответ:
 	\begin{itemize}\itemsep1pt \parskip0pt \parsep0pt
-		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 1, 1, 0, 1\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 1 \oplus 1 \oplus 0=0$. Следующее состояние $\left(1, 1, 0, 1, 0\right)$, а текущий выход $b_{5}=0$.
-		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(1, 1, 0, 1, 0\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=1 \oplus 1 \oplus 0 \oplus 1=1$. Следующее состояние $\left(1, 0, 1, 0, 1\right)$, а текущий выход $b_{5}=1$.
-		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(1, 0, 1, 0, 1\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=1 \oplus 0 \oplus 1 \oplus 0=0$. Следующее состояние $\left(0, 1, 0, 1, 0\right)$, а текущий выход $b_{5}=1$.
-		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 1, 0, 1, 0\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 1 \oplus 0 \oplus 1=0$. Следующее состояние $\left(1, 0, 1, 0, 0\right)$, а текущий выход $b_{5}=0$.
+		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 1, 1, 0, 1\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 1 \oplus 1 \oplus 0=0$. Следующее состояние $\left(1, 1, 0, 1, 0\right)$, а текущий выход $b_{5}=0$;
+		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(1, 1, 0, 1, 0\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=1 \oplus 1 \oplus 0 \oplus 1=1$. Следующее состояние $\left(1, 0, 1, 0, 1\right)$, а текущий выход $b_{5}=1$;
+		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(1, 0, 1, 0, 1\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=1 \oplus 0 \oplus 1 \oplus 0=0$. Следующее состояние $\left(0, 1, 0, 1, 0\right)$, а текущий выход $b_{5}=1$;
+		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(0, 1, 0, 1, 0\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=0 \oplus 1 \oplus 0 \oplus 1=0$. Следующее состояние $\left(1, 0, 1, 0, 0\right)$, а текущий выход $b_{5}=0$;
 		\item $\left(b_{5}, b_{4}, b_{3}, b_{2}, b_{1}\right) = \left(1, 0, 1, 0, 0\right)$. Сумма: $b_0 = b_{5} \oplus b_{4} \oplus b_{3} \oplus b_{2}=1 \oplus 0 \oplus 1 \oplus 0=0$. Следующее состояние $\left(0, 1, 0, 0, 0\right)$, а текущий выход $b_{5}=1$.
 		\end{itemize}
 	\item Итого ответ на вторую часть задачи: $0, 1, 1, 0, 1$.
@@ -440,7 +440,7 @@ $12$ & $1$ & $12$ & $-11$ & $-10$ & $4$ & $2$,$11$ &$(12; 2)$, $(12; 11)$ \\
 
 \tasknumber Вычислить электронную подпись сообщения $m=5$ по схеме ГОСТ Р 34.10-2012. Кривая $y^2 = x^3 - 3 x - 8$ над конечным полем $\mathbb{F}_{11}$. В качестве генератора используется точка G$\left(0; 5\right)$, размер циклической подгруппы -- $16$. Открытый ключ отправителя сообщения Q$\left(10; 4\right)$. Для генерации ЭП использовать случайный параметр $k=3$.
 \medbreak
-\textbf{Решение:}
+\textbf{Решение.}
 \begin{itemize}
 \item Используя формулу $Q = d \times G$, перебором находим, что $d = 5$.
 \item $C = k \times G = 3 \times \left(0; 5\right) = \left(6; 5\right)$.
@@ -465,7 +465,7 @@ $12$ & $1$ & $12$ & $-11$ & $-10$ & $4$ & $2$,$11$ &$(12; 2)$, $(12; 11)$ \\
 
 \tasknumber Сгенерировать секретный сеансовый ключ для Алисы и Боба по протоколу Диффи~---~Хеллмана\index{протокол!Диффи~---~Хеллмана}. Общие параметры схемы: генератор 14 и модуль 17. Открытые ключи Алисы и Боба равны 8 и 5 соответственно.
 \medbreak
-\textbf{Решение и ответ:}
+\textbf{Решение и ответ.}
 \begin{itemize}
 \item Закрытый ключ Алисы: $a = \log_{g} A \bmod p = \log_{14} 8 \bmod 17 = 10$.
 \item Закрытый ключ Боба: $b = \log_{g} B \bmod p = \log_{14} 5 \bmod 17 = 13$.
