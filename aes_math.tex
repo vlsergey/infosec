@@ -105,11 +105,11 @@
     \[ \mathbf{a}(y) ~ \mathbf{b}(y) \mod \mathbf{M}(y) ~\equiv~ \mathbf{a}(y) \otimes \mathbf{b}(y). \]
 
 Операция <<перемешивание столбца>> в шифровании AES состоит в умножении многочлена столбца на
-    \[ \mathbf{c}(y) = (03, 01, 01, 02) = \mathrm{'03'} y^3 + \mathrm{'01'} y^2 + \mathrm{'01'} y + \mathrm{'02'} \]
+    \[ \mathbf{c}(y) = (\mathrm{'03'}, \mathrm{'01'}, \mathrm{'01'}, \mathrm{'02'}) = \mathrm{'03'} y^3 + \mathrm{'01'} y^2 + \mathrm{'01'} y + \mathrm{'02'} \]
 по модулю $\mathbf{M}(y)$. Многочлен $\mathbf{c}(y)$ имеет обратный многочлен
-    \[ \mathbf{d}(y) = \mathbf{c}^{-1}(y) \mod \mathbf{M}(y) = (\mathrm{0B}, \mathrm{0D}, \mathrm{09}, \mathrm{0E}) = \]
+    \[ \mathbf{d}(y) = \mathbf{c}^{-1}(y) \mod \mathbf{M}(y) = (\mathrm{'0B'}, \mathrm{'0D'}, \mathrm{'09'}, \mathrm{'0E'}) = \]
         \[ = \mathrm{'0B'} y^3 + \mathrm{'0D'} y^2 + \mathrm{'09'} y + \mathrm{'0E'}, \]
-    \[ \mathbf{c}(y) \otimes \mathbf{d}(y) = (00, 00, 00, 01) = 1. \]
+    \[ \mathbf{c}(y) \otimes \mathbf{d}(y) = (\mathrm{'00'}, \mathrm{'00'}, \mathrm{'00'}, \mathrm{'01'}) = 1. \]
 При расшифровании выполняется умножение на $\mathbf{d}(y)$ вместо $\mathbf{c}(y)$.
 
 Так как
@@ -155,28 +155,28 @@
 Умножение матриц производится в поле $\GF{2^8}$. Матричное представление полезно, если нужно умножать фиксированный вектор на несколько различных векторов.
 
 \example
-Вычислим для $\mathbf{a}(y) = (\mathrm{F2}, \mathrm{7E}, \mathrm{41}, \mathrm{0A})$ произведение $\mathbf{a}(y) \otimes \mathbf{c}(y)$:
+Вычислим для $\mathbf{a}(y) = (\mathrm{'F2'}, \mathrm{'7E'}, \mathrm{'41'}, \mathrm{'0A'})$ произведение $\mathbf{a}(y) \otimes \mathbf{c}(y)$:
 \[
-    \mathbf{c}(y) = (03, 01, 01, 02),
+    \mathbf{c}(y) = (\mathrm{'03'}, \mathrm{'01'}, \mathrm{'01'}, \mathrm{'02'}),
 \] \[
-    \mathbf{d}(y) = \mathbf{c}^{-1}(y) \mod \mathbf{M}(y) = (\mathrm{0B}, \mathrm{0D}, \mathrm{09}, \mathrm{0E}).
+    \mathbf{d}(y) = \mathbf{c}^{-1}(y) \mod \mathbf{M}(y) = (\mathrm{'0B'}, \mathrm{'0D'}, \mathrm{'09'}, \mathrm{'0E'}).
 \] \[
     \mathbf{a}(y) \otimes \mathbf{c}(y) =
     \left[ \begin{array}{cccc}
-        \mathrm{0A} & \mathrm{F2} & \mathrm{7E} & \mathrm{41} \\
-        \mathrm{41} & \mathrm{0A} & \mathrm{F2} & \mathrm{7E} \\
-        \mathrm{7E} & \mathrm{41} & \mathrm{0A} & \mathrm{F2} \\
-        \mathrm{F2} & \mathrm{7E} & \mathrm{41} & \mathrm{0A} \\
+        \mathrm{'0A'} & \mathrm{'F2'} & \mathrm{'7E'} & \mathrm{'41'} \\
+        \mathrm{'41'} & \mathrm{'0A'} & \mathrm{'F2'} & \mathrm{'7E'} \\
+        \mathrm{'7E'} & \mathrm{'41'} & \mathrm{'0A'} & \mathrm{'F2'} \\
+        \mathrm{'F2'} & \mathrm{7E} & \mathrm{'41'} & \mathrm{'0A'} \\
     \end{array} \right] \cdot
-    \left[ \begin{array}{c} \mathrm{02} \\ \mathrm{01} \\ \mathrm{01} \\ \mathrm{03} \end{array} \right] =
+    \left[ \begin{array}{c} \mathrm{'02'} \\ \mathrm{'01'} \\ \mathrm{'01'} \\ \mathrm{'03'} \end{array} \right] =
 \] \[
     \left[ \begin{array}{ccccccc}
-        \mathrm{0A} \cdot \mathrm{02} & \oplus & \mathrm{F2} & \oplus & \mathrm{7E} & \oplus & \mathrm{41} \cdot \mathrm{03} \\
-        \mathrm{41} \cdot \mathrm{02} & \oplus & \mathrm{0A} & \oplus & \mathrm{F2} & \oplus & \mathrm{7E} \cdot \mathrm{03} \\
-        \mathrm{7E} \cdot \mathrm{02} & \oplus & \mathrm{41} & \oplus & \mathrm{0A} & \oplus & \mathrm{F2} \cdot \mathrm{03} \\
-        \mathrm{F2} \cdot \mathrm{02} & \oplus & \mathrm{7E} & \oplus & \mathrm{41} & \oplus & \mathrm{0A} \cdot \mathrm{03} \\
+        \mathrm{'0A'} \cdot \mathrm{'02'} & \oplus & \mathrm{'F2'} & \oplus & \mathrm{'7E'} & \oplus & \mathrm{'41'} \cdot \mathrm{'03'} \\
+        \mathrm{'41'} \cdot \mathrm{'02'} & \oplus & \mathrm{'0A'} & \oplus & \mathrm{'F2'} & \oplus & \mathrm{'7E'} \cdot \mathrm{'03'} \\
+        \mathrm{'7E'} \cdot \mathrm{'02'} & \oplus & \mathrm{'41'} & \oplus & \mathrm{'0A'} & \oplus & \mathrm{'F2'} \cdot \mathrm{'03'} \\
+        \mathrm{'F2'} \cdot \mathrm{'02'} & \oplus & \mathrm{'7E'} & \oplus & \mathrm{'41'} & \oplus & \mathrm{'0A'} \cdot \mathrm{'03'} \\
     \end{array} \right] =
-    =\left[ \begin{array}{c} \mathrm{5B} \\ \mathrm{F8} \\ \mathrm{BA} \\ \mathrm{DE} \end{array} \right];
+    =\left[ \begin{array}{c} \mathrm{'5B'} \\ \mathrm{'F8'} \\ \mathrm{'BA'} \\ \mathrm{'DE'} \end{array} \right];
 \] \[
     \begin{array}{l}
         \mathbf{a}(y) \otimes \mathbf{c}(y) = \mathbf{b}(y), \\
@@ -184,8 +184,8 @@
     \end{array}
 \] \[
     \begin{array}{ccccc}
-        (\mathrm{F2}, \mathrm{7E}, \mathrm{41}, \mathrm{0A}) & \otimes & (\mathrm{03}, \mathrm{01}, \mathrm{01}, \mathrm{02}) & = & (\mathrm{DE}, \mathrm{BA}, \mathrm{F8}, \mathrm{5B}), \\
-        (\mathrm{DE}, \mathrm{BA}, \mathrm{F8}, \mathrm{5B}) & \otimes & (\mathrm{0B}, \mathrm{0D}, \mathrm{09}, \mathrm{0E}) & = & (\mathrm{F2}, \mathrm{7E}, \mathrm{41}, \mathrm{0A}). \\
+        (\mathrm{'F2'}, \mathrm{'7E'}, \mathrm{'41'}, \mathrm{'0A'}) & \otimes & (\mathrm{'03'}, \mathrm{'01'}, \mathrm{'01'}, \mathrm{'02'}) & = & (\mathrm{'DE'}, \mathrm{'BA'}, \mathrm{'F8'}, \mathrm{'5B'}), \\
+        (\mathrm{'DE'}, \mathrm{'BA'}, \mathrm{'F8'}, \mathrm{'5B'}) & \otimes & (\mathrm{'0B'}, \mathrm{'0D'}, \mathrm{'09'}, \mathrm{'0E'}) & = & (\mathrm{'F2'}, \mathrm{'7E'}, \mathrm{'41'}, \mathrm{'0A'}). \\
     \end{array}
 \]
 \exampleend
