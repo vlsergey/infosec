@@ -24,7 +24,8 @@ $ sudo apt-get install texlive-lang-german \
     texlive-lang-italian \
     texlive-lang-german \
     texlive-lang-european \
-    texlive-lang-cyrillic
+    texlive-lang-cyrillic \
+    texlive-lang-french
 ```
 
 #### OS X:
