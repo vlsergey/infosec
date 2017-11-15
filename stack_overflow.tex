@@ -6,6 +6,35 @@
 В 64-битовой x86-64 архитектуре основное пространство виртуальной памяти процесса из 16-ти эксабайтов ($2^{64}$ байтов) свободно, и только малая часть занята (выделена). Виртуальная память выделяется процессу операционной системой блоками по 4 кБ, называемыми страницами памяти. Выделенные страницы соответствуют страницам физической оперативной памяти или страницам файлов.
 
 Пример выделенной виртуальной памяти процесса представлен в таблице~\ref{tab:virtual-memory}. Локальные переменные функций хранятся в области памяти, называемой стеком.
+
+Приведём пример переполнения буфера в стеке\index{стек}, которое даёт возможность исполнить код для 64-разрядной ОС Linux. Ниже приводится листинг исходной программы, которая печатает расстояние Хэмминга между векторами $b1 = \text{\texttt{0x01234567}}$ и $b2 = \text{\texttt{0x89ABCDEF}}$.
+
+\begin{verbatim}
+#include <stdio.h>
+#include <string.h>
+
+int hamming_distance(unsigned a1, unsigned a2, char *text,
+                     size_t textsize) {
+  char buf[32];
+  unsigned distance = 0;
+  unsigned diff = a1 ^ a2;
+  while (diff) {
+    if (diff & 1) distance++;
+    diff >>= 1;
+  }
+  memcpy(buf, text, textsize);
+  printf("%s: %i\n", buf, distance);
+  return distance;
+}
+
+int main() {
+  char text[68] = "Hamming";
+  unsigned b1 = 0x01234567;
+  unsigned b2 = 0x89ABCDEF;
+  return hamming_distance(b1, b2, text, 8);
+}
+\end{verbatim}
+
 \begin{table}[!ht]
     \centering
     \caption{Пример структуры виртуальной памяти процесса\label{tab:virtual-memory}}
@@ -45,34 +74,6 @@
         \cline{2-2}
     \end{tabular} }
 \end{table}
-
-Приведём пример переполнения буфера в стеке\index{стек}, которое даёт возможность исполнить код для 64-разрядной ОС Linux. Ниже приводится листинг исходной программы, которая печатает расстояние Хэмминга между векторами $b1 = \text{\texttt{0x01234567}}$ и $b2 = \text{\texttt{0x89ABCDEF}}$.
-
-\begin{verbatim}
-#include <stdio.h>
-#include <string.h>
-
-int hamming_distance(unsigned a1, unsigned a2, char *text,
-                     size_t textsize) {
-  char buf[32];
-  unsigned distance = 0;
-  unsigned diff = a1 ^ a2;
-  while (diff) {
-    if (diff & 1) distance++;
-    diff >>= 1;
-  }
-  memcpy(buf, text, textsize);
-  printf("%s: %i\n", buf, distance);
-  return distance;
-}
-
-int main() {
-  char text[68] = "Hamming";
-  unsigned b1 = 0x01234567;
-  unsigned b2 = 0x89ABCDEF;
-  return hamming_distance(b1, b2, text, 8);
-}
-\end{verbatim}
 
 Вывод программы при запуске:
 \begin{verbatim}
