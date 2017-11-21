@@ -36,12 +36,17 @@ $ sudo apt-get install texlive-lang-french
 
 Воспользуйтесь дистрибутивом **MiKTeX**: https://miktex.org/. Необходимые пакеты будут запрошены во время первой сборки.
 
-### Клонирование и сборка
+### Клонирование и сборка (Unix)
 
 ```
 $ git clone https://github.com/vlsergey/infosec
 $ cd infosec
 $ pdflatex Information\ Security.tex
+```
+### Cборка (Windows)
+
+```
+> pdflatex "Information Security.tex"
 ```
 
 ## Какие «ошибки» исправлять не нужно
