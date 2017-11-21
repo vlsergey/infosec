@@ -50,7 +50,7 @@
 \begin{enumerate}
 	\item $ Alice \rightarrow \{ A, E_A \left( T_A, B, K \right) \} \rightarrow Trent $
 	\item $ Trent \rightarrow \{ E_B \left( T_T, A, K \right) \} \rightarrow Bob $
-	\item $ Eva \rightarrow \{ E_B \left( T_A, A, K \right) \} \rightarrow Bob $
+	\item $ Eva \rightarrow \{ E_B \left( T_T, A, K \right) \} \rightarrow Bob $
 \end{enumerate}
 
 В той же работе Лоу предложил модификацию протокола, вводящую явную взаимную аутентификацию абонентов с помощью случайной метки $R_B$ и проверки, что Алиса может расшифровать пакет с меткой, зашифрованной общим сеансовым ключом абонентов $K$. Однако данная модификация приводит к тому, что протокол теряет своё самое главное преимущество перед другими протоколами -- простоту.
