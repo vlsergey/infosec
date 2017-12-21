@@ -22,9 +22,10 @@ $ sudo apt-get install texlive-latex-base \
 
 $ sudo apt-get install texlive-lang-german \
     texlive-lang-italian \
-    texlive-lang-german \
+    texlive-lang-french \
     texlive-lang-european \
     texlive-lang-cyrillic
+$ sudo apt-get install texlive-lang-french
 ```
 
 #### OS X:
@@ -35,16 +36,21 @@ $ sudo apt-get install texlive-lang-german \
 
 Воспользуйтесь дистрибутивом **MiKTeX**: https://miktex.org/. Необходимые пакеты будут запрошены во время первой сборки.
 
-### Клонирование и сборка
+### Клонирование и сборка (Unix)
 
 ```
 $ git clone https://github.com/vlsergey/infosec
 $ cd infosec
 $ pdflatex Information\ Security.tex
 ```
+### Cборка (Windows)
 
-## Какие "ошибки" исправлять не нужно
+```
+> pdflatex "Information Security.tex"
+```
+
+## Какие «ошибки» исправлять не нужно
 
 * При оформлении списков используется правило, что если элементы списка являются предложениями, то перед началом списка не ставится двоеточие (а ставится точка, и все элементы начинаются со строчной буквы).
 * Внутри формул, за исключением многострочных, не используется дополнительное оформление даже для удобочитаемости.
-* В книге принято, что внутри предложения используется "--" для отделения частей, фамилии в названиях отделяются тремя: "~---~".
+* В книге принято, что внутри предложения используется «--» для отделения частей, фамилии в названиях отделяются тремя: «~---~».
