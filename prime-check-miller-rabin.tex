@@ -18,7 +18,7 @@
         \FOR{~$j = 1$ ~\textbf{to}~ $t$~}
             \STATE Выбрать случайное число $a \in [2, n-2]$.
             \IF{~$(a_0 = a^r ~\neq~ \pm 1 \mod n)$ ~\textbf{and} \\
-            \indent ~~~~~~ $(\forall i \in [1, s-1]: ~ a_i = a_0^{2^i} ~\neq~ -1 \mod n)$~}
+            \indent ~~~~~~ $(\forall i \in [1, s-1] \rightarrow a_i = a_0^{2^i} ~\neq~ -1 \mod n)$~}
                \STATE \textbf{return} \textsc{Составное}.
            \ENDIF
         \ENDFOR
