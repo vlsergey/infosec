@@ -36,6 +36,10 @@ $ sudo apt-get install texlive-lang-french
 
 Воспользуйтесь дистрибутивом **MiKTeX**: https://miktex.org/. Необходимые пакеты будут запрошены во время первой сборки.
 
+### Android:
+
+Подробная инструкция здесь: https://williewong.wordpress.com/2017/06/30/texlive-on-android/
+
 ### Клонирование и сборка (Unix)
 
 ```
