@@ -23,6 +23,7 @@
 \usepackage{algorithm, algorithmic}     % 'algorithm' environments
 \floatname{algorithm}{Алгоритм}
 
+\usepackage{array}                      % Новые команды для работы с таблицами, см. также ниже доопределение стилей ячеек L, C, R
 \usepackage{arydshln}                   % dash lines in tables
 \usepackage{caption}                    % titles for figures
 \usepackage{csquotes}
@@ -193,6 +194,15 @@
 %\mathcode`\+=32768
 %\mathcode`\-=32768
 %%end{latexonly}
+
+% Упрощение создания таблиц с длинным текстом в ячейках
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
+
+% Рекомендация для latex'а не разрывать inline-формулы
+\binoppenalty=9999
+\relpenalty=9999
 
 \begin{document}
 \selectlanguage{russian}
