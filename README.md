@@ -28,6 +28,12 @@ $ sudo apt-get install texlive-lang-german \
 $ sudo apt-get install texlive-lang-french
 ```
 
+#### Linux (rpm-based, Fedora, OpenSuse)
+Установка TeXLive и языков:
+```
+$ sudo dnf install texlive-scheme-full
+```
+
 #### OS X:
 
 Скачиваем дистрибутив **MacTeX**: https://www.tug.org/mactex/ (2Gb). Пакета **BasicTeX** будет недостаточно. При установке MacTeX Вы можете отказаться от GUI-программ, чтобы сэкономить место на жестком диске.
