@@ -10,21 +10,19 @@
 \end{array} \]
 \end{theorem}
 
-А формула, приведённая в труде другого китайского математика Циня Цзюшао (пиньинь: Q\'{i}n Ji\v{u}sh\'{a}o, XIII~век~н.~э.), позволяет найти искомое число:
-
+Формула, приведённая в труде другого китайского математика Циня Цзюшао (пиньинь: Q\'{i}n Ji\v{u}sh\'{a}o, XIII~век~н.~э.), позволяет найти искомое число:
 \[ \begin{array}{l}
 	x = \sum\limits_{i=1}^k r_i \cdot e_i, \\
 	e_i = \frac{n}{n_i} \cdot \left( \left(\frac{n}{n_i}\right)^{-1} \mod n_i \right), i = 1, \dots, k.
 \end{array} \]
 
 Китайская теорема об остатках позволяет рассматривать набор попарно взаимно простых чисел $n_1, n_2, n_3, \dots, n_k$ как некоторый <<базис>>, в котором число $0 \leq x < n$ можно задать с помощью <<координат>> $r_1, r_2, r_3, \dots, r_k$. При этом операции сложения и умножения чисел можно выразить через операции сложения и умножения соответствующих остатков:
-
 \[ \begin{array}{l}
 	\forall a, b, c, \begin{array}{l}
 		a_i = a \mod n_i, \\
 		b_i = b \mod n_i, \\
 		c_i = c \mod n_i
-	\end{array}: \\
+	\end{array} \Rightarrow \\
 	\left( c \equiv a + b \mod n \right) \Leftrightarrow \left( c_i \equiv a_i + b_i \mod n_i, i = 1, \dots, k \right), \\
 	\left( c \equiv a \times b \mod n \right) \Leftrightarrow \left( c_i \equiv a_i \times b_i \mod n_i, i = 1, \dots, k \right).
 \end{array} \]
