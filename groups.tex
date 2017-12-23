@@ -6,16 +6,16 @@
 \emph{Группой}\index{группа} называется множество $\Gr$, на котором задана бинарная операция <<$\circ$>>, удовлетворяющая следующим аксиомам:
 \begin{itemize}
     \item замкнутость:
-        \[ \forall a,b \in \Gr: a \circ b = c \in \Gr; \]
+        \[ \forall a,b \in \Gr ~ a \circ b = c \in \Gr; \]
     \item ассоциативность:
-        \[ \forall a,b,c \in \Gr: (a \circ b) \circ c = a \circ (b \circ c); \]
+        \[ \forall a,b,c \in \Gr ~ (a \circ b) \circ c = a \circ (b \circ c); \]
     \item существование единичного элемента:
-        \[ \exists ~ e \in \Gr: e\circ a = a \circ e = a; \]
+        \[ \exists ~ e \in \Gr: \forall a \in \Gr ~ e \circ a = a \circ e = a; \]
     \item существование обратного элемента:
         \[ \forall a \in \Gr ~ \exists ~ b \in \Gr: a \circ b = b \circ a = e. \]
 \end{itemize}
 Если
-    \[ \forall a,b \in \Gr: a \circ b = b \circ a, \]
+    \[ \forall a,b \in \Gr ~ a \circ b = b \circ a, \]
 то такую группу называют \emph{коммутативной} (или \emph{абелевой}).
 
 Если операция в группе задана как умножение <<$\cdot$>>, то группа называется \emph{мультипликативной}. Для мультипликативной группы будем использовать следующие соглашения об обозначениях:
@@ -81,7 +81,7 @@
 \subsection{Группа $\Z_p^*$}\label{section-group-multiplicative}
 
 \emph{Группой $\Z_p^*$} называется группа\index{группа!$\Z_p^*$}
-    \[ \Z_p^* = \{1, 2, \dots, p-1 \mod p\}, \]
+    \[ \Z_p^* = \{1, 2, \dots, p-1 \}, \]
 где $p$ -- простое\index{число!простое} число, операция в группе -- умножение $\ast$ по $\Mod p$.
 
 Группа $\Z_p^*$ -- \emph{циклическая}, порядок --
@@ -143,7 +143,7 @@
 
 \subsection{Группа $\Z_n^*$}
 
-\emph{Функция Эйлера}\index{функция!Эйлера} $\varphi(n)$ определяется как количество чисел, взаимно простых с $n$ в интервале от 1 до $n-1$.
+\emph{Функция Эйлера}\index{функция!Эйлера} $\varphi(n)$ определяется как количество натуральных чисел, взаимно простых с $n$ на отрезке от 1 до $n-1$.
 
 Если $n=p$ -- простое\index{число!простое} число, то
     \[ \varphi(p) = p - 1, \]
@@ -154,7 +154,7 @@
     \[ \varphi(n) = \prod \limits_{i} \varphi(p_i^{k_i}) =  \prod \limits_{i} p_i^{k_i - 1}(p_i - 1). \]
 
 \emph{Группой $\Z_n^*$} называется группа\index{группа!$\Z_n^*$}
-    \[ \Z_n^* = \left\{ \forall a \in \left\{ 1, 2, \dots, n-1 \mod n \right\} : \gcd(a,n) = 1 \right\} \]
+    \[ \Z_n^* = \left\{ a \in \left\{ 1, 2, \dots, n-1 \right\} : \gcd(a,n) = 1 \right\} \]
 с операцией умножения $\ast$ по $\Mod n$.
 
 Порядок группы --
@@ -205,29 +205,29 @@
     \item заданы две бинарные операции, условно называемые операциями умножения <<$\cdot$>> и сложения <<$+$>>;
     \item выполняются аксиомы группы для операции <<сложения>>: \\
         1. замкнутость:
-		\[\forall a, b \in \F: a + b \in \F;\]
+		\[\forall a, b \in \F ~ a + b \in \F;\]
         2. ассоциативность:
-		\[\forall a, b, c \in \F: (a+b)+c = a+(b+c);\]
+		\[\forall a, b, c \in \F ~ (a+b)+c = a+(b+c);\]
         3. существование нейтрального элемента по сложению (часто обозначаемого как <<0>>):
-		\[\exists 0 \in \F: \forall a \in \F: a + 0 = 0 + a = a; \]
+		\[\exists 0 \in \F: \forall a \in \F ~ a + 0 = 0 + a = a; \]
         4. существование обратного элемента:
-		\[\forall a \in \F: \exists -a: a + (-a) = 0; \]
+		\[\forall a \in \F \exists -a: a + (-a) = 0; \]
     \item выполняются аксиомы группы для операции <<умножения>>, за одним исключением: \\
         1. замкнутость:
-		\[\forall a, b \in \F: a \cdot b \in \F; \]
+		\[\forall a, b \in \F ~ a \cdot b \in \F; \]
         2. ассоциативность:
-		\[\forall a, b, c \in \F: (a \cdot b) \cdot c = a \cdot (b \cdot c);\]
+		\[\forall a, b, c \in \F ~ (a \cdot b) \cdot c = a \cdot (b \cdot c);\]
         3. существование нейтрального элемента по умножению (часто обозначаемого как <<1>>):
-		\[\exists 1 \in \F: \forall a \in \F: a \cdot 1 = 1 \cdot a = a;\]
+		\[\exists 1 \in \F: \forall a \in \F ~ a \cdot 1 = 1 \cdot a = a;\]
         4. существование обратного элемента по умножению для всех элементов множества, кроме нейтрального элемента по сложению:
-		\[\forall a \in {\F \setminus \{0\}}: \exists a^{-1}: a \cdot a^{-1} = a^{-1} \cdot a = 1;\]
+		\[\forall a \in {\F \setminus \{0\}} \exists a^{-1}: a \cdot a^{-1} = a^{-1} \cdot a = 1;\]
     \item операции <<сложения>> и <<умножения>> коммутативны: \\
         \[ \begin{array}{l}
-            \forall a, b \in \F: a + b = b + a, \\
-            \forall a, b \in \F: a \cdot b = b \cdot a; \\
+            \forall a, b \in \F ~ a + b = b + a, \\
+            \forall a, b \in \F ~ a \cdot b = b \cdot a; \\
         \end{array} \]
     \item выполняется свойство дистрибутивности:
-        \[ \forall a, b, c \in \F: a \cdot (b + c) = (a \cdot b) + (a \cdot c). \]
+        \[ \forall a, b, c \in \F ~ a \cdot (b + c) = (a \cdot b) + (a \cdot c). \]
 \end{itemize}
 
 Примеры \emph{бесконечных} полей (с бесконечным числом элементов): поле рациональных чисел $\group{Q}$, поле вещественных чисел $\group{R}$, поле комплексных чисел $\group{C}$ с обычными операциями сложения и умножения.
