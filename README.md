@@ -19,7 +19,6 @@ $ sudo apt-get install texlive-latex-base \
     texlive-science \
     texlive-bibtex-extra \
     texlive-fonts-recommended
-
 $ sudo apt-get install texlive-lang-german \
     texlive-lang-italian \
     texlive-lang-french \
