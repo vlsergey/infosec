@@ -1,16 +1,11 @@
 \documentclass[10pt,a4paper,openany]{book}
-% Для векторых русских шрифтов в PDF не забудьте установить пакеты cm-super & cm-unicode
-\usepackage{cmap}                       % Поддержка поиска русских слов в PDF (pdflatex)
+% Векторные русских шрифтов в PDF
+% Необходимо установить также пакеты cm-super и cm-unicode
+\usepackage{cmap}
 \usepackage[X2, T2A]{fontenc}
-%\usepackage[T2, OT1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english,french,german,italian,latin,russian]{babel}
 \usepackage{indentfirst}                % Красная строка в первом абзаце
-%\usepackage{misccorr}
-%Может быть установлено 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, and 20pt
-%\usepackage[12pt]{extsizes}
-%\usepackage[mag=1000,a4paper,left=3cm,right=2cm,top=2cm,bottom=2cm,noheadfoot]{geometry}
-
 % Подключение amsmath также даёт поддержку автоматических \dots
 % см. http://tex.stackexchange.com/questions/77737/dots-versus-ldots-is-there-a-difference
 % см. http://tex.stackexchange.com/questions/117730/what-is-the-difference-between-ldots-and-cdots
@@ -45,6 +40,9 @@
 \usepackage{cjhebrew}
 
 \usepackage[left=1.84cm, right=1.5cm, paperwidth=14cm, top=1.8cm, bottom=2cm, height=19.8cm, paperheight=20cm]{geometry}
+
+% Необходимо установить biblatex-gost
+% и переключить сборку библиографии на biber
 \usepackage[parentracker=true,
   backend=biber,
   hyperref=auto,
