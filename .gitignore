@@ -30,10 +30,10 @@
 *.vrb
 *.xdy
 *.tdo
-/*.pdf
-/*.tps
-/.project
-/.settings/
-/Information Security.run.xml
+*.tps
 *.bcf
 *.run.xml
+Information Security.pdf
+index_only.pdf
+.project
+/.settings/
