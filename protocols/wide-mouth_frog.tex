@@ -1,18 +1,16 @@
 \subsection{Протокол Wide-Mouth Frog}\index{протокол!Wide-Mouth Frog|(}\label{section-protocols-wide-moth-frog}
-Протокол Wide-Mouth Frog является, возможно, самым простым протоколом с доверенным центром. Его автором считается Майкл Бэрроуз (1989 год, \langen{Michael Burrows},  \cite{Burrows:Abadi:Needham:1990}). Протокол состоит из следующих шагов.
+Протокол Wide-Mouth Frog является, возможно, самым простым протоколом с доверенным центром. Его автором считается Майкл Бэрроуз (1989 год, \langen{Michael Burrows}, \cite{Burrows:Abadi:Needham:1990}). Протокол состоит из следующих проходов.
 
-\begin{figure}[!htb]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{pic/key_distribution-wide-mouth_frog}
     \caption{Схема взаимодействия абонентов и доверенного центра в протоколе Wide-Mouth Frog\label{fig:key_distribution-wide-mouth_frog}}
 \end{figure}
 
 \begin{enumerate}
-	\item Алиса генерирует новый сеансовый ключ $K$ и отправляет его вместе с меткой времени, идентификатором Боба и своим незашифрованным идентификатором доверенному центру:
-	\[ Alice \rightarrow \{ A, E_A \left( T_A, B, K \right) \} \rightarrow Trent \]
-	\item Доверенный центр, используя полученный незашифрованный идентификатор $A$, находит у себя в базе данных легальных абонентов секретный ключ Алисы и расшифровывает им пакет данных. Проверяет метку времени (что пакет не очень старый). Далее он отправляет похожий пакет данных Бобу, зашифрованный его секретным ключом:
-	\[ Trent \rightarrow \{ E_B \left( T_T, A, K \right) \} \rightarrow Bob \]
-	Боб, кроме расшифрования пакета, также проверяет метку времени доверенного центра.
+	\item[(1)] Алиса генерирует новый сеансовый ключ $K$
+    \item[{}] $Alice \to \{ A, E_A \left( T_A, B, K \right) \} \to Trent$
+	\item[(2)] $Trent \to \{ E_B \left( T_T, A, K \right) \} \to Bob$
 \end{enumerate}
 
 По окончании протокола у Алисы и Боба есть общий сеансовый ключ $K$.
@@ -28,15 +26,15 @@
 
 В 1995 году Рос Андерсон и Роджер Нидхем (\langen{Ross Anderson, Roger Needham}, \cite{Anderson:Needham:1995}) предложили вариант атаки на протокол, при котором злоумышленник (Ева) может бесконечно продлевать срок действия конкретного сеансового ключа. Идея атаки в том, что после окончания протокола злоумышленник будет посылать доверенному центру назад его же пакеты, дополняя их идентификаторами якобы инициирующего абонента.
 
-\begin{enumerate}
-	\item $ Alice \rightarrow \{ A, E_A \left( T_A, B, K \right) \} \rightarrow Trent $
-	\item $ Trent \rightarrow \{ E_B \left( T_T, A, K \right) \} \rightarrow Bob $
-	\item $ Eva \rightarrow \{ B, E_B \left( T_A, A, K \right) \} \rightarrow Trent $
-	\item $ Trent \rightarrow \{ E_A \left( T'_T, B, K \right) \} \rightarrow Alice $
-	\item $ Eva \rightarrow \{ A, E_A \left( T'_T, B, K \right) \} \rightarrow Trent $
-	\item $ Trent \rightarrow \{ E_B \left( T''_T, A, K \right) \} \rightarrow Bob $
-	\item Повторять шаги 3 и 5, пока не пройдёт время, нужное для получения $K$.
-\end{enumerate}
+\begin{samepage}\begin{itemize}
+	\item[(1)] $Alice \to \{ A, E_A \left( T_A, B, K \right) \} \to Trent$
+	\item[(2)] $Trent \to \{ E_B \left( T_T, A, K \right) \} \to Bob$
+	\item[(3)] $Eva \to \{ B, E_B \left( T_A, A, K \right) \} \to Trent$
+	\item[(4)] $Trent \to \{ E_A \left( T'_T, B, K \right) \} \to Alice$
+	\item[(5)] $Eva \to \{ A, E_A \left( T'_T, B, K \right) \} \to Trent$
+	\item[(6)] $Trent \to \{ E_B \left( T''_T, A, K \right) \} \to Bob$
+	\item[{}] Повторять проходы 3 и 5, пока не пройдёт время, нужное для получения $K$.
+\end{itemize}\end{samepage}
 
 С точки зрения доверенного центра, шаги 1, 3 и 5 являются корректными пакетами, инициирующими общение абонентов между собой. Метки времени в них корректны (если Ева будет успевать вовремя эти пакеты посылать). С точки зрения легальных абонентов каждый из пакетов является приглашением другого абонента начать общение. В результате произойдёт две вещи:
 
@@ -47,19 +45,19 @@
 
 Вторая атака 1997 года Гэвина Лоу (\langen{Gavin Lowe}, \cite{Lowe:1997}) проще в реализации. В результате этой атаки Боб уверен, что Алиса аутентифицировала себя перед доверенным центром и хочет начать второй сеанс общения. Что, конечно, не является правдой, так как второй сеанс инициирован злоумышленником.
 
-\begin{enumerate}
-	\item $ Alice \rightarrow \{ A, E_A \left( T_A, B, K \right) \} \rightarrow Trent $
-	\item $ Trent \rightarrow \{ E_B \left( T_T, A, K \right) \} \rightarrow Bob $
-	\item $ Eva \rightarrow \{ E_B \left( T_T, A, K \right) \} \rightarrow Bob $
-\end{enumerate}
+\begin{samepage}\begin{itemize}
+	\item[(1)] $Alice \to \{ A, E_A \left( T_A, B, K \right) \} \to Trent$
+	\item[(2)] $Trent \to \{ E_B \left( T_T, A, K \right) \} \to Bob$
+	\item[(3)] $Eva \to \{ E_B \left( T_T, A, K \right) \} \to Bob$
+\end{itemize}\end{samepage}
 
 В той же работе Лоу предложил модификацию протокола, вводящую явную взаимную аутентификацию абонентов с помощью случайной метки $R_B$ и проверки, что Алиса может расшифровать пакет с меткой, зашифрованной общим сеансовым ключом абонентов $K$. Однако данная модификация приводит к тому, что протокол теряет своё самое главное преимущество перед другими протоколами -- простоту.
 
-\begin{enumerate}
-	\item $ Alice \rightarrow \{ A, E_A \left( T_A, B, K \right) \} \rightarrow Trent $
-	\item $ Trent \rightarrow \{ E_B \left( T_T, A, K \right) \} \rightarrow Bob $
-	\item $ Bob \rightarrow \{ E_K \left( R_B \right) \} \rightarrow Alice $
-	\item $ Alice \rightarrow \{ E_K \left( R_B + 1 \right) \} \rightarrow Bob $
-\end{enumerate}
+\begin{samepage}\begin{itemize}
+	\item[(1)] $Alice \to \{ A, E_A \left( T_A, B, K \right) \} \to Trent$
+	\item[(2)] $Trent \to \{ E_B \left( T_T, A, K \right) \} \to Bob$
+	\item[(3)] $Bob \to \{ E_K \left( R_B \right) \} \to Alice$
+	\item[(4)] $Alice \to \{ E_K \left( R_B + 1 \right) \} \to Bob$
+\end{itemize}\end{samepage}
 
 \index{протокол!Wide-Mouth Frog|)}
