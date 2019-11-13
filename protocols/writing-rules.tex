@@ -52,14 +52,14 @@
 
 В данном пособии мы будем придерживаться промежуточного формата записи.
 
-\begin{enumerate}
+\begin{protocol}
 	\item[(1)] Алиса генерирует $a$.
 	\item[] $Alice \to \left\{ A = g^a \bmod p \right\} \to Bob$.
 	\item[(2)] Боб генерирует $b$.
 	\item[] Боб вычисляет $s = A^b \bmod p$.
 	\item[] $Bob \to \left\{ B = g^b \mod p \right\} \to Alice$.
 	\item[(3)] Алиса вычисляет $s = B^a \bmod p$.
-\end{enumerate}
+\end{protocol}
 
 Также условимся о правилах записи случая, когда активный криптоаналитик (Меллори) выдаёт себя за легального пользователя.
 
