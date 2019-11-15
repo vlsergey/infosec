@@ -1,0 +1,16 @@
+\input{../_settings}
+\addbibresource{../bibliography.bib}
+\begin{document}
+\selectlanguage{russian}
+
+\input{index}
+
+\chapter*{Литература}
+\addcontentsline{toc}{chapter}{Литература}
+\begingroup
+\renewcommand{\chapter}[2]{}%
+\printbibliography
+\endgroup
+
+\end{document}
+
