@@ -55,8 +55,13 @@
   sortlocale=ru_RU
 ]{biblatex}								% библиография по ГОСТу
 
+\newcommand{\indexchapter}[1]{%
+\chapter*{#1}%
+\addcontentsline{toc}{chapter}{#1}%
+}
 \usepackage[xindy]{imakeidx}
 \makeindex[program=texindy, options=-M mystyle.xdy -L russian -C utf8]
+\indexsetup{level=\indexchapter,toclevel=chapter}
 
 \let\oldindex\index
 
