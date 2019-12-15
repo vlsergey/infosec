@@ -11,6 +11,10 @@
 \@endparpenalty=\@lowpenalty%
 \begin{itemize}}
 {\end{itemize}\end{samepage}}\makeatother
+% Разрешить разрывать страницу для длинных протоколов
+\makeatletter\newenvironment{protocol*}{%
+\begin{itemize}}
+{\end{itemize}}\makeatother
 
 \input{definitions}
 
