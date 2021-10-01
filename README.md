@@ -48,6 +48,13 @@ $ pdflatex Information\ Security.tex
 > pdflatex "Information Security.tex"
 ```
 
+## Настройки редакторов
+
+### [TeXstudio](https://www.texstudio.org/)
+
+* Default Bibliography Tool: `txs://biber` (`biber.exe %`)
+* Default Index Tool: `txs://texindy` (`xindy.exe %.idx`)
+
 ## Какие «ошибки» исправлять не нужно
 
 * При оформлении списков используется правило, что если элементы списка являются предложениями, то перед началом списка не ставится двоеточие (а ставится точка, и все элементы начинаются со строчной буквы).
