@@ -1,17 +1,17 @@
 \subsection{Электронная кодовая книга}
 \selectlanguage{russian}
 
+В стандарте ГОСТ 28147-89 данный режим называется \emph{режимом простой замены}.~\cite{GOST-89}
+
+В режиме электронной кодовой книги (\langen{Electronic Code Book, ECB}, рис.~\ref{fig:ECB}) открытый текст в пакете разделён на блоки
+    \[ \left[ M_1, M_2, \dots, M_{n-1}, M_n \right]. \]
+
 \begin{figure}[bt]
 	\centering
 	\includegraphics[width=1\textwidth]{pic/ECB}
 	\caption{Режим электронной кодовой книги}
 	\label{fig:ECB}
 \end{figure}
-
-В стандарте ГОСТ 28147-89 данный режим называется \emph{режимом простой замены}.~\cite{GOST-89}
-
-В режиме электронной кодовой книги (\langen{Electronic Code Book, ECB}, рис.~\ref{fig:ECB}) открытый текст в пакете разделён на блоки
-    \[ \left[ M_1, M_2, \dots, M_{n-1}, M_n \right]. \]
 
 В процессе шифрования каждому блоку $M_j$ ставится в соответствие шифртекст $C_j$, определяемый с помощью ключа $K$:
     \[ C_j = E_K(M_j), ~ j = 1, 2, \dots, n. \]
