@@ -1,3 +1,4 @@
 *.eps -crlf
 *.jpg -crlf
+*.pdf binary -text
 *.png -crlf
