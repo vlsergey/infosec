@@ -53,7 +53,7 @@ $ pdflatex Information\ Security.tex
 ### [TeXstudio](https://www.texstudio.org/)
 
 * Default Bibliography Tool: `txs://biber` (`biber.exe %`)
-* Default Index Tool: `txs://texindy` (`xindy.exe %.idx`)
+* Default Index Tool: `txs://texindy` (`texindy.exe -M mystyle.xdy -L russian -C utf8 "Information Security.idx"`)
 
 ## Какие «ошибки» исправлять не нужно
 
