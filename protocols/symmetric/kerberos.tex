@@ -6,9 +6,18 @@
 Как и в протоколе Нидхема~---~Шрёдера, инициирующий абонент (Алиса) общается только с выделенным доверенным центром, получая от него два пакета с зашифрованным сессионным ключом -- один для себя, а второй -- для вызываемого абонента (Боба). Однако в отличие от Нидхема~---~Шрёдера\index{протокол!Нидхема~---~Шрёдера} в рассматриваемом протоколе зашифрованные пакеты содержат также метку времени $T_T$ и срок действия сессионного ключа $L$ (от \langen{lifetime} -- срок жизни). Что позволяет, во-первых, защититься от рассмотренной в предыдущем разделе атаки повтором. А, во-вторых, позволяет доверенному центру в некотором смысле управлять абонентами, заставляя их получать новые сессионные ключи по истечению заранее заданного времени $L$.
 
 \begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{pic/key_distribution-kerberos}
-    \caption{Схема взаимодействия абонентов и доверенного центра в протоколе <<Kerberos>>\label{fig:key_distribution-kerberos}}
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[3]{Trent}{Trent}
+		\newinst[3]{Bob}{Bob}
+		
+		\mess{Alice}{$ A, B $}{Trent}
+		\mess{Trent}{$ E_A \left( T_T, L, K, B \right), E_B \left( T_T, L, K, A \right) $}{Alice}
+		\mess{Alice}{$ E_B \left( T_T, L, K, A \right), E_K \left( A, T_A \right) $}{Bob}
+		\mess{Bob}{$ E_K \left( T_T + 1 \right) $}{Alice}
+	\end{sequencediagram}
+	\caption{Диаграмма последовательности взаимодействия абонентов и доверенного центра в протоколе <<Kerberos>>\label{fig:key_distribution-kerberos}}
 \end{figure}
 
 \begin{protocol}

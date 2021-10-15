@@ -1,0 +1,29 @@
+% Протокол без разрывов между страницами, но зато
+% разрешаем разрывать страницу до и после определения протокола
+% (по умолчанию itemize / enumerate так не разрешают)
+\newsavebox{\protocolbox}
+\makeatletter\newenvironment{protocol}{%
+\begin{samepage}%
+\@beginparpenalty=\@lowpenalty%
+\@endparpenalty=\@lowpenalty%
+\begin{itemize}}
+{\end{itemize}\end{samepage}}\makeatother
+% Разрешить разрывать страницу для длинных протоколов
+\makeatletter\newenvironment{protocol*}{%
+\begin{itemize}}
+{\end{itemize}}\makeatother
+
+% https://tex.stackexchange.com/questions/164707/how-to-use-greek-letters-in-pgf-umlsd-or-generally-terms-starting-with
+\renewcommand{\mess}[4][0]{
+	\stepcounter{seqlevel}
+	\path
+	(#2)+(0,-\theseqlevel*\unitfactor-0.7*\unitfactor) node (mess from) {};
+	\addtocounter{seqlevel}{#1}
+	\path
+	(#4)+(0,-\theseqlevel*\unitfactor-0.7*\unitfactor) node (mess to) {};
+	\draw[->,>=angle 60] (mess from) -- (mess to) node[midway, above]
+	{#3};
+
+	\node (\detokenize{#3} from) at (mess from) {};
+	\node (\detokenize{#3} to) at (mess to) {};
+}

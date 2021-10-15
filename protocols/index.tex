@@ -1,20 +1,7 @@
 \chapter{Криптографические протоколы}\index{протокол!криптографический}\label{chapter-protocols}
 \selectlanguage{russian}
 
-% Протокол без разрывов между страницами, но зато
-% разрешаем разрывать страницу до и после определения протокола
-% (по умолчанию itemize / enumerate так не разрешают)
-\newsavebox{\protocolbox}
-\makeatletter\newenvironment{protocol}{%
-\begin{samepage}%
-\@beginparpenalty=\@lowpenalty%
-\@endparpenalty=\@lowpenalty%
-\begin{itemize}}
-{\end{itemize}\end{samepage}}\makeatother
-% Разрешить разрывать страницу для длинных протоколов
-\makeatletter\newenvironment{protocol*}{%
-\begin{itemize}}
-{\end{itemize}}\makeatother
+\input{_settings}
 
 \input{definitions}
 
