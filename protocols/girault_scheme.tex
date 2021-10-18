@@ -27,27 +27,40 @@
 Протокол аутентификации сторон в общем случае выглядит следующим образом (рис.~\ref{fig:key_distribution-girault-auth}).
 
 \begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{pic/key_distribution-girault-auth}
-    \caption{Взаимодействия участников в протоколе идентификации Жиро\label{fig:key_distribution-girault-auth}}
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[3]{Bob}{Bob}
+
+		\mess{Alice}{$ I_A, P_A, t = g^{R_A} \bmod n $}{Bob}
+		\mess{Bob}{$ R_B $}{Alice}
+		\mess{Alice}{$  y = R_A + s_A \times R_B \bmod n $}{Bob}
+	\end{sequencediagram}
+	\caption{Диаграмма последовательности взаимодействия участников в протоколе аутентификации Жиро\label{fig:key_distribution-girault-auth}}
 \end{figure}
 
 \begin{protocol}
     \item[(1)] Алиса выбирает случайное $R_A$.
-    \item[{}] $Alice \to \left\{ I_A, P_A, t = g^{R_A} \right\} \to Bob$
+    \item[{}] $Alice \to \left\{ I_A, P_A, t = g^{R_A} \bmod n \right\} \to Bob$
     \item[(2)] Боб выбирает случайное $R_B$.
     \item[{}] $Bob \to \left\{ R_B \right\} \to Alice$
-    \item[(3)] $Alice \to \left\{ y = R_A + s_A \times R_B \right\} \to Bob$
-    \item[(4)] Боб вычисляет $v_A = P_A^e + I_A$;
-    \item[{}] Боб проверяет, что $g^ y v_A^{R_B} = t$.
+    \item[(3)] $Alice \to \left\{ y = R_A + s_A \times R_B \bmod n \right\} \to Bob$
+    \item[(4)] Боб вычисляет $v_A = P_A^e + I_A \bmod n $;
+    \item[{}] Боб проверяет, что $t = g^ y v_A^{R_B} \bmod n$.
 \end{protocol}
 
 Протокол генерации сессионного ключа, либо просто \emph{схема Жиро}, как и другие схемы, состоит из проходов обмена открытой информацией и вычисления ключа (рис.~\ref{fig:key_distribution-girault-scheme}).
 
 \begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{pic/key_distribution-girault-scheme}
-    \caption{Взаимодействие участников в схеме Жиро\label{fig:key_distribution-girault-scheme}}
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[3]{Bob}{Bob}
+
+		\mess{Alice}{$ P_A, I_A $}{Bob}
+		\mess{Bob}{$ P_B, I_B $}{Alice}
+	\end{sequencediagram}
+	\caption{Диаграмма последовательности взаимодействия участников в схеме Жиро\label{fig:key_distribution-girault-scheme}}
 \end{figure}
 
 \begin{protocol}
