@@ -3,10 +3,17 @@
 
 Если между Алисой и Бобом существует канал связи, недоступный для модификации злоумышленником (то есть когда применима модель только пассивного криптоаналитика), то даже без предварительного обмена секретными ключами или другой информацией можно воспользоваться идеями, использованными ранее в криптографии на открытых ключах. После описания RSA в 1978 году, в 1980 Ади Шамир предложил использовать криптосистемы, основанные на коммутативных операциях, для передачи информации без предварительного обмена секретными ключами. Если предположить, что передаваемой информацией является выработанный одной из сторон секретный сеансовый ключ, то в общем виде мы получаем следующий трёхпроходной протокол.
 
-\begin{figure}[!hb]
-    \centering
-    \includegraphics[width=0.5\textwidth]{pic/key_distribution-three-pass}
-    \caption{Обмен сообщениями в трёхпроходных протоколах\label{fig:key_distribution-three-pass}}
+\begin{figure}[thb]
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[3]{Bob}{Bob}
+
+		\mess{Alice}{$  E_A \left( K \right) $}{Bob}
+		\mess{Bob}{$ E_B \left( E_A \left( K \right) \right) $}{Alice}
+		\mess{Alice}{$ E_B \left( K \right) $}{Bob}
+	\end{sequencediagram}
+	\caption{Диаграмма последовательности взаимодействия участников в трёхпроходных протоколах\label{fig:key_distribution-three-pass}}
 \end{figure}
 
 Предварительно:
@@ -21,7 +28,7 @@
 	\end{array}\]
 \end{itemize}
 
-Схема взаимодействия участников протокола показана на рис.~\ref{fig:key_distribution-three-pass}. Протокол состоит из трёх проходов с передачей сообщений (отсюда название) и одного заключительного, на котором Боб вычисляет сеансовый ключ.
+Диаграмма последовательности взаимодействия участников протокола показана на рис.~\ref{fig:key_distribution-three-pass}. Протокол состоит из трёх проходов с передачей сообщений (отсюда название) и одного заключительного, на котором Боб вычисляет сеансовый ключ.
 
 \begin{protocol}
     \item[(1)] Алиса выбирает новый сеансовый ключ $K$
@@ -54,6 +61,19 @@
 \]
 
 Протокол состоит из следующих проходов и действий.
+
+\begin{figure}[thb]
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[3]{Bob}{Bob}
+		
+		\mess{Alice}{$  K \oplus K_A $}{Bob}
+		\mess{Bob}{$ K \oplus K_A \oplus K_B $}{Alice}
+		\mess{Alice}{$ K \oplus K_B $}{Bob}
+	\end{sequencediagram}
+	\caption{Диаграмма последовательности взаимодействия участников в тривиальном трёхпроходном протоколе}
+\end{figure}
 
 \begin{protocol}
     \item[(1)] Алиса выбирает новый сеансовый ключ $K$
@@ -89,13 +109,26 @@ a \times a' = 1 \mod (p-1), \\
                & D_A( E_A( M ) ) = M^{aa'} = M & \mod p. \\
 \end{array}\]
 
+\begin{figure}[thb]
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[3]{Bob}{Bob}
+
+		\mess{Alice}{$ K^a \bmod p $}{Bob}
+		\mess{Bob}{$ K^{ab} \bmod p $}{Alice}
+		\mess{Alice}{$ K^b \bmod p $}{Bob}
+	\end{sequencediagram}
+	\caption{Диаграмма последовательности взаимодействия участников в бесключевом протоколе Шамира}
+\end{figure}
+
 \begin{protocol}
     \item[(1)] Алиса выбирает новый сеансовый ключ $K < p$
     \item[{}] $Alice \to \left\{ E_A \left( K \right) = K^a \bmod p \right\} \to Bob$
     \item[(2)] $Bob \to \left\{ E_B \left( E_A \left( K \right) \right) = K^{ab} \bmod p \right\} \to Alice$
     \item[(3)] Алиса, используя коммутативность функции шифрования,
 	\[ D_A \left( E_B \left( E_A \left( K \right) \right) \right) = K^{aba'} = K^b = E_B \left( K \right) \mod p. \]
-    \item[{}] $Alice \to \left\{ E_B \left( K \right) = K^b \right\} \to Bob$
+    \item[{}] $Alice \to \left\{ E_B \left( K \right) = K^b \bmod p \right\} \to Bob$
     \item[(4)] Боб расшифровывает $D_B \left( E_B \left( K \right) \right) = K^{bb'} \bmod p = K$
 \end{protocol}
 
