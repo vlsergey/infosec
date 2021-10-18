@@ -1,15 +1,26 @@
 \subsection{Протокол DASS}\index{протокол!DASS|(}
 \selectlanguage{russian}
 
+\begin{figure}
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[2.5]{Trent}{Trent}
+		\newinst[2.5]{Bob}{Bob}
+		
+		\begin{call}{Alice}{ $B$ }{Trent}
+			{$S_T \left( B, K_B \right)$}\end{call}
+		\mess{Alice}{$ E_K \left( T_A \right), S_A \left( L, A, K_P \right), S_{K_P} \left( E_B \left( K \right) \right) $}{Bob}
+		\begin{call}{Bob}{$A$}{Trent}
+			{ $S_T ( A, K_A )$ }\end{call}
+		\mess{Bob}{$ E_K \left( T_B \right) $}{Alice}
+	\end{sequencediagram}
+	\caption{Протокол DASS\label{fig:key_distribution-dass}}
+\end{figure}
+
 Протокол DASS являлся составной частью сервиса распределённой аутентификации DASS (\langen{Distributed Authentication Security Service}), разработанного компанией DEC и описанного в RFC 1507~\cite{rfc1507} в сентябре 1993 года.
 
 В протоколе DASS, по аналогии с протоколами Wide-Mouth Frog и Деннинга~---~Сакко, инициатор (Алиса) генерирует и новый сеансовый ключ, и, для каждого сеанса протокола, новую пару открытого и закрытого ключей отправителя. Доверенный центр (Трент) используется как хранилище сертификатов открытых ключей участников. Но в отличие от Деннинга~---~Сакко к доверенному центру обращаются по очереди оба участника.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{pic/key_distribution-dass}
-    \caption{Взаимодействие участников в протоколе DASS\label{fig:key_distribution-dass}}
-\end{figure}
 
 \begin{protocol}
     \item[(1)] $Alice \to \left\{ B \right\} \to Trent$
@@ -17,18 +28,33 @@
     \item[(3)] $Alice \to \left\{ E_K \left( T_A \right), S_A \left( L, A, K_P \right), S_{K_P} \left( E_B \left( K \right) \right) \right\} \to Bob$
     \item[(4)] $Bob \to \left\{ A \right\} \to Trent$
     \item[(5)] $Trent \to \left\{ S_T \left( A, K_A \right) \right\} \to Bob$
-    \item[(6)] $Bob \to \left\{ E_K \left\{ T_B \right\} \right\} \to Alice$
+    \item[(6)] $Bob \to \left\{ E_K \left( T_B \right) \right\} \to Alice$
 \end{protocol}
 
-С помощью сертификатов открытых ключей $\left\{ S_T \left( B, K_B \right) \right\}$ и $\left\{ S_T \left( A, K_A \right) \right\}$, которые отправляет Трент, и дальнейшего подтверждения владения соответствующими ключами, участники могут аутентифицировать друг-друга. Успешная расшифровка временных меток из сообщений $E_K \left( T_A \right)$ и $E_K \left\{ T_B \right\}$ обеспечивает подтверждение владением сеансовым ключом.
+С помощью сертификатов открытых ключей $S_T \left( B, K_B \right)$ и $S_T \left( A, K_A \right)$, которые отправляет Трент, и дальнейшего подтверждения владения соответствующими ключами, участники могут аутентифицировать друг-друга. Успешная расшифровка временных меток из сообщений $E_K \left( T_A \right)$ и $E_K \left\{ T_B \right\}$ обеспечивает подтверждение владением сеансовым ключом.
 
-В протоколе используется время жизни ($L$) сеансового ключа $K_P$, однако в сообщение не включена метка времени. В результате протокол остаётся уязвимым к атаке с известным сеансовым ключом (KN)\index{атака!с известным сеансовым ключом}. Предположим, что Меллори смогла записать полностью прошедший сеанс связи между Алисой и Бобом, а потом смогла получить доступ к сеансовому ключу $K$. Это позволяет Меллори аутентифицировать себя как Алиса перед Бобом.
+\begin{figure}
+	\centering
+	\begin{sequencediagram}
+		\newinst{Mellory}{Mellory (Alice)}
+		\newinst[2]{Trent}{Trent}
+		\newinst[2]{Bob}{Bob}
+
+		\mess{Mellory}{$ E_K \left( T_M \right), S_A \left( L, A, K_P \right), S_{K_P} \left( E_B ( K ) \right) $}{Bob}
+		\begin{call}{Bob}{$A$}{Trent}
+			{ $S_T ( A, K_A )$ }\end{call}
+		\mess{Bob}{$ E_K \left( T_B \right) $}{Mellory}
+	\end{sequencediagram}
+	\caption{Атака на протокол DASS с известным сеансовым ключом (\langen{known-key attack})\label{fig:key_distribution-dass-kn-attack}}
+\end{figure}
+
+В протоколе используется время жизни ($L$) сеансового ключа $K_P$, однако в сообщение не включена метка времени. В результате протокол остаётся уязвимым к атаке с известным сеансовым ключом (KN)\index{атака!с известным сеансовым ключом}. Предположим, что Меллори смогла записать полностью прошедший сеанс связи между Алисой и Бобом, а потом смогла получить доступ к сеансовому ключу $K$. Это позволяет Меллори аутентифицировать себя как Алиса перед Бобом (рис.~\ref{fig:key_distribution-dass-kn-attack}).
 
 \begin{protocol}
     \item[(1)] $Mellory~(Alice) \to \left\{ E_K \left( T_M \right), S_A \left( L, A, K_P \right), S_{K_P} \left( E_B \left( K \right) \right) \right\} \to Bob$
     \item[(2)] $Bob \to \left\{ A \right\} \to Trent$
     \item[(3)] $Trent \to \left\{ S_T \left( A, K_A \right) \right\} \to Bob$
-    \item[(4)] $Bob \to \left\{ E_K \left\{ T_B \right\} \right\} \to Mellory~(Alice)$
+    \item[(4)] $Bob \to \left\{ E_K \left( T_B \right) \right\} \to Mellory~(Alice)$
 \end{protocol}
 
 На первом проходе Меллори меняет только первое сообщение, содержащее метку времени $E_K \left( T_M \right)$. Всё остальное Меллори копирует из записанного сеанса связи. Если Боб не записывает используемые ключи, он не заметит подмены. Простейшее исправление данной уязвимости состоит во включении метки времени в сообщение $S_A \left( T_A, L, A, K_P \right)$.

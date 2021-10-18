@@ -1,13 +1,27 @@
 \subsection{Протокол Ву~---~Лама}\index{протокол!Ву~---~Лама|(}\label{section-woo-lam}
 \selectlanguage{russian}
 
-Протокол Ву~---~Лама, предложенный в 1992 году (\langen{Thomas Y. C. Woo, Simon S. Lam},~\cite{Woo:Lam:1992:1, Woo:Lam:1992:3}), добавляет к сообщениям случайные числа участников, что позволяет защитить протокол в том числе от атак повтором, а также обеспечивает подтверждение владения ключами. Также это единственный из рассмотренных в этом разделе протоколов, в котором новый ключ формируется доверенной стороной (Трентом).
-
 \begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{pic/woo-lam}
-    \caption{Взаимодействие участников в протоколе Ву~---~Лама\label{fig:woo-lam}}
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[1.5]{Trent}{Trent}
+		\newinst[4]{Bob}{Bob}
+		
+		\begin{call}{Alice}{ $A, B$ }{Trent}
+			{$S_T( K_B )$}\end{call}
+		\mess{Alice}{$ E_B ( A, R_A ) $}{Bob}
+		\begin{call}{Bob}{$A, B, E_T( R_A )$}{Trent}
+			{ $S_T( K_A ), E_B ( S_T ( R_A, K, A, B ) )$ }\end{call}
+		\mess{Bob}{$ E_A (S_T (R_A, K, A, B), R_B) $}{Alice}
+		\mess{Alice}{$ E_K( R_B ) $}{Bob}
+	\end{sequencediagram}
+	\caption{Протокол Ву~---~Лама\label{fig:woo-lam}}
 \end{figure}
+
+Протокол Ву~---~Лама, предложенный в 1992 году (\langen{Thomas Y. C. Woo, Simon S. Lam},~\cite{Woo:Lam:1992:1, Woo:Lam:1992:3}, рис.~\ref{fig:woo-lam}), добавляет к сообщениям случайные числа участников, что позволяет защитить протокол в том числе от атак повтором, а также обеспечивает подтверждение владения ключами.
+
+Также это единственный из рассмотренных в этом разделе протоколов, в котором новый ключ формируется доверенной стороной (Трентом).
 
 \begin{protocol}
     \item[(1)] $Alice \to \left\{ A, B \right\} \to Trent$

@@ -1,13 +1,21 @@
 \subsection{Протокол Деннинга~---~Сакко}\index{протокол!Деннинга~---~Сакко|(}
 \selectlanguage{russian}
 
-Протокол был предложен в 1981 году сотрудниками Университета Пердью Дороти Деннинг и Джованни Марией Сакко (\langen{Dorothy E. Denning, Giovanni Maria Sacco},~\cite{Denning:Sacco:1981}). В данном протоколе к доверенному центру (Тренту) за сертификатами сразу обоих участников обращается инициатор (Алиса, рис.~\ref{fig:denning-sacco}). Этот же участник отвечает и за формирование нового сессионного ключа $K$.
-
 \begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{pic/denning-sacco}
-    \caption{Взаимодействие участников в протоколе Деннинга~---~Сакко\label{fig:denning-sacco}}
+	\centering
+	\begin{sequencediagram}
+		\newinst{Trent}{Trent}
+		\newinst[2.5]{Alice}{Alice}
+		\newinst[2.5]{Bob}{Bob}
+		
+		\begin{call}{Alice}{ $A, B$ }{Trent}
+			{\shortstack{ $S_T( A, K_A, T_T )$, \\ $S_T( B, K_B, T_T )$ }}\postlevel\end{call}
+		\mess{Alice}{\shortstack{ $E_B( S_A ( K, T_A ) )$, \\ $S_T( A, K_A, T_T )$, \\ $S_T( B, K_B, T_T )$ }}{Bob}
+	\end{sequencediagram}
+	\caption{Протокол Деннинга~---~Сакко\label{fig:denning-sacco}}
 \end{figure}
+
+Протокол был предложен в 1981 году сотрудниками Университета Пердью Дороти Деннинг и Джованни Марией Сакко (\langen{Dorothy E. Denning, Giovanni Maria Sacco},~\cite{Denning:Sacco:1981}). В данном протоколе к доверенному центру (Тренту) за сертификатами сразу обоих участников обращается инициатор (Алиса, рис.~\ref{fig:denning-sacco}). Этот же участник отвечает и за формирование нового сессионного ключа $K$.
 
 \begin{protocol}
     \item[(1)] $Alice \to \left\{ A, B \right\} \to Trent$
@@ -21,12 +29,22 @@ Alice \to \{ & E_B( S_A ( K, T_A ) ), & \\
 	\item[(4)] Боб проверяет подпись доверенного центра на сертификате $S_T( A, K_A, T_T )$, расшифровывает сессионный ключ $K$ и проверяет подпись Алисы.
 \end{protocol}
 
-Отсутствие в сообщении $E_B( S_A ( K, T_A ) )$ каких-либо идентификаторов делает протокол уязвимым к атаке с известными сеансовым ключом\index{атака!с известным разовым ключом} и позволяет второй стороне (Бобу) выдать себя за инициатора (Алису) в сеансе с третьей стороной (Кларой, рис.~\ref{fig:denning-sacco-attack}).
+В протоколе отсутствует как аутентификация второй стороны (Боба), так и подтверждение владения новым сессионным ключом.
+
+Кроме того, отсутствие в сообщении $E_B( S_A ( K, T_A ) )$ каких-либо идентификаторов делает протокол уязвимым к атаке с известными сеансовым ключом\index{атака!с известным разовым ключом} и позволяет второй стороне (Бобу) выдать себя за инициатора (Алису) в сеансе с третьей стороной (Кларой, рис.~\ref{fig:denning-sacco-attack}).
 
 \begin{figure}
-    \centering
-    \includegraphics[width=0.67\textwidth]{pic/denning-sacco-attack}
-    \caption{Взаимодействие участников в протоколе Деннинга~---~Сакко при атаке с известным разовым ключом\label{fig:denning-sacco-attack}}
+	\centering
+	\begin{sequencediagram}
+		\newinst{Trent}{Trent}
+		\newinst[2.5]{Bob}{Bob}
+		\newinst[2.5]{Clara}{Clara}
+
+		\begin{call}{Bob}{ $ B, C $ }{Trent}
+			{\shortstack{ $S_T( B, K_B, T_{T2} )$, \\ $S_T( C, K_C, T_{T2} )$ }}\postlevel\end{call}
+		\mess{Bob}{\shortstack{ $ E_C( S_A ( K, T_A ) )$, \\ $S_T( A, K_A, T_{T1} )$, \\ $S_T( C, K_C, T_{T2} )$ }}{Clara}
+	\end{sequencediagram}
+	\caption{Атака на протокол Деннинга~---~Сакко с известным разовым ключом. Опущены шаги взаимодействия Алисы, Трента и Боба, в процессе которых Боб запомнил полученные им $E_C( S_A ( K, T_A ) )$ и $S_T( A, K_A, T_{T1} )$.\label{fig:denning-sacco-attack}}
 \end{figure}
 
 \begin{protocol}
