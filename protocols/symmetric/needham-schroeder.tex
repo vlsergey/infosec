@@ -1,23 +1,23 @@
 \subsection{Протокол Нидхема~---~Шрёдера}\index{протокол!Нидхема~---~Шрёдера|(}\label{section-protocols-needham-schroeder}
 \selectlanguage{russian}
 
-Протокол Нидхема~---~Шрёдера (\langen{Roger Needham, Michael Shroeder}, 1979,~\cite{Needham:Schroeder:1978}, рис.~\ref{fig:key_distribution-needham-schroeder}) похож на модифицированный протокол <<Wide-Mouth Frog>>, но отличается тем, что доверенный центр (Трент) во время работы основной части протокола не общается со вторым абонентом. Первый абонент получает от доверенного центра специальный пакет, который он без всякой модификации отправляет второму абоненту.
-
-\begin{figure}[thb]
+\begin{figure}
 	\centering
 	\begin{sequencediagram}
 		\newinst{Alice}{Alice}
 		\newinst[2.5]{Trent}{Trent}
 		\newinst[2.5]{Bob}{Bob}
-
+		
 		\mess{Alice}{$A, B, R_A$}{Trent}
 		\mess{Trent}{$ E_A \left( R_A, B, K, E_B \left( K, A \right) \right) $}{Alice}
 		\mess{Alice}{$ E_B \left( K, A \right) $}{Bob}
 		\mess{Bob}{$E_K \left( R_B \right)$}{Alice}
 		\mess{Alice}{$E_K \left( R_B - 1 \right)$}{Bob}
 	\end{sequencediagram}
-	\caption{Диаграмма последовательности взаимодействия абонентов и доверенного центра в протоколе Нидхема~---~Шрёдера\label{fig:key_distribution-needham-schroeder}}
+	\caption{Протокол Нидхема~---~Шрёдера\label{fig:key_distribution-needham-schroeder}}
 \end{figure}
+
+Протокол Нидхема~---~Шрёдера (\langen{Roger Needham, Michael Shroeder}, 1979,~\cite{Needham:Schroeder:1978}, рис.~\ref{fig:key_distribution-needham-schroeder}) похож на модифицированный протокол <<Wide-Mouth Frog>>, но отличается тем, что доверенный центр (Трент) во время работы основной части протокола не общается со вторым абонентом. Первый абонент получает от доверенного центра специальный пакет, который он без всякой модификации отправляет второму абоненту.
 
 \begin{protocol}
 	\item[(1)] $ Alice	\to \{ A, B, R_A \}						\to Trent $
@@ -33,9 +33,7 @@
 
 Относительно мелкий недостаток протокола в том, что во втором пакете доверенный центр в зашифрованном виде передаёт то, что в третьем шаге пересылается по открытому каналу ($E_B \left( K, A \right)$).
 
-Но серьёзный недостаток связан с уязвимостью протокола к атаке с известным сеансовым ключом. Если злоумышленник сумеет в какой-то момент времени получить ранее использованный сессионный ключ $K$, он сможет убедить Боба, что он является Алисой, и что это новый сессионный ключ. Для этого ему понадобится переданный ранее по открытому каналу пакет из пункта 3 протокола (рис.~\ref{fig:key_distribution-needham-schroeder-attack}).
-
-\begin{figure}[thb]
+\begin{figure}
 	\centering
 	\begin{sequencediagram}
 		\newinst{Alice}{Alice}
@@ -43,8 +41,6 @@
 		\newinst[1]{Eva}{Eva}
 		\newinst[1]{Bob}{Bob}
 
-		\mess{Alice}{$A, B, R_A$}{Trent}
-		\mess{Trent}{$ E_A \left( R_A, B, K, E_B \left( K, A \right) \right) $}{Alice}
 		\mess{Alice}{$ E_B \left( K, A \right) $}{Bob}
 		\mess{Bob}{$ E_K \left( R_B \right)$}{Alice}
 		\mess{Alice}{$E_K \left( R_B - 1 \right)$}{Bob}
@@ -54,8 +50,10 @@
 		\mess{Bob}{$ E_K \left( R_B \right) $}{Eva}
 		\mess{Eva}{$ E_K \left( R_B - 1 \right) $}{Bob}
 	\end{sequencediagram}
-	\caption{Диаграмма последовательности атаки с известным сеансовым ключом в протоколе Нидхема~---~Шрёдера\label{fig:key_distribution-needham-schroeder-attack}}
+	\caption{Атаки с известным сеансовым ключом на протокол Нидхема~---~Шрёдера\label{fig:key_distribution-needham-schroeder-attack}}
 \end{figure}
+
+Но серьёзный недостаток связан с уязвимостью протокола к атаке с известным сеансовым ключом. Если злоумышленник сумеет в какой-то момент времени получить ранее использованный сессионный ключ $K$, он сможет убедить Боба, что он является Алисой, и что это новый сессионный ключ. Для этого ему понадобится переданный ранее по открытому каналу пакет из пункта 3 протокола (рис.~\ref{fig:key_distribution-needham-schroeder-attack}).
 
 \begin{protocol}
 	\item[(1)] $ Eva \to \{ A, B, R_A \} \to Trent $

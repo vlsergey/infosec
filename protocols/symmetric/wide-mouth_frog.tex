@@ -1,18 +1,19 @@
 \subsection{Протокол Wide-Mouth Frog}\index{протокол!Wide-Mouth Frog|(}\label{section-protocols-wide-moth-frog}
-Протокол Wide-Mouth Frog является, возможно, самым простым протоколом с доверенным центром. Его автором считается Майкл Бэрроуз (1989 год, \langen{Michael Burrows}, \cite{Burrows:Abadi:Needham:1990}, \ref{fig:key_distribution-wide-mouth_frog}). Протокол состоит из следующих проходов.
 
 \begin{figure}
 	\centering
 	\begin{sequencediagram}
-	    \newinst{Alice}{Alice}
-	    \newinst[2.5]{Trent}{Trent}
-	    \newinst[2.5]{Bob}{Bob}
-
-	    \mess{Alice}{$ A, E_A \left( T_A, B, K \right)$}{Trent}
-	    \mess{Trent}{$E_B \left( T_T, A, K \right)$}{Bob}
+		\newinst{Alice}{Alice}
+		\newinst[2.5]{Trent}{Trent}
+		\newinst[2.5]{Bob}{Bob}
+		
+		\mess{Alice}{$ A, E_A \left( T_A, B, K \right)$}{Trent}
+		\mess{Trent}{$E_B \left( T_T, A, K \right)$}{Bob}
 	\end{sequencediagram}
-    \caption{Диаграмма последовательности взаимодействия абонентов и доверенного центра в протоколе Wide-Mouth Frog\label{fig:key_distribution-wide-mouth_frog}}
+	\caption{Протокол Wide-Mouth Frog\label{fig:key_distribution-wide-mouth_frog}}
 \end{figure}
+
+Протокол Wide-Mouth Frog является, возможно, самым простым протоколом с доверенным центром. Его автором считается Майкл Бэрроуз (1989 год, \langen{Michael Burrows}, \cite{Burrows:Abadi:Needham:1990}, \ref{fig:key_distribution-wide-mouth_frog}). Протокол состоит из следующих проходов.
 
 \begin{protocol}
 	\item[(1)] Алиса генерирует новый сеансовый ключ $K$
@@ -31,8 +32,6 @@
 
 Однако самой серьёзной проблемой протокола является возможность применения следующих атак.
 
-В 1995 году Рос Андерсон и Роджер Нидхем (\langen{Ross Anderson, Roger Needham}, \cite{Anderson:Needham:1995}, рис~\ref{fig:key_distribution-wide-mouth_frog-Anderson-Needham-attack}) предложили вариант атаки на протокол, при котором злоумышленник (Ева) может бесконечно продлевать срок действия конкретного сеансового ключа. Идея атаки в том, что после окончания протокола злоумышленник будет посылать доверенному центру назад его же пакеты (перехваченные ранее), дополняя их идентификаторами якобы инициирующего абонента.
-
 \begin{figure}
 	\centering
 	\begin{sequencediagram}
@@ -46,10 +45,12 @@
 		\mess{Eva}{$ B, E_B \left( T_T, A, K \right) $}{Trent}
 		\mess{Trent}{$ E_A \left( T'_T, B, K \right) $}{Alice}
 		\mess{Eva}{$ A, E_A \left( T'_T, B, K \right) $}{Trent}
-        \mess{Trent}{$ E_B \left( T''_T, A, K \right) $}{Bob}
+		\mess{Trent}{$ E_B \left( T''_T, A, K \right) $}{Bob}
 	\end{sequencediagram}
-	\caption{Диаграмма последовательности атаки Роса Андерсона и Роджера Нидхема на протокол <<Wide-Mouth Frog>>\label{fig:key_distribution-wide-mouth_frog-Anderson-Needham-attack}}
+	\caption{Атака Роса Андерсона и Роджера Нидхема на протокол <<Wide-Mouth Frog>>\label{fig:key_distribution-wide-mouth_frog-Anderson-Needham-attack}}
 \end{figure}
+
+В 1995 году Рос Андерсон и Роджер Нидхем (\langen{Ross Anderson, Roger Needham}, \cite{Anderson:Needham:1995}, рис~\ref{fig:key_distribution-wide-mouth_frog-Anderson-Needham-attack}) предложили вариант атаки на протокол, при котором злоумышленник (Ева) может бесконечно продлевать срок действия конкретного сеансового ключа. Идея атаки в том, что после окончания протокола злоумышленник будет посылать доверенному центру назад его же пакеты (перехваченные ранее), дополняя их идентификаторами якобы инициирующего абонента.
 
 \begin{protocol}
 	\item[(1)] $Alice \to \{ A, E_A \left( T_A, B, K \right) \} \to Trent$
@@ -68,8 +69,6 @@
 	\item После того, как пройдёт время, нужное злоумышленнику Еве для взлома сеансового ключа $K$, Ева сможет и читать всю переписку, проходящую между абонентами, и успешно выдавать себя за обоих из абонентов.
 \end{itemize}
 
-Вторая атака 1997 года Гэвина Лоу (\langen{Gavin Lowe}, \cite{Lowe:1997}, рис.~\ref{fig:key_distribution-wide-mouth_frog-lowe-attack}) проще в реализации. В результате этой атаки Боб уверен, что Алиса аутентифицировала себя перед доверенным центром и хочет начать второй сеанс общения. Что, конечно, не является правдой, так как второй сеанс инициирован злоумышленником.
-
 \begin{figure}
 	\centering
 	\begin{sequencediagram}
@@ -77,13 +76,15 @@
 		\newinst[1]{Trent}{Trent}
 		\newinst[1]{Eva}{Eva}
 		\newinst[1]{Bob}{Bob}
-
+		
 		\mess{Alice}{$ A, E_A \left( T_A, B, K \right) $}{Trent}
 		\mess{Trent}{$ E_B \left( T_T, A, K \right) $}{Bob}
 		\mess{Eva}{$ E_B \left( T_T, A, K \right) $}{Bob}
 	\end{sequencediagram}
-	\caption{Диаграмма последовательности атаки Гэвина Лоу на протокол <<Wide-Mouth Frog>>\label{fig:key_distribution-wide-mouth_frog-lowe-attack}}
+	\caption{Атака Лоу на протокол <<Wide-Mouth Frog>>\label{fig:key_distribution-wide-mouth_frog-lowe-attack}}
 \end{figure}
+
+Вторая атака 1997 года Гэвина Лоу (\langen{Gavin Lowe}, \cite{Lowe:1997}, рис.~\ref{fig:key_distribution-wide-mouth_frog-lowe-attack}) проще в реализации. В результате этой атаки Боб уверен, что Алиса аутентифицировала себя перед доверенным центром и хочет начать второй сеанс общения. Что, конечно, не является правдой, так как второй сеанс инициирован злоумышленником.
 
 \begin{protocol}
 	\item[(1)] $Alice \to \{ A, E_A \left( T_A, B, K \right) \} \to Trent$

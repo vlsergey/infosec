@@ -9,7 +9,7 @@
 
 Протокол обмена состоит из следующих действий.
 
-\begin{figure}[thb]
+\begin{figure}
 	\centering
 	\begin{sequencediagram}
 		\newinst{Alice}{Alice}
@@ -18,7 +18,7 @@
 		\mess{Alice}{$ A = g ^ a \bmod p $}{Bob}
 		\mess{Bob}{$ B = g ^ b \bmod p $}{Alice}
 	\end{sequencediagram}
-	\caption{Обмен сообщениями в протоколе Диффи~---~Хеллмана\label{fig:key_distribution-diffie-hellman}}
+	\caption{Протокол Диффи~---~Хеллмана\label{fig:key_distribution-diffie-hellman}}
 \end{figure}
 
 \begin{protocol}
@@ -36,21 +36,21 @@
 
 Протокол можно использовать только с такими каналами связи, в которые не может вмешаться активный криптоаналитик. В противном случае протокол становится уязвим к простой атаке <<человек посередине>>\index{атака!<<человек посередине>>}.
 
-\begin{figure}[thb]
+\begin{figure}
 	\centering
 	\begin{sequencediagram}
 		\newinst{Alice}{Alice}
 		\newinst[2.5]{Mellory}{Mellory}
 		\newinst[2.5]{Bob}{Bob}
-
+		
 		\mess{Alice}{$ A = g ^ a \bmod p $}{Mellory}
-        \prelevel
+		\prelevel
 		\mess{Mellory}{$ M = g ^ m \bmod p $}{Bob}
 		\mess{Bob}{$ B = g ^ b \bmod p $}{Mellory}
-        \prelevel
+		\prelevel
 		\mess{Mellory}{$ M = g ^ m \bmod p $}{Alice}
 	\end{sequencediagram}
-    \caption{Диаграмма последовательности взаимодействия участников в протоколе Диффи~---~Хеллмана при атаке <<человек посередине>>\label{fig:key_distribution-diffie-hellman-mitm}}
+	\caption{Атака <<человек посередине>> на протокол Диффи~---~Хеллмана\label{fig:key_distribution-diffie-hellman-mitm}}
 \end{figure}
 
 \begin{protocol}
@@ -63,7 +63,6 @@
     \item[{}] $Mellory~(Bob) \to \left\{ M = g ^ m \bmod p \right\} \to Alice$
     \item[(3)] Алиса вычисляет сеансовый ключ для канала с Меллори (думая, что Меллори это Боб)
         \[K_{AM} = M ^ a \bmod p = g ^ { am } \bmod p\]
-\pagebreak
     \item[(4)] Боб выбирает случайное $2 \leq b \leq p-1$
     \item[{}] Боб вычисляет сеансовый ключ для канала с Меллори (думая, что Меллори это Алиса)
         \[K_{BM} = M ^ b \bmod p = g ^ { bm } \bmod p\]

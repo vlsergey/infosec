@@ -9,8 +9,6 @@
 	\label{eq:blom_center_matrix}
 \end{equation}
 
-Симметричность матрицы $D_{m,m}$ доверенного центра позволяет любым двум участникам сети создать общий сеансовый ключ. Пусть Алиса и Боб -- легальные пользователи сети, то есть они обладают открытыми ключами $I_A$ и $I_B$ соответственно, а их закрытые ключи $K_A$ и $K_B$ были вычислены одним и тем же доверенным центром по формуле~\ref{eq:blom_center_matrix}. Тогда протокол выработки общего секретного ключа выглядит следующим образом (рис.~\ref{fig:key_distribution-bloms-scheme}).
-
 \begin{figure}
 	\centering
 	\begin{sequencediagram}
@@ -19,14 +17,16 @@
 		
 		\mess{Alice}{$ I_A $}{Bob}
 		\mess{Bob}{$I_B $}{Alice}
-
+		
 		\postlevel
 		\begin{callself}{Alice}{$K_{AB} = K^T_A I_B$}{}\end{callself}
 		\prelevel\prelevel
 		\begin{callself}{Bob}{$K_{BA} = K^T_B I_A$}{}\end{callself}
 	\end{sequencediagram}
-	\caption{Диаграмма последовательности взаимодействия участников в схеме Блома\label{fig:key_distribution-bloms-scheme}}
+	\caption{Схема Блома\label{fig:key_distribution-bloms-scheme}}
 \end{figure}
+
+Симметричность матрицы $D_{m,m}$ доверенного центра позволяет любым двум участникам сети создать общий сеансовый ключ. Пусть Алиса и Боб -- легальные пользователи сети, то есть они обладают открытыми ключами $I_A$ и $I_B$ соответственно, а их закрытые ключи $K_A$ и $K_B$ были вычислены одним и тем же доверенным центром по формуле~\ref{eq:blom_center_matrix}. Тогда протокол выработки общего секретного ключа выглядит следующим образом (рис.~\ref{fig:key_distribution-bloms-scheme}).
 
 \begin{protocol}
     \item[(1)] $Alice \to \left\{ I_A \right\} \to Bob$

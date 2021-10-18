@@ -1,21 +1,21 @@
 \subsection{Протокол Yahalom}\index{протокол!Yahalom|(}\label{section-protocols-yahalom}
 
-Протокол Yahalom можно рассматривать как улучшенную версию протокола Wide-Mouth Frog\index{протокол!Wide-Mouth Frog} из раздела~\ref{section-protocols-wide-moth-frog}. Данный протокол <<перекладывает>> генерацию нового сессионного ключа на сторону доверенного центра, а также использует случайные числа для защиты от атак повтором.
-
-\begin{figure}[thb]
+\begin{figure}
 	\centering
 	\begin{sequencediagram}
 		\newinst{Alice}{Alice}
 		\newinst[2.5]{Trent}{Trent}
 		\newinst[2.5]{Bob}{Bob}
-
+		
 		\mess{Alice}{$A$, $R_A$}{Bob}
 		\mess{Bob}{$ B, E_B( A, R_A, R_B ) $}{Trent}
 		\mess{Trent}{$ E_A( B, K, R_A, R_B )$, $E_B(A, K) $}{Alice}
 		\mess{Alice}{$E_B( A, K )$, $E_K( R_B )$}{Bob}
 	\end{sequencediagram}
-	\caption{Диаграмма последовательности взаимодействия абонентов и доверенного центра в протоколе Yahalom\label{fig:key_distribution-yahalom}}
+	\caption{Протокол Yahalom\label{fig:key_distribution-yahalom}}
 \end{figure}
+
+Протокол Yahalom можно рассматривать как улучшенную версию протокола Wide-Mouth Frog\index{протокол!Wide-Mouth Frog} из раздела~\ref{section-protocols-wide-moth-frog}. Данный протокол <<перекладывает>> генерацию нового сессионного ключа на сторону доверенного центра, а также использует случайные числа для защиты от атак повтором.
 
 \begin{protocol}
 	\item[(1)] $Alice \to \{ A, R_A \} \to Bob$
@@ -34,22 +34,22 @@
 
 Нужно отметить (\cite{Zhou:Yu:Pan:Wang:2016}), что в рамках протокола Боб никак не продемонстрировал, что он успешно получил новый сессионный ключ $K$ и может им оперировать (не выполнена цель G8). Сообщение от Алисы на 4-м проходе могло быть перехвачено или модифицировано злоумышленником. Но никакого ответа Алиса от Боба уже не ожидает и уверена, что протокол завершился успешно.
 
-Также на 3-м проходе Трент не включает случайное число $R_B$ в сообщение $E_B(A, K)$, что позволяет Алисе, действуя не из лучших побуждений, заставить Боба принять старый сессионный ключ (рис.~\ref{fig:key_distribution-yahalom-attack}).
-
 \begin{figure}[thb]
 	\centering
 	\begin{sequencediagram}
 		\newinst{Alice}{Alice}
 		\newinst[2.5]{Trent}{Trent}
 		\newinst[2.5]{Bob}{Bob}
-
+		
 		\mess{Alice}{$A$, $R_{A2}$}{Bob}
 		\mess{Bob}{$ B, E_B( A, R_{A2}, R_{B2} ) $}{Trent}
 		\mess{Trent}{$ E_A( B, K_2, R_{A2}, R_{B2} )$, $E_B(A, K_2) $}{Alice}
 		\mess{Alice}{$E_B( A, K_1 )$, $E_{K_1}( R_{B2} )$}{Bob}
 	\end{sequencediagram}
-	\caption{Диаграмма последовательности атаки на протокол Yahalom для использованием старого сессионного ключа\label{fig:key_distribution-yahalom-attack}}
+	\caption{Атака на протокол Yahalom\label{fig:key_distribution-yahalom-attack}}
 \end{figure}
+
+Также на 3-м проходе Трент не включает случайное число $R_B$ в сообщение $E_B(A, K)$, что позволяет Алисе, действуя не из лучших побуждений, заставить Боба принять старый сессионный ключ (рис.~\ref{fig:key_distribution-yahalom-attack}).
 
 \begin{protocol}
 	\item[(1)] $Alice \to \{ A, R_A \} \to Bob$

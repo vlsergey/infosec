@@ -24,8 +24,6 @@
         \[ P_A^e + I_A = g^{-s_A} \mod n. \]
 \end{itemize}
 
-Протокол аутентификации сторон в общем случае выглядит следующим образом (рис.~\ref{fig:key_distribution-girault-auth}).
-
 \begin{figure}
 	\centering
 	\begin{sequencediagram}
@@ -36,8 +34,10 @@
 		\mess{Bob}{$ R_B $}{Alice}
 		\mess{Alice}{$  y = R_A + s_A \times R_B \bmod n $}{Bob}
 	\end{sequencediagram}
-	\caption{Диаграмма последовательности взаимодействия участников в протоколе аутентификации Жиро\label{fig:key_distribution-girault-auth}}
+	\caption{Протокол аутентификации Жиро\label{fig:key_distribution-girault-auth}}
 \end{figure}
+
+Протокол аутентификации сторон в общем случае выглядит следующим образом (рис.~\ref{fig:key_distribution-girault-auth}).
 
 \begin{protocol}
     \item[(1)] Алиса выбирает случайное $R_A$.
@@ -49,8 +49,6 @@
     \item[{}] Боб проверяет, что $t = g^ y v_A^{R_B} \bmod n$.
 \end{protocol}
 
-Протокол генерации сессионного ключа, либо просто \emph{схема Жиро}, как и другие схемы, состоит из проходов обмена открытой информацией и вычисления ключа (рис.~\ref{fig:key_distribution-girault-scheme}).
-
 \begin{figure}
 	\centering
 	\begin{sequencediagram}
@@ -60,8 +58,10 @@
 		\mess{Alice}{$ P_A, I_A $}{Bob}
 		\mess{Bob}{$ P_B, I_B $}{Alice}
 	\end{sequencediagram}
-	\caption{Диаграмма последовательности взаимодействия участников в схеме Жиро\label{fig:key_distribution-girault-scheme}}
+	\caption{Схема Жиро\label{fig:key_distribution-girault-scheme}}
 \end{figure}
+
+Протокол генерации сессионного ключа, либо просто \emph{схема Жиро}, как и другие схемы, состоит из проходов обмена открытой информацией и вычисления ключа (рис.~\ref{fig:key_distribution-girault-scheme}).
 
 \begin{protocol}
     \item[(1)] $Alice \to \left\{ P_A, I_A \right\} \to Bob$
