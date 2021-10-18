@@ -2,7 +2,7 @@
 
 Протокол Yahalom можно рассматривать как улучшенную версию протокола Wide-Mouth Frog\index{протокол!Wide-Mouth Frog} из раздела~\ref{section-protocols-wide-moth-frog}. Данный протокол <<перекладывает>> генерацию нового сессионного ключа на сторону доверенного центра, а также использует случайные числа для защиты от атак повтором.
 
-\begin{figure}
+\begin{figure}[thb]
 	\centering
 	\begin{sequencediagram}
 		\newinst{Alice}{Alice}
@@ -36,7 +36,7 @@
 
 Также на 3-м проходе Трент не включает случайное число $R_B$ в сообщение $E_B(A, K)$, что позволяет Алисе, действуя не из лучших побуждений, заставить Боба принять старый сессионный ключ (рис.~\ref{fig:key_distribution-yahalom-attack}).
 
-\begin{figure}
+\begin{figure}[thb]
 	\centering
 	\begin{sequencediagram}
 		\newinst{Alice}{Alice}
