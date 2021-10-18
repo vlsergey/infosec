@@ -7,7 +7,7 @@
 	\centering
 	\begin{sequencediagram}
 		\newinst{Alice}{Alice}
-		\newinst[3]{Bob}{Bob}
+		\newinst[2.5]{Bob}{Bob}
 
 		\mess{Alice}{$  E_A \left( K \right) $}{Bob}
 		\mess{Bob}{$ E_B \left( E_A \left( K \right) \right) $}{Alice}
@@ -66,7 +66,7 @@
 	\centering
 	\begin{sequencediagram}
 		\newinst{Alice}{Alice}
-		\newinst[3]{Bob}{Bob}
+		\newinst[2.5]{Bob}{Bob}
 		
 		\mess{Alice}{$  K \oplus K_A $}{Bob}
 		\mess{Bob}{$ K \oplus K_A \oplus K_B $}{Alice}
@@ -113,7 +113,7 @@ a \times a' = 1 \mod (p-1), \\
 	\centering
 	\begin{sequencediagram}
 		\newinst{Alice}{Alice}
-		\newinst[3]{Bob}{Bob}
+		\newinst[2.5]{Bob}{Bob}
 
 		\mess{Alice}{$ K^a \bmod p $}{Bob}
 		\mess{Bob}{$ K^{ab} \bmod p $}{Alice}

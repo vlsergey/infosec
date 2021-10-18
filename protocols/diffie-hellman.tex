@@ -9,10 +9,16 @@
 
 Протокол обмена состоит из следующих действий.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{pic/key_distribution-diffie-hellman}
-    \caption{Обмен сообщениями в протоколе Диффи~---~Хеллмана\label{fig:key_distribution-diffie-hellman}}
+\begin{figure}[thb]
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[2.5]{Bob}{Bob}
+		
+		\mess{Alice}{$ A = g ^ a \bmod p $}{Bob}
+		\mess{Bob}{$ B = g ^ b \bmod p $}{Alice}
+	\end{sequencediagram}
+	\caption{Обмен сообщениями в протоколе Диффи~---~Хеллмана\label{fig:key_distribution-diffie-hellman}}
 \end{figure}
 
 \begin{protocol}
@@ -30,10 +36,21 @@
 
 Протокол можно использовать только с такими каналами связи, в которые не может вмешаться активный криптоаналитик. В противном случае протокол становится уязвим к простой атаке <<человек посередине>>\index{атака!<<человек посередине>>}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.67\textwidth]{pic/key_distribution-diffie-hellman-mitm}
-    \caption{Схема взаимодействия участников в протоколе Диффи~---~Хеллмана при атаке <<человек посередине>>\label{fig:key_distribution-diffie-hellman-mitm}}
+\begin{figure}[thb]
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[2.5]{Mellory}{Mellory}
+		\newinst[2.5]{Bob}{Bob}
+
+		\mess{Alice}{$ A = g ^ a \bmod p $}{Mellory}
+        \prelevel
+		\mess{Mellory}{$ M = g ^ m \bmod p $}{Bob}
+		\mess{Bob}{$ B = g ^ b \bmod p $}{Mellory}
+        \prelevel
+		\mess{Mellory}{$ M = g ^ m \bmod p $}{Alice}
+	\end{sequencediagram}
+    \caption{Диаграмма последовательности взаимодействия участников в протоколе Диффи~---~Хеллмана при атаке <<человек посередине>>\label{fig:key_distribution-diffie-hellman-mitm}}
 \end{figure}
 
 \begin{protocol}

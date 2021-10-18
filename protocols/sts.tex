@@ -18,10 +18,18 @@
 
 Протокол состоит из четырёх проходов, три из которых включают передачу сообщений (рис.~\ref{fig:key_distribution-sts}, \cite{Cheremushkin:2009}).
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{pic/key_distribution-sts}
-    \caption{Взаимодействие участников в протоколе STS\label{fig:key_distribution-sts}}
+\begin{figure}[thb]
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[2.5]{Bob}{Bob}
+
+		\mess{Alice}{$ A, m_A = g^{R_A} \bmod p $}{Bob}
+		\postlevel
+		\mess{Bob}{\shortstack{ $  B, A, m_B = g^{R_B} \bmod p$, \\ $E_K( S_B ( m_A, m_B )) $ }}{Alice}
+		\mess{Alice}{$ A, B, E_K( S_A ( m_A, m_B ) ) $}{Bob}
+	\end{sequencediagram}
+    \caption{Диаграмма последовательности взаимодействия участников в протоколе STS\label{fig:key_distribution-sts}}
 \end{figure}
 
 \begin{protocol}
@@ -43,10 +51,20 @@
 
 Как показала атака Лоу 1996 года (\cite{Lowe:1996}, рис.~\ref{fig:key_distribution-sts-attack}), протокол не может гарантировать аутентификацию субъектов (цель G1), ключей (G7) и подтверждение владения сессионным ключом (G8). Хотя злоумышленник не может получить доступ к новому сессионному ключу, если протокол использовать только для аутентификации субъектов, Алиса может принять злоумышленника за Боба.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.67\textwidth]{pic/key_distribution-sts-attack}
-    \caption{Схема взаимодействия участников в протоколе STS при атаке Лоу\label{fig:key_distribution-sts-attack}}
+\begin{figure}[thb]
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[3]{Mellory}{Mellory}
+		\newinst[3]{Bob}{Bob}
+
+		\mess{Alice}{$ A, m_A = g^{R_A} \bmod p $}{Mellory}
+		\mess{Mellory}{$ M, m_A $}{Bob}
+		\mess{Bob}{$ B, M, m_B, E_K( S_B ( m_A, m_B )) $}{Mellory}
+		\mess{Mellory}{$ B, A, m_B, E_K( S_B ( m_A, m_B )) $}{Alice}
+		\mess{Alice}{$ A, B, E_K( S_A ( m_A, m_B ) ) $}{Mellory}
+	\end{sequencediagram}
+	\caption{Диаграмма последовательности взаимодействия участников в протоколе STS при атаке Лоу\label{fig:key_distribution-sts-attack}}
 \end{figure}
 
 \begin{protocol}

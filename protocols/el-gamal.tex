@@ -1,10 +1,15 @@
 \subsection{Протокол Эль-Гамаля}\index{протокол!Эль-Гамаля|(}
 \selectlanguage{russian}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{pic/key_distribution-el-gamal}
-    \caption{Взаимодействие участников в протоколе Эль-Гамаля\label{fig:key_distribution-el-gamal}}
+\begin{figure}[thb]
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[2.5]{Bob}{Bob}
+
+		\mess{Alice}{$ g^x \bmod p $}{Bob}
+	\end{sequencediagram}
+	\caption{Диаграмма последовательности взаимодействия участников в протоколе Эль-Гамаля\label{fig:key_distribution-el-gamal}}
 \end{figure}
 
 Протокол Эль-Гамаля (рис.~\ref{fig:key_distribution-el-gamal}, \cite{ElGamal:1984, ElGamal:1985}) за счёт предварительного распространения открытого ключа одной из сторон обеспечивает аутентификацию ключа для этой стороны. Можно гарантировать, что только владелец соответствующего закрытого ключа сможет вычислить сеансовый ключ. Однако подтверждение факта получение ключа (выполнение целей G1 и G8) не является частью протокола.

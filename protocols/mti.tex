@@ -11,10 +11,16 @@
     Bob: & ~ b, ~~ K_B = g^b \bmod p. \\
 \end{array}\]
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{pic/key_distribution-mti}
-    \caption{Взаимодействие участников в протоколе MTI/A(0)\label{fig:key_distribution-mti}}
+\begin{figure}[thb]
+	\centering
+	\begin{sequencediagram}
+		\newinst{Alice}{Alice}
+		\newinst[2.5]{Bob}{Bob}
+
+		\mess{Alice}{$ g^{R_A} \bmod p $}{Bob}
+		\mess{Bob}{$ g^{R_B} \bmod p $}{Alice}
+	\end{sequencediagram}
+    \caption{Диаграмма последовательности взаимодействия участников в протоколе MTI/A(0)\label{fig:key_distribution-mti}}
 \end{figure}
 
 \begin{protocol}
