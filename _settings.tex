@@ -32,6 +32,7 @@
 \usepackage[totoc=true]{idxlayout}      % балансировка индексов на последней странице, индекс в ToC
 \usepackage{import}
 \usepackage{lscape}                     % поддержка поворота страниц на 90 градусов для широких таблиц
+\usepackage{microtype}                  % запретить выходить за границы страницы
 \usepackage{multicol}                   % поддержка колонок
 \setlength{\columnsep}{0.1cm}
 \usepackage{multirow}                   % multirow cells in tables
@@ -128,9 +129,6 @@ number = {\textnumero}%
 %\fancyhf{}                              % remove everything
 %\renewcommand{\headrulewidth}{0pt}      % remove lines as well
 %\renewcommand{\footrulewidth}{0pt}}
-
-% запретить выходить за границы страницы
-\sloppy
 
 \newtheorem{theorem}{Теорема}[section]
 \newtheorem{lemma}[theorem]{Лемма}
