@@ -354,6 +354,20 @@
 	address		= {New York, NY, USA},
 } 
 
+@article{Carter:Wegman:1979,
+    title       = {Universal classes of hash functions},
+    journal     = {Journal of Computer and System Sciences},
+    volume      = {18},
+    number      = {2},
+    pages       = {143--154},
+    year        = {1979},
+    issn        = {0022-0000},
+    doi         = {10.1016/0022-0000(79)90044-8},
+    author      = {Carter, John Lawrence and Wegman, Mark N.},
+    abstract    = {This paper gives an input independent average linear time algorithm for storage and retrieval on keys. The algorithm makes a random choice of hash function from a suitable class of hash functions. Given any sequence of inputs the expected time (averaging over all functions in the class) to store and retrieve elements is linear in the length of the sequence. The number of references to the data base required by the algorithm for any input is extremely close to the theoretical minimum for any possible hash function with randomly distributed inputs. We present three suitable classes of hash functions which also can be evaluated rapidly. The ability to analyze the cost of storage and retrieval without worrying about the distribution of the input allows as corollaries improvements on the bounds of several algorithms.},
+    language	= {English},
+}
+
 @article{Shamir:1979,
 	author		= {Shamir, Adi},
 	title		= {How to Share a Secret},
@@ -428,6 +442,20 @@
 	doi		= {10.1016/0022-314X(80)90084-0},
 	language	= {English},
 }
+@article{Wegman:Carter:1981,
+    author      = {Wegman, Mark N. and Carter, John Lawrence},
+    title       = {New hash functions and their use in authentication and set equality},
+    journal     = {Journal of Computer and System Sciences},
+    volume      = {22},
+    number      = {3},
+    pages       = {265--279},
+    year        = {1981},
+    month       = {6},
+    issn        = {0022-0000},
+    doi         = {10.1016/0022-0000(81)90033-7},
+    abstract    = {In this paper we exhibit several new classes of hash functions with certain desirable properties, and introduce two novel applications for hashing which make use of these functions. One class contains a small number of functions, yet is almost universal2. If the functions hash n-bit long names into m-bit indices, then specifying a member of the class requires only O((m + log2log2(n)) · log2(n)) bits as compared to O(n) bits for earlier techniques. For long names, this is about a factor of m larger than the lower bound of m + log2n − log2m bits. An application of this class is a provably secure authentication technique for sending messages over insecure lines. A second class of functions satisfies a much stronger property than universal2. We present the application of testing sets for equality. The authentication technique allows the receiver to be certain that a message is genuine. An “enemy”—even one with infinite computer resources—cannot forge or modify a message without detection. The set equality technique allows operations including “add member to set,” “delete member from set” and “test two sets for equality” to be performed in expected constant time and with less than a specified probability of error.},
+    language    = {English},
+}
 
 @article{Denning:Sacco:1981,
     author      = {Denning, Dorothy E. and Sacco, Giovanni Maria},
@@ -445,7 +473,8 @@
     doi         = {10.1145/358722.358740},
     publisher   = {ACM},
     address     = {New York, NY, USA},
-} 
+    language    = {English},
+}
 
 @inproceedings{Yao:1982,
 	author		= {Yao, Andrew Chi-Chih},
@@ -839,6 +868,22 @@
     pages       = {107--125},
     issn        = {1573-7586},
     doi         = {10.1007/BF00124891},
+    language    = {English},
+}
+
+@inproceedings{Dietzfelbinger:Gil:Matias:Pippenger:1992,
+    author      = {Dietzfelbinger, Martin and Gil, Joseph and Matias, Yossi and Pippenger, Nicholas},
+    title       = {Polynomial Hash Functions Are Reliable (Extended Abstract)},
+    year        = {1992},
+    isbn        = {3-540-55719-9},
+    publisher   = {Springer-Verlag},
+    address     = {Berlin, Heidelberg},
+    booktitle   = {Proceedings of the 19th International Colloquium on Automata, Languages and Programming},
+    pages       = {235–-246},
+    numpages    = {12},
+    series      = {ICALP '92},
+    doi         = {10.5555/646246.756769},
+    language    = {English},
 }
 
 @misc{rfc1507,
@@ -948,6 +993,31 @@
     issn        = {1815-2198},
     url         = {http://kiwibyrd.chat.ru/aes/aes2.htm},
     language    = {Russian},
+}
+
+@InProceedings{Black:Halevi:Krawczyk:etc:1999,
+    author      = {Black, J. and Halevi, S. and Krawczyk, H. and Krovetz, T. and Rogaway, P.},
+    editor      = {Wiener, Michael},
+    title       = {UMAC: Fast and Secure Message Authentication},
+    booktitle   = {Advances in Cryptology --- CRYPTO' 99},
+    year        = {1999},
+    publisher   = {Springer Berlin Heidelberg},
+    address     = {Berlin, Heidelberg},
+    pages       = {216--233},
+    abstract    = {We describe a message authentication algorithm, UMAC, which can authenticate messages (in software, on contemporary machines) roughly an order of magnitude faster than current practice (e.g., HMAC-SHA1), and about twice as fast as times previously reported for the universal hash-function family MMH. To achieve such speeds, UMAC uses a new universal hash-function family, NH, and a design which allows effective exploitation of SIMD parallelism. The ``cryptographic'' work of UMAC is done using standard primitives of the user's choice, such as a block cipher or cryptographic hash function; no new heuristic primitives are developed here. Instead, the security of UMAC is rigorously proven, in the sense of giving exact and quantitatively strong results which demonstrate an inability to forge UMAC-authenticated messages assuming an inability to break the underlying cryptographic primitive. Unlike conventional, inherently serial MACs, UMAC is parallelizable, and will have ever-faster implementation speeds as machines offer up increasing amounts of parallelism. We envision UMAC as a practical algorithm for next-generation message authentication.},
+    isbn        = {978-3-540-48405-9},
+    language	= {English},
+}
+
+
+@phdthesis{Krovetz:2000,
+    author		= {Krovetz, Theodore D.},
+    title		= {Software-Optimized Universal Hashing and Message Authentication},
+    year		= {2000},
+    month       = {9},
+    url         = {https://cr.yp.to/bib/2000/krovetz-thesis.pdf},
+    publisher	= {University of California},
+    language	= {English},
 }
 
 @reference{GOST-2001,
@@ -1266,6 +1336,21 @@
 	year		= {2005},
 	month		= {9},
 	language	= {English},
+}
+
+@misc{rfc4418,
+    editor          = {Krovetz, T.},
+    title           = {UMAC: Message Authentication Code using Universal Hashing},
+    series          = {Request for Comments},
+    number          = {4418},
+    howpublished    = {RFC 4418 (Proposed Standard)},
+    publisher       = {IETF},
+    organization    = {Internet Engineering Task Force},
+    year            = {2006},
+    month           = {3},
+    address         = {Sacramento, California, USA},
+    url             = {https://tools.ietf.org/html/rfc4418},
+    language        = {English},
 }
 
 @incollection{FL-2006-149,
