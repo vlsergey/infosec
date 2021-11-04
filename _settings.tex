@@ -24,7 +24,7 @@
 \usepackage{arydshln}                   % dash lines in tables
 \usepackage{caption}                    % titles for figures
 \usepackage{cjhebrew}
-\usepackage{csquotes}
+\usepackage{csquotes}                   % для оформления цитат
 \usepackage{enumerate}
 \usepackage{enumitem}                   % кастомизация itemize/enumerate, напр. отказ от indent
 \usepackage{fancybox}                   % страница в рамке
@@ -114,21 +114,6 @@ number = {\textnumero}%
 \captionsetup{textformat=simple}        % Текст подписи будет напечатан как есть
 %\captionsetup[table]{position=above}    % вертикальные отступы подписи таблицы для случая, когда подпись вверху
 %\captionsetup[figure]{position=below}   % вертикальные отступы подписи рисунка для случая, когда подпись внизу
-
-%% стиль главы и секции вверху страницы
-%\pagestyle{fancy}
-%%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-%\renewcommand{\sectionmark}[1]{\markright{#1}{}}
-%
-%%\fancyhf{}
-%%\fancyfoot[СE,CO]{\thepage}
-%%\fancyhead[LE]{\textsc{\nouppercase{\leftmark}}}
-%\fancyhead[RO]{\textsc{\nouppercase{\rightmark}}}
-%
-%\fancypagestyle{plain}{ %
-%\fancyhf{}                              % remove everything
-%\renewcommand{\headrulewidth}{0pt}      % remove lines as well
-%\renewcommand{\footrulewidth}{0pt}}
 
 \newtheorem{theorem}{Теорема}[section]
 \newtheorem{lemma}[theorem]{Лемма}
