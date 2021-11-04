@@ -25,7 +25,7 @@
     \centering
     \subcaptionbox{Исходный рисунок\label{fig:starfish}}{ \includegraphics[width=0.45\textwidth]{pic/starfish}}
     ~~~
-    \subcaptionbox{Рисунок, зашифрованный AES-128\label{fig:starfish-aes-128-ecb}}{ \includegraphics[width=0.45\textwidth]{pic/starfish-aes-128-ecb}}
+    \subcaptionbox{Зашифрованный AES рисунок\label{fig:starfish-aes-128-ecb}}{ \includegraphics[width=0.45\textwidth]{pic/starfish-aes-128-ecb}}
     \caption{Шифрование в режиме электронной кодовой книги\label{fig:ecb-demo}}
 \end{figure}
 BMP файл в данном случае содержит в самом начале стандартный заголовок (ширина, высота, количество цветов), и далее идёт массив 24-битовых значений цвета пикселей, взятых построчно сверху вниз. В массиве много последовательностей нулевых байтов, так как пиксели белого фона кодируются 3 нулевыми байтами. В AES размер блока равен 16 байтам, и, значит, каждые $\frac{16}{3}$ подряд идущих пикселей белого фона шифруются одинаково, позволяя различить изображение в зашифрованном файле.
