@@ -3,7 +3,7 @@
 
 Схема разделения секрета Шамира (\langen{Adi Shamir},~\cite{Shamir:1979}), также называемая схемой интерполяционных полиномов Лагранжа, основывается на том, что для восстановления всех коэффициентов полинома $P(x) = a_{K-1}x^{K-1} + \dots + a_1 x + a_0$ степени $K-1$ требуется $K$ координат различных точек, принадлежащих кривой $y=P(x)$. Все операции проводятся в конечном поле $GF(p)$.
 
-\begin{figure}[thb]
+\begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{pic/shamir}
   \caption{Через две точки можно провести неограниченное число графиков, заданных полиномами степени 2. Для выбора единственного из них нужна третья точка. Данные графики приведены только для иллюстрации идеи: в схеме Шамира используется конечное поле, полиномы над которым сложно представить на графике.}
@@ -53,11 +53,11 @@
 
 Последовательно вычисляем
 \[\begin{array}{llc}
-M	&\displaystyle = \sum\limits_{i=0}^{k-1} y_i \prod\limits_{j=0, j \neq i}^{k-1} \frac{x_j}{x_j - x_i} & \mod p = \\
+M &\displaystyle = \sum\limits_{i=0}^{k-1} y_i \prod\limits_{j=0, j \neq i}^{k-1} \frac{x_j}{x_j - x_i} \mod p = & \\
 	\\
-	&= 14 \cdot \frac{4}{4-1} \cdot \frac{15}{15-1} + 21 \cdot \frac{1}{1-4} \cdot \frac{15}{15-4} + 6 \cdot \frac{1}{1-15} \cdot \frac{4}{4-15} & \mod 23 = \\
+	&= 14 {\cdot} \frac{4}{4-1} {\cdot} \frac{15}{15-1} + 21 {\cdot} \frac{1}{1-4} {\cdot} \frac{15}{15-4} + 6 {\cdot} \frac{1}{1-15} {\cdot} \frac{4}{4-15} & \mod 23 = \\
 	\\
-	&\displaystyle = 14 \cdot \frac{4}{3} \cdot \frac{15}{14} + 21 \cdot \frac{1}{-3} \cdot \frac{15}{11} + 6 \cdot \frac{1}{-14} \cdot \frac{4}{-11} & \mod 23 = \\
+	&\displaystyle = 14 {\cdot} \frac{4}{3} {\cdot} \frac{15}{14} + 21 {\cdot} \frac{1}{-3} {\cdot} \frac{15}{11} + 6 {\cdot} \frac{1}{-14} {\cdot} \frac{4}{-11} & \mod 23 = \\
 	\\
 	&\displaystyle = 20 - 7 \cdot 15 \cdot 11^{-1} + 12 \cdot 7^{-1} \cdot 11^{-1} & \mod 23 = \\
 	\\
