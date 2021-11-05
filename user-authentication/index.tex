@@ -45,11 +45,19 @@ NIST (Национальный институт стандартов и техн
 
 \begin{table}[!ht]
     \caption{Оценка NIST предполагаемой энтропии паролей\label{tab:password-entropy}}
-    \resizebox{\textwidth}{!}{ \begin{tabular}{|c||c|c|c||c|}
+    \centering
+    {\renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{|c|c|c|c|c|}
         \hline
-        \multirow{2}{*}{\parbox{1.5cm}{\medskip \centering Длина пароля, символы}} & \multicolumn{3}{|c||}{\parbox{6.25cm}{\centering Энтропия паролей пользователей по критериям NIST}} & \multirow{2}{*}{\parbox{2.75cm}{\centering Энтропия случайных равновероятных паролей}} \\
+            \multirow{2}{*}{\parbox{1.5cm}{\medskip\medskip\medskip \centering {\footnotesize Длина пароля, символы}}} &
+            \multicolumn{3}{c|}{\parbox{4.5cm}{\medskip \centering {\footnotesize Энтропия паролей пользователей по критериям NIST}}} &
+            \multirow{2}{*}{\parbox{2cm}{\centering {\footnotesize \medskip\medskip Энтропия случайных равновероятных паролей}}} \\ [3.5ex]
         \cline{2-4}
-        & \parbox{1.5cm}{\centering Без проверок} & \parbox{2cm}{\centering Словарная проверка} & \parbox{2.75cm}{\centering Словарная и композиционная проверка} & \\
+            &
+            \parbox{1.5cm}{\centering {\footnotesize \medskip\medskip Без проверок}} &
+            \parbox{1.5cm}{\centering {\footnotesize \medskip\medskip Словарная проверка}} &
+            \parbox{1.5cm}{\centering {\tiny \medskip Словарная и композиционная проверка}} &
+            \\ [4ex]
         \hline
         4  & 10 & 14 & 16 & 26.3 \\
         6  & 14 & 20 & 23 & 39.5 \\
@@ -62,7 +70,8 @@ NIST (Национальный институт стандартов и техн
         30 & 46 & 46 & 52 & 197.2 \\
         40 & 56 & 56 & 62 & 263.4 \\
         \hline
-    \end{tabular} }
+    \end{tabular}
+    }
 \end{table}
 
 В таблице~\ref{tab:password-entropy} приведена оценка NIST на величину энтропии пользовательских паролей в зависимости от их длины, и приведено сравнение с энтропией случайных паролей с равномерным распределением символов из набора в $D=94$ символов клавиатуры. Вероятное число попыток для подбора пароля составляет $O(2^H)$. Из таблицы видно, что по критериям NIST энтропия реальных паролей в 2--4 раза меньше энтропии случайных паролей с равномерным распределением символов.
@@ -111,26 +120,31 @@ NIST (Национальный институт стандартов и техн
     \[ N_3 = D_1^L \approx 2^{4.7 L}, \]
     \[ N_4 = D_2^L \approx 2^{6.6 L}. \]
 
-\begin{table}[!ht]
+\begin{table}
     \caption{Различные верхние оценки числа паролей\label{tab:password-number}}
-    \resizebox{\textwidth}{!}{ \begin{tabular}{|c||c|c|c|}
+    \centering
+    {\renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{|c|c|c|c|}
         \hline
-        \multirow{2}{*}{\parbox{1.5cm}{\medskip\medspace \centering Длина пароля}} & \multicolumn{3}{|c|}{Число паролей} \\
+            \multirow{2}{*}{\parbox{1.5cm}{\footnotesize\centering\medskip\medskip\medskip Длина пароля}} &
+            \multicolumn{3}{c|}{\footnotesize Число паролей}
+            \\
         \cline{2-4}
-            & \parbox{3.5cm}{\medspace \centering На основе слоговой композиции} &
-            \parbox{3cm}{\medspace\centering Алфавит $D=26$ символов} &
-            \parbox{3cm}{\medspace \centering Алфавит $D=94$ символа} \\
+            &
+            \parbox{2cm}{\footnotesize\centering\medskip На основе слоговой композиции} &
+            \parbox{2cm}{\footnotesize\centering\medskip Алфавит $D=26$ символов} &
+            \parbox{2cm}{\footnotesize\centering\medskip Алфавит $D=94$ символа}
+            \\ [3.5ex]
         \hline
-        \rule{0pt}{2.5ex}$6$  & $2^{26}$ & $2^{28}$ & $2^{39}$ \\
+        6  & $2^{26}$ & $2^{28}$ & $2^{39}$ \\
         9  & $2^{39}$ & $2^{42}$ & $2^{59}$ \\
         12 & $2^{52}$ & $2^{56}$ & $2^{79}$ \\
         15 & $2^{65}$ & $2^{71}$ & $2^{98}$ \\
+        21 & $2^{91}$ & $2^{99}$ & $2^{137}$ \\
+        39 & $2^{169}$ & $2^{183}$ & $2^{256}$ \\
         \hline
-        \rule{0pt}{2.5ex} 21 & $2^{91}$ & $2^{99}$ & $2^{137}$ \\
-        \hline
-        \rule{0pt}{2.5ex} 39 & $2^{169}$ & $2^{183}$ & $2^{256}$ \\
-        \hline
-    \end{tabular} }
+    \end{tabular}
+    }
 \end{table}
 
 Из таблицы~\ref{tab:password-number} видно, что при доступном объёме вычислений в $2^{60}$\,--\,$2^{70}$ операций, пароли вплоть до 15-ти символов, построенные на словах, слогах, изменениях слов, вставках цифр, небольшом изменении регистров и других простейших модификациях, в настоящее время могут быть найдены полным перебором как на вычислительном кластере, так и на персональном компьютере.
@@ -247,18 +261,21 @@ NIST (Национальный институт стандартов и техн
     \caption{Атаки на радужных таблицах на \emph{одном} ПК\label{tab:rainbow-tables}}
     \resizebox{\textwidth}{!}{ \begin{tabular}{|c|c|c|c|c|c|c|}
         \hline
-        \multirow{2}{*}{\parbox{1.0cm}{\medskip\medskip \centering Длина, биты}} & \multicolumn{3}{|c|}{\parbox{4.3cm}{\medspace\centering Пароль или ключ}} &
-            \multicolumn{3}{|c|}{\parbox{4.33cm}{\medspace\centering Радужная таблица}} \\
+            \multirow{2}{*}{\parbox{1.0cm}{\medskip\medskip \centering Длина, биты}} & \multicolumn{3}{|c|}{Пароль или ключ} &
+            \multicolumn{3}{|c|}{Радужная таблица} \\
         \cline{2-7}
-        & \parbox{1.0cm}{\centering Длина,\\ симв.} & \parbox{1.7cm}{\centering Множество} & \parbox{1.7cm}{\centering Мощность} &
-            \parbox{1cm}{\centering Объём} & \parbox{2.23cm}{\medspace \centering Время вычисления таблиц} & \parbox{1.1cm}{\centering Время поиска} \\
+            &
+            \parbox{1.0cm}{\centering Длина,\\ симв.} &
+            Множество &
+            Мощность &
+            Объём &
+            \parbox{2.0cm}{\medspace \centering Время вычисления таблиц} & \parbox{1.1cm}{\centering Время поиска} \\
         \hline \hline
         \multicolumn{7}{|c|}{Хэш LM} \\
         \hline
-        \rule{0pt}{2.5ex}\multirow{3}{*}{$2 \times 56$} & \multirow{3}{*}{14} &
-            A--Z & $2^{33}$ & 610 MB &  & 6 с \\
-        & & A--Z, 0-9 & $2^{36}$ & 3 GB &  & 15 с \\
-        & & все & $2^{43}$ & 64 GB & \parbox{2.23cm}{несколько лет} & 7 мин \\
+        &  & A--Z & $2^{33}$ & 610 MB & \multirow{3}{*}{\parbox{1.5cm}{\centering несколько лет}} & 6 с \\
+        $2 \times 56$ & 14 & A--Z, 0-9 & $2^{36}$ & 3 GB &  & 15 с \\
+        & & все & $2^{43}$ & 64 GB &  & 7 мин \\
         \hline \hline
         \multicolumn{7}{|c|}{Хэш MD5} \\
         \hline
