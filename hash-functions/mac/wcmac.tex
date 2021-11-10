@@ -30,7 +30,7 @@
 Тогда получение быстрой имитовставки можно сделать следующим образом
 \[ \begin{array}{l}
 \textrm{secret key: } k: \langle k_1, k_2 \rangle,\\
-\textrm{random nonce: } r \leftarrow {0,1}^n,\\
+\textrm{random nonce: } r \leftarrow \{0,1\}^n,\\
 \textrm{MAC} (m) = \langle r, H_{k_1}(m) \oplus PRF_{k_2}(r) \rangle.
 \end{array} \]
 
