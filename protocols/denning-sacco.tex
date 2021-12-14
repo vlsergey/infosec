@@ -1,4 +1,4 @@
-\subsection{Протокол Деннинга~---~Сакко}\index{протокол!Деннинга~---~Сакко|(}
+\subsection{Протокол Деннинг~---~Сакко}\index{протокол!Деннинг~---~Сакко|(}
 \selectlanguage{russian}
 
 \begin{figure}
@@ -12,7 +12,7 @@
 			{\shortstack{ $S_T( A, K_A, T_T )$, \\ $S_T( B, K_B, T_T )$ }}\postlevel\end{call}
 		\mess{Alice}{\shortstack{ $E_B( S_A ( K, T_A ) )$, \\ $S_T( A, K_A, T_T )$, \\ $S_T( B, K_B, T_T )$ }}{Bob}
 	\end{sequencediagram}
-	\caption{Протокол Деннинга~---~Сакко\label{fig:denning-sacco}}
+	\caption{Протокол Деннинг~---~Сакко\label{fig:denning-sacco}}
 \end{figure}
 
 Протокол был предложен в 1981 году сотрудниками Университета Пердью Дороти Деннинг и Джованни Марией Сакко (\langen{Dorothy E. Denning, Giovanni Maria Sacco},~\cite{Denning:Sacco:1981}). В данном протоколе к доверенному центру (Тренту) за сертификатами сразу обоих участников обращается инициатор (Алиса, рис.~\ref{fig:denning-sacco}). Этот же участник отвечает и за формирование нового сессионного ключа $K$.
@@ -44,7 +44,7 @@ Alice \to \{ & E_B( S_A ( K, T_A ) ), & \\
 			{\shortstack{ $S_T( B, K_B, T_{T2} )$, \\ $S_T( C, K_C, T_{T2} )$ }}\postlevel\end{call}
 		\mess{Bob}{\shortstack{ $ E_C( S_A ( K, T_A ) )$, \\ $S_T( A, K_A, T_{T1} )$, \\ $S_T( C, K_C, T_{T2} )$ }}{Clara}
 	\end{sequencediagram}
-	\caption{Атака на протокол Деннинга~---~Сакко с известным разовым ключом. Опущены шаги взаимодействия Алисы, Трента и Боба, в процессе которых Боб запомнил полученные им $E_C( S_A ( K, T_A ) )$ и $S_T( A, K_A, T_{T1} )$.\label{fig:denning-sacco-attack}}
+	\caption{Атака на протокол Деннинг~---~Сакко с известным разовым ключом. Опущены шаги взаимодействия Алисы, Трента и Боба, в процессе которых Боб запомнил полученные им $E_C( S_A ( K, T_A ) )$ и $S_T( A, K_A, T_{T1} )$.\label{fig:denning-sacco-attack}}
 \end{figure}
 
 \begin{protocol}
@@ -62,4 +62,4 @@ Bob~(Alice) \to \{ & E_C( S_A ( K, T_A ) ), & \\
 
 В результате Клара уверена, что получила от Алисы новый сессионный ключ $K$.
 
-\index{протокол!Деннинга~---~Сакко|)}
+\index{протокол!Деннинг~---~Сакко|)}
