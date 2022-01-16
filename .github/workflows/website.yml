@@ -1,0 +1,38 @@
+name: WebSite
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: adopt
+    - name: Download tex2html with maven
+      run: mvn org.apache.maven.plugins:maven-dependency-plugin:2.4:get -DremoteRepositories=central::default::https://repo.maven.apache.org/maven2,jitpack::::https://jitpack.io -DgroupId=com.github.vlsergey -DartifactId=tex2html -Dversion=master-SNAPSHOT -Dclassifier=application -Dtransitive=false -Ddest=./tex2html.jar
+    - name: Make tex2html executable
+      run: chmod +x ./tex2html.jar
+    - name: Checkout current branch as docs branch
+      run: git checkout -b docs
+    - name: Create docs folder
+      run: mkdir docs
+    - name: Run docs
+      run: ./tex2html.jar --in "./Information Security.tex" --out ./docs --format=WEBSITE
+    - name: Set git environment (user.name)
+      run: git config user.name "${{github.actor}}"
+    - name: Set git environment (user.email)
+      run: git config user.email "${{github.actor}}@users.noreply.github.com"
+    - name: Add docs to GIT index
+      run: git add ./docs/*
+    - name: Commit docs
+      run: git commit -m "Generate website"
+    - name: Update remote docs branch
+      run: git push origin docs:docs -f
