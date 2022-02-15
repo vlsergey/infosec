@@ -10,7 +10,7 @@
 ## Последние релизы (сборки, готовые PDF)
 * Релизы в формате PDF: https://github.com/vlsergey/infosec/releases
 * Online-версия: https://vlsergey.github.io/infosec/
-<sub>(может содержать минорные проблемы вёрстки, см. проект [tex2html](https://github.com/vlsergey/tex2html))</sub>
+<sub>(может содержать проблемы вёрстки, см. проект [tex2html](https://github.com/vlsergey/tex2html))</sub>
 
 ## Инструкция по сборке
 ### Установка необходимых компонент
