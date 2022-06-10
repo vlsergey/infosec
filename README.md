@@ -36,6 +36,11 @@ $ sudo apt-get install texlive-lang-german \
 
 Скачиваем дистрибутив **MacTeX**: https://www.tug.org/mactex/ (2Gb). Пакета **BasicTeX** будет недостаточно. При установке MacTeX Вы можете отказаться от GUI-программ, чтобы сэкономить место на жестком диске.
 
+#### Freebsd:
+```
+https://www.freshports.org/print/texlive-full
+```
+
 #### Windows:
 
 Воспользуйтесь дистрибутивом **MiKTeX**: https://miktex.org/. Большая часть необходимых пакетов будет запрошена к устаровке во время первой сборки (автоматически). Кроме них нужно вручную установить два пакета для поддержки векторых шрифтов в PDF: `cm-super` и `cm-unicode`.
