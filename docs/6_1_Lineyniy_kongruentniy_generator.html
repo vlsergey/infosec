@@ -1,0 +1,51 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="6_1_Линейный_конгруэнтный_генератор">6.1. Линейный конгруэнтный генератор</h2><p><a name="N86585"><!--генератор!линейный конгруэнтный--></a>
+Алгоритм был предложен Лемером (англ. <span lang="en"><i>Derrick Henry Lehmer</i></span>, [<a href="Literatura.html#Lehmer:1951:1">59</a>, <a href="Literatura.html#Lehmer:1951:2">60</a>]) в 1949 году. Линейный конгруэнтный генератор основывается на вычислении последовательности <span class="mathjax">$x_n, x_{n+1}, \dots$</span>, такой что:</p><div class="mathjax" style="text-align: center;">$$x_{n+1} = a \cdot x_n + c \mod m.$$</div><p>Числа <span class="mathjax">$a, c, m$</span>, <span class="mathjax">$ 0 &lt; a &lt; m, 0 &lt; c &lt; m$</span>, являются параметрами алгоритма.</p><p><span style="font-variant: small-caps;"><b>Пример.</b></span> 
+Для параметров <span class="mathjax">$a = 2, c = 3, m = 5$</span> и начального состояния <span class="mathjax">$x_0 = 1$</span> получаем последовательность: <span class="mathjax">$0, 3, 4, 1, 0, \dots$</span>
+Максимальный период ограничен значением <span class="mathjax">$m$</span>. Но максимум периода достигается тогда и только тогда, когда<span class="nonbreaking-interword-space"> </span><a href="Literatura.html#Knuth:2001:2">[124]</a>:</p><ul><li>числа <span class="mathjax">$c$</span> и <span class="mathjax">$m$</span> взаимно просты<a name="N86658"><!--числа!взаимно простые--></a>;</li><li>число <span class="mathjax">$a - 1$</span> кратно каждому простому делителю числа <span class="mathjax">$m$</span>;</li><li>число <span class="mathjax">$a - 1$</span> кратно 4, если <span class="mathjax">$m$</span> кратно 4.</li></ul><p>Конкретная реализация алгоритма может использовать в качестве выхода либо внутреннее состояние целиком (число <span class="mathjax">$x_n$</span>), либо его отдельные биты. Линейный конгруэнтный генератор является простым (то есть &laquo;дешёвым&raquo;) и быстрым генератором. Результат его работы &ndash; статистически качественная псевдослучайная последовательность. Линейный конгруэнтный генератор нашёл широкое применение в качестве стандартной реализации функции для получения псевдослучайных чисел в различных компиляторах и библиотеках времени исполнения (см. таблицу<span class="nonbreaking-interword-space"> </span><a href="#table:lcg">[table:lcg]</a>). Забегая вперёд, предупредим читателя, что его использование в криптографии недопустимо. Зная два последовательных значения выхода генератора (<span class="mathjax">$x_n$</span> и <span class="mathjax">$x_{n+1}$</span>) и единственный параметр схемы <span class="mathjax">$m$</span>, можно решить систему уравнений и найти <span class="mathjax">$a$</span> и <span class="mathjax">$c$</span>, чего будет достаточно для нахождения всей дальнейшей (или предыдущей) части последовательности. Параметр <span class="mathjax">$m$</span>, в свою очередь, можно найти перебором, начиная с некоторого <span class="mathjax">$\min(X): X \geq x_i$</span>, где <span class="mathjax">$x_i$</span> &ndash; наблюдаемые элементы последовательности.</p><command name="landscape"><argument required="true">landscape</argument><argument required="true"><command name="renewcommand"><argument required="true"><command name="arraystretch"></command></argument><argument required="true">1.5</argument></command>
+<figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; "><table style="border-collapse: collapse;"><colgroup></colgroup></table><figcaption style="flex-basis: 100%; text-align: center;">Таблица 6.1 &mdash; Примеры параметров линейного конгруэнтного генератора в различных книгах, компиляторах и библиотеках времени исполнения<a name="#table:lcg"></a></figcaption></figure>
+</argument><content>
+</content></command><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="Glava_6_Generatori_psevdosluchaynih_chisel.html">&#129080; Glava_6_Generatori_psevdosluchaynih_chisel</a></li><li class="page-item"><a class="page-link" href="6_2_Registr_sdviga_s_lineynoy_obratnoy_svjazju.html">6_2_Registr_sdviga_s_lineynoy_obratnoy_svjazju &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

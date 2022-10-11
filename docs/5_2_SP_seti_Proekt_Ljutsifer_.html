@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="5_2_SP_сети_Проект_Люцифер_">5.2. SP-сети. Проект &laquo;Люцифер&raquo;</h2><p><a name="N82047"><!--шифр!Люцифер|(--></a>
+В 1973 году в журнале <span lang="en">``Scientific American''</span> появилась статья сотрудника IBM (а ранее &ndash; ВМС США) Хорста Фейстеля (англ. <span lang="en"><i>Horst Feistel</i></span>) &laquo;Cryptography and Computer Privacy&raquo;<span class="nonbreaking-interword-space"> </span><a href="Literatura.html#Feistel:1973">[37]</a>, описывающая проект функции шифрования &laquo;Люцифер&raquo;, который можно считать прообразом современных блочных шифров. Развитием данной системы стал государственный стандарт США &laquo;Digital Encryption Standard&raquo; с 1979 по 2001 годы.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; "><figure style="margin-left: 0; margin-right: 0; width: 66%;"><a name="fig:s-box-inside" style="vertical-align: top; align-self: start;"></a><img src="images/79EBDC2BDB473CF64C7AFDC60B4B6F26.png" style="width: 100%"><figcaption>(a) S-блок. На вход поступают 3 бита информации, которые трактуются как двоичное представление номера одной из <span class="mathjax">$2^3$</span> линий внутреннего p-блока. На выходе номер активной сигнальной дорожки обратно преобразуется в 3-битовое представление</figcaption></figure><span class="nonbreaking-interword-space"> </span><span class="nonbreaking-interword-space"> </span><span class="nonbreaking-interword-space"> </span><figure style="margin-left: 0; margin-right: 0; width: 25%;"><a name="fig:p-box-inside" style="vertical-align: top; align-self: start;"></a><img src="images/345D0FCF2DC4E16CFD36E3A21A379115.png" style="width: 100%"><figcaption>(b) P-блок. Все поступающие на вход биты не меняются, но перемешиваются внутри блока</figcaption></figure><figcaption style="flex-basis: 100%; text-align: center;">Рис. 5.2 &mdash; Возможные реализации s- и p-блоков</figcaption></figure><p>Фейстель высказал идею, что идеальный шифр для блока размером в 128 бит должен включать в себя блок замен (substitution box, s-box, далее s-блок), который мог бы обработать сразу 128 бит входного блока данных. S-блок принимает на вход блок битов и даёт на выходе другой блок бит (возможно, даже другого размера) согласно некоторому словарю или результату вычисления нелинейной функции</p><command name="footnote"><argument required="true">Нелинейная функция в целях производительности также может быть технологически реализована в виде выборки уже вычисленного значения по аргументу из словаря.</argument></command><p>. К сожалению, физическая реализация (см. рис.<span class="nonbreaking-interword-space"> </span><a href="5_2_SP_seti_Proekt_Ljutsifer_.html#fig:s-box-inside">5.2a</a>) действительно произвольного блока замен для входа в 128 бит потребовала бы <span class="mathjax">$2^{128}$</span> внутренних соединений или словаря из <span class="mathjax">$2^{128}$</span> 128-битовых значений, если реализовывать программным способом, что технологически невозможно</p><command name="footnote"><argument required="true">Причём в шифре таких блоков должно быть столько же, сколько разных ключей мог бы иметь шифр.</argument></command><p>. Зато если такой блок можно было бы создать, то он был бы очень хорош с криптографической точки зрения. Даже если криптоаналитик знает произвольное число пар значений вход-выход, то это ничего не скажет ему об остальном множестве значений. То есть без полного перебора всех возможных <span class="mathjax">$2^{128}$</span> вариантов входа криптоаналитик не сможет составить полное представление о внутренней структуре блока.</p><p>С другой стороны, блок перестановок (permutation box, p-box, далее p-блок), изображённый на рис.<span class="nonbreaking-interword-space"> </span><a href="5_2_SP_seti_Proekt_Ljutsifer_.html#fig:p-box-inside">5.2b</a>, может обрабатывать блоки битов любого размера. Однако какая-либо криптографическая стойкость у него отсутствует: он представляет собой тривиальное линейное преобразование своего входа. Криптоаналитику достаточно иметь <span class="mathjax">$N$</span> линейно независимых пар значений входа и выхода (где <span class="mathjax">$N$</span> &ndash; размер блока), чтобы получить полное представление о структуре p-блока.</p><p><a name="N82182"><!--SP-сеть|(--></a>
+Идея Фейстеля состояла в том, чтобы комбинировать s- и p-блоки, позволяя на практике получить большой блок нелинейных преобразований (то есть один большой s-блок), как изображено на рис.<span class="nonbreaking-interword-space"> </span><a href="5_2_SP_seti_Proekt_Ljutsifer_.html#fig:sp-network">5.3</a>. При достаточном числе &laquo;слоёв&raquo; SP-сеть начинает обладать свойствами хорошего s-блока (сложностью криптографического анализа и выявления структуры), при этом оставаясь технологически простой в реализации.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 80%;"><a name="fig:sp-network" style="vertical-align: top; align-self: start;"></a><img src="images/C8B6363251740BF0CE38C2769374807D.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 5.3 &mdash; SP-сеть, состоящая из 4 p-блоков и 3 слоёв s-блоков, по 5 блоков в каждом слое</figcaption></figure><p>Следующей составляющей будущего шифра стала возможность менять используемые s-блоки в зависимости от ключа. Вместо каждого из s-блоков в SP-сети Фейстель поместил модуль с двумя разными s-блоками. В зависимости от одного из битов ключа (своего для каждой пары блоков) использовался первый или второй s-блок. Результатом данного подхода стал первый вариант шифра в проекте &laquo;Люцифер&raquo;, который в упрощённом виде (с меньшим размером блока и меньшим числом слоёв) изображён на рис.<span class="nonbreaking-interword-space"> </span><a href="5_2_SP_seti_Proekt_Ljutsifer_.html#fig:lucifer">5.4</a>.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 80%;"><a name="fig:lucifer" style="vertical-align: top; align-self: start;"></a><img src="images/286633A3E22DC5BA587ABB9ED4D3BB7F.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 5.4 &mdash; Общий вид (упрощённая схема) функции шифрования в одном из вариантов проекта &laquo;Люцифер&raquo;. Входной блок (в проекте &laquo;Люцифер&raquo; его объём &ndash; 128 бит) подавался на вход на несколько слоёв (в &laquo;Люцифере&raquo; слоёв 16) из p-блоков и пар s-блоков. S-блок в каждой паре выбирался в зависимости от значения соответствующего бита ключа</figcaption></figure><p><a name="N82259"><!--SP-сеть|)--></a>Разделение функции шифрования на относительно простые раунды (&laquo;слои&raquo;), комбинация больших p-блоков со множеством s-блоков малого размера &ndash; всё это до сих пор используется в современных блочных шифрах.</p><p><a name="N82265"><!--шифр!Люцифер|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="Glava_5_Blochnie_shifri.html">&#129080; Glava_5_Blochnie_shifri</a></li><li class="page-item"><a class="page-link" href="5_3_Jacheyka_Feystelja.html">5_3_Jacheyka_Feystelja &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

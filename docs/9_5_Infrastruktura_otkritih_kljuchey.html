@@ -1,0 +1,104 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="9_5_Инфраструктура_открытых_ключей">9.5. Инфраструктура открытых ключей</h2><h3 data-command-name="subsection" id="9_5_1_Иерархия_удостоверяющих_центров">9.5.1. Иерархия удостоверяющих центров</h3><p>Проблему аутентификации и распределения сеансовых симметричных ключей шифрования в Интернете, а также в больших локальных и виртуальных сетях решают с помощью построения иерархии открытых ключей криптосистем с открытым ключом.</p><ol><li>Существует удостоверяющий центр (УЦ) верхнего уровня<a name="N95111"><!--удостоверяющий центр!верхнего уровня--></a>, корневой УЦ<a name="N95117"><!--удостоверяющий центр!корневой--></a> (англ. <span lang="en"><i>root certificate authority, root CA</i></span>), обладающий парой из закрытого и открытого ключей. Открытый ключ УЦ верхнего уровня распространяется среди всех пользователей, причём все пользователи <em>доверяют УЦ</em>. Это означает, что:
+        <ul><li>УЦ &ndash; &laquo;хороший&raquo;, то есть обеспечивает надёжное хранение закрытого ключа, не пытается фальсифицировать и скомпрометировать свои ключи;</li><li>имеющийся у пользователей открытый ключ УЦ действительно принадлежит УЦ.</li></ul>
+        В массовых информационных и интернет-системах открытые ключи многих корневых УЦ встроены в дистрибутивы и пакеты обновлений ПО. Доверие пользователей неявно проявляется в их уверенности в том, что открытые ключи корневых УЦ, включённые в ПО, не фальсифицированы и не скомпрометированы. <em>Де-факто пользователи доверяют а) распространителям ПО и обновлений, б) корневому УЦ.</em><a name="N95153"><!--доверие--></a>
+
+        Назначение УЦ верхнего уровня &ndash; проверка принадлежности и подписание открытых ключей удостоверяющих центров второго уровня (англ. <span lang="en"><i>certificate authority, certification authority, CA</i></span>), а также организаций и сервисов. УЦ подписывает своим закрытым ключом следующее сообщение:
+        <ul><li>название и URI УЦ нижележащего уровня или организации/сервиса;</li><li>значение сгенерированного открытого ключа и название алгоритма соответствующей криптосистемы с открытым ключом;</li><li>время выдачи и срок действия открытого ключа.</li></ul></li><li>УЦ второго уровня<a name="N95181"><!--удостоверяющий центр--></a> имеют свои пары открытых и закрытых ключей, сгенерированных и подписанных корневым УЦ, причём перед подписанием корневой УЦ убеждается в &laquo;надёжности&raquo; УЦ второго уровня, производит юридические проверки. Корневой УЦ не имеет доступа к закрытым ключам УЦ второго уровня.
+
+        Пользователи, имея в своей базе открытых ключей доверенные открытые ключи корневого УЦ, могут проверить ЭП открытых ключей УЦ 2-го уровня и убедиться, что предъявленный открытый ключ действительно принадлежит данному УЦ. Таким образом:
+        <ul><li>Пользователи полностью доверяют корневому УЦ и его открытому ключу, который у них хранится. Пользователи верят, что корневой УЦ не подписывает небезопасные ключи и гарантирует, что подписанные им ключи действительно принадлежат УЦ 2-го уровня.</li><li>Проверив ЭП открытого ключа УЦ 2-го уровня с помощью доверенного открытого ключа УЦ 1-го уровня, пользователь верит, что открытый ключ УЦ 2-го уровня действительно принадлежит данному УЦ и не был скомпрометирован.</li></ul>
+
+        Аутентификация в протоколе защищённого ин<wbr></wbr>тер<wbr></wbr>нет-сое<wbr></wbr>ди<wbr></wbr>не<wbr></wbr>ния SSL/TLS<a name="N95203"><!--протокол!SSL/TLS--></a> достигается в результате проверки пользователями совпадения URI-адреса сервера из ЭП с фактическим адресом.
+
+        УЦ второго уровня в свою очередь тоже подписывает открытые ключи УЦ третьего уровня, а также организаций. И так далее по уровням.</li><li>В результате построена <em>иерархия</em> подписанных открытых ключей.</li><li>Открытый ключ с идентификационной информацией (название организации, URI-адрес веб-ресурса, дата выдачи, срок действия и<span class="nonbreaking-interword-space"> </span>др.) и подписью УЦ вышележащего уровня, заверяющей ключ и идентифицирующие реквизиты, называется <em>сертификатом открытого ключа</em>,<a name="N95227"><!--сертификат открытого ключа--></a> на который существует международный стандарт X.509<a name="N95233"><!--сертификат!X509--></a>, последняя версия 3. В сертификате указывается его область применения: подписание других сертификатов, аутентификация для веба, аутентификация для электронной почты и<span class="nonbreaking-interword-space"> </span>т.&nbsp;д.</li></ol><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 80%;"><a name="fig:x509-hierarchy" style="vertical-align: top; align-self: start;"></a><img src="images/E5EF42D5815F13811294275CCE2EEB7F.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 9.1 &mdash; Иерархия сертификатов</figcaption></figure><p>На рис.<span class="nonbreaking-interword-space"> </span><a href="9_5_Infrastruktura_otkritih_kljuchey.html#fig:x509-hierarchy">9.1</a> приведены примеры иерархии сертификатов и путь подписания сертификата X.509<a name="N95280"><!--сертификат!X509--></a> интернет-сервиса Gmail (Google Mail).</p><p>Система распределения, хранения и управления сертификатами открытых ключей называется <em>инфраструктурой открытых ключей</em><a name="N95291"><!--инфраструктура открытых ключей--></a> (англ. <span lang="en"><i>public key infrastructure, PKI</i></span>). PKI применяется для аутентификации в системах SSL/TLS<a name="N95310"><!--протокол!SSL/TLS--></a>, IPsec<a name="N95316"><!--протокол!IPsec--></a>, PGP и<span class="nonbreaking-interword-space"> </span>т.&nbsp;д. Помимо процедур выдачи и распределения открытых ключей, PKI также определяет процедуру отзыва скомпрометированных или устаревших сертификатов.</p><h3 data-command-name="subsection" id="9_5_2_Структура_сертификата_X_509">9.5.2. Структура сертификата X.509</h3><p>Ниже приведён пример сертификата X.509<a name="N95343"><!--сертификат!X509--></a>, использовавшегося интернет-сервисом mail.google.com для предоставления защищённого SSL-соединения в 2009 г. Сертификат напечатан командой <tt>openssl x509 -in file.crt -noout -text</tt>:</p><span class="small"></span><pre>Certificate:
+Data:
+  Version: 3 (0x2)
+  Serial Number:
+    6e:df:0d:94:99:fd:45:33:dd:12:97:fc:42:a9:3b:e1
+  Signature Algorithm: sha1WithRSAEncryption
+  Issuer: C=ZA, O=Thawte Consulting (Pty) Ltd.,
+    CN=Thawte SGC CA
+  Validity
+    Not Before: Mar 25 16:49:29 2009 GMT
+    Not After : Mar 25 16:49:29 2010 GMT
+  Subject: C=US, ST=California, L=Mountain View, O=Google Inc,
+    CN=mail.google.com
+  Subject Public Key Info:
+    Public Key Algorithm: rsaEncryption
+    RSA Public Key: (1024 bit)
+      Modulus (1024 bit):
+        00:c5:d6:f8:92:fc:ca:f5:61:4b:06:41:49:e8:0a:
+        2c:95:81:a2:18:ef:41:ec:35:bd:7a:58:12:5a:e7:
+        6f:9e:a5:4d:dc:89:3a:bb:eb:02:9f:6b:73:61:6b:
+        f0:ff:d8:68:79:1f:ba:7a:f9:c4:ae:bf:37:06:ba:
+        3e:ea:ee:d2:74:35:b4:dd:cf:b1:57:c0:5f:35:1d:
+        66:aa:87:fe:e0:de:07:2d:66:d7:73:af:fb:d3:6a:
+        b7:8b:ef:09:0e:0c:c8:61:a9:03:ac:90:dd:98:b5:
+        1c:9c:41:56:6c:01:7f:0b:ee:c3:bf:f3:91:05:1f:
+        fb:a0:f5:cc:68:50:ad:2a:59
+      Exponent: 65537 (0x10001)
+  X509v3 extensions:
+    X509v3 Extended Key Usage: TLS Web Server
+      Authentication, TLS Web Client Authentication,
+      Netscape Server Gated Crypto
+    X509v3 CRL Distribution Points:
+    URI:http://crl.thawte.com/ThawteSGCCA.crl
+    Authority Information Access:
+    OCSP - URI:http://ocsp.thawte.com
+    CA Issuers - URI:http://www.thawte.com/repository/
+        Thawte_SGC_CA.crt
+    X509v3 Basic Constraints: critical
+    CA:FALSE
+Signature Algorithm: sha1WithRSAEncryption
+  62:f1:f3:05:0e:bc:10:5e:49:7c:7a:ed:f8:7e:24:d2:f4:a9:
+  86:bb:3b:83:7b:d1:9b:91:eb:ca:d9:8b:06:59:92:f6:bd:2b:
+  49:b7:d6:d3:cb:2e:42:7a:99:d6:06:c7:b1:d4:63:52:52:7f:
+  ac:39:e6:a8:b6:72:6d:e5:bf:70:21:2a:52:cb:a0:76:34:a5:
+  e3:32:01:1b:d1:86:8e:78:eb:5e:3c:93:cf:03:07:22:76:78:
+  6f:20:74:94:fe:aa:0e:d9:d5:3b:21:10:a7:65:71:f9:02:09:
+  cd:ae:88:43:85:c8:82:58:70:30:ee:15:f3:3d:76:1e:2e:45:
+  a6:bc</pre><p>Как видно, сертификат действителен с 26.03.2009 до 25.03.2010, открытый ключ представляет собой ключ RSA<a name="N95360"><!--криптосистема!RSA--></a> с длиной модуля <span class="mathjax">$n = 1024$</span> бита и экспонентой <span class="mathjax">$e = 65537$</span> и принадлежит компании Google Inc. Открытый ключ предназначен для взаимной аутентификации веб-сервера mail.google.com и веб-клиента в протоколе SSL/TLS. Сертификат подписан ключом удостоверяющего центра Thawte SGC CA, подпись вычислена с помощью криптографического хеша SHA-1<a name="N95372"><!--хеш-функция!SHA-1--></a> и алгоритма RSA<a name="N95378"><!--электронная подпись!RSA--></a>. В свою очередь, сертификат с открытым ключом Thawte SGC CA для проверки значения ЭП данного сертификата расположен по адресу:</p><command name="url"><argument required="true">http://www.thawte.com/repository/Thawte<_></_>SGC<_></_>CA.crt</argument></command><p>.</p><p>Электронная подпись вычисляется от всех полей сертификата, кроме самого значения подписи.</p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="9_4_Dlini_kljuchey.html">&#129080; 9_4_Dlini_kljuchey</a></li><li class="page-item"><a class="page-link" href="Glava_10_Kriptograficheskie_protokoli.html">Glava_10_Kriptograficheskie_protokoli &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

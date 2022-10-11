@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="8_6_Коллизии_в_хеш_функциях">8.6. Коллизии в хеш-функциях</h2><h3 data-command-name="subsection" id="8_6_1_Вероятность_коллизии">8.6.1. Вероятность коллизии</h3><p>Если <span class="mathjax">$k$</span>-битовая криптографическая хеш-функция имеет равномерное распределение выходных хеш-значений по всем сообщениям, то, согласно парадоксу дней рождения<a name="N90247"><!--парадокс дней рождения--></a> (см.<span class="nonbreaking-interword-space"> </span></p><command name="autoref"><argument required="true">section:birthday-paradox</argument></command><p>в<span class="nonbreaking-interword-space"> </span>приложении), среди</p><div class="mathjax" style="text-align: center;">$$ n_{1/2} \approx \sqrt{2 \ln 2} \cdot 2^{k/2} $$</div><p>случайных сообщений с вероятностью больше <span class="mathjax">$1/2$</span> найдутся два сообщения с одинаковыми значениями хеш-функций, то есть произойдёт коллизия.</p><p>Криптографические хеш-функции должны быть равномерными по выходу, насколько это можно проверить, чтобы быть устойчивыми к коллизиям. Следовательно, для нахождения коллизии нужно взять группу из примерно <span class="mathjax">$2^{k/2}$</span> сообщений.</p><p>Например, для нахождения коллизии в 96-битовой хеш-функ<wbr></wbr>ции, которая, в частности, используется в имитовставке<a name="N90273"><!--имитовставка--></a> <span class="mathjax">${\textrm{MAC}}$</span> в протоколе IPsec<a name="N90282"><!--протокол!IPsec--></a>, потребуется группа из <span class="mathjax">$2^{48}$</span> сообщений, 3072 Тбайт памяти для хранения группы и время на <span class="mathjax">$2^{48}$</span> операций хеширования, что достижимо.</p><p>Если значения хеш-функции имеют неравномерное распределение, то размер группы с коллизией меньше, чем <span class="mathjax">$n_{1/2}$</span>. Если для поиска коллизии достаточно взять группу с размером, много меньшим <span class="mathjax">$n_{1/2}$</span>, то хеш-функция не является устойчивой к коллизиям.</p><p>Например, для 128-битовой функции MD5<a name="N90300"><!--коллизия--></a><a name="N90305"><!--хеш-функция!MD5--></a> в 2005 году Ван Сяоюн и Ю Хунбо (пиньинь <i>W&aacute;ng Xiǎo<wbr></wbr>y&uacute;n</i> и <i>Y&uacute; H&oacute;ng<wbr></wbr>bō</i>) представили атаку для нахождения коллизии за <span class="mathjax">$2^{39} \ll 2^{64}$</span> операций<span class="nonbreaking-interword-space"> </span><a href="Literatura.html#WangYu:2005">[106]</a>. Это означает, что MD5 взломана и более не может считаться надёжной криптографической хеш-функцией.</p><h3 data-command-name="subsection" id="8_6_2_Комбинации_хеш_функций">8.6.2. Комбинации хеш-функций</h3><p>Для иллюстрации свойств устойчивости к коллизиям исследуем следующий пример комбинирования двух хеш-функций. Рассмотрим две хеш-функции <span class="mathjax">$f$</span> и <span class="mathjax">$g$</span>. Известно, что одна из этих функций не противостоит коллизиям, но какая именно &ndash; неизвестно. Тогда имеют место следующие утверждения:</p><ul><li>Функция <span class="mathjax">$h(x) = f(g(x))$</span> не устойчива к коллизиям, если <span class="mathjax">$g(x)$</span> имеет коллизии.</li><li>Функция <span class="mathjax">$h(x) = f(g(x)) ~\|~ g(f(x))$</span> не устойчива, например, если <span class="mathjax">$g(x) = \textrm{const}$</span>.</li><li>Функция <span class="mathjax">$h(x) = f(x) ~\|~ g(x)$</span> устойчива к коллизиям.</li></ul><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="8_5_Imitovstavka_MAC_.html">&#129080; 8_5_Imitovstavka_MAC_</a></li><li class="page-item"><a class="page-link" href="8_7_Kogda_vredno_heshirovat.html">8_7_Kogda_vredno_heshirovat &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

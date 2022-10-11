@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="13_2_Pretty_Good_Privacy">13.2. Pretty Good Privacy</h2><p>В качестве примера передачи файлов по сети с обеспечением аутентификации, конфиденциальности и целостности рассмотрим систему PGP (англ. <span lang="en"><i>Pretty Good Privacy</i></span>), разработанную Филом Циммерманном (англ. <span lang="en"><i>Phil Zimmermann</i></span>) в 1991 г. Изначально система предлагалась к использованию для защищённой передачи электронной почты. Стандартом PGP является OpenPGP. Примерами реализации стандарта OpenPGP являются GNU Privacy Guard (GPG) и netpgp, разработанные в рамках проектов GNU и NetBSD соответственно.</p><p>Каждый пользователь обладает одной или несколькими парами из закрытого и открытого ключей. Ключи используются как для расшифрования получаемых пользователем сообщений, так и для генерации электронных подписей отправляемых сообщений. Также пользователь хранит открытые ключи других участников системы, чтобы иметь возможность отправлять им зашифрованные сообщения и аутентифицировать отправителей принимаемых сообщений.</p><p>В системе PGP каждое передаваемое сообщение подписывается закрытым ключом отправителя, затем сообщение шифруется блочной криптосистемой на случайно выбранном секретном сеансовом ключе. Сам сеансовый ключ шифруется криптосистемой с открытым ключом на открытом ключе получателя.</p><p>Свои закрытые ключи отправитель хранит в зашифрованном виде. Набор ключей называется связкой закрытых ключей. Шифрование закрытых ключей в связке производится симметричным шифром<a name="N106711"><!--шифр!симметричный--></a>, ключом которого является функция от пароля, вводимого пользователем. Шифрование закрытых ключей, хранимых на компьютере, является стандартной практикой для защиты от утечки, например, в случае взлома ОС, утери ПК и<span class="nonbreaking-interword-space"> </span>т.&nbsp;д.</p><p>Набор открытых ключей других пользователей называется связкой открытых ключей.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 90%;"><a name="fig:pgp" style="vertical-align: top; align-self: start;"></a><img src="images/E8FD3970F78B2A77820E31EFCFE259C2.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 13.2 &mdash; Схема обработки сообщения в PGP</figcaption></figure><p>На рис.<span class="nonbreaking-interword-space"> </span><a href="13_2_Pretty_Good_Privacy.html#fig:pgp">13.2</a> представлена схема обработки сообщения в PGP для передачи от <span class="mathjax">$A$</span> к <span class="mathjax">$B$</span>. Использование аутентификации, сжатия и блочного шифрования является опциональным. Обозначения на рисунке следующие:</p><ul><li>Пароль &ndash; пароль, вводимый отправителем для расшифрования связки своих закрытых ключей;</li><li><span class="mathjax">$D$</span> &ndash; расшифрование блочной криптосистемы для извлечения секретного ключа ЭП отправителя;</li><li><span class="mathjax">$SK_A$</span> &ndash; закрытый ключ ЭП отправителя;</li><li><span class="mathjax">$ID_{SKa}$</span> &ndash; идентификатор ключа ЭП отправителя, по которому получатель определяет, какой ключ из связки открытых ключей использовать для проверки подписи;</li><li><span class="mathjax">$m$</span> &ndash; сообщение (файл) для передачи;</li><li><span class="mathjax">$h(m)$</span> &ndash; криптографическая хеш-функция;</li><li><span class="mathjax">$E_{SKa}$</span> &ndash; схема ЭП на секретном ключе <span class="mathjax">$SK_A$</span>;</li><li><span class="mathjax">$\|$</span> &ndash; конкатенация битовых строк;</li><li><span class="mathjax">$Z$</span> &ndash; сжатие сообщения алгоритмом компрессии;</li><li><span class="mathjax">$RND$</span> &ndash; криптографический генератор псевдослучайной последовательности;</li><li><span class="mathjax">$K_s$</span> &ndash; сгенерированный псевдослучайный сеансовый ключ;</li><li><span class="mathjax">$E_{Ks}$</span> &ndash; блочное шифрование на секретном сеансовом ключе <span class="mathjax">$K_s$</span>;</li><li><span class="mathjax">$PK_B$</span> &ndash; открытый ключ получателя;</li><li><span class="mathjax">$ID_{PKb}$</span> &ndash; идентификатор открытого ключа получателя, по которому получатель определяет, какой ключ из связки закрытых ключей использовать для расшифрования сеансового ключа;</li><li><span class="mathjax">$E_{PKb}$</span> &ndash; шифрование сеансового ключа криптосистемой с открытым ключом на открытом ключе <span class="mathjax">$B$</span>;</li><li><span class="mathjax">$c$</span> &ndash; зашифрованное подписанное сообщение.</li></ul><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="Glava_13_Primeri_sistem_zaschiti.html">&#129080; Glava_13_Primeri_sistem_zaschiti</a></li><li class="page-item"><a class="page-link" href="13_3_Protokol_SSL_TLS.html">13_3_Protokol_SSL_TLS &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

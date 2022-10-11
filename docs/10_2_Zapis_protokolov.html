@@ -1,0 +1,64 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="10_2_Запись_протоколов">10.2. Запись протоколов</h2><p>Для записи протоколов, связанных с реализацией функций защиты информации, не используют выражения вроде &laquo;участник с ролью &laquo;Отправитель&raquo;&raquo;, а заменяют их на краткие обозначения вроде &laquo;отправитель&raquo; или используют общепринятые экземплификанты</p><command name="footnote"><argument required="true"><em>Экземплификант</em> или <em>экземплификатив</em> &ndash; конкретное понятие или имя собственное, используемое в качестве примера для обозначения неизвестного места или личности. (Википедия, свободная энциклопедия; 5 июля 2019)</argument></command><p>: Алиса, Боб, Клара, Ева и<span class="nonbreaking-interword-space"> </span>т.&nbsp;д. При этом используют следующие соглашения.</p><ul><li>Алиса, Боб (от англ. <span lang="en"><i>A, B</i></span>) &ndash; отправитель и получатель.</li><li>Карл, Клара, Чарли (от англ. <span lang="en"><i>C</i></span>) &ndash; равноправная третья сторона.</li><li>Ева (от англ. <span lang="en"><i>eavesdropper</i></span>) &ndash; пассивный криптоаналитик.</li><li>Меллори (от англ. <span lang="en"><i>malicious</i></span>) &ndash; активный криптоаналитик.</li><li>Трент (от англ. <span lang="en"><i>trust</i></span>) &ndash; доверенная сторона.</li></ul><p>Не существует общепринятого формата записи протоколов, они могут отличаться как по внешнему виду, так и по полноте описания. Например, вот наиболее полный формат записи протокола Диффи<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Хеллмана<a name="N95838"><!--протокол!Диффи—Хеллмана--></a>.</p><ul><li>Предварительный этап.
+	<ul><li>Все стороны выбрали общие <span class="mathjax">$g$</span> и <span class="mathjax">$p$</span>.</li></ul></li><li>Проход 1.
+	<ul><li>Алиса генерирует случайное <span class="mathjax">$a$</span>.</li><li>Алиса вычисляет <span class="mathjax">$A = g^a \bmod p$</span>.</li><li>Алиса отправляет Бобу <span class="mathjax">$A$</span>.</li></ul></li><li>Проход 2.
+	<ul><li>Боб принимает от Алисы <span class="mathjax">$A$</span>.</li><li>Боб генерирует случайное <span class="mathjax">$b$</span>.</li><li>Боб вычисляет <span class="mathjax">$B = g^b \bmod p$</span>.</li><li>Боб отправляет Алисе <span class="mathjax">$B$</span>.</li><li>Боб вычисляет <span class="mathjax">$s = A^b \bmod p$</span>.</li></ul></li><li>Проход 2.
+	<ul><li>Алиса принимает от Боба <span class="mathjax">$B$</span>.</li><li>Алиса вычисляет <span class="mathjax">$s = B^a \bmod p$</span>.</li></ul></li><li>Результат протокола.
+	<ul><li>Стороны вычислили общий сеансовый ключ <span class="mathjax">$s$</span>.</li></ul></li></ul><p>Теперь сравните с краткой записью того же самого протокола.</p><ol><li><span class="mathjax">$A \to B : A = g^a \bmod p$</span></li><li><span class="mathjax">$B \to A : B = g^b \bmod p$</span></li></ol><p>В краткой записи опускаются инициализация и предварительные требования, вычисления непередаваемых данных (в данном примере &ndash; общего сеансового ключа <span class="mathjax">$s$</span>), а также любые проверки.</p><p>В данном пособии мы будем придерживаться промежуточного формата записи.</p><!--%--><command name="samepage"><argument required="true">samepage</argument><content><!--%--><command name="@beginparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><command name="@endparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><ul><li>Алиса генерирует <span class="mathjax">$a$</span>.</li><li><span class="mathjax">$Alice \to \left\{ A = g^a \bmod p \right\} \to Bob$</span>.</li><li>Боб генерирует <span class="mathjax">$b$</span>.</li><li>Боб вычисляет <span class="mathjax">$s = A^b \bmod p$</span>.</li><li><span class="mathjax">$Bob \to \left\{ B = g^b \mod p \right\} \to Alice$</span>.</li><li>Алиса вычисляет <span class="mathjax">$s = B^a \bmod p$</span>.</li></ul></content></command><p>Также условимся о правилах записи случая, когда активный криптоаналитик (Меллори) выдаёт себя за легального пользователя.</p><div class="mathjax" style="text-align: center;">$$
+\begin{array}{llllc}
+(1) &amp; A                &amp; \to M \left(B\right) &amp; : &amp; A   = g^a     \bmod p, \\ 
+(2) &amp; M \left(A\right) &amp; \to B                &amp; : &amp; A^* = g^{a^*} \bmod p, \\ 
+(3) &amp; B                &amp; \to M \left(A\right) &amp; : &amp; B   = g^b     \bmod p, \\ 
+(4) &amp; M \left(B\right) &amp; \to A                &amp; : &amp; B^* = g^{b^*} \bmod p. \\
+\end{array}
+$$</div><p>Либо, отводя отдельный столбец для каждого участника.</p><div class="mathjax" style="text-align: center;">$$
+\begin{array}{lllclllc}
+	(1) &amp; A  &amp; \to   &amp; M \left(B\right) &amp; {}    &amp; {} &amp; : &amp; A = g^a     \bmod p, \\ 
+	(2) &amp; {} &amp; {}    &amp; M \left(A\right) &amp; \to   &amp; B  &amp; : &amp; A^* = g^{a^*} \bmod p, \\ 
+	(3) &amp; {} &amp; {}    &amp; M \left(A\right) &amp; \gets &amp; B  &amp; : &amp; B   = g^b     \bmod p, \\ 
+	(4) &amp; A  &amp; \gets &amp; M \left(B\right) &amp; {}    &amp; {} &amp; : &amp; B^* = g^{b^*} \bmod p. \\
+\end{array}
+$$</div><p>Для сокращения описания и упрощения сравнения разных протоколов используют следующие соглашения об обозначениях передаваемых данных.</p><ul><li><span class="mathjax">$A$</span>, <span class="mathjax">$B$</span>, и т.<span class="nonbreaking-interword-space"> </span>п. &ndash; идентификаторы участников протокола: Алисы и Боба, соответственно.</li><li><span class="mathjax">$M$</span> (от англ. <span lang="en"><i>message</i></span>) &ndash; сообщение в исходном виде, открытый текст вне зависимости от кодировки. То есть под <span class="mathjax">$M$</span> может пониматься и исходный текст в виде текста или, например, звука, либо уже некоторое число или массив бит, однозначно соответствующие этому сообщению.</li><li><span class="mathjax">$K$</span> (от англ. <span lang="en"><i>key</i></span>) &ndash; некоторый ключ. Без дополнительных уточнений обычно обозначает секретный сеансовый ключ.</li><li><span class="mathjax">$K_A$</span> &ndash; общий секретный ключ между Алисой и Трентом (для симметричных криптосистем).</li><li><span class="mathjax">$K_A$</span> &ndash; открытый ключ Алисы (для асимметричных криптосистем).</li><li><span class="mathjax">$L$</span> (от англ. <span lang="en"><i>lifetime</i></span>) &ndash; время жизни, например, сертификата.</li><li><span class="mathjax">$E_K \left( \dots \right)$</span> (от англ. <span lang="en"><i>encrypt</i></span>) &ndash; данные, зашифрованные на ключе <span class="mathjax">$K$</span>.</li><li><span class="mathjax">$E_A \left( \dots \right)$</span>, <span class="mathjax">$E_B \left( \dots \right)$</span> &ndash; данные, зашифрованные на ключах Алисы и Боба, соответственно.</li><li><span class="mathjax">$S_K \left( \dots \right)$</span> (от англ. <span lang="en"><i>sign</i></span>) &ndash; данные <em>и</em> соответствующая цифровая подпись на открытом ключе <span class="mathjax">$K$</span>.</li><li><span class="mathjax">$T_A$</span>, <span class="mathjax">$T_B$</span> (от англ. <span lang="en"><i>timestamp</i></span>) &ndash; метки времени от соответствующих участников.</li><li><span class="mathjax">$R_A$</span>, <span class="mathjax">$R_B$</span> (от англ. <span lang="en"><i>random</i></span>) &ndash; случайные числа, выбранные соответствующими участниками.</li></ul><p>Примеры использования обозначений.</p><ul><li><span class="mathjax">$E_{K_B}( M )$</span> или просто <span class="mathjax">$E_B( M )$</span> &ndash; сообщение <span class="mathjax">$M$</span>, зашифрованное ключом Боба <span class="mathjax">$K_B$</span>.</li><li><span class="mathjax">$S_A( R_A )$</span> &ndash; случайное число <span class="mathjax">$R_A$</span>, сгенерированное Алисой и ей же подписанное. То есть в сообщении будет и случайное число (открытым текстом), и электронная подпись этого числа.</li><li><span class="mathjax">$S_T( A, K_A, T_T, L)$</span> &ndash; идентификатор и ключ Алисы, метка времени и срок жизни данной записи, всё вместе подписанное открытым ключом доверенного центра (Трента). То есть фактически <em>сертификат ключа</em><a name="N96191"><!--сертификат!ключа--></a> Алисы.</li></ul><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="10_1_Osnovnie_ponjatija.html">&#129080; 10_1_Osnovnie_ponjatija</a></li><li class="page-item"><a class="page-link" href="10_3_Svoystva_bezopasnosti_protokolov.html">10_3_Svoystva_bezopasnosti_protokolov &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

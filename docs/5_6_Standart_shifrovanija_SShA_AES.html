@@ -1,0 +1,177 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="5_6_Стандарт_шифрования_США_AES">5.6. Стандарт шифрования США AES</h2><p><a name="N82728"><!--шифр!AES|(--></a>
+До 2001 г. стандартом шифрования данных в США был DES<a name="N82734"><!--шифр!DES--></a> (аббревиатура от Data Encryption Standard), который был принят в 1980 году. Входной блок открытого текста и выходной блок шифрованного текста DES составляли по 64 бита каждый, длина ключа &ndash; 56 бит (до процедуры расширения). Алгоритм основан на ячейке Фейстеля<a name="N82740"><!--ячейка Фейстеля--></a> с s-блоками и таблицами расширения и перестановки битов. Количество раундов &ndash; 16.</p><p>Для повышения криптостойкости и замены стандарта DES был объявлен конкурс на новый стандарт AES (аббревиатура от Advanced Encryption Standard). Победителем конкурса стал шифр Rijndael. Название составлено с использованием первых слогов фамилий его создателей (Rijmen и Daemen). В русскоязычном варианте читается как &laquo;Рэндал&raquo;<span class="nonbreaking-interword-space"> </span><a href="Literatura.html#Kiwi:1999">[123]</a>. 26 ноября 2001 года шифр был утверждён в качестве стандарта FIPS 197 и введён в действие 26 мая 2002 года<span class="nonbreaking-interword-space"> </span><a href="Literatura.html#FIPS-PUB-197">[39]</a>.</p><p>AES &ndash; это раундовый<a name="N82756"><!--шифр!раундовый--></a> блочный<a name="N82762"><!--шифр!блочный--></a> шифр с переменной длиной ключа (128, 192 или 256 бит) и фиксированными длинами входного и выходного блоков (128 бит).</p><h3 data-command-name="subsection" id="5_6_1_Состояние_ключ_шифрования_и_число_раундов">5.6.1. Состояние, ключ шифрования и число <command name="protect"></command><line-break></line-break> раундов</h3><p>Различные преобразования воздействуют на результат промежуточного шифрования, называемый <em>состоянием</em> (<span class="mathjax">$\mathsf{State}$</span>). Состояние представлено <span class="mathjax">$(4 \times 4)$</span>-матрицей из байтов <span class="mathjax">$a_{i,j}$</span>.</p><p><em>Ключ шифрования раунда</em> (<span class="mathjax">$\mathsf{Key}$</span>) также представляется прямоугольной <span class="mathjax">$(4 \times \mathsf{Nk})$</span>-матрицей из байтов <span class="mathjax">$k_{i,j}$</span>, где <span class="mathjax">$\mathsf{Nk}$</span> равно длине ключа, разделённой на 32, то есть 4, 6 или 8.</p><p>Эти представления приведены ниже:</p><div class="mathjax" style="text-align: center;">$$
+    \mathsf{State} = \left[ \begin{array}{cccc}
+        a_{0,0} &amp; a_{0,1} &amp; a_{0,2} &amp; a_{0,3} \\
+        a_{1,0} &amp; a_{1,1} &amp; a_{1,2} &amp; a_{1,3} \\
+        a_{2,0} &amp; a_{2,1} &amp; a_{2,2} &amp; a_{2,3} \\
+        a_{3,0} &amp; a_{3,1} &amp;a_{3,2} &amp; a_{3,3}  \\
+    \end{array} \right],
+$$</div><div class="mathjax" style="text-align: center;">$$
+    \mathsf{Key} = \left[ \begin{array}{cccc}
+        k_{0,0} &amp; k_{0,1} &amp; k_{0,2} &amp; k_{0,3} \\
+        k_{1,0} &amp; k_{1,1} &amp; k_{1,2} &amp; k_{1,3} \\
+        k_{2,0} &amp; k_{2,1} &amp; k_{2,2} &amp; k_{2,3} \\
+        k_{3,0} &amp; k_{3,1} &amp; k_{3,2} &amp; k_{3,3} \\
+    \end{array} \right].
+$$</div><p>Иногда блоки символов интерпретируются как одномерные последовательности из 4-байтных векторов, где каждый вектор является соответствующим столбцом прямоугольной таблицы. В этих случаях таблицы можно рассматривать как наборы из 4, 6 или 8 векторов, нумеруемых в диапазоне <span class="mathjax">$0 \dots 3$</span>, <span class="mathjax">$0 \dots 5$</span> или <span class="mathjax">$0 \dots 7$</span> соответственно. В тех случаях, когда нужно пометить индивидуальный байт внутри 4-байтного вектора, используется обозначение <span class="mathjax">$(a, b, c, d)$</span>, где <span class="mathjax">$a$</span>, <span class="mathjax">$b$</span>, <span class="mathjax">$c$</span>, <span class="mathjax">$d$</span> соответствуют байтам в одной из позиций (<span class="mathjax">$0$</span>, <span class="mathjax">$1$</span>, <span class="mathjax">$2$</span>, <span class="mathjax">$3$</span>) в столбце или векторе.</p><p><em>Входные</em> и <em>выходные</em> блоки шифра AES рассматриваются как последовательности 16 байтов <span class="mathjax">$(a_0, a_1, \dots, a_{15})$</span>. Преобразование входного блока <span class="mathjax">$(a_0, \dots, a_{15})$</span> в исходную <span class="mathjax">$(4 \times 4)$</span>-матрицу состояния <span class="mathjax">$\mathsf{State}$</span> или преобразование конечной матрицы состояния в выходную последовательность проводится по правилу (запись по столбцам):</p><div class="mathjax" style="text-align: center;">$$ a_{i,j} = a_{i + 4j}, ~ i = 0 \dots 3, ~ j = 0 \dots 3. $$</div><p>Аналогично ключ шифрования может рассматриваться как последовательность байтов <span class="mathjax">$(k_0, k_1, \dots, k_{4 \cdot \mathsf{Nk} - 1})$</span>, где <span class="mathjax">$\mathsf{Nk} = 4, 6, 8$</span>. Число байтов в этой последовательности равно 16, 24 или 32, а номера этих байтов находятся в интервалах <span class="mathjax">$0 \dots 15$</span>, <span class="mathjax">$0 \dots 23$</span> или <span class="mathjax">$0 \dots 31$</span> соответственно. <span class="mathjax">$(4 \times \mathsf{Nk})$</span>-матрица ключа шифрования <span class="mathjax">$\mathsf{Key}$</span> задаётся по правилу:</p><div class="mathjax" style="text-align: center;">$$ k_{i,j} = k_{i + 4j}, ~ i = 0 \dots 3, ~ j = 0 \dots \mathsf{Nk} - 1. $$</div><p>Число раундов <span class="mathjax">$\mathsf{Nr}$</span> зависит от длины ключа. Его значения приведены в таблице ниже.</p><div style="display: flex; align-items: center; justify-content: center;">
+    <table style="border-collapse: collapse;"><colgroup><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"></colgroup><tr style="border-top: solid thin;"><td style="padding-left: 6pt;padding-right: 6pt;text-align: left;white-space: nowrap;">Длина ключа, биты</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">128</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">192</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">256</td></tr><tr style=""><td style="padding-left: 6pt;padding-right: 6pt;text-align: left;white-space: nowrap;"><span class="mathjax">$\mathsf{Nk}$</span></td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">4</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">6</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">8</td></tr><tr style="border-bottom: solid thin;"><td style="padding-left: 6pt;padding-right: 6pt;text-align: left;white-space: nowrap;">Число раундов <span class="mathjax">$\mathsf{Nr}$</span></td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">10</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">12</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">14</td></tr></table>
+</div><h3 data-command-name="subsection" id="5_6_2_Операции_в_поле">5.6.2. Операции в поле</h3><p>При переходе от одного раунда к другому матрицы <em>состояния</em> и <em>ключа шифрования раунда</em> подвергаются ряду преобразований. Преобразования могут осуществляться над:</p><ul><li>отдельными байтами или парами байтов (необходимо определить операции сложения и умножения);</li><li>столбцами матрицы, которые рассматриваются как 4-мерные векторы с соответствующими байтами в качестве элементов;</li><li>строками матрицы.</li></ul><p>В алгоритме шифрования AES байты рассматриваются как элементы поля <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span>, а вектор-столбцы из четырёх байтов &ndash; как многочлены третьей степени над полем <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span>. В приложении<span class="nonbreaking-interword-space"> </span><a href="#chap:discrete-math">16</a> дано подробное описание этих операций.</p><p>Хотя определение операций дано через их математическое представление, в реализациях шифра AES активно используются таблицы с заранее вычисленными результатами операций над отдельными байтами, включая взятие обратного элемента и перемножение элементов в поле <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span> (на что требуется 256 байт и 64 КиБ памяти соответственно).</p><h3 data-command-name="subsection" id="5_6_3_Операции_одного_раунда_шифрования">5.6.3. Операции одного раунда шифрования</h3><p>В каждом раунде шифра AES, кроме последнего, производятся следующие 4 операции:</p><ul><li>замена байтов, <span class="mathjax">$\mathsf{SubBytes}$</span>;</li><li>сдвиг строк, <span class="mathjax">$\mathsf{ShiftRows}$</span>;</li><li>перемешивание столбцов, <span class="mathjax">$\mathsf{MixColumns}$</span>;</li><li>добавление текущего ключа, <span class="mathjax">$\mathsf{AddRoundKey}$</span>.</li></ul><p>В обозначениях, близких к языку С, можно записать программу в следующем виде:</p><div class="mathjax" style="text-align: center;">$$
+    \begin{array}{l}
+        \mathsf{Round(State, RoundKey)} \{ \\
+        ~~~~ \mathsf{SubBytes(State)}; \\
+        ~~~~ \mathsf{ShiftRows(State)}; \\
+        ~~~~ \mathsf{MixColumns(State)}; \\
+        ~~~~ \mathsf{AddRoundKey(State, RoundKey)}; \\
+        \} \\
+    \end{array}
+$$</div><p>В последнем раунде исключается операция &laquo;перемешивание столбцов&raquo;. Этот раунд можно записать в следующем виде:</p><div class="mathjax" style="text-align: center;">$$
+    \begin{array}{l}
+        \mathsf{Round(State, RoundKey)} \{ \\
+        ~~~~ \mathsf{SubBytes(State)}; \\
+        ~~~~ \mathsf{ShiftRows(State)}; \\
+        ~~~~ \mathsf{AddRoundKey(State, RoundKey)}; \\
+        \} \\
+    \end{array}
+$$</div><p>В этих обозначениях все &laquo;функции&raquo;, а именно: <span class="mathjax">$\mathsf{Round}$</span>, <span class="mathjax">$\mathsf{SubBytes}$</span>, <span class="mathjax">$\mathsf{ShiftRows}$</span>, <span class="mathjax">$\mathsf{MixColumns}$</span> и <span class="mathjax">$\mathsf{AddRoundKey}$</span> воздействуют на матрицы, определяемые указателем <span class="mathjax">$\mathsf{(State, RoundKey)}$</span>. Сами преобразования описаны в следующих разделах.</p><h4 data-command-name="subsubsection" id="Замена_байтов_mathsf_SubBytes_">Замена байтов <span class="mathjax">$\mathsf{SubBytes}$</span></h4><p>Нелинейная операция &laquo;замена байтов&raquo; действует независимо на каждый байт <span class="mathjax">$a_{i,j}$</span> текущего состояния. Таблица замены (или s-блок) является обратимой и формируется последовательным применением двух преобразований.</p><ol><li>Сначала байт <span class="mathjax">$a$</span> представляется как элемент <span class="mathjax">$a(x)$</span> поля Галуа <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span> и заменяется на обратный элемент <span class="mathjax">$a^{-1} \equiv a^{-1}(x)$</span> в поле. Байт <span class="mathjax">$\mathrm{'00'}$</span>, для которого обратного элемента не существует, переходит сам в себя.</li><li>Затем к обратному байту <span class="mathjax">$a^{-1} = (x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_7)$</span> применяется аффинное преобразование над полем <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span> следующего вида:
+        <div class="mathjax" style="text-align: center;">$$
+            \left[  \begin{array}{c}
+                y_{0} \\ y_{1} \\ y_{2} \\ y_{3} \\ y_{4} \\ y_{5} \\ y_{6} \\ y_{7} \\
+            \end{array} \right] = \left[ \begin{array}{cccccccc}
+                1 &amp; 0 &amp; 0  &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+                1 &amp; 1 &amp; 0  &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+                1 &amp; 1 &amp; 1  &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+                1 &amp; 1 &amp; 1  &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+                1 &amp; 1 &amp; 1  &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+                0 &amp; 1 &amp; 1  &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+                0 &amp; 0 &amp; 1  &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\
+                0 &amp; 0 &amp; 0  &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1  \
+            \end{array} \right] \cdot \left[ \begin{array}{c}
+                x_{0} \\ x_{1} \\ x_{2} \\ x_{3} \\ x_{4} \\ x_{5} \\ x_{6} \\ x_{7} \\
+            \end{array} \right] + \left[ \begin{array}{c}
+                1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 1 \\ 1 \\ 0 \\
+            \end{array} \right].
+        $$</div></li></ol><p>В полиномиальном представлении это аффинное преобразование имеет вид</p><div class="mathjax" style="text-align: center;">$$Y(z)=(z^4)X(z)(1+z+z^2+z^3+z^4)\mod(1+z^8) + F(z).$$</div><p>Применение описанных операций s-блока ко всем байтам текущего состояния обозначено</p><div class="mathjax" style="text-align: center;">$$ \mathsf{SubBytes(State)}. $$</div><p>Обращение операции <span class="mathjax">$\mathsf{SubBytes(State)}$</span> также является заменой байтов. Сначала выполняется обратное аффинное преобразование, а затем от полученного байта берётся обратный.</p><h4 data-command-name="subsubsection" id="Сдвиг_строк_mathsf_ShiftRows_">Сдвиг строк <span class="mathjax">$\mathsf{ShiftRows}$</span></h4><p>Для выполнения операции &laquo;сдвиг строк&raquo; строки в таблице текущего состояния циклически сдвигаются влево. Величина сдвига различна для различных строк. Строка <span class="mathjax">$0$</span> не сдвигается вообще. Строка <span class="mathjax">$1$</span> сдвигается на <span class="mathjax">$C_1=1$</span> позицию, строка <span class="mathjax">$2$</span> &ndash; на <span class="mathjax">$C_2=2$</span> позиции, строка <span class="mathjax">$3$</span> &ndash; на <span class="mathjax">$C_3=3$</span> позиции.</p><!--%Величины $C1,C2$ и $C3$ зависят от $Nb$. Их значения приведены в таблице~\ref{tab:AES-shift-rows}.--><!--%--><!--%\begin{table}[!ht]--><!--%    \centering--><!--%    \begin{tabular}{|c|c|c|c|}--><!--%        \hline--><!--%        Nb & C1 & C2 & C3 \\--><!--%        \hline--><!--%        4  & 1  & 2  & 3  \\--><!--%        \hline--><!--%        6  & 1  & 2  & 3  \\--><!--%        \hline--><!--%        8  & 1  & 3  & 4  \\--><!--%        \hline--><!--%    \end{tabular}--><!--%    \caption{Сдвиг $C$ и длина блока $Nb$.}--><!--%    \label{tab:AES-shift-rows}--><!--%\end{table}--><h4 data-command-name="subsubsection" id="Перемешивание_столбцов_mathsf_Mix_Columns_">Перемешивание столбцов <span class="mathjax">$\mathsf{Mix Columns}$</span></h4><p>При выполнении операции &laquo;перемешивание столбцов&raquo; столбцы матрицы текущего состояния рассматриваются как многочлены над полем <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span> и умножаются по модулю многочлена <span class="mathjax">$y^4 +1$</span> на фиксированный многочлен <span class="mathjax">$\mathbf{c}(y)$</span>, где</p><div class="mathjax" style="text-align: center;">$$ \mathbf{c}(y) = \mathrm{'03'} y^3 + \mathrm{'01'} y^2 + \mathrm{'01'} y + \mathrm{'02'}. $$</div><p>Этот многочлен взаимно прост с многочленом <span class="mathjax">$y^4 + 1$</span> и, следовательно, обратим. Перемножение удобнее проводить в матричном виде. Если <span class="mathjax">$\mathbf{b}(y) = \mathbf{c}(y) \otimes \mathbf{a}(y)$</span>, то</p><div class="mathjax" style="text-align: center;">$$
+    \left[ \begin{array}{c}
+        b_{0} \\ b_{1} \\ b_{2} \\ b_{3} \\
+    \end{array}\right] =  \left[ \begin{array}{cccc}
+        \mathrm{'02'} &amp; \mathrm{'03'} &amp; \mathrm{'01'} &amp; \mathrm{'01'} \\
+        \mathrm{'01'} &amp; \mathrm{'02'} &amp; \mathrm{'03'} &amp; \mathrm{'01'} \\
+        \mathrm{'01'} &amp; \mathrm{'01'} &amp; \mathrm{'02'} &amp; \mathrm{'03'} \\
+        \mathrm{'03'} &amp; \mathrm{'01'} &amp; \mathrm{'01'} &amp; \mathrm{'02'} \\
+    \end{array} \right] \cdot \left[ \begin{array}{c}
+        a_{0} \\ a_{1} \\ a_{2} \\ a_{3} \\
+     \end{array} \right].
+$$</div><p>Обратная операция состоит в умножении на многочлен <span class="mathjax">$\mathbf{d}(y)$</span>, обратный многочлену <span class="mathjax">$\mathbf{c}(y)$</span> по модулю <span class="mathjax">$y^4 + 1$</span>, то есть</p><div class="mathjax" style="text-align: center;">$$
+    (\mathrm{'03'} y^{3} + \mathrm{'01'} y^{2} + \mathrm{'01'} y + \mathrm{'02'}) \otimes \mathbf{d}(y) = \mathrm{'01'}.
+$$</div><p>Этот многочлен равен</p><div class="mathjax" style="text-align: center;">$$
+    \mathbf{d}(y) = \mathrm{'0B'} y^3 + \mathrm{'0D'} y^2 + \mathrm{'09'} y + \mathrm{'0E'}.
+$$</div><h4 data-command-name="subsubsection" id="Добавление_ключа_раунда_mathsf_AddRoundKey_">Добавление ключа раунда <span class="mathjax">$\mathsf{AddRoundKey}$</span></h4><p>Операция &laquo;добавление ключа раунда&raquo; состоит в том, что матрица текущего состояния складывается по модулю 2 с матрицей ключа текущего раунда. Обе матрицы должны иметь одинаковые размеры. Матрица ключа раунда вычисляется с помощью процедуры <em>расширения ключа</em>, описанной ниже. Операция &laquo;добавление ключа раунда&raquo; обозначается <span class="mathjax">$\mathsf{AddRoundKey(State, RoundKey)}$</span>.</p><div class="mathjax" style="text-align: center;">$$\begin{eqnarray}
+    \left[ \begin{array}{cccc}
+        a_{0,0} &amp; a_{0,1} &amp; a_{0,2} &amp; a_{0,3} \\
+        a_{1,0} &amp; a_{1,1} &amp; a_{1,2} &amp; a_{1,3} \\
+        a_{2,0} &amp; a_{2,1} &amp; a_{2,2} &amp; a_{2,3} \\
+        a_{3,0} &amp; a_{3,1} &amp; a_{3,2} &amp; a_{3,3}
+    \end{array} \right]
+    \oplus
+    \left[ \begin{array}{cccc}
+        k_{0,0} &amp; k_{0,1} &amp; k_{0,2} &amp; k_{0,3} \\
+        k_{1,0} &amp; k_{1,1} &amp; k_{1,2} &amp; k_{1,3} \\
+        k_{2,0} &amp; k_{2,1} &amp; k_{2,2} &amp; k_{2,3} \\
+        k_{3,0} &amp; k_{3,1} &amp; k_{3,2} &amp; k_{3,3}
+    \end{array} \right] =
+    \\
+    = \left[ \begin{array}{cccc}
+        b_{0,0} &amp; b_{0,1} &amp; b_{0,2} &amp; b_{0,3} \\
+        b_{1,0} &amp; b_{1,1} &amp; b_{1,2} &amp; b_{1,3} \\
+        b_{2,0} &amp; b_{2,1} &amp; b_{2,2} &amp; b_{2,3} \\
+        b_{3,0} &amp; b_{3,1} &amp; b_{3,2} &amp; b_{3,3}
+    \end{array} \right].
+\end{eqnarray}$$</div><h3 data-command-name="subsection" id="5_6_4_Процедура_расширения_ключа">5.6.4. Процедура расширения ключа</h3><p>Матрица ключа текущего раунда вычисляется из исходного ключа шифра с помощью специальной процедуры, состоящей из расширения ключа и выбора раундового ключа. Основные принципы этой процедуры состоят в следующем:</p><ul><li>суммарная длина ключей всех раундов равна длине блока, умноженной на увеличенное на 1 число раундов. Для блока длины 128 бит и 10 раундов общая длина всех ключей раундов равна 1408;</li><li>с помощью ключа шифра находят <em>расширенный ключ</em>;</li><li>ключи <em>раунда</em> выбираются из <em>расширенного</em> ключа по правилу: ключ первого раунда состоит из первых 4 столбцов матрицы расширенного ключа, второй ключ &ndash; из следующих 4 столбцов и<span class="nonbreaking-interword-space"> </span>т.&nbsp;д.</li></ul><p>Расширенный ключ &ndash; это матрица <span class="mathjax">$\mathsf{W}$</span>, состоящая из <span class="mathjax">$4(\mathsf{Nr} + 1)$</span> 4-байтных вектор-столбцов, каждый столбец <span class="mathjax">$i$</span> обозначается <span class="mathjax">$\mathsf{W}[i]$</span>.</p><p>Далее рассматривается только случай, когда ключ шифра состоит из 16 байтов. Первые <span class="mathjax">$\mathsf{Nk} = 4$</span> столбца содержат ключ шифра. Остальные столбцы вычисляются рекурсивно из столбцов с меньшими номерами.</p><p>Для <span class="mathjax">$\mathsf{Nk} = 4$</span> имеем 16-байтный ключ</p><div class="mathjax" style="text-align: center;">$$
+    \mathsf{Key} = (\mathsf{Key}[0], \mathsf{Key}[1], \dots, \mathsf{Key}[15]).
+$$</div><p>Приведём алгоритм расширения ключа для <span class="mathjax">$\mathsf{Nk} = 4$</span>.</p><command name="algorithm"><argument required="true">algorithm</argument><argument required="false">ht</argument><content>
+    <command name="caption"><argument required="true"><span class="mathjax">$\mathsf{KeyExpansion}(\mathsf{Key}, \mathsf{W})$</span><a name="#alg:AES-key-exp"></a></argument></command>
+    <command name="algorithmic"><argument required="true">algorithmic</argument><content>
+        <command name="FOR"><argument required="true"> <span class="mathjax">$i=0$</span> <command name="TO"></command><span class="mathjax">$\mathsf{Nk} - 1$</span></argument></command>
+            <command name="STATE"></command><span class="mathjax">$\mathsf{W}[i] = (\mathsf{Key}[4i], ~ \mathsf{Key}[4i+1], ~ \mathsf{Key}[4i+2], ~ \mathsf{Key}[4i+3])^T$</span>;
+        <command name="ENDFOR"></command>
+        <command name="FOR"><argument required="true"> <span class="mathjax">$i = \mathsf{Nk}$</span> <command name="TO"></command><span class="mathjax">$4(\mathsf{Nr} + 1) - 1$</span></argument></command>
+            <command name="STATE"></command><span class="mathjax">$\mathsf{temp} = \mathsf{W}[i-1]$</span>;
+            <command name="IF"><argument required="true"> (<span class="mathjax">$i = 0 \mod \mathsf{Nk}$</span>)</argument></command>
+                <command name="STATE"></command><span class="mathjax">$\mathsf{temp} = \mathsf{SubWord}(\mathsf{RotWord}(\mathsf{temp})) ~ \oplus ~ \mathsf{Rcon}[i ~/~ \mathsf{Nk}]$</span>;
+            <command name="ENDIF"></command>
+            <command name="STATE"></command><span class="mathjax">$\mathsf{W}[i] = \mathsf{W}[i - \mathsf{Nk}] ~ \oplus ~ \mathsf{temp}$</span>;
+        <command name="ENDFOR"></command>
+    </content></command>
+</content></command><!--%\[--><!--%    \begin{array}{l}--><!--%        \mathsf{KeyExpansion}(\mathsf{Key}, \mathsf{W}) \{ \\--><!--%        ~~~~ \mathsf{for ~ (i = 0; ~ i < Nk = 4; ~ i++)} \\--><!--%        ~~~~~~~~ \mathsf{W[i] = (Key[4 \cdot i], ~ Key[4*i+1], ~ Key[4*i+2], ~ Key[4*i+3]);} \\--><!--%        ~~~~ \mathsf{for ~ (i = Nk; ~ i < 4 * (Nr + 1); ~ i++)} ~ \{ \\--><!--%        ~~~~~~~~ \mathsf{temp = W[i-1];} \\--><!--%        ~~~~~~~~ \mathsf{if ~ (i ~ \% ~ Nk ~ == ~ 0)} \\--><!--%        ~~~~~~~~~~~~ \mathsf{temp = SubWord(RotWord(temp))} ~ \oplus ~ \mathsf{Rcon[i / Nk];} \\--><!--%        ~~~~~~~~ \mathsf{W[i] = W[i - Nk]} ~ \oplus ~ \mathsf{temp;} \\--><!--%        ~~~~ \} \\--><!--%        \} \\--><!--%    \end{array}--><!--%\]--><p>Здесь <span class="mathjax">$\mathsf{SubWord}(\mathsf{W}[i])$</span> обозначает функцию, которая применяет операцию &laquo;замена байтов&raquo; (или s-блок) <span class="mathjax">$\mathsf{SubBytes}$</span> к каждому из 4 байтов столбца <span class="mathjax">$\mathsf{W}[i]$</span>. Функция <span class="mathjax">$\mathsf{RotWord}(\mathsf{W}[i])$</span> осуществляет циклический сдвиг вверх байт столбца <span class="mathjax">$\mathsf{W}[i]$</span>: если <span class="mathjax">$\mathsf{W}[i] = (a, b, c, d)^T$</span>, то <span class="mathjax">$\mathsf{RotWord}(\mathsf{W}[i]) = (b, c, d, a)^T$</span>. Векторы-константы <span class="mathjax">$\mathsf{Rcon}[i]$</span> определены ниже.</p><p>Как видно из этого описания, первые <span class="mathjax">$\mathsf{Nk} = 4$</span> столбца заполняются ключом шифра. Все следующие столбцы <span class="mathjax">$\mathsf{W}[i]$</span> равны сумме по модулю <span class="mathjax">$2$</span> предыдущего столбца <span class="mathjax">$\mathsf{W}[i-1]$</span> и столбца <span class="mathjax">$\mathsf{W}[i-4]$</span>. Для столбцов <span class="mathjax">$\mathsf{W}[i]$</span> с номерами <span class="mathjax">$i$</span>, кратными <span class="mathjax">$\mathsf{Nk} = 4$</span>, к столбцу <span class="mathjax">$\mathsf{W}[i-1]$</span> применяются операции <span class="mathjax">$\mathsf{RotWord(W)}$</span> и <span class="mathjax">$\mathsf{SubWord(W)}$</span>, а затем производится суммирование по модулю 2 со столбцом <span class="mathjax">$\mathsf{W}[i-4]$</span> и константой раунда <span class="mathjax">$\mathsf{Rcon}[i ~/~ 4]$</span>.</p><!--%Для $\mathsf{Nk}>6$ имеем--><!--%\[--><!--%\begin{array}{l}--><!--% \mathsf{KeyExpansion\,(byte\,Key\,[4*Nk]\,\, word \,\, W[Nb*(Nr+1)])}\\--><!--%  \{\\--><!--% \quad\quad \mathsf{for\,\,(i=0;\,\, i<Nk;\,\,i++)} \\--><!--%  \qquad \quad\quad\quad \mathsf{W[i]=(Key[4*i];Key[4*i+1];Key[4*i+2];Key[4*i+3]);}\\--><!--%  \quad\quad \mathsf{for \,\,(i=Nk;\,\,i<Nb*(Nr+1);\,\,i++)}\\--><!--%  \quad\quad \{ \\--><!--%  \quad \quad\quad\quad \mathsf{temp=W[i-1]}; \\--><!--%  \quad \quad\quad\quad \mathsf{if\,\,(i\quad\% \quad Nk==0)}\\--><!--%  \qquad \qquad \qquad \quad \mathsf{temp=SubByte(RotByte(temp))\quad\widehat{\,}\quad Rcon[i/Nk]};\\--><!--%\quad \quad\quad\quad \mathsf{else \,\,if\,\,(i\quad\% \quad Nk==4)}\\--><!--% \qquad \qquad \qquad \quad \mathsf{temp=SubByte(temp)};\\--><!--%  \quad \quad\quad\quad \mathsf{W[i]=W[i-Nk] \quad\widehat{\,}\quad temp};\\--><!--%  \quad\quad \} \\--><!--%  \}\, \\--><!--%\end{array}--><!--%\]--><!--%Различие между этими двумя случаями состоит в том, что во втором случае к столбцу $\mathsf{W[i-1]}$ применяются операции--><!--% $\mathsf{RotByte(W)}$ и $\mathsf{SubByte(W)}$, если $\mathsf{i-4}$ кратно $\mathsf{Nk}$.\\--><p>Векторы-константы раундов определяются следующим образом:</p><div class="mathjax" style="text-align: center;">$$ \mathsf{Rcon}[i] = (\mathsf{RC}[i], \mathrm{'00'}, \mathrm{'00'}, \mathrm{'00'})^T, $$</div><p>где байт <span class="mathjax">$\mathsf{RC}[1] = \mathrm{'01'}$</span>, а байты <span class="mathjax">$\mathsf{RC}[i] = \alpha^{i-1}, ~ i = 2, 3, \dots$</span>; байт <span class="mathjax">$\alpha = \mathrm{'02'}$</span> &ndash; это примитивный элемент поля <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span>.</p><p><span style="font-variant: small-caps;"><b>Пример.</b></span> 
+Пусть <span class="mathjax">$\mathsf{Nk} = 4$</span>. В этом случае ключ шифра имеет длину 128 бит. Найдём столбцы расширенного ключа. Столбцы <span class="mathjax">$\mathsf{W}[0], \mathsf{W}[1], \mathsf{W}[2], \mathsf{W}[3]$</span> непосредственно заполняются битами ключа шифра. Номер следующего столбца <span class="mathjax">$\mathsf{W}[4]$</span> кратен <span class="mathjax">$\mathsf{Nk}$</span>, поэтому</p><div class="mathjax" style="text-align: center;">$$
+    \mathsf{W}[4] = \mathsf{SubWord}(\mathsf{RotWord}(\mathsf{W}[3])) \oplus \mathsf{W}[0] \oplus
+        \left[ \begin{array}{c}
+            \mathrm{'01'} \\ \mathrm{'00'} \\ \mathrm{'00'} \\ \mathrm{'00'} \\
+        \end{array} \right].
+$$</div><p>Далее имеем:</p><div class="mathjax" style="text-align: center;">$$
+    \begin{array}{l}
+        \mathsf{W}[5] = \mathsf{W}[4] \oplus \mathsf{W}[1], \\
+        \mathsf{W}[6] = \mathsf{W}[5] \oplus \mathsf{W}[2], \\
+        \mathsf{W}[7] = \mathsf{W}[6] \oplus \mathsf{W}[3].  \\
+    \end{array}
+$$</div><p>Затем:</p><div class="mathjax" style="text-align: center;">$$
+    \mathsf{W}[8] = \mathsf{SubWord}(\mathsf{RotWord}(\mathsf{W}[7])) \oplus \mathsf{W}[4] \oplus
+        \left[ \begin{array}{c}
+            \alpha \\
+            \mathrm{'00'}\\
+            \mathrm{'00'}\\
+            \mathrm{'00'}\\
+        \end{array} \right] ,
+$$</div><div class="mathjax" style="text-align: center;">$$
+    \begin{array}{l}
+        \mathsf{W}[9] = \mathsf{W}[8] \oplus \mathsf{W}[5], \\
+        \mathsf{W}[10] = \mathsf{W}[9] \oplus \mathsf{W}[6], \\
+        \mathsf{W}[11] = \mathsf{W}[10] \oplus \mathsf{W}[7] \\
+    \end{array}
+$$</div><p>и<span class="nonbreaking-interword-space"> </span>т.&nbsp;д.</p><!--%\example--><!--%Пусть $\mathsf{Nk=6}.$ В этом случае ключ шифра имеет длину 192 бита. Найдём столбцы расширенного ключа. Столбцы $\mathsf{W[0],W[1],W[2],W[3],W[4],W[5]}$ непосредственно заполняются--><!--%битами ключа шифра. Номер следующего столбца $\mathsf{W[6]}$ кратен $\mathsf{Nk}$, поэтому--><!--%\[--><!--%\begin{array}{ccccccc}--><!--% \mathsf{W[6]} & = & \mathsf{SubByte(RotByte(W[5]))} &\oplus  &  \mathsf{W[0]} & \oplus  & \left[ \begin{array}{c}--><!--% \mathsf{`01'} \\--><!--%  \mathsf{`00'}\\--><!--%  \mathsf{`00'}\\--><!--%  \mathsf{`00'}\\--><!--%\end{array}--><!--%\right]    \\--><!--%\end{array}--><!--%\].--><!--%--><!--%Далее имеем--><!--%\[--><!--%\begin{array}{ccc}--><!--% \mathsf{W[7]=W[6]}\oplus \mathsf{W[1]}; & \mathsf{W[8]=W[7]}\oplus \mathsf{W[2]}; & \mathsf{W[9]=W[8]}\oplus \mathsf{W[3]}; \\--><!--% \mathsf{W[10]=W[9]}\oplus \mathsf{W[4]}; &\mathsf{ W[11]=W[10]}\oplus \mathsf{W[5]}.\\--><!--%\end{array}--><!--%\]--><!--%Затем--><!--%\[--><!--%\begin{array}{ccccccc}--><!--% \mathsf{W[12]} & = & \mathsf{SubByte(RotByte(W[11]))} &\oplus  &  \mathsf{W[6]} & \oplus  & \left[ \begin{array}{c}--><!--% \mathsf{\alpha} \\--><!--%  \mathsf{`00'}\\--><!--%  \mathsf{`00'}\\--><!--%  \mathsf{`00'}\\--><!--%\end{array}--><!--%\right] , \\--><!--%\end{array}--><!--%\]--><!--%\[--><!--%\begin{array}{ccc}--><!--% \mathsf{W[13]=W[12]}\oplus \mathsf{W[7]}; & \mathsf{W[14]= W[13]}\oplus \mathsf{W[8]};  & \mathsf{W[15]=W[14]}\oplus \mathsf{W[9]}, \\--><!--%\end{array}--><!--%\]--><!--%и~т.\,д.--><!--%\exampleend--><!--%--><!--%\example--><!--%Пусть $\mathsf{Nk=8}.$ В этом случае ключ шифра имеет длину $256$ бита. Найдём столбцы расширенного ключа. Столбцы--><!--%$\mathsf{W[0],W[1],W[2],W[3],W[4],W[5],W[6],W[7]}$ непосредственно заполняются битами ключа шифра. Номер следующего столбца--><!--%$\mathsf{W[8]}$ кратен $\mathsf{Nk}$, поэтому--><!--%\[--><!--%\begin{array}{ccccccc}--><!--% \mathsf{W[8]} & = & \mathsf{SubByte(RotByte(W[7]))} &\oplus  &  \mathsf{W[0]} & \oplus  & \left[ \begin{array}{c}--><!--% \mathsf{`01'} \\--><!--%  \mathsf{`00'}\\--><!--%  \mathsf{`00'}\\--><!--%  \mathsf{`00'}\\--><!--%\end{array}--><!--%\right]    \\--><!--%\end{array}--><!--%\].--><!--%Далее имеем--><!--%\[--><!--%\begin{array}{ccc}--><!--%\mathsf{ W[7]=W[6]}\oplus \mathsf{W[1]}; & \mathsf{W[8]=W[7]}\oplus \mathsf{W[2]}; & \mathsf{W[9]=W[8]}\oplus \mathsf{W[3]}; \\--><!--%\mathsf{ W[10]=W[9]}\oplus \mathsf{W[4]}; & \mathsf{W[11]=W[10]}\oplus \mathsf{W[5]}.\\--><!--%\end{array}--><!--%\]--><!--%Номер следующего столбца $\mathsf{W[12]}$ равен $12$. Так как $12-4$ кратно $\mathsf{Nk}$, то--><!--%\[--><!--%\begin{array}{ccc}--><!--%\mathsf{ W[12]=SubByte(RotByte(W[11]))}\oplus \mathsf{W[4]}; & \mathsf{W[13]=W[12]}\oplus \mathsf{W[5]}; & \mathsf{W[14]=W[13]}\oplus \mathsf{W[6]}; \\--><!--%\mathsf{ W[15]=W[14]}\oplus \mathsf{W[7]}. &  &\\--><!--%\end{array}--><!--%\]--><!--%Затем--><!--%\[--><!--%\begin{array}{ccccccc}--><!--% \mathsf{W[16]} & = & \mathsf{SubByte(RotByte(W[15]))} &\oplus  &  \mathsf{W[8]} & \oplus  & \left[ \begin{array}{c}--><!--% \mathsf{\alpha} \\--><!--%  \mathsf{`00'}\\--><!--%  \mathsf{`00'}\\--><!--%  \mathsf{`00'}\\--><!--%\end{array}--><!--%\right] , \\--><!--%\end{array}--><!--%\]--><!--%\[--><!--%\begin{array}{ccc}--><!--% \mathsf{W[17]=W[16]}\oplus \mathsf{W[9]}; & \mathsf{W[18]=W[17]}\oplus \mathsf{W[10]};  &\mathsf{ W[19]=W[18]}\oplus \mathsf{W[10]}, \\--><!--%\end{array}--><!--%\]--><!--%--><!--%\[--><!--%\begin{array}{ccc}--><!--%\mathsf{ W[20]=SubByte(RotByte(W[19]))}\oplus \mathsf{W[12]}; & \mathsf{W[21]=W[20]}\oplus \mathsf{W[13]}; & \mathsf{W[22]=W[21]}\oplus \mathsf{W[14]}; \\--><!--%\mathsf{ W[23]=W[22]}\oplus \mathsf{W[15]}, &  &\\--><!--%\end{array}--><!--%\]--><!--%и~т.\,д.--><p>Ключ <span class="mathjax">$i$</span>-го раунда состоит из столбцов матрицы расширенного ключа</p><div class="mathjax" style="text-align: center;">$$
+    \mathsf{RoundKey} = (\mathsf{W}[4(i-1)], \mathsf{W}[4(i-1) + 1], \ldots, \mathsf{W}[4i-1]).
+$$</div><!--%Если длина блока равна 192 битам $Nb=6$, то ключ 5-го раунда состоит из столбцов $W[24],W[25],W[26],W[27],W[28],W[29].$--><!--%\exampleend--><p>В настоящее время американский стандарт шифрования AES де-факто используется во всём мире в негосударственных системах передачи данных, если позволяет законодательство страны. C 2010 года процессоры Intel поддерживают специальный набор инструкций для шифра AES.</p><p><a name="N83663"><!--шифр!AES|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="5_5_GOST_28147_89.html">&#129080; 5_5_GOST_28147_89</a></li><li class="page-item"><a class="page-link" href="5_7_Shifr_Kuznechik_.html">5_7_Shifr_Kuznechik_ &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

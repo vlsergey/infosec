@@ -1,0 +1,108 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="16_4_Конечные_поля_и_операции_в_алгоритме_AES">16.4. Конечные поля и операции в алгоритме AES</h2><p><a name="N114029"><!--шифр!AES|(--></a>
+В алгоритме блочного шифрования<a name="N114035"><!--шифр!блочный--></a> AES преобразования над битами и байтами осуществляются специальными математическими операциями. Биты и байты понимаются как элементы поля.</p><h3 data-command-name="subsection" id="16_4_1_Операции_с_байтами_в_AES">16.4.1. Операции с байтами в AES</h3><p>Чтобы определить операции сложения и умножения двух байтов, введём сначала представление байта в виде многочлена степени 7 или меньше. Байт</p><div class="mathjax" style="text-align: center;">$$ a =( a_7, a_6, a_5, a_4, a_3, a_2, a_1, a_0) $$</div><p>преобразуется в многочлен <span class="mathjax">$a(x)$</span> с коэффициентами 0 или 1 по правилу</p><div class="mathjax" style="text-align: center;">$$ a(x) = a_{7}x^{7}+a_{6}x^{6}+a_{5}x^{5}+a_{4}x^{4}+a_{3}x^{3}+a_{2}x^{2}+a_{1}x+a_{0}. $$</div><p>Далее байт трактуется как элемент конечного поля <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span>, заданного неприводимым многочленом, например</p><div class="mathjax" style="text-align: center;">$$ m(x) = x^{8}+x^{4}+x^{3}+x +1. $$</div><p>Произведение многочленов <span class="mathjax">$a(x)$</span> и <span class="mathjax">$b(x)$</span> по модулю многочлена <span class="mathjax">$m(x)$</span> записывают как</p><div class="mathjax" style="text-align: center;">$$ c(x) = a(x) b(x) \mod m(x). $$</div><p>Остаток <span class="mathjax">$c(x)$</span> представляет собой многочлен степени 7 или меньше. Его коэффициенты <span class="mathjax">$(c_{7}, c_{6}, c_{5}, c_{4}, c_{3}, c_{2}, c_{1}, c_{0})$</span> образуют байт <span class="mathjax">$c$</span>, который и называется произведением байтов <span class="mathjax">$a$</span> и <span class="mathjax">$b$</span>.</p><p>Сложение байтов осуществляется как <span class="mathjax">$\oplus$</span> (исключающее ИЛИ), что является операцией сложения многочленов в двоичном поле.</p><p><em>Единичным</em> элементом поля является байт <span class="mathjax">$\mathrm{'00000001'}$</span>, или <span class="mathjax">$\mathrm{'01'}$</span> в шестнадцатеричной записи. <em>Нулевым</em> элементом поля является байт <span class="mathjax">$\mathrm{'00000000'}$</span>, или <span class="mathjax">$\mathrm{'00'}$</span> в шестнадцатеричной записи. Одним из <em>примитивных</em> элементов поля является байт <span class="mathjax">$\mathrm{'00000010'}$</span>, или <span class="mathjax">$\mathrm{'02'}$</span> в шестнадцатеричной записи. Байты часто записывают в шестнадцатеричной форме, но при математических преобразованиях они должны интерпретироваться как элементы поля <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span>.</p><p>Для каждого ненулевого байта <span class="mathjax">$a$</span> существует обратный байт <span class="mathjax">$b$</span> такой, что их произведение является единичным байтом:</p><div class="mathjax" style="text-align: center;">$$ a b = 1 \mod m(x). $$</div><p>Обратный байт обозначается <span class="mathjax">$b = a^{-1}$</span>.</p><p>Для байта <span class="mathjax">$a$</span>, представленного многочленом <span class="mathjax">$a(x)$</span>, нахождение обратного байта <span class="mathjax">$a^{-1}$</span> сводится к решению уравнения</p><div class="mathjax" style="text-align: center;">$$ m(x) d(x) + b(x) a(x) = 1. $$</div><p>Если такое решение найдено, то многочлен <span class="mathjax">$b(x) \mod m(x)$</span> является представлением обратного байта <span class="mathjax">$a^{-1}$</span>. Обратный элемент (байт) может быть найден с помощью расширенного алгоритма Евклида для многочленов.</p><p><span style="font-variant: small-caps;"><b>Пример.</b></span> 
+Найти байт, обратный байту <span class="mathjax">$a = \mathrm{'C1'}$</span>, в шестнадцатеричной записи. Так как <span class="mathjax">$a(x) = x^{7} + x^{6} + 1$</span>, то с помощью расширенного алгоритма Евклида находим</p><div class="mathjax" style="text-align: center;">$$ (x^{8} + x^{4} + x^{3} + x + 1) (x^{4} + x^{3} + x^{2} + x + 1) + (x^{7} + x^{6} + 1) (x^{5} + x^{3}) = 1. $$</div><p>Таким образом, обратный элемент поля, или обратный байт <span class="mathjax">$\mathrm{'C1'}$</span>, равен</p><div class="mathjax" style="text-align: center;">$$ x^{5} + x^{3} = a^{-1} = \mathrm{'00101000'} = \mathrm{'28'}. $$</div><p><span style="font-variant: small-caps;"><b>Пример.</b></span> 
+В алгоритме блочного шифрования AES байты рассматриваются как элементы поля Галуа <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span>. Сложим байты <span class="mathjax">$\mathrm{'57'}$</span> и <span class="mathjax">$\mathrm{'83'}$</span>. Представляя их многочленами, находим:</p><div class="mathjax" style="text-align: center;">$$ (x^6 + x^4 + x^2 + x + 1) + (x^7 + x + 1) = x^7 + x^6 + x^4 + x^2, $$</div><p>или в двоичной записи &ndash;</p><div class="mathjax" style="text-align: center;">$$ 01010111 \oplus 10000011 = 11010100 = \mathrm{'D4'}. $$</div><p>Получили <span class="mathjax">$\mathrm{'57'} + \mathrm{'83'} = \mathrm{'D4'}$</span>.</p><p><span style="font-variant: small-caps;"><b>Пример.</b></span> 
+Выполним в поле <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span>, заданном неприводимым многочленом</p><div class="mathjax" style="text-align: center;">$$ m(x) = x^8 + x^4 + x^3 + x + 1 $$</div><p>(из алгоритма AES), операции с байтами: <span class="mathjax">$\mathrm{'FA'} \cdot \mathrm{'A9'} + \mathrm{'E0'}$</span>, где</p><div class="mathjax" style="text-align: center;">$$ FA = 11111010, ~ A9 = 10101001, ~ E0 = 11100000, $$</div><div class="mathjax" style="text-align: center;">$$ (x^7 + x^6 + x^5 + x^4 + x^3  +x)(x^7 + x^5 + x^3 + 1) + (x^7 + x^6 + x^5) \mod m(x) = $$</div><div class="mathjax" style="text-align: center;">$$ = x^{14} + x^{13} + x^{10} + x^{8} + x^7 + x^3 + x \mod m(x) = $$</div><div class="mathjax" style="text-align: center;">$$ = (x^{14} + x^{13} + x^{10} + x^{8} + x^7 + x^3 + x) + x^6 \cdot m(x) \mod m(x) = $$</div><div class="mathjax" style="text-align: center;">$$ = x^{13} + x^9 + x^8 + x^6 + x^3 + x \mod m(x) = $$</div><div class="mathjax" style="text-align: center;">$$ = (x^{13} + x^9 + x^8 + x^6 + x^3 + x) + x^5 \cdot m(x) \mod m(x) = $$</div><div class="mathjax" style="text-align: center;">$$ = x^5 + x^3 + x \mod m(x) = \mathrm{'2A'}. $$</div><h3 data-command-name="subsection" id="16_4_2_Операции_над_вектором_из_байтов_в_AES">16.4.2. Операции над вектором из байтов в AES</h3><!--%\subsection{Многочлены над полем в алгоритме AES}--><p>Поле <span class="mathjax">${{\mathbb{GF}}(2^{nk})}$</span> можно задать как расширение степени <span class="mathjax">$nk$</span> базового поля <span class="mathjax">${{\mathbb{GF}}(2)}$</span>:</p><div class="mathjax" style="text-align: center;">$$ \alpha \in {{\mathbb{GF}}(2^{nk})}, ~ \alpha = \sum\limits_{i=0}^{nk-1} a_i x^i, ~ a_i \in {{\mathbb{GF}}(2)} $$</div><p>с неприводимым многочленом <span class="mathjax">$r(x)$</span> степени <span class="mathjax">$nk$</span> над полем <span class="mathjax">${{\mathbb{GF}}(2)}$</span>,</p><div class="mathjax" style="text-align: center;">$$ r(x) = \sum\limits_{i=0}^{nk} a_i x^i, ~ a_i \in {{\mathbb{GF}}(2)}, ~ a_{nk} = 1. $$</div><p>Поле <span class="mathjax">${{\mathbb{GF}}(2^{nk})}$</span> можно задать и как расширение степени <span class="mathjax">$k$</span> базового поля <span class="mathjax">${{\mathbb{GF}}(2^n)}$</span>:</p><div class="mathjax" style="text-align: center;">$$ \alpha \in {{\mathbb{GF}}((2^n)}^k), ~ \alpha = \sum\limits_{i=0}^{k-1} a_i x^i, ~ a_i \in {{\mathbb{GF}}(2^n)} $$</div><p>с неприводимым многочленом <span class="mathjax">$r(x)$</span> степени <span class="mathjax">$k$</span> над полем <span class="mathjax">${{\mathbb{GF}}(2^n)}$</span>,</p><div class="mathjax" style="text-align: center;">$$ r(x) = \sum\limits_{i=0}^{k} a_i x^i, ~ a_i \in {{\mathbb{GF}}(2^n)}, ~ a_k = 1. $$</div><p><span style="font-variant: small-caps;"><b>Пример.</b></span> 
+В таблице<span class="nonbreaking-interword-space"> </span><a href="#tab:irreducible-gf8">[tab:irreducible-gf8]</a> приведены примеры приводимых и неприводимых многочленов над полем <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span>.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; "><table style="border-collapse: collapse;"><colgroup><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"></colgroup><tr style="border-bottom: solid thin;border-top: solid thin;"><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">Многочлен</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">Разложение</td></tr><tr style="border-top: solid thin;"><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;"><span class="mathjax">$\mathrm{'01'} x + \mathrm{'00'}$</span></td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">неприводимый</td></tr><tr style=""><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;"><span class="mathjax">$\mathrm{'01'} x + \mathrm{'01'}$</span></td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">неприводимый</td></tr><tr style=""><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;"><span class="mathjax">$\mathrm{'01'} x + \mathrm{'A9'}$</span></td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">неприводимый</td></tr><tr style=""><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;"><span class="mathjax">$\mathrm{'01'} x^2 + \mathrm{'00'} x + \mathrm{'00'}$</span></td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;"><span class="mathjax">$(\mathrm{'01'} x) \cdot (\mathrm{'01'} x)$</span></td></tr><tr style=""><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;"><span class="mathjax">$\mathrm{'1D'} x^2 + \mathrm{'AF'} x + \mathrm{'52'}$</span></td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;"><span class="mathjax">$(\mathrm{'41'} x + \mathrm{'0A'}) \cdot (\mathrm{'E3'} x + \mathrm{'5A'})$</span></td></tr><tr style="border-bottom: solid thin;"><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;"><span class="mathjax">$\mathrm{'01'} x^4 + \mathrm{'01'}$</span></td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;"><span class="mathjax">$(\mathrm{'01'} x + \mathrm{'01'})^4$</span></td></tr></table><figcaption style="flex-basis: 100%; text-align: center;">Таблица 16.4 &mdash; Примеры многочленов над полем <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span><a name="#tab:irreducible-gf8"></a></figcaption></figure><p>В алгоритме AES вектор-столбец <span class="mathjax">$\mathbf{a}$</span> состоит из четырёх байтов <span class="mathjax">$a_{0}, a_{1}, a_{2}, a_{3}$</span>. Ему ставится в соответствие многочлен <span class="mathjax">$\mathbf{a}(y)$</span> от переменной <span class="mathjax">$y$</span> вида</p><div class="mathjax" style="text-align: center;">$$ \mathbf{a}(y) = a_{3}y^{3}+a_{2}y^{2}+a_{1}y+a_{0}, $$</div><p>причём коэффициенты многочлена (байты) интерпретируются как элементы поля <span class="mathjax">${{\mathbb{GF}}(2^{8})}$</span>. Это значит, что при сложении или умножении двух таких многочленов их коэффициенты складываются и перемножаются, как определено выше.</p><p>Многочлены <span class="mathjax">$\mathbf{a}(y)$</span> и <span class="mathjax">$\mathbf{b}(y)$</span> умножаются по модулю многочлена</p><div class="mathjax" style="text-align: center;">$$ \mathbf{M}(y)= \mathrm{'01'} y^4 + \mathrm{'01'} = y^4 + 1, ~ \mathrm{'01'} \in {{\mathbb{GF}}(2^8)}, $$</div><div class="mathjax" style="text-align: center;">$$ \mathbf{M}(y)= (\mathrm{'01'}, \mathrm{'00'},\mathrm{'00'}, \mathrm{'00'}, \mathrm{'01'}), $$</div><p>который <em>не</em> является неприводимым над <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span>.</p><!--%Следовательно, многочлен $\mathbf{a}(y)$ задаёт многочлен третьей степени над полем $\GF{2^8}$, но не является элементом поля $\GF{2^{32}}$.--><p>Операция умножения по модулю <span class="mathjax">$\mathbf{M}(y)$</span> обозначается <span class="mathjax">$\otimes$</span>:</p><div class="mathjax" style="text-align: center;">$$ \mathbf{a}(y) ~ \mathbf{b}(y) \mod \mathbf{M}(y) ~\equiv~ \mathbf{a}(y) \otimes \mathbf{b}(y). $$</div><p>Операция &laquo;перемешивание столбца&raquo; в шифровании AES состоит в умножении многочлена столбца на</p><div class="mathjax" style="text-align: center;">$$ \mathbf{c}(y) = (03, 01, 01, 02) = \mathrm{'03'} y^3 + \mathrm{'01'} y^2 + \mathrm{'01'} y + \mathrm{'02'} $$</div><p>по модулю <span class="mathjax">$\mathbf{M}(y)$</span>. Многочлен <span class="mathjax">$\mathbf{c}(y)$</span> имеет обратный многочлен</p><div class="mathjax" style="text-align: center;">$$ \mathbf{d}(y) = \mathbf{c}^{-1}(y) \mod \mathbf{M}(y) = (\mathrm{0B}, \mathrm{0D}, \mathrm{09}, \mathrm{0E}) = $$</div><div class="mathjax" style="text-align: center;">$$ = \mathrm{'0B'} y^3 + \mathrm{'0D'} y^2 + \mathrm{'09'} y + \mathrm{'0E'}, $$</div><div class="mathjax" style="text-align: center;">$$ \mathbf{c}(y) \otimes \mathbf{d}(y) = (00, 00, 00, 01) = 1. $$</div><p>При расшифровании выполняется умножение на <span class="mathjax">$\mathbf{d}(y)$</span> вместо <span class="mathjax">$\mathbf{c}(y)$</span>.</p><p>Так как</p><div class="mathjax" style="text-align: center;">$$ y^j = y^{j \mod 4} \mod y^4+1, $$</div><p>где коэффициенты из поля <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span>, то произведение многочленов</p><div class="mathjax" style="text-align: center;">$$ \mathbf{a}(y) = a_{3}y^{3}+ a_{2}y^{2} + a_{1}y + a_{0} $$</div><p>и</p><div class="mathjax" style="text-align: center;">$$ \mathbf{b}(y) = b_{3}y^{3} + b_{2}y^{2} + b_{1}y + b_{0}, $$</div><p>обозначаемое как</p><div class="mathjax" style="text-align: center;">$$ \mathbf{f}(y) = \mathbf{a}(y) \otimes \mathbf{b}(y) = f_{3}y^{3} + f_{2}y^{2} + f_{1}y + f_{0}, $$</div><p>содержит коэффициенты</p><div class="mathjax" style="text-align: center;">$$
+    \begin{array}{ccccccccc}
+        f_{0} &amp; = &amp; a_{0}b_{0} &amp; + &amp; a_{3}b_{1} &amp; + &amp; a_{2}b_{2} &amp; + &amp; a_{1}b_{3}, \\
+        f_{1} &amp; = &amp; a_{1}b_{0} &amp; + &amp; a_{0}b_{1} &amp; + &amp; a_{3}b_{2} &amp; + &amp; a_{2}b_{3}, \\
+        f_{2} &amp; = &amp; a_{2}b_{0} &amp; + &amp; a_{1}b_{1} &amp; + &amp; a_{0}b_{2} &amp; + &amp; a_{3}b_{3}, \\
+        f_{3} &amp; = &amp; a_{3}b_{0} &amp; + &amp; a_{2}b_{1} &amp; + &amp; a_{1}b_{2} &amp; + &amp;  a_{0}b_{3}.
+    \end{array}
+$$</div><p>Эти соотношения можно переписать также в матричном виде:</p><div class="mathjax" style="text-align: center;">$$
+    \begin{array}{cccc}
+        \left[ \begin{array}{c}
+            f_{0} \\
+            f_{1} \\
+            f_{2} \\
+            f_{3}
+        \end{array} \right] &amp;  = &amp; \left[\begin{array}{cccc}
+            a_{0} &amp; a_{3} &amp; a_{2} &amp; a_{1} \\
+            a_{1} &amp; a_{0} &amp; a_{3} &amp; a_{2} \\
+            a_{2} &amp; a_{1} &amp; a_{0} &amp; a_{3} \\
+            a_{3} &amp; a_{2} &amp; a_{1} &amp; a_{0}
+        \end{array}\right] &amp; \left[\begin{array}{c}
+            b_{0} \\
+            b_{1} \\
+            b_{2} \\
+            b_{3}
+        \end{array} \right]
+    \end{array}.
+$$</div><p>Умножение матриц производится в поле <span class="mathjax">${{\mathbb{GF}}(2^8)}$</span>. Матричное представление полезно, если нужно умножать фиксированный вектор на несколько различных векторов.</p><p><span style="font-variant: small-caps;"><b>Пример.</b></span> 
+Вычислим для <span class="mathjax">$\mathbf{a}(y) = (\mathrm{F2}, \mathrm{7E}, \mathrm{41}, \mathrm{0A})$</span> произведение <span class="mathjax">$\mathbf{a}(y) \otimes \mathbf{c}(y)$</span>:</p><div class="mathjax" style="text-align: center;">$$
+    \mathbf{c}(y) = (03, 01, 01, 02),
+$$</div><div class="mathjax" style="text-align: center;">$$
+    \mathbf{d}(y) = \mathbf{c}^{-1}(y) \mod \mathbf{M}(y) = (\mathrm{0B}, \mathrm{0D}, \mathrm{09}, \mathrm{0E}).
+$$</div><div class="mathjax" style="text-align: center;">$$
+    \mathbf{a}(y) \otimes \mathbf{c}(y) =
+    \left[ \begin{array}{cccc}
+        \mathrm{0A} &amp; \mathrm{F2} &amp; \mathrm{7E} &amp; \mathrm{41} \\
+        \mathrm{41} &amp; \mathrm{0A} &amp; \mathrm{F2} &amp; \mathrm{7E} \\
+        \mathrm{7E} &amp; \mathrm{41} &amp; \mathrm{0A} &amp; \mathrm{F2} \\
+        \mathrm{F2} &amp; \mathrm{7E} &amp; \mathrm{41} &amp; \mathrm{0A} \\
+    \end{array} \right] \cdot
+    \left[ \begin{array}{c} \mathrm{02} \\ \mathrm{01} \\ \mathrm{01} \\ \mathrm{03} \end{array} \right] =
+$$</div><div class="mathjax" style="text-align: center;">$$
+    \left[ \begin{array}{ccccccc}
+        \mathrm{0A} \cdot \mathrm{02} &amp; \oplus &amp; \mathrm{F2} &amp; \oplus &amp; \mathrm{7E} &amp; \oplus &amp; \mathrm{41} \cdot \mathrm{03} \\
+        \mathrm{41} \cdot \mathrm{02} &amp; \oplus &amp; \mathrm{0A} &amp; \oplus &amp; \mathrm{F2} &amp; \oplus &amp; \mathrm{7E} \cdot \mathrm{03} \\
+        \mathrm{7E} \cdot \mathrm{02} &amp; \oplus &amp; \mathrm{41} &amp; \oplus &amp; \mathrm{0A} &amp; \oplus &amp; \mathrm{F2} \cdot \mathrm{03} \\
+        \mathrm{F2} \cdot \mathrm{02} &amp; \oplus &amp; \mathrm{7E} &amp; \oplus &amp; \mathrm{41} &amp; \oplus &amp; \mathrm{0A} \cdot \mathrm{03} \\
+    \end{array} \right] =
+    \left[ \begin{array}{c} \mathrm{5B} \\ \mathrm{F8} \\ \mathrm{BA} \\ \mathrm{DE} \end{array} \right];
+$$</div><div class="mathjax" style="text-align: center;">$$
+    \begin{array}{l}
+        \mathbf{a}(y) \otimes \mathbf{c}(y) = \mathbf{b}(y), \\
+        \mathbf{b}(y) \otimes \mathbf{d}(y) = \mathbf{a}(y); \\
+    \end{array}
+$$</div><div class="mathjax" style="text-align: center;">$$
+    \begin{array}{ccccc}
+        (\mathrm{F2}, \mathrm{7E}, \mathrm{41}, \mathrm{0A}) &amp; \otimes &amp; (\mathrm{03}, \mathrm{01}, \mathrm{01}, \mathrm{02}) &amp; = &amp; (\mathrm{DE}, \mathrm{BA}, \mathrm{F8}, \mathrm{5B}), \\
+        (\mathrm{DE}, \mathrm{BA}, \mathrm{F8}, \mathrm{5B}) &amp; \otimes &amp; (\mathrm{0B}, \mathrm{0D}, \mathrm{09}, \mathrm{0E}) &amp; = &amp; (\mathrm{F2}, \mathrm{7E}, \mathrm{41}, \mathrm{0A}). \\
+    \end{array}
+$$</div><p><a name="N114563"><!--шифр!AES|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="16_3_Gruppi.html">&#129080; 16_3_Gruppi</a></li><li class="page-item"><a class="page-link" href="16_5_Modulnaja_arifmetika.html">16_5_Modulnaja_arifmetika &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

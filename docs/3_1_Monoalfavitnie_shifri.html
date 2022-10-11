@@ -1,0 +1,59 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="3_1_Моноалфавитные_шифры">3.1. Моноалфавитные шифры</h2><p><a name="N76356"><!--шифр!моноалфавитный|(--></a>
+Преобразования открытого текста в шифртекст могут быть описаны различными функциями. Если функция преобразования является аддитивной, то и соответствующий шифр называется <em>аддитивным</em>. Если это преобразование является аффинным, то шифр называется <em>аффинным</em>.</p><h3 data-command-name="subsection" id="3_1_1_Шифр_Цезаря">3.1.1. Шифр Цезаря</h3><p><a name="N76385"><!--шифр!Цезаря--></a>Известным примером простого шифра замены является <em>шифр Цезаря</em>. Процедура шифрования состоит в следующем (рис.<span class="nonbreaking-interword-space"> </span><a href="3_1_Monoalfavitnie_shifri.html#fig:caesar">3.1</a>). Записывают все буквы латинского алфавита в стандартном порядке:</p><div class="mathjax" style="text-align: center;">$$ A B C D E \dots Z. $$</div><p>Делают циклический сдвиг влево, например на три буквы, и записывают все буквы во втором ряду, начиная с четвёртой буквы <span class="mathjax">$D$</span>. Буквы первого ряда заменяют соответствующими (как показано стрелкой на рисунке) буквами второго ряда. После такой замены слова не распознаются теми, кто не знает ключа. Ключом <span class="mathjax">$K$</span> является первый символ сдвинутого алфавита.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; "><a name="fig:caesar" style="vertical-align: top; align-self: start;"></a><div class="mathjax" style="text-align: center;">$$ \begin{array}{ccccccccccc}
+    \text{A} &amp; \text{B} &amp; \text{C} &amp; \text{D} &amp; \text{E} &amp; &amp; \text{V} &amp; \text{W} &amp; \text{X} &amp; \text{Y} &amp; \text{Z} \\
+    \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \dots &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow \\
+    \text{D} &amp; \text{E} &amp; \text{F} &amp; \text{G} &amp; \text{H} &amp; &amp; \text{Y} &amp; \text{Z} &amp; \text{A} &amp; \text{B} &amp; \text{C} \\
+\end{array} $$</div><figcaption style="flex-basis: 100%; text-align: center;">Рис. 3.1 &mdash; Шифр Цезаря<a name="N76436"><!--шифр!Цезаря--></a></figcaption></figure><p><span style="font-variant: small-caps;"><b>Пример.</b></span> 
+В русском языке сообщение <tt>изучайтекриптографию</tt> посредством шифрования с ключом <span class="mathjax">$K = \text{\texttt{г}}$</span> (сдвиг вправо на 3 символа по алфавиту) преобразуется в <tt>лкцъгмхзнултхсёугчлб</tt>.</p><p>Недостатком любого шифра замены является то, что в шифрованном тексте сохраняются все частоты появления букв открытого текста и корреляционные связи между буквами. Они существуют в каждом языке. Например, в русском языке чаще всего встречаются буквы <span class="mathjax">$A$</span> и <span class="mathjax">$O$</span>. Для дешифрования криптоаналитик имеет возможность прочитать открытый текст, используя частотный анализ букв шифртекста. Для &laquo;взлома&raquo; шифра Цезаря достаточно найти одну пару букв &ndash; одну замену.</p><h3 data-command-name="subsection" id="3_1_2_Аддитивный_шифр_перестановки">3.1.2. Аддитивный шифр перестановки</h3><p><a name="N76484"><!--шифр!перестановки аддитивный--></a>Рисунок<span class="nonbreaking-interword-space"> </span><a href="3_1_Monoalfavitnie_shifri.html#fig:caesar-additiv">3.2</a> поясняет <em>аддитивный шифр</em> перестановки на алфавите. Все 26 букв латинского алфавита нумеруют по порядку от 0 до 25. Затем номер буквы меняют в соответствии с уравнением:</p><div class="mathjax" style="text-align: center;">$$ y = x + b \mod 26, $$</div><p>где <span class="mathjax">$x$</span> &ndash; прежний номер, <span class="mathjax">$y$</span> &ndash; новый номер, <span class="mathjax">$b$</span> &ndash; заданное целое число, определяющее сдвиг номера и известное только легальным пользователям. Очевидно, что шифр Цезаря является примером аддитивного шифра.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; "><a name="fig:caesar-additiv" style="vertical-align: top; align-self: start;"></a><div class="mathjax" style="text-align: center;">$$ \begin{array}{ccccccccccc}
+    \text{A} &amp; \text{B} &amp; \text{C} &amp; \text{D} &amp; \text{E} &amp; &amp; \text{V} &amp; \text{W} &amp; \text{X} &amp; \text{Y} &amp; \text{Z} \\
+    \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \dots &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow \\
+    0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; &amp; 21 &amp; 22 &amp; 23 &amp; 24 &amp; 25 \\
+    \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \dots &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow \\
+    3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; &amp; 24 &amp; 25 &amp; 0 &amp; 1 &amp; 2 \\
+    \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \dots &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow \\
+    \text{D} &amp; \text{E} &amp; \text{F} &amp; \text{G} &amp; \text{H} &amp; &amp; \text{Y} &amp; \text{Z} &amp; \text{A} &amp; \text{B} &amp; \text{C} \\
+\end{array} $$</div><figcaption style="flex-basis: 100%; text-align: center;">Рис. 3.2 &mdash; Шифр Цезаря<a name="N76538"><!--шифр!Цезаря--></a> как пример аддитивного шифра<a name="N76544"><!--шифр!перестановки аддитивный--></a></figcaption></figure><h3 data-command-name="subsection" id="3_1_3_Аффинный_шифр">3.1.3. Аффинный шифр</h3><p><a name="N76562"><!--шифр!афинный--></a>Аддитивный шифр является частным случаем <em>аффинного шифра</em>. Правило шифрования сообщения имеет вид</p><div class="mathjax" style="text-align: center;">$$ y = a x + b \mod n. $$</div><p>Здесь производится умножение номера символа <span class="mathjax">$x$</span> из алфавита, <span class="mathjax">$x\in {\mathbb{}}\{ 0, 1, 2, \dots, N \leq n-1 \}$</span>, на заданное целое число <span class="mathjax">$a$</span> и сложение с числом <span class="mathjax">$b$</span> по модулю целого числа <span class="mathjax">$n$</span>. Ключом является <span class="mathjax">$K = (a, b)$</span>.</p><p>Расшифрование осуществляется по формуле:</p><div class="mathjax" style="text-align: center;">$$ x = (y - b) a^{-1} \mod n. $$</div><p>Чтобы обеспечить обратимость в этом шифре, должен существовать единственный обратный элемент <span class="mathjax">$a^{-1}$</span> по модулю <span class="mathjax">$n$</span>. Для этого должно выполняться условие <span class="mathjax">$\gcd(a,n) = 1$</span>, то есть <span class="mathjax">$a$</span> и <span class="mathjax">$n$</span> должны быть взаимно простыми числами (<span class="mathjax">$\gcd$</span> &ndash; сокращение, образованное от термина greatest common divisor &ndash; наибольший общий делитель, <span class="mathjax">$\text{НОД}$</span>). Очевидно, что для &laquo;взлома&raquo; такого шифра достаточно найти две пары букв &ndash; две замены.</p><p><a name="N76619"><!--шифр!моноалфавитный|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="Glava_3_Istoricheskie_shifri.html">&#129080; Glava_3_Istoricheskie_shifri</a></li><li class="page-item"><a class="page-link" href="3_2_Bigrammnie_shifri_zameni.html">3_2_Bigrammnie_shifri_zameni &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

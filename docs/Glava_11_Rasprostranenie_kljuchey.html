@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h1 data-command-name="chapter" id="Глава_11_Распространение_ключей">Глава 11. Распространение ключей</h1><p>Задача распространения ключей является одной из множества задач построения надёжной сети общения многих абонентов. Задача состоит в получении в нужный момент времени двумя легальными абонентами сети секретного сессионного ключа шифрования (и аутентификации сообщений). Хорошим решением данной задачи будем считать такой протокол распространения ключей, который удовлетворяет следующим условиям.</p><ul><li>В результате работы протокола между двумя абонентами должен быть сформирован секретный сессионный ключ.</li><li>Успешное окончание протокола в том числе должно означать и успешную взаимную аутентификацию абонентов. Не должно быть такого, что протокол успешно завершился с точки зрения одной из сторон, а вторая сторона при этом представлена злоумышленником.</li><li>К участию в работе протокола должны допускаться только легальные пользователи сети. Внешний пользователь не должен иметь возможность получить общий сессионный ключ с кем-либо из абонентов.</li><li>Добавление нового абонента в сеть (или исключение из неё) не должно требовать уведомления всех участников сети.</li></ul><p>Последнее требование сразу исключает такие варианты протоколов, в которых каждый из абонентов знал бы некоторый мастер-ключ общения с любым другим участником. Данные варианты плохи тем, что с ростом системы количество пар мастер-ключей &laquo;абонент-абонент&raquo; растёт как квадрат от количества участников. Поэтому большая часть рассматриваемых решений состоит в том, что в сети выделяется один или несколько доверенных центров T (англ. <span lang="en"><i>Trent</i></span>, от англ. <span lang="en"><i>trust</i></span>), которые как раз и владеют информацией обо всех легальных участниках сети и их ключах. Они же будут явно или неявно выступать одним из участников протоколов по формированию сеансовых ключей.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 80%;"><a name="fig:key_distribution-networks" style="vertical-align: top; align-self: start;"></a><img src="images/DE40C5860875B74F2B66FE81E4108DA3.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 11.1 &mdash; Варианты сетей без выделенного доверенного центра и с выделенным доверенным центром T</figcaption></figure><p>Если говорить о требованиях к данному классу протоколов с точки зрения свойств безопасности, то &laquo;идеальный&raquo; протокол распространения ключей должен реализовывать следующие цели:</p><ul><li>аутентификация сторон протокола;</li><li>защита от повтора;</li><li>аутентификация ключа;</li><li>подтверждение владения новым ключом;</li><li>совершенная прямая секретность;</li><li>формирование новых ключей.</li><li>ограниченная защита от атак отказа в обслуживании.</li></ul><p>Разумеется, &laquo;идеальный&raquo; протокол должен быть устойчивым ко всем известным атакам, в том числе рассмотренным в разделе<span class="nonbreaking-interword-space"> </span><a href="#section-protocols-attacks">10.5</a>.</p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="10_5_Ataki_na_protokoli.html">&#129080; 10_5_Ataki_na_protokoli</a></li><li class="page-item"><a class="page-link" href="11_1_Simmetrichnie_protokoli.html">11_1_Simmetrichnie_protokoli &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

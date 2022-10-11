@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="16_2_Парадокс_дней_рождения">16.2. Парадокс дней рождения</h2><p>Парадокс дней рождения<a name="N112480"><!--парадокс дней рождения--></a> связан с контринтуитивным ответом на следующую задачу: какой должен быть минимальный размер группы, чтобы вероятность совпадения дней рождения хотя бы у пары человек из этой группы была больше <span class="mathjax">$1 / 2$</span>? Первый возникающий в голове вариант ответа &laquo;183 человека&raquo; (то есть <span class="mathjax">$\left\lceil 365 / 2 \right\rceil$</span>) является неверным.</p><p>Найдём вероятность <span class="mathjax">$P(n)$</span> того, что в группе из <span class="mathjax">$n$</span> человек хотя бы двое имеют дни рождения в один день года. Вероятность того, что <span class="mathjax">$n$</span> человек (<span class="mathjax">$n &lt; N = 365$</span>) не имеют общего дня рождения, есть</p><div class="mathjax" style="text-align: center;">$$
+    \bar{P}(n) = 1 \cdot \left( 1 - \frac{1}{N} \right) \cdot \left(1 - \frac{2}{N} \right)\cdot \dots \cdot  \left( 1 - \frac{n-1}{N} \right) = \prod\limits_{i=0}^{n-1} \left( 1 - \frac{i}{N} \right).
+$$</div><p>Аппроксимируя <span class="mathjax">$1-x \leq \exp({-x})$</span>, находим</p><div class="mathjax" style="text-align: center;">$$ \bar{P}(n) \approx \prod\limits_{i=0}^{n-1} \exp\left(-\frac{i}{N}\right) = \exp\left(-\frac{n(n-1)}{2} \cdot \frac{1}{N}\right) \approx \exp\left(-\frac{n^2}{2} \cdot \frac{1}{N}\right). $$</div><p>Вероятность того, что хотя бы 2 человека из <span class="mathjax">$n$</span> имеют общий день рождения, есть</p><div class="mathjax" style="text-align: center;">$$ P(n) = 1 - \bar{P}(n) \approx 1 -  \exp\left(-\frac{n^2}{2} \cdot \frac{1}{N}\right). $$</div><p>Кроме того, найдём минимальный размер группы, в которой дни рождения совпадают хотя бы у двоих с вероятностью не менее <span class="mathjax">$1 / 2$</span>. То есть найдём такое число <span class="mathjax">$n_{1/2}$</span>, чтобы выполнялось условие <span class="mathjax">$P(n_{1/2}) \geq \frac{1}{2}$</span>. Подставляя это значение в формулу для вероятности, получим <span class="mathjax">$\frac{1}{2} \geq \exp\left(-\frac{n_{1/2}^2}{2} \cdot \frac{1}{N}\right)$</span>. Следовательно,</p><div class="mathjax" style="text-align: center;">$$n_{1/2} \geq \sqrt{2 \ln 2 \cdot N} \approx 1,18 \sqrt{ N } \approx 22,5.$$</div><p>В криптографии при оценках стойкости алгоритмов часто опускают коэффициент <span class="mathjax">$\sqrt{2 \ln 2}$</span>, считая ответом на задачу &laquo;округлённое&raquo; значение <span class="mathjax">$\sqrt{ N }$</span>. Например, оценку числа операций хеширования для поиска коллизии идеальной криптографической хеш-функции с размером выхода <span class="mathjax">$k$</span> бит часто записывают как <span class="mathjax">$2^{k/2}$</span>.</p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="Glava_16_Matematicheskoe_prilozhenie.html">&#129080; Glava_16_Matematicheskoe_prilozhenie</a></li><li class="page-item"><a class="page-link" href="16_3_Gruppi.html">16_3_Gruppi &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

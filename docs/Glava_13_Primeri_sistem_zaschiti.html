@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h1 data-command-name="chapter" id="Глава_13_Примеры_систем_защиты">Глава 13. Примеры систем защиты</h1><h2 data-command-name="section" id="13_1_Kerberos_для_локальной_сети">13.1. Kerberos для локальной сети</h2><p>Система аутентификации и распределения ключей Kerberos основана на протоколе Нидхема<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Шрёдера (см. разделы<span class="nonbreaking-interword-space"> </span><a href="#section-protocols-needham-schroeder, section-protocols-kerberos">[section-protocols-needham-schroeder, section-protocols-kerberos]</a>). Самые известные реализации протокола Kerberos включены в Microsoft Active Directory и ПО Kerberos с открытым исходным кодом для Unix.</p><p>Протокол предназначен для решения задачи аутентификации и распределения ключей в рамках локальной сети, в которой есть группа пользователей, имеющих доступ к набору сервисов, для которых требуется обеспечить единую аутентификацию. Протокол Kerberos использует только симметричное шифрование. Секретный ключ используется для взаимной аутентификации.</p><p>Естественно, что в глобальной сети Интернет невозможно секретно создать и распределить пары секретных ключей, поэтому Kerberos построен для (виртуальной) локальной сети.</p><p>В протоколе используются 4 типа субъектов:</p><ul><li>пользователи системы <span class="mathjax">$C_i$</span>;</li><li>сервисы <span class="mathjax">$S_i$</span>, доступ к которым имеют пользователи;</li><li>сервер аутентификации AS (англ. <span lang="en"><i>Authentication Server</i></span>), который производит аутентификацию пользователей по паролям и/или смарт-картам только один раз и выдаёт секретные сеансовые ключи для дальнейшей аутентификации;</li><li>сервер выдачи мандатов TGS (англ. <span lang="en"><i>Ticket Granting Server</i></span>) для аутентификации доступа к запрашиваемым сервисам, аутентификация выполняется по сеансовым ключам<a name="N106433"><!--ключ!сеансовый--></a>, выданным сервером AS.</li></ul><p>Для работы протокола требуется заранее распределить следующие секретные симметричные ключи для взаимной аутентификации.</p><ul><li>Ключи <span class="mathjax">$K_{C_i}$</span> между пользователем <span class="mathjax">$i$</span> и сервером AS. Как правило, ключом служит обычный пароль<a name="N106449"><!--пароль--></a>, точнее, результат хеширования пароля. Может быть использована и смарт-карта.</li><li>Ключ <span class="mathjax">$K_{TGS}$</span> между серверами AS и TGS.</li><li>Ключи <span class="mathjax">$K_{S_i}$</span> между сервисами <span class="mathjax">$S_i$</span> и сервером TGS.</li></ul><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 100%;"><a name="fig:kerberos" style="vertical-align: top; align-self: start;"></a><img src="images/9530E84910A1F20B21E3701C239CF103.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 13.1 &mdash; Схема аутентификации и распределения ключей Kerberos</figcaption></figure><p>На рис.<span class="nonbreaking-interword-space"> </span><a href="Glava_13_Primeri_sistem_zaschiti.html#fig:kerberos">13.1</a> представлена схема протокола, состоящая из 6 шагов.</p><p>Введём обозначения для протокола между пользователем <span class="mathjax">$C$</span> с ключом <span class="mathjax">$K_C$</span> и сервисом <span class="mathjax">$S$</span> с ключом <span class="mathjax">$K_S$</span>:</p><ul><li><span class="mathjax">$ID_C, ID_{TGS}, ID_S$</span> &ndash; идентификаторы пользователя, сервера TGS и сервиса <span class="mathjax">$S$</span> соответственно;</li><li><span class="mathjax">$t_i, \tilde{t}_i$</span> &ndash; запрашиваемые и выданные границы времени действия сеансовых ключей аутентификации;</li><li><span class="mathjax">$ts_i$</span> &ndash; метка текущего времени (англ. <span lang="en"><i>timestamp</i></span>);</li><li><span class="mathjax">$N_i$</span> &ndash; одноразовая метка (англ. <span lang="en"><i>nonce</i></span>)<a name="N106563"><!--одноразовая метка--></a>, псевдослучайное число для защиты от атак воспроизведения сообщений;</li><li><span class="mathjax">$K_{C,TGS}, K_{C,S}$</span> &ndash; выданные сеансовые ключи аутентификации пользователя и сервера TGS, пользователя и сервиса <span class="mathjax">$S$</span> соответственно;</li><li><span class="mathjax">$T_{TGS} = E_{K_{TGS}}(K_{C,TGS} ~\|~ ID_C ~\|~ \tilde{t}_1)$</span> &ndash; мандат (англ. <span lang="en"><i>ticket</i></span>) для TGS, который пользователь расшифровать не может;</li><li><span class="mathjax">$T_{S} = E_{K_S}(K_{C,S} ~\|~ ID_C ~\|~ \tilde{t}_2)$</span> &ndash; мандат для сервиса <span class="mathjax">$S$</span>, который пользователь расшифровать не может;</li><li><span class="mathjax">$K_1, K_2$</span> &ndash; обмен информацией для генерирования общего секретного симметричного ключа дальнейшей коммуникации, например по протоколу Диффи<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Хеллмана<a name="N106608"><!--протокол!Диффи—Хеллмана--></a>.</li></ul><p>Схема протокола следующая.</p><ol><li>Первичная аутентификация пользователя по паролю, получение сеансового ключа <span class="mathjax">$K_{C,TGS}$</span> для дальнейшей аутентификации. Это действие выполняется один раз для каждого пользователя, чтобы уменьшить риск компрометации пароля.
+        <ol><li><span class="mathjax">$C \rightarrow AS: ~ ID_C ~\|~ ID_{TGS} ~\|~ t_1 ~\|~ N_1$</span>.</li><li><span class="mathjax">$C \leftarrow AS: ~ ID_C ~\|~ T_{TGS} ~\|~ E_{K_C}( K_{C,TGS} ~\|~ \tilde{t}_1 ~\|~ N_1 ~\|~ ID_{TGS})$</span>.</li></ol></li><li>Аутентификация сеансовым ключом <span class="mathjax">$K_{C,TGS}$</span> на сервере TGS для запроса доступа к сервису выполняется один раз для каждого сервиса. Получение другого сеансового ключа аутентификации <span class="mathjax">$K_{C,S}$</span>.
+        <ol><li><span class="mathjax">$C \rightarrow TGS: ~~ ID_S ~\|~ t_2 ~\|~ N_2 ~\|~ T_{TGS} ~\|~ E_{K_{C,TGS}}(ID_C ~\|~ ts_1)$</span>.</li><li><span class="mathjax">$C \leftarrow TGS: ~~ ID_C ~\|~ T_{S} ~\|~ E_{K_{C,TGS}}( K_{C,S} ~\|~ \tilde{t}_2 ~\|~ N_2 ~\|~ ID_S)$</span>.</li></ol></li><li>Аутентификация сеансовым ключом <span class="mathjax">$K_{C,S}$</span> на сервисе <span class="mathjax">$S$</span> &ndash; создание общего сеансового ключа дальнейшего взаимодействия.
+        <ol><li><span class="mathjax">$C \rightarrow S: ~~ T_{S} ~\|~ E_{K_{C,S}}(ID_C ~\|~ ts_2 ~\|~ K_1)$</span>.</li><li><span class="mathjax">$C \leftarrow S: ~~ E_{K_{C,S}}( ts_2 ~\|~ K_2)$</span>.</li></ol></li></ol><p>Аутентификация и проверка целостности достигаются сравнением идентификаторов, одноразовых меток и меток времени внутри зашифрованных сообщений после расшифрования с их действительными значениями.</p><p>Некоторым недостатком схемы является необходимость синхронизации часов между субъектами сети.</p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="12_2_Raspredelenie_po_koalitsijam.html">&#129080; 12_2_Raspredelenie_po_koalitsijam</a></li><li class="page-item"><a class="page-link" href="13_2_Pretty_Good_Privacy.html">13_2_Pretty_Good_Privacy &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="6_2_Регистр_сдвига_с_линейной_обратной_связью">6.2. Регистр сдвига с линейной обратной связью</h2><p>Другой схемой построения псевдослучайных генераторов является использование регистров сдвига с линейной обратной связью, а также её вариациями. Для начала рассмотрим простой РСЛОС, изображённый на рис.<span class="nonbreaking-interword-space"> </span><a href="6_2_Registr_sdviga_s_lineynoy_obratnoy_svjazju.html#fig:lfsr">6.1</a>.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 75%;"><a name="fig:lfsr" style="vertical-align: top; align-self: start;"></a><img src="images/549E3DA37548A87C5D7DBB17936F4155.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 6.1 &mdash; Регистр сдвига с линейной обратной связью</figcaption></figure><p>Регистр сдвига состоит из <span class="mathjax">$n$</span> однобитовых ячеек <span class="mathjax">$b_1, b_2, \dots, b_n$</span>, содержащих 0 или 1, и линейной обратной связи, определяемой коэффициентами <span class="mathjax">$C_1 = 1$</span>, <span class="mathjax">$C_2, C_3, \dots, C_n \in \{0, 1\}$</span>. Многочлен над полем Галуа <span class="mathjax">$GF(2^n)$</span> вида <span class="mathjax">$C_1 x^n + C_2 x^{n-1} + \dots + C_n x + 1$</span> называется характеристическим многочленом РСЛОС.</p><p>Начальным состоянием генератора является набор значений в битовых ячейках. На каждой итерации генератор вычисляет сумму по модулю два (то есть выполняет операцию XOR) значений ячеек, для которых <span class="mathjax">$C_i=1$</span>:</p><div class="mathjax" style="text-align: center;">$$\begin{array}{ll}
+	b_{n+1} &amp;= \sum\limits_{i} C_i b_i \mod 2, \\
+	b_{n+1} &amp;= b_1 \oplus C_2 b_2 \oplus C_3 b_3 \oplus \dots \oplus C_n b_n.
+\end{array}$$</div><p>Далее регистр сдвигает значения на одну ячейку влево. Самая правая ячейка <span class="mathjax">$b_n$</span> принимает вычисленное значение <span class="mathjax">$b_{n+1}$</span>:</p><div class="mathjax" style="text-align: center;">$$\begin{array}{ll}
+	b_1 := b_2, \\
+	b_2 := b_3, \\
+	\dots \\
+	b_n := b_{n+1}. \\
+\end{array}
+$$</div><p>Выходом генератора является значение ячейки <span class="mathjax">$b_1$</span> после сдвига.</p><p><span style="font-variant: small-caps;"><b>Пример.</b></span> 
+Пусть регистр сдвига с линейной обратной связью задан характеристическим многочленом <span class="mathjax">$m\left(x\right)=x^{5} + x^{3} + 1$</span>. Как показано на рисунке, регистр состоит из пяти ячеек. В линейной обратной связи будут участвовать ячейки 1 и 3 (то есть <span class="mathjax">$C_1 = 1, C_3 = 1$</span>, остальные <span class="mathjax">$C_i = 0$</span>).</p><div style="display: flex; align-items: center; justify-content: center;">
+	<command name="tikzpicture"><argument required="true">tikzpicture</argument><argument required="false">scale=0.05</argument><content>
+		<command name="draw"><argument required="false">black,very thick</argument></command> (30,30) &ndash; (30,40) &ndash; (40,40) &ndash; (40,30) &ndash; (30,30) &ndash; (30,40);
+		<command name="draw"><argument required="false">black,thick</argument></command> (35,40) &ndash; (35,50) &ndash; (35,50) &ndash; (37.5,50);
+		<command name="draw"><argument required="false">black,very thick</argument></command> (40,30) &ndash; (40,40) &ndash; (50,40) &ndash; (50,30) &ndash; (40,30) &ndash; (40,40);
+		<command name="draw"><argument required="false">black,very thick</argument></command> (50,30) &ndash; (50,40) &ndash; (60,40) &ndash; (60,30) &ndash; (50,30) &ndash; (50,40);
+		<command name="draw"><argument required="false">black,thick</argument></command> (55,40) &ndash; (55,47.5);
+		<command name="draw"><argument required="false">black,thick</argument></command> (53.5,46) &ndash; (55,47.5) &ndash; (56.5,46);
+		<command name="draw"><argument required="false">black,thick</argument></command> (37.5,50) &ndash; (52.5,50);
+		<command name="draw"><argument required="false">black,thick</argument></command> (51,51.5) &ndash; (52.5,50) &ndash; (51,48.5);
+		<command name="draw"></command>(55,50) circle radius=2.5;
+		<command name="draw"><argument required="false">black</argument></command> (52.5,50) &ndash; (57.5,50);
+		<command name="draw"><argument required="false">black</argument></command> (55,47.5) &ndash; (55,52.5);
+		<command name="draw"><argument required="false">black,very thick</argument></command> (60,30) &ndash; (60,40) &ndash; (70,40) &ndash; (70,30) &ndash; (60,30) &ndash; (60,40);
+		<command name="draw"><argument required="false">black,very thick</argument></command> (70,30) &ndash; (70,40) &ndash; (80,40) &ndash; (80,30) &ndash; (70,30) &ndash; (70,40);
+		<command name="draw"><argument required="false">black,thick</argument></command> (57.5,50) &ndash; (85,50) &ndash; (85,35) &ndash; (80,35);
+		<command name="draw"><argument required="false">black,thick</argument></command> (82.5,36.5) &ndash; (80,35) &ndash; (82.5,33.5);
+		<command name="draw"><argument required="false">black,thick</argument></command> (30,35) &ndash; (15,35);
+		<command name="draw"><argument required="false">black,thick</argument></command> (20,30) &ndash; (15,35) &ndash; (20,40);
+	</content></command>
+</div><p>Если начальное состояние регистра равно <span class="mathjax">$\vec{s_0} = (0, 0, 0, 0, 1)$</span>, то дальнейшие внутренние состояния регистра <span class="mathjax">$s_i$</span> и выходы генератора <span class="mathjax">$r_i$</span> равны:</p><ol><li><span class="mathjax">$b_{n+1} = b_1 \oplus b_3 = 0 \oplus 0 = 0$</span>, <span class="mathjax">$\vec{s_1} = (0, 0, 0, 1, 0)$</span>, <span class="mathjax">$r_1 = b_1 = 0$</span>;</li><li><span class="mathjax">$b_{n+1} = b_1 \oplus b_3 = 0 \oplus 0 = 0$</span>, <span class="mathjax">$\vec{s_2} = (0, 0, 1, 0, 0)$</span>, <span class="mathjax">$r_2 = b_1 = 0$</span>;</li><li><span class="mathjax">$b_{n+1} = b_1 \oplus b_3 = 0 \oplus 1 = 1$</span>, <span class="mathjax">$\vec{s_3} = (0, 1, 0, 0, 1)$</span>, <span class="mathjax">$r_3 = b_1 = 0$</span>;</li><li><span class="mathjax">$b_{n+1} = b_1 \oplus b_3 = 0 \oplus 0 = 0$</span>, <span class="mathjax">$\vec{s_4} = (1, 0, 0, 1, 0)$</span>, <span class="mathjax">$r_4 = b_1 = 1$</span>;</li><li><span class="mathjax">$b_{n+1} = b_1 \oplus b_3 = 1 \oplus 0 = 1$</span>, <span class="mathjax">$\vec{s_5} = (0, 0, 1, 0, 1)$</span>, <span class="mathjax">$r_5 = b_1 = 0$</span>;</li><li><span class="mathjax">$b_{n+1} = b_1 \oplus b_3 = 0 \oplus 1 = 1$</span>, <span class="mathjax">$\vec{s_6} = (0, 1, 0, 1, 1)$</span>, <span class="mathjax">$r_6 = b_1 = 0$</span>;</li><li><span class="mathjax">$b_{n+1} = b_1 \oplus b_3 = 0 \oplus 0 = 0$</span>, <span class="mathjax">$\vec{s_7} = (1, 0, 1, 1, 0)$</span>, <span class="mathjax">$r_7 = b_1 = 1$</span>;</li><li><span class="mathjax">$b_{n+1} = b_1 \oplus b_3 = 1 \oplus 1 = 0$</span>, <span class="mathjax">$\vec{s_8} = (0, 1, 1, 0, 0)$</span>, <span class="mathjax">$r_8 = b_1 = 0$</span>;
+	и так далее.</li></ol><p>Максимальный период последовательности РСЛОС равен <span class="mathjax">$2^n - 1$</span>. Максимум достигается в том и только в том случае, когда характеристический многочлен РСЛОС примитивен. В этом случае РСЛОС называют регистром сдвига максимального периода, а генерируемые им последовательности &ndash; М-последовательностями или же последовательностями максимального периода.</p><p>Если известна структура РСЛОС (значения коэффициентов <span class="mathjax">$C_2, \dots, C_n$</span>), то внутреннее состояние генератора можно восстановить по <span class="mathjax">$n$</span> предыдущим выходам. По <span class="mathjax">$2n$</span> предыдущим выходам генератора можно восстановить и внутреннее состояние, и структуру генератора. Зная структуру и текущее внутреннее состояние генератора, можно восстановить его предыдущие и следующие выходные значения.</p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="6_1_Lineyniy_kongruentniy_generator.html">&#129080; 6_1_Lineyniy_kongruentniy_generator</a></li><li class="page-item"><a class="page-link" href="6_3_Kriptograficheski_stoykie_generatori_psevdosluchaynih_chisel.html">6_3_Kriptograficheski_stoykie_generatori_psevdosluchaynih_chisel &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="8_2_MD5">8.2. MD5</h2><p><a name="N88355"><!--хеш-функция!MD-5|(--></a>
+Одна из наиболее популярных в прошлом, но криптографически нестойкая в настоящий момент хеш-функция MD5 (от англ. <span lang="en"><i>message digest 5</i></span>) разработана Рональдом Ривестом (англ. <span lang="en"><i>Ronald Linn Rivest</i></span>) в 1991 году как развитие хеш-функии MD4<a name="N88387"><!--хеш-функция!MD-4--></a> и представлена как RFC 1321 в апреле 1992 года (<a href="Literatura.html#rfc1321">[90]</a>).</p><p>MD5 разрабатывалась как криптографически-стойкая хеш-функция с длиной выходного блока 128 бит. Исходный текст сначала дополняется до целого числа обрабатываемых блоков по 512 бит (рис.<span class="nonbreaking-interword-space"> </span><a href="8_2_MD5.html#fig:md5-padding">8.2</a>).</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 95%;"><a name="fig:md5-padding" style="vertical-align: top; align-self: start;"></a><img src="images/2BCE747AC59B63325A38486D3F99E5EB.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 8.2 &mdash; Дополнение открытого текста до целого числа 512-битовых блоков в хеш-функции MD5</figcaption></figure><ul><li>Дополнение (паддинг). Исходное сообщение рассматривается как последовательность бит и дополняется сначала единичным битом <tt>1</tt>, а далее нулевыми битами <tt>000<command name="dots"><argument required="true">000</argument></command></tt> до тех пор, пока остаток от деления сообщения в битах по модулю 512 не будет равен 448.</li><li>Добавление длины сообщения. Длина исходного сообщения в битах (до дополнения) добавляется в виде 64-битового значения к обрабатываемому тексту. Если текст имеет длину больше, чем <span class="mathjax">$2^{64}$</span> бита, используется остаток от деления длины на <span class="mathjax">$2^{64}$</span>.</li></ul><p>Далее обрабатываемый текст разбивается на целое число 512-битовых блоков <span class="mathjax">$M_i$</span> и выполняется последовательное вычисление хеш-функции по итеративной формуле:</p><div class="mathjax" style="text-align: center;">$$\begin{array}{l}
+H_i = f ( H_{i-1}, M_i ),\\
+H_0 = \text{IV}.\\
+\end{array}$$</div><p>В качестве начального значения <span class="mathjax">$H_0 = \text{IV}$</span> выступает конкатенация заданных в стандарте 16-ричных последовательностей:</p><div class="mathjax" style="text-align: center;">$$\begin{array}{l}
+A = \text{01} ~ \text{23} ~ \text{45} ~ \text{67},\\
+B = \text{89} ~ \text{ab} ~ \text{cd} ~ \text{ef},\\
+C = \text{fe} ~ \text{dc} ~ \text{ba} ~ \text{98},\\
+D = \text{76} ~ \text{54} ~ \text{32} ~ \text{10}.\\
+\end{array}$$</div><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 100%;"><a name="fig:md5-round" style="vertical-align: top; align-self: start;"></a><img src="images/D985508CF9451740B0DF6AE12338E62F.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 8.3 &mdash; Один раунд преобразования текста в хеш-функции MD5</figcaption></figure><p>Каждый из раундов вычисления <span class="mathjax">$H_i = f ( H_{i-1}, M_i )$</span> состоит из 16 итераций (рис.<span class="nonbreaking-interword-space"> </span><a href="8_2_MD5.html#fig:md5-round">8.3</a>), в которых выполняется преобразование четырёх 8-битовых блоков <span class="mathjax">$A, B, C, D$</span>. Основное преобразование выполняется с первым из блоков <span class="mathjax">$A$</span> (который в конце итерации становится блоком <span class="mathjax">$B$</span>, и далее по кругу, что делает процедуру чем-то похожей на схему Фейстеля). К значению <span class="mathjax">$A_{x-1}$</span> из результата предыдущей итерации (или предыдущего раунда, если это первая итерация) прибавляется значение нелинейной функции <span class="mathjax">$F(B, C, D)$</span>, числовое значение некоторого байта из <span class="mathjax">$M_i$</span> (индекс байта определяется константой <span class="mathjax">$g_x$</span>), значение &laquo;ключа&raquo; итерации <span class="mathjax">$K_x$</span>. Полученное значение сдвигается влево на количество бит, определяемое ещё одной константой итерации <span class="mathjax">$s_x$</span>, арифметически складывается со значением блока <span class="mathjax">$B_{x-1}$</span> и считается новым значением блока <span class="mathjax">$B_x$</span>. Остальные блоки циклически сдвигаются без изменений (<span class="mathjax">$B_{x-1} \to C_x$</span>, <span class="mathjax">$C_{x-1} \to D_x$</span>, <span class="mathjax">$D_{x-1} \to A_x$</span>).</p><p>Вид нелинейной функции <span class="mathjax">$F$</span> и значения констант <span class="mathjax">$g_x$</span>, <span class="mathjax">$K_x$</span>, <span class="mathjax">$s_x$</span> отличаются для каждой из 16 итераций и заданы в описании на хеш-функции.</p><p>Значения <span class="mathjax">$A, B, C, D$</span> результата обработки самого последнего блока <span class="mathjax">$M_i$</span> конкатенируются и считаются результатом вычисления хеш-функции.</p><p>Уже на примере хеш-функции, предложенной в 1991 году, можно увидеть общие свойства, которые присущи большей части современных хеш-функций.</p><ul><li>Во-первых, разбиение исходного текста на блоки равной длины и дополнение последнего блока дополнительными значениями (для финального преобразования), возможно включая длину исходного открытого текста или какую-либо простую функцию от всех блоков сообщения.</li><li>Во-вторых, наличие некоторой функции преобразования <span class="mathjax">$H_i = f ( H_{i-1}, M_i )$</span>, которую можно рассматривать как фактически функцию шифрования некоторого блочного шифра. Но при этом в качестве шифруемого текста выступает результат хеширования предыдущего блока <span class="mathjax">$H_{i-1}$</span>, а блок исходного хешируемого сообщения <span class="mathjax">$M_i$</span> выступает в качестве ключа шифрования. От стойкости данного шифра зависит возможность (при известных <span class="mathjax">$H_{i-1}$</span> и <span class="mathjax">$H_{i}$</span>) восстановить &laquo;ключ шифрования&raquo;, то есть часть исходного сообщения, особенно если оно короткое (меньше одного блока, то есть фактически осуществить атаку на восстановление прообраза.</li></ul><p>В 1996 году Ханс Доббертин нашёл коллизии в модификации MD5, которая отличалась от оригинальной только изменением инициализирующих значений <span class="mathjax">$A, B, C, D$</span>, что явно показало наличие уязвимости в дизайне хеш-функции. В 2004 году было объявлено о существовании алгоритма нахождения коллизий к оригинальной хеш-функции с помощью суперкомпьютера, в 2005 году был опубликован подобный алгоритм с примером коллизии, а в 2006 году исследователь из Чехии Властимил Клима представил алгоритм для обычного персонального компьютера с возможностью использования любых начальных значений <span class="mathjax">$A, B, C, D$</span> ([<a href="Literatura.html#Wang:Feng:Lai:Yu:2004">25</a>, <a href="Literatura.html#Klima:2006">56</a>, <a href="Literatura.html#WangYu:2005">106</a>]).</p><p>В настоящий момент данная хеш-функция считается криптографически нестойкой, но ранее она широко использовалась для обеспечения защиты информации, например для хеширования паролей в некоторых версиях Linux и FreeBSD, для генерации имитовставки HMAC-MD5, для проверки целостности файлов и прочих целей. Большое количество стандартных библиотек времени исполнения, систем управления базами данных и даже программ обработки электронных таблиц содержат встроенные функции для вычисления значений хеш-функции MD5.</p><p><a name="N88608"><!--хеш-функция!MD-5|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="8_1_Struktura_Merkla.html">&#129080; 8_1_Struktura_Merkla</a></li><li class="page-item"><a class="page-link" href="8_3_GOST_R_34_11_94.html">8_3_GOST_R_34_11_94 &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

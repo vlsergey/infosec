@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="16_8_Классы_сложности_задач">16.8. Классы сложности задач</h2><p>Данный раздел поясняет обоснованность стойкости криптосистем с открытым ключом и имеет лишь косвенное отношение к дискретной математике.</p><p>Машина Тьюринга (МТ) (модель, представляющая любой вычислительный алгоритм) состоит из следующих частей:</p><ul><li>неограниченная лента, разделённая на клетки; в каждой клетке содержится символ из конечного алфавита, содержащего пустой символ blank; если символ ранее не был записан на ленту, то он считается blank;</li><li>печатающая головка, которая может считать, записать символ <span class="mathjax">$a_i$</span> и передвинуть ленту на 1 клетку влево или вправо <span class="mathjax">$d_k$</span>;</li><li>конечная таблица действий
+    <div class="mathjax" style="text-align: center;">$$ (q_i, a_j) \rightarrow (q_{i1}, a_{j1}, d_k), $$</div>
+где <span class="mathjax">$q$</span> &ndash; состояние машины.</li></ul><p>Если таблица переходов однозначна, то машина Тьюринга<a name="N119261"><!--машина Тьюринга--></a> называется детерминированной. <em>Детерминированная</em> машина Тьюринга может <em>имитировать</em> любую существующую детерминированную ЭВМ. Если таблица переходов неоднозначна, то есть <span class="mathjax">$(q_i, a_j)$</span> может переходить по нескольким правилам, то машина <em>недетерминированная</em>.</p><p>Класс задач <span class="mathjax">${\mathbb{P}}$</span> &ndash; задачи, которые могут быть решены за <em>полиномиальное</em> время<a name="N119297"><!--задача!полиномиальная--></a> на <em>детерминированной</em> машине Тьюринга. Пример полиномиальной сложности (количество битовых операций)</p><div class="mathjax" style="text-align: center;">$$ O(k^{\textrm{const}}), $$</div><p>где <span class="mathjax">$k$</span> &ndash; длина входных параметров алгоритма. Операция возведения в степень в модульной арифметике <span class="mathjax">$a^b \mod n$</span> имеет кубическую сложность <span class="mathjax">$O(k^3)$</span>, где <span class="mathjax">$k$</span> &ndash; двоичная длина чисел <span class="mathjax">$a,b,n$</span>.</p><p>Класс задач <span class="mathjax">${\mathbb{NP}}$</span> &ndash; обобщение класса <span class="mathjax">${\mathbb{P}} \subseteq {\mathbb{NP}}$</span>, включает задачи, которые могут быть решены за <em>полиномиальное</em> время на <em>недетерминированной</em> машине Тьюринга. Пример сложности задач из <span class="mathjax">${\mathbb{NP}}$</span> &ndash; экспоненциальная сложность<a name="N119348"><!--задача!экспоненциальная--></a></p><div class="mathjax" style="text-align: center;">$$ O(\textrm{const}^k). $$</div><p>Алгоритм Гельфонда<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Шенкса<a name="N119361"><!--алгоритм!Гельфонда—Шенкса--></a> решения задачи дискретного логарифмирования (нахождения <span class="mathjax">$x$</span> для заданных основания <span class="mathjax">$g$</span>, модуля <span class="mathjax">$p$</span> и <span class="mathjax">$a = g^x \mod p$</span>), описанный в разделе криптостойкости системы Эль-Гамаля<a name="N119383"><!--криптосистема!Эль-Гамаля--></a>, имеет сложность <span class="mathjax">$O(e^{k/2})$</span>, где <span class="mathjax">$k$</span> &ndash; двоичная длина чисел.</p><p>В криптографии полиномиальные задачи (относящиеся к классу <span class="mathjax">${\mathbb{P}}$</span>) считаются <em>лёгкими и вычислимыми</em> на ЭВМ, которые являются детерминированными машинами Тьюринга. Для них, по определению, существуют алгоритмы, работающие за время, полиномиальное относительно размера входных данных. Задачи, относящиеся к классу <span class="mathjax">${\mathbb{NP}}$</span>, считаются <em>трудными и невычислимыми</em> на ЭВМ, так как все известные на сегодняшний день алгоритмы решения таких задач (в общем случае) требуют экспоненциального времени, а значит всегда можно выбрать такой размер входных данных (читай &ndash; размер ключа шифрования), что время вычисления станет сравнимым с возрастом Вселенной.</p><p>Класс <span class="mathjax">${\mathbb{NP}}$</span>-полных задач &ndash; подмножество задач из <span class="mathjax">${\mathbb{NP}}$</span>, для которых не известен полиномиальный алгоритм для детерминированной машины Тьюринга, и все задачи могут быть сведены друг к другу за полиномиальное время на <em>детерминированной</em> машине Тьюринга. Например, задача об укладке рюкзака является <span class="mathjax">${\mathbb{NP}}$</span>-полной.</p><p>Стойкость криптосистем с <em>открытым</em> ключом, как правило, основана на <span class="mathjax">${\mathbb{NP}}$</span> или <span class="mathjax">${\mathbb{NP}}$</span>-полных задачах:</p><ol><li>RSA<a name="N119443"><!--криптосистема!RSA--></a> &ndash; <span class="mathjax">${\mathbb{NP}}$</span>-задача факторизации (строго говоря, основана на трудности извлечения корня степени <span class="mathjax">$e$</span> по модулю <span class="mathjax">$n$</span>).</li><li>Криптосистемы типа Эль-Гамаля<a name="N119460"><!--криптосистема!Эль-Гамаля--></a> &ndash; <span class="mathjax">${\mathbb{NP}}$</span>-задача дискретного логарифмирования.</li></ol><p><em>Нерешённой</em> проблемой является доказательство неравенства</p><div class="mathjax" style="text-align: center;">$$ {\mathbb{P}} \neq {\mathbb{NP}}. $$</div><p>Именно на гипотезе о том, что для некоторых задач не существует полиномиальных алгоритмов, и основана стойкость криптосистем с открытым ключом.</p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="16_7_Gruppi_tochek.html">&#129080; 16_7_Gruppi_tochek</a></li><li class="page-item"><a class="page-link" href="16_9_Metod_indeksa_sovpadeniy.html">16_9_Metod_indeksa_sovpadeniy &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

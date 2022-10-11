@@ -1,0 +1,47 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="17_9_Разделение_секрета">17.9. Разделение секрета</h2><command name="addtocounter"><argument required="true">task-section</argument><argument required="true">1</argument></command><command name="setcounter"><argument required="true">task-number</argument><argument required="true">0</argument></command><p><b>№<command name="addtocounter"><argument required="true">task-number</argument><argument required="true">1</argument></command><command name="arabic"><argument required="true">task-section</argument></command>.<command name="arabic"><argument required="true">task-number</argument></command>.</b><span class="nonbreaking-interword-space"> </span><span class="nonbreaking-interword-space"> </span>При разделении секрета по <span class="mathjax">$(k, n)$</span>-пороговой векторной схеме<a name="N123712"><!--схема!векторная--></a> (схеме Блэкли<a name="N123718"><!--схема!Блэкли--></a>) с модулем <span class="mathjax">$p = 11$</span> получены 4 следа: <span class="mathjax">$\left( {8, 1, 4} \right)$</span>, <span class="mathjax">$\left( {9, 8, 10} \right)$</span>, <span class="mathjax">$\left( {4, 2, 1} \right)$</span>, <span class="mathjax">$\left( {4, 7, 5} \right)$</span>. Восстановите исходную точку и секрет, если известно, что это первая координата <span class="mathjax">$(x)$</span> точки.</p><command name="medbreak"></command><p><b>Ответ:</b> исходная точка: <span class="mathjax">$(4,8)$</span>, секрет <span class="mathjax">$M = 4$</span>.</p><command name="bigbreak"></command><p><b>№<command name="addtocounter"><argument required="true">task-number</argument><argument required="true">1</argument></command><command name="arabic"><argument required="true">task-section</argument></command>.<command name="arabic"><argument required="true">task-number</argument></command>.</b><span class="nonbreaking-interword-space"> </span><span class="nonbreaking-interword-space"> </span>Секрет был разделён по <span class="mathjax">$(3, n)$</span>-пороговой схеме Шамира<a name="N123792"><!--схема!Шамира--></a> с модулем <span class="mathjax">$p=11$</span>. Известны четыре следа: <span class="mathjax">$\left( {3, 9} \right)$</span>, <span class="mathjax">$\left( {4, 9} \right)$</span>, <span class="mathjax">$\left( {5, 10} \right)$</span>, <span class="mathjax">$\left( {6, 1} \right)$</span>. Восстановить оптимальным способом исходный многочлен и секрет.</p><command name="medbreak"></command><p><b>Ответ:</b> исходный многочлен: <span class="mathjax">$F\left( x \right) = ax^2  + bx + M = 6x^2  + 2x + 4$</span>. Секретом является последний свободный многочлен <span class="mathjax">$M = 4$</span>.</p><command name="bigbreak"></command><p><b>№<command name="addtocounter"><argument required="true">task-number</argument><argument required="true">1</argument></command><command name="arabic"><argument required="true">task-section</argument></command>.<command name="arabic"><argument required="true">task-number</argument></command>.</b><span class="nonbreaking-interword-space"> </span><span class="nonbreaking-interword-space"> </span>Используя эллиптическую кривую <span class="mathjax">$y^2 = x^3 - 7x - 8$</span> над конечным полем <span class="mathjax">$\mathbb{F}_{11}$</span>, генератор <span class="mathjax">$G(9; 8)$</span> и открытый ключ Боба <span class="mathjax">$K_B(0; 5)$</span>, Алиса сгенерировала разделяемый секрет (по схеме ECIES<a name="N123872"><!--схема!ECIES--></a>) <span class="mathjax">$S=P_x$</span> для последующего использования в качестве ключа шифрования и передала Бобу соответствующий секрету след <span class="mathjax">$R(5; 4)$</span>. Найдите секрет <span class="mathjax">$S$</span>, если закрытый ключ Боба <span class="mathjax">$k_B = 6$</span>.</p><command name="medbreak"></command><p><b>Решение и ответ:</b></p><ul><li><span class="mathjax">$P = k_B * R = 6 * (5; 4) = (5; 7).$</span></li><li>По шагам:
+	<div class="mathjax" style="text-align: center;">$$R \to 2R \to 3R \to 4R \to 5R \to 6R: $$</div>
+	<div class="mathjax" style="text-align: center;">$$(5; 4) \to (10; 3) \to (0; 6) \to (0; 5) \to (10; 8) \to (5; 7). $$</div></li><li>Ответ: <span class="mathjax">$S = P_x = 5$</span>.</li></ul><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="17_8_Protokoli_rasprostranenija_kljuchey.html">&#129080; 17_8_Protokoli_rasprostranenija_kljuchey</a></li><li class="page-item"><a class="page-link" href="Glava_18_Ekzamenatsionnie_voprosi.html">Glava_18_Ekzamenatsionnie_voprosi &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

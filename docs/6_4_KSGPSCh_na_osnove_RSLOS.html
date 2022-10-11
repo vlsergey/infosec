@@ -1,0 +1,57 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="6_4_КСГПСЧ_на_основе_РСЛОС">6.4. КСГПСЧ на основе РСЛОС</h2><p>Как уже упоминалось ранее, использование РСЛОС в качестве ГПСЧ не является криптографически стойким. Однако можно использовать комбинацию из нескольких регистров сдвига, чтобы в результате получить быстрый, простой (дешёвый) и надёжный (криптографически стойкий) генератор псевдослучайных чисел.</p><h3 data-command-name="subsection" id="6_4_1_Генераторы_с_несколькими_регистрами_сдвига">6.4.1. Генераторы с несколькими регистрами <command name="protect"></command><line-break></line-break> сдвига</h3><p>Первый способ улучшения криптографических свойств последовательности состоит в создании композиционных генераторов из нескольких регистров сдвига при определённом способе выбора параметров. Схема такого генератора показана на рис.<span class="nonbreaking-interword-space"> </span><a href="6_4_KSGPSCh_na_osnove_RSLOS.html#fig:generators">6.2</a>. Здесь <span class="mathjax">$L_i, ~ i = 1, 2, \dots, M$</span> &ndash; регистры сдвига с линейной обратной связью. Вырабатываемые ими двоичные символы <span class="mathjax">$x_{1,i}, x_{2,i}, \dots, x_{M,i}$</span> поступают синхронно на устройство преобразования, задаваемое булевой функцией <span class="mathjax">$f(x_{1,i}, x_{2,i}, \dots, x_{M,i})$</span>. В булевой функции и аргументы, и значения функции принимают значения <span class="mathjax">$0$</span> или <span class="mathjax">$1$</span>.</p><p>Число ячеек в <span class="mathjax">$i$</span>-м регистре равно <span class="mathjax">$L_{i}$</span>, причём <span class="mathjax">$\gcd(L_i, L_j)=1$</span> для <span class="mathjax">$i \neq j$</span>, где <span class="mathjax">$\gcd$</span> &ndash; наибольший общий делитель. Общее число ячеек <span class="mathjax">$L = \sum\limits_{i=1}^M L_i$</span>. Булева функция <span class="mathjax">$f$</span> должна включать слагаемое по одному из входов, то есть <span class="mathjax">$f = \dots + x_i + \dots$</span>, для того чтобы двоичные символы на выходе этой функции были равновероятными. Период этого генератора может достигать величины (немного меньше)</p><div class="mathjax" style="text-align: center;">$$ T \simeq 2^L. $$</div><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 70%;"><a name="fig:generators" style="vertical-align: top; align-self: start;"></a><img src="images/BFB5B602291390214FEB8B1F8505C11A.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 6.2 &mdash; Генератор с несколькими регистрами сдвига</figcaption></figure><p>Таким образом, увеличение числа регистров сдвига с обратной связью увеличивает период последовательности.</p><p>Одним из способов оценки криптостойкости генератора является оценка длины регистра с линейной обратной связью, эквивалентного по порождаемой последовательности. Такой эквивалентный РСЛОС находится с помощью алгоритма Берлекэмпа<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Мэсси<a name="N87446"><!--алгоритм!Берлекэмпа—Мэсси--></a> декодирования циклических кодов. В лучшем случае длина эквивалентного регистра соизмерима с периодом последовательности, порождённой нелинейным генератором. В общем случае определение эквивалентной длины является сложной задачей.</p><h3 data-command-name="subsection" id="6_4_2_Генераторы_с_нелинейными_преобразованиями">6.4.2. Генераторы с нелинейными <command name="protect"></command><line-break></line-break> преобразованиями</h3><p>Известно, что любая булева функция <span class="mathjax">$f(x_1, x_2, \dots, x_M)$</span> может быть единственным образом записана многочленом Жегалкина<a name="N87483"><!--многочлен!Жегалкина--></a>:</p><div class="mathjax" style="text-align: center;">$$ \begin{array}{ll}
+    f(x_1, x_2, \dots, x_M) &amp; = ~c~ \oplus \\
+    &amp; \oplus \sum\limits_{1 \leq i \leq M} c_i x_i \oplus \\
+    &amp; \oplus \sum\limits_{1 \leq i &lt; j \leq M} c_{i,j} x_i x_j \oplus \\
+    &amp; \oplus \sum\limits_{1 \leq i &lt; j &lt; k \leq M} c_{i,j,k} x_i x_j x_k \oplus \\
+    &amp; \oplus \dots \oplus \\
+    &amp; \oplus ~ c_{1,2,\dots,M} ~ x_1 x_2 \dots x_M.
+\end{array} $$</div><!--%Криптографу рекомендуется выбирать булеву функцию с возможно большим числом ненулевых коэффициентов при квадратичных членах полинома Жегалкина.--><p>Второй способ улучшения криптостойкости последовательности поясняется с помощью рис.<span class="nonbreaking-interword-space"> </span><a href="6_4_KSGPSCh_na_osnove_RSLOS.html#fig:lfsr-zhegalkin">6.3</a>, на котором представлены регистр сдвига с <span class="mathjax">$M$</span> ячейками и устройство, осуществляющее преобразование с помощью булевой функции <span class="mathjax">$f(x_1, x_2, \dots, x_M)$</span>, причём функция <span class="mathjax">$f$</span> содержит нелинейные члены, то есть произведения <span class="mathjax">$x_i x_j \dots$</span>. Тактовый вход здесь такой же, как у регистров, показанных на других рисунках.</p><p>Если функция <span class="mathjax">$f$</span> нелинейная, то в общем случае неизвестен полиномиальный алгоритм восстановления состояния регистров по нескольким последним выходам генератора. Таким образом, использование нескольких регистров сдвига увеличивает максимально возможный период, по сравнению с одним регистром, до <span class="mathjax">$T &lt; 2^{L_1 + L_2 + \dots + L_M}$</span>, а нелинейность функции <span class="mathjax">$f$</span> позволяет избежать простого нахождения состояния по выходу. Чтобы улучшить криптостойкость последовательности, порождаемой регистром, рекомендуется брать много нелинейных членов многочлена Жегалкина.</p><p>Такой подход применён в системе GPS. Удачных попыток её взлома до сих пор нет.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 40%;"><a name="fig:lfsr-zhegalkin" style="vertical-align: top; align-self: start;"></a><img src="images/5EDE648E93E52318F027982C18EDD26C.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 6.3 &mdash; Криптографический генератор с нелинейной булевой функцией</figcaption></figure><h3 data-command-name="subsection" id="6_4_3_Мажоритарные_генераторы_на_примере_алгоритма_шифрования_A5_1">6.4.3. Мажоритарные генераторы на примере алгоритма шифрования A5/1</h3><p><a name="N87571"><!--шифр!A5--></a>
+Третий способ улучшения криптостойкости последовательностей поясняется с помощью рис.<span class="nonbreaking-interword-space"> </span><a href="6_4_KSGPSCh_na_osnove_RSLOS.html#fig:gsm-a51-cipher">6.4</a>, на котором показан мажоритарный генератор ключей алгоритма потокового шифрования A5/1 стандарта GSM. В отличие от случая нелинейного комбинирования выходов нескольких регистров в этом случае применён условный сдвиг регистров, то есть на каждом такте некоторые регистры могут не сдвигаться, а оставаться в прежнем состоянии. На рисунке показана схема из трёх регистров сдвига с различными многочленами обратной связи (здесь применена обратная нумерация ячеек, коэффициентов и переменных по сравнению с предыдущими разделами):</p><div class="mathjax" style="text-align: center;">$$ \left\{ \begin{array}{l}
+    c_1(y) = y^{19} + y^{18} + y^{17} + y^{14} + 1, \\
+    c_2(y) = y^{22} + y^{21} + 1, \\
+    c_3(y) = y^{23} + y^{22} + y^{21} + y^8 + 1.
+\end{array} \right. $$</div><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 100%;"><a name="fig:gsm-a51-cipher" style="vertical-align: top; align-self: start;"></a><img src="images/92E9EC0D5456162DF9E51506789FC46B.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 6.4 &mdash; Регистр сдвига алгоритма шифрования A5/1</figcaption></figure><p>В алгоритме A5/1 регистры сдвигаются не на каждом такте. Правило сдвига следующее. В каждом регистре есть один тактовый бит, определяющий сдвиг, &ndash; восьмой бит <span class="mathjax">$\textrm{C1}$</span> для первого регистра, десятые биты <span class="mathjax">$\textrm{C2}$</span> и <span class="mathjax">$\textrm{C3}$</span> для второго и третьего регистров. На каждом такте вычисляется мажоритарное значение тактового бита <span class="mathjax">$m = \textrm{majority}(\textrm{C1}, \textrm{C2}, \textrm{C3})$</span>, то есть по большинству значений: 0 или 1. Если для данного регистра значение тактового бита совпадает с мажоритарным решением, то регистр сдвигается. Если не совпадает, то остаётся в прежнем состоянии без сдвига на следующий такт. Так как всего состояний тактовых битов <span class="mathjax">$2^3$</span>, то в среднем каждый регистр сдвигается в <span class="mathjax">$\frac{3}{4}$</span> всех тактов.</p><p>Общее количество ячеек всех трёх регистров <span class="mathjax">$19+22+23=64$</span>, следовательно, период генератора A5/1: <span class="mathjax">$T &lt; 2^{64}$</span>. Данный шифр не может считаться стойким из-за возможности полного перебора. Например, известны атаки на шифр A5/1, требующие 150-300 GiB оперативной памяти и нескольких минут вычислений одного ПК (2001 г.).</p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="6_3_Kriptograficheski_stoykie_generatori_psevdosluchaynih_chisel.html">&#129080; 6_3_Kriptograficheski_stoykie_generatori_psevdosluchaynih_chisel</a></li><li class="page-item"><a class="page-link" href="Glava_7_Potokovie_shifri.html">Glava_7_Potokovie_shifri &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

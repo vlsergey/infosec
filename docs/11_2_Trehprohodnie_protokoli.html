@@ -1,0 +1,94 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="11_2_Трёхпроходные_протоколы">11.2. Трёхпроходные протоколы</h2><p>Если между Алисой и Бобом существует канал связи, недоступный для модификации злоумышленником (то есть когда применима модель только пассивного криптоаналитика), то даже без предварительного обмена секретными ключами или другой информацией можно воспользоваться идеями, использованными ранее в криптографии на открытых ключах. После описания RSA в 1978 году, в 1980 Ади Шамир предложил использовать криптосистемы, основанные на коммутативных операциях, для передачи информации без предварительного обмена секретными ключами. Если предположить, что передаваемой информацией является выработанный одной из сторон секретный сеансовый ключ, то в общем виде мы получаем следующий трёхпроходной протокол.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; "><a name="fig:key_distribution-three-pass" style="vertical-align: top; align-self: start;"></a><command name="sequencediagram"><argument required="true">sequencediagram</argument><content>
+		<command name="newinst"><argument required="true">Alice</argument><argument required="true">Alice</argument></command>
+		<command name="newinst"><argument required="false">2.5</argument><argument required="true">Bob</argument><argument required="true">Bob</argument></command>
+
+		<command name="mess"><argument required="true">Alice</argument><argument required="true"><span class="mathjax">$  E_A \left( K \right) $</span></argument><argument required="true">Bob</argument></command>
+		<command name="mess"><argument required="true">Bob</argument><argument required="true"><span class="mathjax">$ E_B \left( E_A \left( K \right) \right) $</span></argument><argument required="true">Alice</argument></command>
+		<command name="mess"><argument required="true">Alice</argument><argument required="true"><span class="mathjax">$ E_B \left( K \right) $</span></argument><argument required="true">Bob</argument></command>
+	</content></command><figcaption style="flex-basis: 100%; text-align: center;">Рис. 11.11 &mdash; Диаграмма последовательности взаимодействия участников в трёхпроходных протоколах</figcaption></figure><p>Предварительно:</p><ul><li>Алиса и Боб соединены незащищённым каналом связи, открытым для прослушивания (но не для модификации) злоумышленником.</li><li>Каждая из сторон имеет пару из открытого и закрытого ключей <span class="mathjax">$K_A$</span>, <span class="mathjax">$k_A$</span>, <span class="mathjax">$K_B$</span>, <span class="mathjax">$k_B$</span> соответственно.</li><li>Сторонами выбрана и используется коммутативная функция шифрования:
+	<div class="mathjax" style="text-align: center;">$$\begin{array}{lll}
+		D_{A} \left( E_{A} \left( X \right) \right)	= X                                       &amp; \forall X, \left\{ K_A, k_a \right\}; \\
+		E_{A} \left( E_{B} \left( X \right) \right)	= E_B \left( E_A \left( X \right) \right) &amp; \forall ~ K_A, K_B, X.
+	\end{array}$$</div></li></ul><p>Протокол состоит из трёх проходов с передачей сообщений (отсюда и название) и одного заключительного, на котором Боб вычисляет сеансовый ключ. Диаграмма последовательности протокола изображена на рис.<span class="nonbreaking-interword-space"> </span><a href="11_2_Trehprohodnie_protokoli.html#fig:key_distribution-three-pass">11.11</a>.</p><!--%--><command name="samepage"><argument required="true">samepage</argument><content><!--%--><command name="@beginparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><command name="@endparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><ul><li>Алиса выбирает новый сеансовый ключ <span class="mathjax">$K$</span></li><li><span class="mathjax">$Alice \to \left\{ E_A \left( K \right) \right\} \to Bob$</span></li><li><span class="mathjax">$Bob \to \left\{ E_B \left( E_A \left( K \right) \right) \right\} \to Alice$</span></li><li>Алиса, используя коммутативность функции шифрования, &laquo;исключает&raquo; из сообщения Боба шифрование на своём ключе <span class="mathjax">$K_A$</span>:
+	<div class="mathjax" style="text-align: center;">$$ D_A \left( E_B \left( E_A \left( K \right) \right) \right) = D_A \left( E_A \left( E_B \left( K \right) \right) \right) = E_B \left( K \right). $$</div></li><li><span class="mathjax">$Alice \to \left\{ E_B \left( K \right) \right\} \to Bob$</span></li><li>Боб расшифровывает <span class="mathjax">$D_B \left( E_B \left( K \right) \right) = K$</span></li></ul></content></command><p>В результате работы протокола стороны получают общий секретный ключ <span class="mathjax">$K$</span>.</p><p>Общим недостатком всех подобных протоколов является отсутствие аутентификации сторон. Конечно, в случае пассивного криптоаналитика это не требуется, но в реальной жизни всё-таки нужно рассматривать все возможные модели (в том числе активного криптоаналитика) и использовать такие протоколы, которые предполагают взаимную аутентификацию сторон.</p><p>Также, в отличие, например, от схемы Диффи<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Хеллмана, рассмотренной в разделе<span class="nonbreaking-interword-space"> </span><a href="#section-protocols-diffie-hellman">11.3.1</a>, новый ключ выбирается инициатором сеанса. Это позволяет инициатору, исходя не из лучших побуждений, заставить второго участника использовать устаревший сеансовый ключ.</p><p>Если говорить в терминах свойств безопасности, то все представители данного класса протоколов декларируют только аутентификацию ключа (G7). В отличие от схемы Диффи<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Хеллмана, трёхпроходные протоколы не требуют выбора новых &laquo;мастер&raquo;-ключей для каждого сеанса протокола, из-за чего нельзя гарантировать ни совершенную прямую секретность (G9), ни формирование новых ключей (G10).</p><h3 data-command-name="subsection" id="11_2_1_Тривиальный_вариант">11.2.1. Тривиальный вариант</h3><p>Приведём пример протокола на основе функции XOR (побитовое сложение по модулю 2). Хотя данная функция может использоваться как фундамент для построения систем совершенной криптостойкости (см. главу<span class="nonbreaking-interword-space"> </span><a href="#chapter:perfect_secure_systems">4</a>), для трёхпроходного протокола это неудачный выбор. Продемонстрируем это далее.</p><p>Пусть перед началом протокола обе стороны имеют свои секретные ключи <span class="mathjax">$K_A$</span> и <span class="mathjax">$K_B$</span>, представляющие собой случайные двоичные последовательности с равномерным распределением символов. Функция шифрования определяется как <span class="mathjax">$E_i( X ) = X \oplus K_i$</span>, где <span class="mathjax">$X$</span> это сообщение, а <span class="mathjax">$K_i$</span> &ndash; секретный ключ. Очевидно, что:</p><div class="mathjax" style="text-align: center;">$$ \begin{matrix}
+\forall i, j, X: E_i \left( E_j \left( X \right) \right) &amp; = &amp; X \oplus K_j \oplus K_i &amp; = &amp; \\ 
+ &amp; = &amp; X \oplus K_i \oplus K_j &amp; = &amp; E_j \left( E_i \left( X \right) \right).
+\end{matrix}
+$$</div><p>Протокол состоит из следующих проходов и действий.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; "><command name="sequencediagram"><argument required="true">sequencediagram</argument><content>
+		<command name="newinst"><argument required="true">Alice</argument><argument required="true">Alice</argument></command>
+		<command name="newinst"><argument required="false">2.5</argument><argument required="true">Bob</argument><argument required="true">Bob</argument></command>
+		
+		<command name="mess"><argument required="true">Alice</argument><argument required="true"><span class="mathjax">$  K \oplus K_A $</span></argument><argument required="true">Bob</argument></command>
+		<command name="mess"><argument required="true">Bob</argument><argument required="true"><span class="mathjax">$ K \oplus K_A \oplus K_B $</span></argument><argument required="true">Alice</argument></command>
+		<command name="mess"><argument required="true">Alice</argument><argument required="true"><span class="mathjax">$ K \oplus K_B $</span></argument><argument required="true">Bob</argument></command>
+	</content></command><figcaption style="flex-basis: 100%; text-align: center;">Рис. 11.12 &mdash; Диаграмма последовательности взаимодействия участников в тривиальном трёхпроходном протоколе</figcaption></figure><!--%--><command name="samepage"><argument required="true">samepage</argument><content><!--%--><command name="@beginparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><command name="@endparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><ul><li>Алиса выбирает новый сеансовый ключ <span class="mathjax">$K$</span></li><li><span class="mathjax">$Alice \to \left\{ E_A \left( K \right) = K \oplus K_A \right\} \to Bob$</span></li><li><span class="mathjax">$Bob \to \left\{ E_B \left( E_A \left( K \right) \right) = K \oplus K_A \oplus K_B \right\} \to Alice$</span></li><li>Алиса, используя коммутативность функции шифрования,
+	<div class="mathjax" style="text-align: center;">$$ D_A \left( E_B \left( E_A \left( K \right) \right) \right) = K \oplus K_A \oplus K_B \oplus K_A = K \oplus K_B = E_B \left( K \right). $$</div></li><li><span class="mathjax">$Alice \to \left\{ E_B \left( K \right) = K \oplus K_B \right\} \to Bob$</span></li><li>Боб расшифровывает <span class="mathjax">$D_B \left( E_B \left( K \right) \right) = K \oplus K_B \oplus K_B = K$</span></li></ul></content></command><p>По окончании сеанса протокола Алиса и Боб знают общий сеансовый ключ <span class="mathjax">$K$</span>.</p><p>Предложенный выбор коммутативной функции шифрования совершенной секретности является неудачным, так из переданных сообщений криптоаналитик может тривиально определить ключ <span class="mathjax">$K$</span>. Предположим, что криптоаналитик перехватил все три сообщения:</p><div class="mathjax" style="text-align: center;">$$
+    K \oplus K_A, ~~ K \oplus K_A \oplus K_B, ~~ K \oplus K_B.
+$$</div><p>Сложение по модулю 2 всех трёх сообщений даёт ключ <span class="mathjax">$K$</span>. Поэтому такая система шифрования не применяется.</p><p>Теперь приведём протокол надёжной передачи секретного ключа, основанный на экспоненциальной (коммутативной) функции шифрования. Стойкость этого протокола связана с трудностью задачи вычисления дискретного логарифма: при известных значениях <span class="mathjax">$y, g, p$</span>, найти <span class="mathjax">$x$</span> из уравнения <span class="mathjax">$y = g^x \bmod p$</span>.</p><h3 data-command-name="subsection" id="11_2_2_Бесключевой_протокол_Шамира">11.2.2. Бесключевой протокол Шамира</h3><p><a name="N100212"><!--протокол!Шамира бесключевой|(--></a>Стороны предварительно договариваются о большом простом числе <span class="mathjax">$p \sim 2^{1024}$</span>. Каждая из сторон выбирает себе по секретному ключу <span class="mathjax">$a$</span> и <span class="mathjax">$b$</span>. Эти ключи меньше и взаимно просты с <span class="mathjax">$p-1$</span>. Также стороны приготовили по специальному числу <span class="mathjax">$a'$</span> и <span class="mathjax">$b'$</span>, которые позволяют им расшифровать сообщение, зашифрованное своим ключом:</p><div class="mathjax" style="text-align: center;">$$\begin{array}{l}
+a' = a{-1} \mod (p-1), \\
+a \times a' = 1 \mod (p-1), \\
+\forall X: (X^a)^{a'} = X. \\
+\end{array}$$</div><p>Последнее выражение верно по следствию из малой теоремы Ферма<a name="N100239"><!--теорема!Ферма малая--></a>. Операции шифрования и расшифрования определяются следующим образом:</p><div class="mathjax" style="text-align: center;">$$\begin{array}{lll}
+\forall M &lt; p: &amp; C = E( M ) = M^{a}            &amp; \mod p, \\
+               &amp; D( C ) = C^{a'}               &amp; \mod p, \\
+               &amp; D_A( E_A( M ) ) = M^{aa'} = M &amp; \mod p. \\
+\end{array}$$</div><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; "><command name="sequencediagram"><argument required="true">sequencediagram</argument><content>
+		<command name="newinst"><argument required="true">Alice</argument><argument required="true">Alice</argument></command>
+		<command name="newinst"><argument required="false">2.5</argument><argument required="true">Bob</argument><argument required="true">Bob</argument></command>
+
+		<command name="mess"><argument required="true">Alice</argument><argument required="true"><span class="mathjax">$ K^a \bmod p $</span></argument><argument required="true">Bob</argument></command>
+		<command name="mess"><argument required="true">Bob</argument><argument required="true"><span class="mathjax">$ K^{ab} \bmod p $</span></argument><argument required="true">Alice</argument></command>
+		<command name="mess"><argument required="true">Alice</argument><argument required="true"><span class="mathjax">$ K^b \bmod p $</span></argument><argument required="true">Bob</argument></command>
+	</content></command><figcaption style="flex-basis: 100%; text-align: center;">Рис. 11.13 &mdash; Диаграмма последовательности взаимодействия участников в бесключевом протоколе Шамира</figcaption></figure><!--%--><command name="samepage"><argument required="true">samepage</argument><content><!--%--><command name="@beginparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><command name="@endparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><ul><li>Алиса выбирает новый сеансовый ключ <span class="mathjax">$K &lt; p$</span></li><li><span class="mathjax">$Alice \to \left\{ E_A \left( K \right) = K^a \bmod p \right\} \to Bob$</span></li><li><span class="mathjax">$Bob \to \left\{ E_B \left( E_A \left( K \right) \right) = K^{ab} \bmod p \right\} \to Alice$</span></li><li>Алиса, используя коммутативность функции шифрования,
+	<div class="mathjax" style="text-align: center;">$$ D_A \left( E_B \left( E_A \left( K \right) \right) \right) = K^{aba'} = K^b = E_B \left( K \right) \mod p. $$</div></li><li><span class="mathjax">$Alice \to \left\{ E_B \left( K \right) = K^b \bmod p \right\} \to Bob$</span></li><li>Боб расшифровывает <span class="mathjax">$D_B \left( E_B \left( K \right) \right) = K^{bb'} \bmod p = K$</span></li></ul></content></command><p>По окончании сеанса протокола Алиса и Боб знают общий сеансовый ключ <span class="mathjax">$K$</span>.</p><p>Предположим, что криптоаналитик перехватил три сообщения:</p><div class="mathjax" style="text-align: center;">$$ \begin{array}{l}
+    y_1 = K^a \bmod p, \\
+    y_2 = K^{ab} \bmod p, \\
+    y_3 = K^b \bmod p. \\
+\end{array} $$</div><p>Чтобы найти ключ <span class="mathjax">$K$</span>, криптоаналитику надо решить систему из этих трёх уравнений, что имеет очень большую вычислительную сложность, неприемлемую с практической точки зрения, если все три числа <span class="mathjax">$a, b, ab$</span> достаточно велики. Предположим, что <span class="mathjax">$a$</span> (или <span class="mathjax">$b$</span>) мало. Тогда, вычисляя последовательные степени <span class="mathjax">$y_3$</span> (или <span class="mathjax">$y_1$</span>), можно найти <span class="mathjax">$a$</span> (или <span class="mathjax">$b$</span>), сравнивая результат с <span class="mathjax">$y_2$</span>. Зная <span class="mathjax">$a$</span>, легко найти <span class="mathjax">$a^{-1}\mod(p-1)$</span> и <span class="mathjax">$K=(y_1)^{a^{-1}}\mod p$</span>.</p><p><a name="N100425"><!--протокол!Шамира бесключевой|)--></a></p><h3 data-command-name="subsection" id="11_2_3_Криптосистема_Мэсси_Омуры">11.2.3. Криптосистема Мэсси<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Омуры</h3><p><a name="N100445"><!--протокол!Мэсси—Омуры|(--></a><a name="N100454"><!--криптосистема!Мэсси—Омуры|(--></a>В 1982 году Джеймс Мэсси и Джим Омура заявили патент (англ. <span lang="en"><i>James Massey, Jim K. Omura</i></span>,<span class="nonbreaking-interword-space"> </span><a href="Literatura.html#Massey:Omura:1986">[67]</a>), улучшающий (по их мнению) бесключевой протокол Шамира. В качестве операции шифрования вместо возведения в степень в мультипликативной группе <span class="mathjax">${{\mathbb{Z}}}_p^*$</span> они предложили использовать возведение в степень в поле Галуа <span class="mathjax">${{\mathbb{GF}}(2^n)}$</span>. Секретный ключ каждой стороны (для Алисы &ndash; <span class="mathjax">$a$</span>) должен удовлетворять условиям:</p><div class="mathjax" style="text-align: center;">$$ \begin{array}{l}
+ a \in {{\mathbb{GF}}(2^n)}, \\
+ gfd \left( a, x^{ n-1 } + x^{ n-2 } + ... + x + 1 \right) = 1. \\
+\end{array} $$</div><p>В остальном протокол выглядит аналогично.</p><p><a name="N100494"><!--протокол!Мэсси—Омуры|)--></a><a name="N100503"><!--криптосистема!Мэсси—Омуры|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="11_1_Simmetrichnie_protokoli.html">&#129080; 11_1_Simmetrichnie_protokoli</a></li><li class="page-item"><a class="page-link" href="11_3_Kriptosistemi_protokoli_.html">11_3_Kriptosistemi_protokoli_ &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

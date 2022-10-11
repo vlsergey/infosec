@@ -1,0 +1,46 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="5_5_ГОСТ_28147_89">5.5. ГОСТ 28147-89</h2><p><a name="N82568"><!--шифр!ГОСТ 28147-89|(--></a>
+Российский стандарт шифрования, получивший известность как ГОСТ 28147-89 (<a href="Literatura.html#GOST-89">[131]</a>), относится к действующим симметричным одноключевым криптографическим алгоритмам. Он зарегистрирован 2 июня 1989 года и введён в действие Постановлением Государственного комитета СССР по стандартам от 02.06.89 №1409. В настоящий момент шифр известен под названиями &laquo;ГОСТ&raquo; (&laquo;GOST&raquo;) и &laquo;Магма&raquo;. Последнее название появилось в стандарте ГОСТ Р 34.12-2015<span class="nonbreaking-interword-space"> </span><a href="Literatura.html#GOST-R:34.12-2015">[117]</a>, описывающем как данный блочный шифр, так и более новый шифр &laquo;Кузнечик&raquo;, о котором будет рассказано в разделе <a href="#section-grig">5.7</a>.</p><p>ГОСТ 28147-89 устанавливает единый алгоритм криптографических преобразований для систем обмена информацией в вычислительных сетях и определяет правила шифрования и расшифрования данных, а также выработки имитовставки<a name="N82592"><!--имитовставка--></a>. Основные параметры шифра таковы: размер блока составляет 64 бита, число раундов <span class="mathjax">$m=32$</span>, имеется 8 ключей по 32 бита каждый, так что общая длина ключа &ndash; 256 бит. Основа алгоритма &ndash; цепочка ячеек Фейстеля<a name="N82601"><!--ячейка Фейстеля--></a>.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 60%;"><a name="fig:gost-28147-89" style="vertical-align: top; align-self: start;"></a><img src="images/103AED9B1943ABC0CD039A9491756DDF.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 5.7 &mdash; Схема ГОСТ 28147-89</figcaption></figure><p>Структурная схема алгоритма шифрования представлена на рис.<span class="nonbreaking-interword-space"> </span><a href="5_5_GOST_28147_89.html#fig:gost-28147-89">5.7</a> и включает:</p><ul><li>ключевое запоминающее устройство (КЗУ) на 256 бит, которое состоит из восьми 32-разрядных накопителей <span class="mathjax">$(X_0, X_1, \dots, X_7)$</span> и содержит сеансовые ключи шифрования одного раунда;</li><li>32-разрядный сумматор <span class="mathjax">$\boxplus$</span> по модулю <span class="mathjax">$2^{32}$</span>;</li><li>сумматор <span class="mathjax">$\oplus$</span> по модулю 2;</li><li>блок подстановки <span class="mathjax">$(S)$</span>;</li><li>регистр циклического сдвига на одиннадцать шагов в сторону старшего разряда <span class="mathjax">$(R)$</span>.</li></ul><p>Блок подстановки <span class="mathjax">$(S)$</span> состоит из 8 узлов замены &ndash; s-блоков с памятью на 64 бита каждый. Поступающий на вход блока подстановки 32-разрядный вектор разбивается на 8 последовательных 4-разрядных векторов, каждый из которых преобразуется в 4-разрядный вектор соответствующим узлом замены. Узел замены представляет собой таблицу из 16 строк, содержащих по 4 бита в строке. Входной вектор определяет адрес строки в таблице, заполнение данной строки является выходным вектором. Затем 4-разрядные выходные векторы последовательно объединяются в 32-разрядный вектор.</p><p>При перезаписи информации содержимое <span class="mathjax">$i$</span>-го разряда одного накопителя переписывается в <span class="mathjax">$i$</span>-й разряд другого накопителя.</p><p>Ключ, определяющий заполнение КЗУ, и таблицы блока подстановки <span class="mathjax">$K$</span> являются секретными элементами.</p><p>Стандарт не накладывает ограничений на степень секретности защищаемой информации.</p><p>ГОСТ 28147-89 удобен как для аппаратной, так и для программной реализаций.</p><p>Алгоритм имеет четыре режима работы:</p><ul><li>простой замены,</li><li>гаммирования,</li><li>гаммирования с обратной связью,</li><li>выработки имитовставки<a name="N82694"><!--имитовставка--></a>.</li></ul><p>Из них первые три &ndash; режимы шифрования, а последний &ndash; генерирования имитовставки<a name="N82701"><!--имитовставка--></a> (другие названия: инициализирующий вектор, синхропосылка). Подробно данные режимы описаны в следующем разделе.</p><p><a name="N82707"><!--шифр!ГОСТ 28147-89|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="5_4_Shifr_DES.html">&#129080; 5_4_Shifr_DES</a></li><li class="page-item"><a class="page-link" href="5_6_Standart_shifrovanija_SShA_AES.html">5_6_Standart_shifrovanija_SShA_AES &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

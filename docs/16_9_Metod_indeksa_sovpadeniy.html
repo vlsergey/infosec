@@ -1,0 +1,85 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="16_9_Метод_индекса_совпадений">16.9. Метод индекса совпадений</h2><p>Приведём теоретическое обоснование метода индекса совпадений. Пусть алфавит имеет размер <span class="mathjax">$A$</span>. Пронумеруем его буквы числами от <span class="mathjax">$1$</span> до <span class="mathjax">$A$</span>. Пусть заданы вероятности появления каждой буквы:</p><div class="mathjax" style="text-align: center;">$$ \mathcal{P} = \left\{ {p_1 ,p_2 , \ldots , p_A } \right\}. $$</div><p>В простейшей модели языка предполагается, что тексты состоят из последовательности букв, порождаемых источником независимо друг от друга с известным распределением <span class="mathjax">$\mathcal{P}$</span>.</p><p>Найдём индекс совпадений для различных предположений относительно распределений букв последовательности. Сначала рассмотрим случай, когда вероятности всех букв одинаковы. Пусть</p><div class="mathjax" style="text-align: center;">$$ \mathbf{X} = \left[ X_1, X_2, \dots, X_L \right] $$</div><p>&ndash; случайный текст с распределением</p><div class="mathjax" style="text-align: center;">$$ \mathcal{P}_1 = \left\{ p_{11}, p_{12}, \dots, p_{1A} \right\}. $$</div><p>Найдём индекс совпадений</p><div class="mathjax" style="text-align: center;">$$ I_c(\mathcal{P}_1), $$</div><p>то есть вероятность того, что в случайно выбранной паре позиций находятся одинаковые буквы.</p><p>Для пары позиций <span class="mathjax">$(k,j)$</span> найдём условную вероятность того, что на этих позициях находятся одинаковый символ:</p><div class="mathjax" style="text-align: center;">$$ P \left( X_k  = X_j \mid (k,j) \right) ~=~ \sum\limits_{i=1}^A p_{1i}^2 ~\equiv~ k_{p_1}. $$</div><p>Эта вероятность не зависит от выбора пары позиций <span class="mathjax">$(k,j)$</span>.</p><p>Так как число различных пар равно <span class="mathjax">$\frac{L(L - 1)}{2}$</span>, то вероятность случайного выбора пары <span class="mathjax">$(k,j)$</span> равна</p><div class="mathjax" style="text-align: center;">$$ P_{(K,J)} (k,j) = \frac{2}{L(L - 1)}. $$</div><p>Следовательно,</p><div class="mathjax" style="text-align: center;">$$\begin{eqnarray}
+    I(\mathcal{P}_1) ~= \sum \limits_{1 \leq k &lt; j \leq L} P_{(K,J)}(k,j) ~\cdot~ P(X_k  = X_j \mid (k,j)) =\\
+    = \sum \limits_{1 \leq k &lt; j \leq L} \frac{2}{L(L - 1)} k_{p_1} = k_{p_1}.
+\end{eqnarray}$$</div><p>Найдём теперь аналогичную вероятность <span class="mathjax">$I\left( {\mathcal{P}_1 ,\mathcal{P}_2 } \right)$</span> для случая, когда последовательность независимых случайных букв может быть представлена в виде</p><div class="mathjax" style="text-align: center;">$$
+\mathbf{X} = \left[ {\begin{array}{*{20}c}
+   {X_1 ,}  \\
+   {Y_1 ,}  \\
+ \end{array} \begin{array}{*{20}c}
+   {X_2 ,}  \\
+   {Y_2 ,}  \\
+ \end{array} \begin{array}{*{20}c}
+   { \ldots ,}  \\
+   { \ldots ,}  \\
+ \end{array} \begin{array}{*{20}c}
+   {X_{L/2} }  \\
+   {Y_{L/2} }  \\
+ \end{array} } \right],
+$$</div><p>где одинаково распределённые случайные буквы в первой строке имеют распределение:</p><div class="mathjax" style="text-align: center;">$$ \mathcal{P}_1  = \left\{ {p_{11} ,p_{12} , \ldots , p_{1A} } \right\}, $$</div><p>а одинаково распределённые случайные буквы во второй строке имеют другое распределение:</p><div class="mathjax" style="text-align: center;">$$ \mathcal{P}_2  = \left\{ {p_{21} ,p_{22} , \ldots , p_{2A} } \right\}. $$</div><p>В этом случае сумму по всем парам мы разделяем на три суммы: по парам внутри позиций первой строки, по парам внутри позиций второй строки и по парам, в которых первая позиция берётся из первой строки, а вторая &ndash; из второй:</p><div class="mathjax" style="text-align: center;">$$\begin{eqnarray}
+I(\mathcal{P}_1, \mathcal{P}_2) =
+        \frac{2}{L(L - 1)} \cdot \left(
+        \sum \limits_{1 \leq k &lt; j \leq L/2} P( X_k  = X_j \mid ( k,j )) + \right.
+\\
+        \left. + \sum\limits_{1 \leq k &lt; j \leq L/2} P(Y_k  = Y_j \mid (k,j)) +
+            \sum\limits_{k=1}^{L/2} \sum\limits_{j=1}^{L/2} {P(X_k = Y_j \mid (k,j))} \right) =
+\\
+    = \frac{2}{L(L - 1)} \left( \frac{1}{2} \frac{L}{2} \left( \frac{L}{2} - 1 \right) k_{p_1} +
+        \frac{1}{2} \frac{L}{2} \left( \frac{L}{2} - 1 \right) k_{p_2} +
+        \left( \frac{L}{2} \right)^2 k_{p_1, p_2} \right),
+\end{eqnarray}$$</div><p>где обозначено</p><div class="mathjax" style="text-align: center;">$$ k_{p_1, p_2}  = \sum\limits_{i=1}^A p_{1,i} p_{2,i}. $$</div><p>В общем случае рассмотрим последовательность, представленную в виде матрицы, состоящей из <span class="mathjax">$m$</span> строк и <span class="mathjax">$\frac{L}{m}$</span> столбцов, где</p><div class="mathjax" style="text-align: center;">$$
+{\mathbf X} = \left[ {\begin{array}{*{20}c}
+   {X_1 } &amp; {X_2 } &amp;  \cdots  &amp; {X_{L/m} }  \\
+   {Y_1 } &amp; {Y_2 } &amp;  \cdots  &amp; {Y_{L/m} }  \\
+    \vdots  &amp;  \vdots  &amp;  \ddots  &amp;  \vdots   \\
+   {Z_1 } &amp; {Z_2 } &amp;  \cdots  &amp; {Z_{L/m} }  \\
+\end{array}} \right].
+$$</div><p>Считаем, что одинаково распределённые случайные буквы в первой строке имеют распределение</p><div class="mathjax" style="text-align: center;">$$ P_1  = \left\{ {p_{11} ,p_{12} , \ldots , p_{1A} } \right\}, $$</div><p>одинаково распределённые случайные буквы во второй строке имеют распределение</p><div class="mathjax" style="text-align: center;">$$ P_2  = \left\{ {p_{21} ,p_{22} , \ldots , p_{2A} } \right\} $$</div><p>и<span class="nonbreaking-interword-space"> </span>т.&nbsp;д., одинаково распределённые случайные буквы <span class="mathjax">$m$</span>-й строки имеют распределение</p><div class="mathjax" style="text-align: center;">$$ P_m  = \left\{ {p_{m1},p_{m2} , \ldots , p_{mA} } \right\}. $$</div><p>Для вычисления вероятности того, что в случайно выбранной паре позиций будут одинаковые буквы, выполним суммирование по различным парам внутри строк и по парам между различными строками. Аналогично предыдущему случаю получим:</p><div class="mathjax" style="text-align: center;">$$\begin{eqnarray}
+I(\mathcal{P}_1, \mathcal{P}_2, \ldots, \mathcal{P}_m ) = \\
+= \frac{2}{L(L - 1)} \left( \frac{L}{2m} \left( \frac{L}{m} - 1 \right) k_{p_1} + \frac{L}{2m} \left( \frac{L}{m} - 1 \right) k_{p_2} + \right. \\
++ \dots + \left. \frac{L}{2m} \left( \frac{L}{m} - 1 \right) k_{p_m} \right) + \\
++ \frac{2}{L(L - 1)} \left( \left( \frac{L}{m} \right)^2 k_{p_1, p_2} + \left( \frac{L}{m} \right)^2 k_{p_1, p_3} + \dots + \left( \frac{L}{m} \right)^2 k_{p_{m - 1}, p_m } \right).
+\end{eqnarray}$$</div><p>Первая сумма содержит <span class="mathjax">$m$</span> слагаемых, вторая &ndash; <span class="mathjax">$ \frac{m(m-1)}{2}$</span> слагаемых. Полагая</p><div class="mathjax" style="text-align: center;">$$ k_{p_1} = k_{p_2} = \dots = k_{p_m} = k_p, $$</div><div class="mathjax" style="text-align: center;">$$ k_{p_i p_j } = k_r = \frac{1}{A}, ~ i \ne j, $$</div><p>получим после несложных выкладок</p><div class="mathjax" style="text-align: center;">$$ m = \frac{k_p  - k_r}{I - k_r  + \frac{k_p  - I}{L}}. $$</div><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="16_8_Klassi_slozhnosti_zadach.html">&#129080; 16_8_Klassi_slozhnosti_zadach</a></li><li class="page-item"><a class="page-link" href="Glava_17_Primeri_zadach.html">Glava_17_Primeri_zadach &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

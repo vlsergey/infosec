@@ -1,0 +1,52 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="5_3_Ячейка_Фейстеля">5.3. Ячейка Фейстеля</h2><p><a name="N82286"><!--ячейка Фейстеля|(--></a>
+Следующей идеей, продвинувшей развитие блочных шифров и приведшей к появлению государственного стандарта DES<a name="N82292"><!--шифр!DES--></a>, стала конструкция, получившая название <em>ячейка Фейстеля</em>. Данная конструкция приведена на рис.<span class="nonbreaking-interword-space"> </span><a href="5_3_Jacheyka_Feystelja.html#fig:Feistel">5.5</a>.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 60%;"><a name="fig:Feistel" style="vertical-align: top; align-self: start;"></a><img src="images/0D2F12F9634C305B4E15C422143D2D22.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 5.5 &mdash; Ячейка Фейстеля</figcaption></figure><p>На рис.<span class="nonbreaking-interword-space"> </span><a href="5_3_Jacheyka_Feystelja.html#fig:Feistel">5.5</a> изображён один раунд шифрования блочного шифра, использующего оригинальную ячейку Фейстеля. Каждый раунд шифрования принимает на вход блок с чётным количеством бит и делит его на две равные части <span class="mathjax">$L_k$</span> и <span class="mathjax">$R_k$</span>. Входным блоком для первого раунда является блок открытого текста. Правая часть <span class="mathjax">$R_k$</span> без изменений становится левой частью входного блока <span class="mathjax">$L_{k+1}$</span> следующего раунда шифрования. Кроме того, правая часть подаётся на вход <em>функции Фейстеля</em> <span class="mathjax">$F\left(R_k, K_k \right)$</span><a name="N82367"><!--функция!Фейстеля--></a>, аргументами которой являются половина блока данных и раундовый ключ<a name="N82373"><!--ключ!раундовый--></a> (раундовые ключи получаются в результате работы алгоритма ключевого расписания, как описано в разделе<span class="nonbreaking-interword-space"> </span><a href="#section-block-ciphers-intro">5.1</a>). Результат работы функции Фейстеля складывается с помощью побитового сложения по модулю 2 с левой частью входного блока <span class="mathjax">$L_k$</span>. Полученная последовательность бит становится правой частью выходного блока раунда шифрования. Таким образом, работа <span class="mathjax">$k$</span>-го раунда ячейки Фейстеля описывается следующими соотношениями:</p><div class="mathjax" style="text-align: center;">$$\begin{array}{l}
+    L_{k+1} = R_{k}, \\
+    R_{k+1} = L_{k} \oplus F\left( R_k, K_k \right).
+\end{array}$$</div><p>Результатом шифрования является конкатенация последних выходных блоков <span class="mathjax">$L_n$</span> и <span class="mathjax">$R_n$</span>, где <span class="mathjax">$n$</span> &ndash; число раундов шифрования.</p><p>Несложно показать, что зная раундовые ключи <span class="mathjax">$K_1, \dots, K_n$</span> и результат шифрования <span class="mathjax">$L_n$</span> и <span class="mathjax">$R_n$</span>, можно восстановить открытый текст. В частности, для каждого раунда:</p><div class="mathjax" style="text-align: center;">$$\begin{array}{l}
+    R_k = L_{k+1}, \\
+    L_k = R_{k+1} \oplus F\left( R_k, K_k \right).
+\end{array}$$</div><p>Таким образом, ячейка Фейстеля гарантирует корректность работы блочного шифра вне зависимости от сложности функции Фейстеля<a name="N82416"><!--функция!Фейстеля--></a> <span class="mathjax">$F\left(R_k, K_k \right)$</span>. В результате криптограф (автор шифра) при использовании ячейки Фейстеля не должен беспокоиться об обратимости функции шифрования в целом (конструкция ячейки Фестеля уже гарантирует это), а должен беспокоиться только о достаточной криптографической стойкости функции Фейстеля, необратимость которой не требуется (и даже вредит криптостойкости). Функция Фейстеля обычно состоит из блоков перестановок и замен (то есть из p- и s-блоков, уже рассмотренных ранее).</p><p><a name="N82425"><!--ячейка Фейстеля|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="5_2_SP_seti_Proekt_Ljutsifer_.html">&#129080; 5_2_SP_seti_Proekt_Ljutsifer_</a></li><li class="page-item"><a class="page-link" href="5_4_Shifr_DES.html">5_4_Shifr_DES &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

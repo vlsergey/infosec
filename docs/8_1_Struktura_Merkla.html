@@ -1,0 +1,49 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="8_1_Структура_Меркла_Дамгора">8.1. Структура Меркла<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Дамгора</h2><p><a name="N88155"><!--структура!Меркла—Дамгора|(--></a>
+Приведём пример метода построения хеш-функции, называемого структурой (конструкцией, методом) Меркла<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Дамгора (рис.<span class="nonbreaking-interword-space"> </span><a href="8_1_Struktura_Merkla.html#fig:merkle-damgard">8.1</a>), впервые описанной в кандидатской диссертации Ральфа Меркла в 1979 году. Меркл и Дамгор независимо друг от друга показали, что если раундовая функция сжатия (обозначенная <span class="mathjax">$f$</span> на рис.<span class="nonbreaking-interword-space"> </span><a href="8_1_Struktura_Merkla.html#fig:merkle-damgard">8.1</a>) устойчива к коллизиям, то итоговая хеш-функция будет также устойчива (англ. <span lang="en"><i>Ralph Charles Merkle</i></span>, дат. <span lang="danish"><i>Ivan Bjerre Damg&aring;rd</i></span>, [<a href="Literatura.html#Damgard:1990">26</a>, <a href="Literatura.html#Merkle:1990">71</a>, <a href="Literatura.html#Merkle:1979">72</a>]).</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 95%;"><a name="fig:merkle-damgard" style="vertical-align: top; align-self: start;"></a><img src="images/3509C67799116AE63150C3D06E0124B7.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 8.1 &mdash; Структура Меркла<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Дамгора</figcaption></figure><p>Пусть есть задан открытый текст <span class="mathjax">$M$</span> в виде двоичной последовательности некоторой длины. Текст дополняется, во-первых, дополнением (паддингом), во-вторых, длиной исходного сообщения таким образом, чтобы после дополнения обрабатываемая последовательность можно было разбить на целое число блоков фиксированной длины <span class="mathjax">$M_1, M_2, \dots, M_n$</span>.</p><p>Выбирается некоторый начальный вектор IV. Далее последовательно применяется раундовая функция сжатия к двум аргументам, первым из которых является рещультат предыдущего вызова (IV для самого первого), а вторым аргументом &ndash; соответствующий блок <span class="mathjax">$M_i$</span> обрабатываемой последовательности.</p><div class="mathjax" style="text-align: center;">$$\begin{array}{l}
+H_0 = \text{IV},\\
+H_i = f ( H_{i-1}, M_i ).\\
+\end{array}$$</div><p>В зависимости от хеш-функции структура может быть дополнена финальным преобразованием, в котором вторым аргументом будет ещё одна некоторая функция от исходного сообщения. Например, в хеш-функции &laquo;Стрибог&raquo;<a name="N88265"><!--хеш-функция!Стрибог--></a> таким аргументом является арифметическая функция всех блоков исходного открытого текста.</p><p>К плюсам данной конструкции относят доказанный авторами факт, что если раундовая функция сжатия устойчива к коллизиям, то итоговая хеш-функция будет также устойчива. Однако у конструкции присутствуют и недостатки.</p><ul><li>Атака на нахождение второго прообраза (для некоторого известного открытого текста) может быть выполнена за <span class="mathjax">$2^n / | M |$</span> операций, где <span class="mathjax">$| M |$</span> &ndash; длина открытого текста. Это меньше, чем требуется операций для полного перебора (<span class="mathjax">$2^n$</span>), особенно для длинных сообщений.</li><li>Если известен способ нахождения пары коллизий, то множественные коллизии найти незначительно сложнее.</li><li>В отсуствие финального преобразования при заданном значении хеш-функции <span class="mathjax">$h = H(M)$</span> (и неизвестном исходном сообщении <span class="mathjax">$M$</span>) можно легко найти значение <span class="mathjax">$H( pad(M) \| M' )$</span>, где <span class="mathjax">$pad(M)$</span> &ndash; функция дополнения, а <span class="mathjax">$M'$</span> &ndash; выбранный злоумышленником дополнительный текст к исходному сообщению.</li></ul><p>С использованием данной конструкции построены такие криптографические хеш-функции, как MD4<a name="N88303"><!--хеш-функция!MD4--></a>, SHA-1<a name="N88309"><!--хеш-функция!SHA-1--></a>, SHA-2<a name="N88315"><!--хеш-функция!SHA-2--></a>, российский стандарт ГОСТ<span class="nonbreaking-interword-space"> </span>Р<span class="nonbreaking-interword-space"> </span>34.11-2012 (&laquo;Стрибог&raquo;)<a name="N88325"><!--хеш-функция!Стрибог--></a> и многие другие.</p><p><a name="N88331"><!--структура!Меркла—Дамгора|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="Glava_8_Kriptograficheskie_hesh_funktsii.html">&#129080; Glava_8_Kriptograficheskie_hesh_funktsii</a></li><li class="page-item"><a class="page-link" href="8_2_MD5.html">8_2_MD5 &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="3_3_Полиграммный_шифр_замены_Хилла">3.3. Полиграммный шифр замены Хилла</h2><p><a name="N77014"><!--шифр!Хилла|(--></a>
+Если при шифровании преобразуются более двух букв открытого текста, то шифр называется <em>полиграммным</em><a name="N77025"><!--шифр!полиграммный--></a>. Первый полиграммный шифр предложил Лестер Хилл в 1929 году (англ. <span lang="en"><i>Lester Sanders Hill</i></span>, [<a href="Literatura.html#Hill:1931">46</a>, <a href="Literatura.html#Hill:1929">47</a>]). Это был первый шифр, который позволял оперировать более чем тремя символами за один такт.</p><p>В шифре Хилла текст предварительно преобразуют в цифровую форму и разбивают на последовательности (блоки) по <span class="mathjax">$n$</span> последовательных цифр. Такие последовательности называются <em><span class="mathjax">$n$</span>-граммами</em>. Выбирают обратимую по модулю <span class="mathjax">$m$</span>  <span class="mathjax">$(n \times n)$</span>-матрицу <span class="mathjax">$\mathbf{A} = (a_{ij})$</span>, где <span class="mathjax">$m$</span> &ndash; число букв в алфавите. Выбирают случайный <span class="mathjax">$n$</span>-вектор <span class="mathjax">$\mathbf{f} = (f_1, \dots, f_n)$</span>. После чего <span class="mathjax">$n$</span>-грамма открытого текста <span class="mathjax">$\mathbf{x} = (x_1, x_2, \dots, x_n)$</span> заменяется <span class="mathjax">$n$</span>-граммой шифрованного текста <span class="mathjax">$\mathbf{y} = (y_1, y_2, \dots, y_n)$</span> по формуле:</p><div class="mathjax" style="text-align: center;">$$ \mathbf{y} = \mathbf{x} \mathbf{A} + \mathbf{f} \mod m. $$</div><p>Расшифрование проводится по правилу:</p><div class="mathjax" style="text-align: center;">$$ \mathbf{x} = (\mathbf{y} - \mathbf{f}) \mathbf{A}^{-1} \mod m. $$</div><p><span style="font-variant: small-caps;"><b>Пример.</b></span> 
+Приведём пример шифрования с помощью шифра Хилла. Преобразуем английский алфавит в числовую форму (m = 26) следующим образом:</p><div class="mathjax" style="text-align: center;">$$ \text{a} \rightarrow 0, ~ \text{b} \rightarrow 1, ~ \text{c} \rightarrow 2, ~ \dots, ~ \text{z} \rightarrow 25. $$</div><!--%\[ \begin{array}{cccccccccccccc}--><!--%    a & b & c & d & e & f & g & h & i & j &  k &  l &  m &  n \\--><!--%    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13--><!--%\end{array} \]--><!--%\[ \begin{array}{cccccccccccc}--><!--%     o &  p &  q &  r &  s &  t &  u &  v &  w &  x &  y &  z  \\--><!--%    14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25--><!--%\end{array} \]--><p>Выберем для примера <span class="mathjax">$n = 2$</span>. Запишем фразу &laquo;Wheatstone was the inventor&raquo; из предыдущего примера (первая строка таблицы). Каждой букве поставим в соответствие её номер в алфавите (вторая строка):</p><div style="display: flex; align-items: center; justify-content: center;">  <table style="border-collapse: collapse;"><colgroup><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"></colgroup><tr style="border-bottom: solid thin;border-top: solid thin;"><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">w, h</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">e,a</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">t,s</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">t,o</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">n,e</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">w,a</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">s,t</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">h,e</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">i,n</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">v,e</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">n,t</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">o,r</td></tr><tr style="border-bottom: solid thin;border-top: solid thin;"><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">22, 7</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">4,0</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">19,18</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">19,14</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">13,4</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">22,0</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">18,19</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">7,4</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">8,13</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">21,4</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">13,19</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">14,17</td></tr></table>  </div><p>Выберем матрицу шифрования <span class="mathjax">$A$</span> в виде:</p><div class="mathjax" style="text-align: center;">$$
+    \mathbf{A} = \left( \begin{array}{cc}
+        5 &amp; 8 \\
+        3 &amp; 5 \\
+    \end{array} \right).
+$$</div><p>Эта матрица обратима по <span class="mathjax">${\operatorname{mod}}26$</span>, так как её определитель равен <span class="mathjax">$1$</span> и взаимно прост с числом букв английского алфавита <span class="mathjax">$m=26$</span>. Обратная матрица равна:</p><div class="mathjax" style="text-align: center;">$$
+    \mathbf{A}^{-1} = \left( \begin{array}{cc}
+        5  &amp; 18 \\
+        23 &amp; 5
+    \end{array} \right) \mod 26.
+$$</div><p>Выберем вектор <span class="mathjax">$\mathbf{f} = (4, 2)$</span>. Первая числовая пара открытого текста <span class="mathjax">$\mathbf{x} = (\text{w}, \text{h}) = (22, 7)$</span> зашифрована в виде:</p><div class="mathjax" style="text-align: center;">$$
+    \mathbf{y} = \mathbf{x} \mathbf{A} + \mathbf{f} =
+        (22, 7)
+        \left( \begin{array}{cc}
+            5 &amp; 8 \\
+            3 &amp; 5
+        \end{array} \right) +
+        (4, 2) = (14, 3) \mod 26
+$$</div><p>или в буквенном виде <span class="mathjax">$(\text{o}, \text{d})$</span>.</p><p>Повторяя вычисления для всех пар, получим полный шифрованный текст в числовом виде (третья строка) или в буквенном виде (четвёртая строка):</p><div style="display: flex; align-items: center; justify-content: center;">  <table style="border-collapse: collapse;"><colgroup><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"><col style="border-left: solid thin;border-right: solid thin;"></colgroup><tr style="border-top: solid thin;"><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">w, h</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">e, a</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">t, s</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">t, o</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">n, e</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">w, a</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">s, t</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">h, e</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">i, n</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">v, e</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">n, t</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">o, r</td></tr><tr style="border-bottom: solid thin;"><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">22, 7</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">4, 0</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">19, 18</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">19, 14</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">13, 4</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">22, 0</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">18, 19</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">7, 4</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">8, 13</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">21, 4</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">13, 19</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">14, 17</td></tr><tr style="border-top: solid thin;"><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">14, 3</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">24, 22</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">9, 21</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">3, 9</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">23, 1</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">10, 8</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">12, 19</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">19, 23</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">18, 3</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">11, 15</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">13, 20</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">2, 19</td></tr><tr style="border-bottom: solid thin;"><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">o, d</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">y, w</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">j, v</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">d, j</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">x, b</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">k, i</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">m, t</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">t, x</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">s, d</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">l, p</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">n, u</td><td style="padding-left: 6pt;padding-right: 6pt;text-align: center;white-space: nowrap;">c, t</td></tr></table>  </div><p>Криптосистема Хилла уязвима к частотному криптоанализу<a name="N77454"><!--криптоанализ!частотный--></a>, который основан на вычислении частот последовательностей символов. Рассмотрим пример &laquo;взлома&raquo; простого варианта криптосистемы Хилла.</p><p><span style="font-variant: small-caps;"><b>Пример.</b></span> В английском языке <span class="mathjax">$m = 26$</span>,</p><div class="mathjax" style="text-align: center;">$$ a \rightarrow 0, ~ b \rightarrow 1, ~ \dots, ~ z \rightarrow 25. $$</div><p>При шифровании использована криптосистема Хилла с матрицей второго порядка c нулевым вектором <span class="mathjax">$\mathbf{f}$</span>. Наиболее часто встречающиеся в шифртексте биграммы &ndash; RH и NI, в то время как в исходном языке &ndash; TH и HE (артикль THE). Найдём матрицу секретного ключа, составив уравнения</p><div class="mathjax" style="text-align: center;">$$
+    \begin{array}{l}
+        R = 17 = -9 \mod 26, ~~ H = 7 \mod 26, ~~ N = 13 \mod 26, \\
+        I = 8 \mod 26, ~~ T = 19 = -7 \mod 26, ~~ E=4 \mod 26; \\
+    \end{array}
+$$</div><div class="mathjax" style="text-align: center;">$$
+    \left( \begin{array}{cc}
+        \text{R} &amp; \text{H} \\
+        \text{N} &amp; \text{I}
+    \end{array} \right) =
+    \left( \begin{array}{cc}
+        \text{T} &amp; \text{H} \\
+        \text{H} &amp; \text{E}
+    \end{array} \right) \cdot
+    \left( \begin{array}{cc}
+        k_{1,1} &amp; k_{1,2} \\
+        k_{2,1} &amp; k_{2,2}
+    \end{array} \right) \mod 26;
+$$</div><div class="mathjax" style="text-align: center;">$$
+    \left( \begin{array}{cc}
+        -9 &amp; 7 \\
+        13 &amp; 8
+    \end{array} \right) =
+    \left( \begin{array}{cc}
+        -7 &amp; 7 \\
+        7 &amp; 4
+    \end{array} \right) \cdot
+    \left( \begin{array}{cc}
+        k_{1,1} &amp; k_{1,2} \\
+        k_{2,1} &amp; k_{2,2}
+    \end{array} \right) \mod 26.
+$$</div><p>Стоит обратить внимание на то, что числа 4, 8, 13 не имеют обратных элементов по модулю 26.</p><div class="mathjax" style="text-align: center;">$$
+    D = \det \left( \begin{array}{cc} -7 &amp; 7 \\ 7 &amp; 4 \end{array} \right) = -7 \cdot 4 - 7 \cdot 7 = 1 \mod 26.
+$$</div><div class="mathjax" style="text-align: center;">$$
+    \left( \begin{array}{cc} -7 &amp; 7 \\ 7 &amp; 4 \end{array} \right)^{-1} =
+    D^{-1} \left( \begin{array}{cc} 4 &amp; -7 \\ -7 &amp; -7 \end{array} \right) =
+    \left( \begin{array}{cc} 4 &amp; -7 \\ -7 &amp; -7 \end{array} \right) \mod 26.
+$$</div><div class="mathjax" style="text-align: center;">$$
+    \left( \begin{array}{cc} k_{1,1} &amp; k_{1,2} \\ k_{2,1} &amp; k_{2,2} \end{array} \right) =
+    \left( \begin{array}{cc} 4 &amp; -7 \\ -7 &amp; -7 \end{array} \right) \cdot
+    \left( \begin{array}{cc} -9 &amp; 7 \\ 13 &amp; 8 \end{array} \right) =
+$$</div><div class="mathjax" style="text-align: center;">$$
+    = \left( \begin{array}{cc} 3 &amp; -2 \\ -2 &amp; -1 \end{array} \right) \mod 26.
+$$</div><p>Найденный секретный ключ</p><div class="mathjax" style="text-align: center;">$$
+    \left( \begin{array}{cc} \text{D} &amp; \text{Y} \\ \text{Y} &amp; \text{Z} \end{array} \right).
+$$</div><p><a name="N77503"><!--шифр!Хилла|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="3_2_Bigrammnie_shifri_zameni.html">&#129080; 3_2_Bigrammnie_shifri_zameni</a></li><li class="page-item"><a class="page-link" href="3_4_Shifr_gammirovanija_Vizhenera.html">3_4_Shifr_gammirovanija_Vizhenera &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

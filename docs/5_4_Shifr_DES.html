@@ -1,0 +1,46 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="5_4_Шифр_DES">5.4. Шифр DES</h2><p><a name="N82446"><!--шифр!DES|(--></a>
+Развитием проекта &laquo;Люцифер&raquo;<a name="N82452"><!--шифр!Люцифер--></a> стал государственный стандарт США, известный как DES (англ. <span lang="en"><i>data encryption standard</i></span>). Это первый из рассматриваемых нами блочных шифров, который имеет ярко выраженные раунды шифрования, отдельно выделенную функцию ключевого расписания и основан на классической ячейке Фейстеля<a name="N82471"><!--ячейка Фейстеля--></a>. Поэтому для знакомства с шифром достаточно рассмотреть устройство функции Фейстеля<a name="N82477"><!--функция!Фейстеля--></a> как основного элемента, отличающего данный шифр от аналогичных.</p><p>В шифре DES открытый текст делится на блоки по 32 бита, и они обрабатываются в 16 раундах. Раундовые ключи генерируются из исходных 64 бит ключа (при этом значащими являются только 56 бит, а последние 8 бит используются для проверки корректности ввода ключа). На вход функции Фейстеля для шифра DES, схема которой приведена на рис.<span class="nonbreaking-interword-space"> </span><a href="5_4_Shifr_DES.html#fig:des">5.6</a>, подаётся половина от размера входного блока &ndash; 32 бита.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 75%;"><a name="fig:des" style="vertical-align: top; align-self: start;"></a><img src="images/48E8CD1D64E62C596B54A0A0C42803F6.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 5.6 &mdash; Функция Фейстеля<a name="N82517"><!--функция!Фейстеля--></a> шифра DES</figcaption></figure><p>Эти 32 бита проходят через функцию расширения, которая с помощью дублирования отдельных битов превращает их в 48 бит. Они суммируются побитово по модулю 2 с раундовым ключом. Результат подаётся на вход 8 s-блоков, которые работают как таблицы замен последовательности из 6 бит в 4 бита (каждый блок). На выходе s-блоков получаются <span class="mathjax">$8 \times 4 = 32$</span> бита, которые попадают в p-блок перестановки. Результат работы p-блока является результатом функции Фейстеля<a name="N82528"><!--функция!Фейстеля--></a> для одного раунда шифра DES.</p><p>Интересно отметить, что изначально автором предполагалось использовать ключ в 128 бит, но под напором АНБ (Агентство национальной безопасности, англ. <span lang="en"><i>National Security Agency, NSA</i></span>) он был сокращён до 56 бит, что на тот момент составляло вполне достаточную для криптостойкости величину. Кроме того, АНБ указало обязательные к использованию s-блоки (таблицы замен). Много позже, в 90-х годах, когда были разработаны методы линейного и дифференциального криптоанализа, выяснилось, что предложенные АНБ в 70-х годах s-блоки устойчивы к данным методам криптоанализа, как будто специально делались с учётом возможности их использования.</p><p><a name="N82547"><!--шифр!DES|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="5_3_Jacheyka_Feystelja.html">&#129080; 5_3_Jacheyka_Feystelja</a></li><li class="page-item"><a class="page-link" href="5_5_GOST_28147_89.html">5_5_GOST_28147_89 &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

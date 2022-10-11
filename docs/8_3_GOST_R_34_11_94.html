@@ -1,0 +1,50 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="8_3_ГОСТ_Р_34_11_94">8.3. ГОСТ Р 34.11-94</h2><p><a name="N88628"><!--хеш-функция!ГОСТ Р 34.11-94|(--></a>
+Устаревший российский стандарт ГОСТ<span class="nonbreaking-interword-space"> </span>Р<span class="nonbreaking-interword-space"> </span>34.11-94<span class="nonbreaking-interword-space"> </span><a href="Literatura.html#GOST-94">[119]</a> &laquo;Информационная технология. Криптографическая защита информации. Функция хэширования&raquo; описывает хеш-функцию, которая в целом также построена с использованием структуры Меркла<span class="nonbreaking-interword-space"> </span>&mdash;<span class="nonbreaking-interword-space"> </span>Дамгора<a name="N88647"><!--структура!Меркла—Дамгора--></a>, но со своими особенностями (рис.<span class="nonbreaking-interword-space"> </span><a href="8_3_GOST_R_34_11_94.html#fig:gost-94">8.4</a>).</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 100%;"><a name="fig:gost-94" style="vertical-align: top; align-self: start;"></a><img src="images/CF6F50AF43C7D8351AB735964D9D413E.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 8.4 &mdash; Структура хеш-функции ГОСТ<span class="nonbreaking-interword-space"> </span>Р<span class="nonbreaking-interword-space"> </span>34.11-94</figcaption></figure><ul><li>Сообщение обрабатывается не с начального блока, а с конечного. Для целей удобства записи считается, что исходное сообщение разбивается на блоки<div class="mathjax" style="text-align: center;">$$
+  M = m_n \| m_{n-1} \| \dots \| m_2 \| m_1.
+$$</div></li><li>Дополнение происходит в блоке <span class="mathjax">$m_n$</span>, то есть в последнем обрабатываемом, но первом с точки зрения исходного текста. Блок дополняется нулями &laquo;слева&raquo; (то есть перед открытым текстом) до размера в 256 бит.</li><li>В отличие от хеш-функции MD5<a name="N88709"><!--хеш-функция!MD5--></a> присутствует финальное преобразование, которое выполняется над арифметической суммой всех обработанных блоков. В будущем аналогичное преобразование будет использоваться и в хеш-функции ГОСТ<span class="nonbreaking-interword-space"> </span>Р<span class="nonbreaking-interword-space"> </span>34.11-2012 &laquo;Стрибог&raquo;<a name="N88719"><!--хеш-функция!Стрибог|(--></a>.</li><li>Для хеш-функции не определены стартовый вектор <span class="mathjax">$H_0 = IV$</span>, внутренние параметры раундовой функции компресии (параметры <span class="mathjax">$s$</span>-блоков используемой функции шифрования) и способ представления результатов хеширования в виде 16-ричной и/или Base64-записи, что привело к появлению нескольких, несовместимых между собой реализаций алгоритма.</li></ul><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 100%;"><a name="fig:gost-94-elxlxl" style="vertical-align: top; align-self: start;"></a><img src="images/01217DAD6BA89DD217A95D2795799E59.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 8.5 &mdash; Последовательность преобразований в раундовой функции сжатия ГОСТ<span class="nonbreaking-interword-space"> </span>Р<span class="nonbreaking-interword-space"> </span>34.11-94</figcaption></figure><p>Раундовая функция сжатия состоит из нескольких последовательных преобразований, как показано на рис.<span class="nonbreaking-interword-space"> </span><a href="8_3_GOST_R_34_11_94.html#fig:gost-94-elxlxl">8.5</a>.</p><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 75%;"><a name="fig:gost-94-encrypt" style="vertical-align: top; align-self: start;"></a><img src="images/F7029D66456033ACE0E923B1D9AF1852.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 8.6 &mdash; Шифрующее преобразование <span class="mathjax">$E$</span> в раундовой функции сжатия хеш-функции ГОСТ<span class="nonbreaking-interword-space"> </span>Р<span class="nonbreaking-interword-space"> </span>34.11-94</figcaption></figure><ul><li>Результат обработки предыдущего блока <span class="mathjax">$H_{i-1}$</span> разделяется на 4 части.  Каждая из них шифруется собственным ключом (также полученным из <span class="mathjax">$H_{i-1}$</span>) с помощью блочного шифра ГОСТ<span class="nonbreaking-interword-space"> </span>28147&mdash;89 в режиме простой замены, как показано на рис.<span class="nonbreaking-interword-space"> </span><a href="8_3_GOST_R_34_11_94.html#fig:gost-94-encrypt">8.6</a>. Результат шифрования конкатенируется (в <span class="mathjax">$S$</span>).
+
+<figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; width: 55%;"><a name="fig:gost-94-permutation" style="vertical-align: top; align-self: start;"></a><img src="images/89C8A1F5808B7CE26AAE560695F85A0A.png" style="width: 100%"><figcaption style="flex-basis: 100%; text-align: center;">Рис. 8.7 &mdash; Линейное преобразование <span class="mathjax">$L$</span> в раундовой функции сжатия хеш-функции ГОСТ<span class="nonbreaking-interword-space"> </span>Р<span class="nonbreaking-interword-space"> </span>34.11-94</figcaption></figure></li><li>Блок <span class="mathjax">$S$</span> разбивается на 16 частей (по 16 бит), далее производится линейное преобразование, изображённое на рис.<span class="nonbreaking-interword-space"> </span><a href="8_3_GOST_R_34_11_94.html#fig:gost-94-permutation">8.7</a>. Все блоки кроме <span class="mathjax">$x_1$</span> сдвигаются на одну позицию вправо. Значение первого блока <span class="mathjax">$x_1$</span> складывается побитово по модулю 2 (операция XOR) со значениями блоков <span class="mathjax">$x_2, x_3, x_4, x_13$</span> и <span class="mathjax">$x_15$</span>, результат помещается в блок <span class="mathjax">$x_16$</span>. Данное преобразование (<span class="mathjax">$L$</span>) повторяется 12 раз.</li><li>К результату предыдущих преобразований складывается побитово по модулю 2 (операция XOR) с обрабатываемым блоком <span class="mathjax">$m_i$</span>. Это первый и единственный раз, когда в преобразованиях участвует обрабатываемая последовательность. Результат сложения пропускается через линейное преобразование <span class="mathjax">$L$</span> 1 раз.</li><li>К результату побитово по модулю 2 (операция XOR) добавляется результат обработки предыдущей раундовой функции сжатия <span class="mathjax">$H_{i-1}$</span>. Результат сложения пропускается через линейное преобразование <span class="mathjax">$L$</span> 61 раз.</li></ul><p>В 2008 году криптоаналитики из Европы сумели уменьшить количество операций для поиска коллизий в <span class="mathjax">$2^{23}$</span> раза (по сравнению с ожидаемым количеством <span class="mathjax">$2^{128}$</span>, <a href="Literatura.html#Boldyreva:Fehr:ONeill:2008">[18]</a>). Хотя в целом это не позволяет говорить о криптографической ненадёжности хеш-функции на текущий момент, но показывает, что при её проектировании были допущеные определённые ошибки. С 1 января 2013 года на территории России стандарт был заменён на ГОСТ Р 34.11-2012 &laquo;Стрибог&raquo;.</p><p><a name="N88923"><!--хеш-функция!ГОСТ Р 34.11-94|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="8_2_MD5.html">&#129080; 8_2_MD5</a></li><li class="page-item"><a class="page-link" href="8_4_Hesh_funktsija_Stribog_.html">8_4_Hesh_funktsija_Stribog_ &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>

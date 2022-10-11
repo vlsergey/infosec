@@ -1,0 +1,83 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="utf-8"><style type="text/css"> 
+div.toc-item-h2 {
+  padding-left: 2em;
+}
+div.toc-item-h3 {
+  padding-left: 4em;
+}
+div.toc-item-h4 {
+  padding-left: 6em;
+}
+div.toc-item-h5 {
+  padding-left: 8em;
+}
+div.toc-item-h6 {
+  padding-left: 10em;
+}
+</style><link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet"><style type="text/css"> 
+span.small {
+  font-size: 90%
+}
+span.tiny {
+  font-size: 50%
+}
+</style><style type="text/css"> 
+div.mathjax {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+</style></head><body><div class="container"><h2 data-command-name="section" id="11_4_Схемы_с_доверенным_центром">11.4. Схемы с доверенным центром</h2><p><a name="N102052"><!--схема!распределения ключей|(--></a>
+Схемы распределения ключей с доверенным центром состоят из трёх этапов.</p><ol><li>На первом этапе доверенный центр создаёт некоторый секрет, известный только ему. Это может быть некоторая секретная матрица с особыми свойствами, как в схеме Блома<a name="N102061"><!--схема!Блома--></a> из раздела<span class="nonbreaking-interword-space"> </span><a href="#section-bloms-scheme">11.4.2</a>, или пара из закрытого и открытого ключей, как в схеме Жиро<a name="N102074"><!--схема!Жиро--></a> из раздела<span class="nonbreaking-interword-space"> </span><a href="#section-girault-scheme">11.4.1</a>.</li><li>Для каждого нового легального участника сети доверенный центр, используя свою секретную информацию, вырабатывает некоторый отпечаток или сертификат, который позволяет новому участнику вырабатывать сеансовые ключи с другими легальными участниками.</li><li>Наконец, на третьем этапе, когда начинается протокол общения двух легальных участников, они предъявляют друг-другу идентификаторы и/или дополнительную информацию от доверенного центра. Используя её, без дополнительного обращения к центру, они могут сгенерировать секретный сеансовый ключ для общения между собой.</li></ol><h3 data-command-name="subsection" id="11_4_1_Схема_Жиро">11.4.1. Схема Жиро</h3><p><a name="N102108"><!--схема!Жиро|(--></a>
+В схеме Жиро (фр. <span lang="french"><i>Marc Girault</i></span>,<span class="nonbreaking-interword-space"> </span>[<a href="Literatura.html#Girault:1990">42</a>, <a href="Literatura.html#Girault:1991">43</a>]) надёжность строится на стойкости криптосистемы RSA (сложности факторизации больших чисел и вычисления дискретного корня).</p><p>Предварительно:</p><ul><li>Доверенный центр (Трент, <span class="mathjax">$T$</span>):
+    <ul><li>выбирает общий модуль <span class="mathjax">$n = p \times q$</span>, где <span class="mathjax">$p$</span> и <span class="mathjax">$q$</span> &ndash; большие простые числа;</li><li>выбирает пару из закрытого и открытого ключей:<div class="mathjax" style="text-align: center;">$$\begin{array}{l}
+            K_{T, \text{public}}: (e, n) \\
+            K_{T, \text{private}}: (d, n);
+        \end{array}$$</div></li><li>выбирает элемент <span class="mathjax">$g$</span> поля <span class="mathjax">$\mathbb{Z}_n^{\times}$</span> максимального порядка;</li><li>публикует в общедоступном для всех участников месте параметры схемы <span class="mathjax">$n$</span>, <span class="mathjax">$e$</span> и <span class="mathjax">$g$</span>.</li></ul></li><li>Каждый из легальных участников:
+    <ul><li>выбирает себе закрытый ключ <span class="mathjax">$s_i$</span> и идентификатор <span class="mathjax">$I_i$</span>;</li><li>вычисляет и отправляет доверенному центру<div class="mathjax" style="text-align: center;">$$v_i = g^{-s_i} \mod n;$$</div></li><li>используя протокол аутентификации сторон (см. ниже) участник доказывает доверенному центру <span class="mathjax">$T$</span>, что владеет закрытым ключом, не раскрывая его значение;</li><li>получает от доверенного центр свой открытый ключ:
+            <div class="mathjax" style="text-align: center;">$$ P_i = (v_i - I_i)^d = (g^{-s_i} - I_i)^d \mod n; $$</div></li></ul>
+    В результате для каждого участника, например, Алисы, которая владеет <span class="mathjax">$P_A, I_A, s_a$</span> будет выполняться утверждение:
+        <div class="mathjax" style="text-align: center;">$$ P_A^e + I_A = g^{-s_A} \mod n. $$</div></li></ul><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; "><a name="fig:key_distribution-girault-auth" style="vertical-align: top; align-self: start;"></a><command name="sequencediagram"><argument required="true">sequencediagram</argument><content>
+		<command name="newinst"><argument required="true">Alice</argument><argument required="true">Alice</argument></command>
+		<command name="newinst"><argument required="false">3</argument><argument required="true">Bob</argument><argument required="true">Bob</argument></command>
+
+		<command name="mess"><argument required="true">Alice</argument><argument required="true"><span class="mathjax">$ I_A, P_A, t = g^{R_A} \bmod n $</span></argument><argument required="true">Bob</argument></command>
+		<command name="mess"><argument required="true">Bob</argument><argument required="true"><span class="mathjax">$ R_B $</span></argument><argument required="true">Alice</argument></command>
+		<command name="mess"><argument required="true">Alice</argument><argument required="true"><span class="mathjax">$  y = R_A + s_A \times R_B \bmod n $</span></argument><argument required="true">Bob</argument></command>
+	</content></command><figcaption style="flex-basis: 100%; text-align: center;">Рис. 11.20 &mdash; Протокол аутентификации Жиро</figcaption></figure><p>Протокол аутентификации сторон в общем случае выглядит следующим образом (рис.<span class="nonbreaking-interword-space"> </span><a href="11_4_Shemi_s_doverennim_tsentrom.html#fig:key_distribution-girault-auth">11.20</a>).</p><!--%--><command name="samepage"><argument required="true">samepage</argument><content><!--%--><command name="@beginparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><command name="@endparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><ul><li>Алиса выбирает случайное <span class="mathjax">$R_A$</span>.</li><li><span class="mathjax">$Alice \to \left\{ I_A, P_A, t = g^{R_A} \bmod n \right\} \to Bob$</span></li><li>Боб выбирает случайное <span class="mathjax">$R_B$</span>.</li><li><span class="mathjax">$Bob \to \left\{ R_B \right\} \to Alice$</span></li><li><span class="mathjax">$Alice \to \left\{ y = R_A + s_A \times R_B \bmod n \right\} \to Bob$</span></li><li>Боб вычисляет <span class="mathjax">$v_A = P_A^e + I_A \bmod n $</span>;</li><li>Боб проверяет, что <span class="mathjax">$t = g^ y v_A^{R_B} \bmod n$</span>.</li></ul></content></command><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; "><a name="fig:key_distribution-girault-scheme" style="vertical-align: top; align-self: start;"></a><command name="sequencediagram"><argument required="true">sequencediagram</argument><content>
+		<command name="newinst"><argument required="true">Alice</argument><argument required="true">Alice</argument></command>
+		<command name="newinst"><argument required="false">3</argument><argument required="true">Bob</argument><argument required="true">Bob</argument></command>
+
+		<command name="mess"><argument required="true">Alice</argument><argument required="true"><span class="mathjax">$ P_A, I_A $</span></argument><argument required="true">Bob</argument></command>
+		<command name="mess"><argument required="true">Bob</argument><argument required="true"><span class="mathjax">$ P_B, I_B $</span></argument><argument required="true">Alice</argument></command>
+	</content></command><figcaption style="flex-basis: 100%; text-align: center;">Рис. 11.21 &mdash; Схема Жиро</figcaption></figure><p>Протокол генерации сессионного ключа, называемый <em>схемой Жиро</em>, как и другие схемы, состоит из проходов обмена открытой информацией и вычисления ключа (рис.<span class="nonbreaking-interword-space"> </span><a href="11_4_Shemi_s_doverennim_tsentrom.html#fig:key_distribution-girault-scheme">11.21</a>).</p><!--%--><command name="samepage"><argument required="true">samepage</argument><content><!--%--><command name="@beginparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><command name="@endparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><ul><li><span class="mathjax">$Alice \to \left\{ P_A, I_A \right\} \to Bob$</span></li><li>Боб вычисляет <span class="mathjax">$K_{BA} = (P_A^e + I_A)^{s_B} \bmod n$</span>.</li><li><span class="mathjax">$Bob \to \left\{ P_B, I_B \right\} \to Alice$</span></li><li>Алиса вычисляет <span class="mathjax">$K_{AB} = (P_B^e + I_B)^{s_A} \bmod n$</span>.</li></ul></content></command><p>В результате работы схемы стороны сгенерировали одинаковый общий сеансовый ключ.</p><div class="mathjax" style="text-align: center;">$$ K_{AB} = (P_A^e + I_A)^{s_B} = (g^{-s_A})^{s_B} = g^{-s_As_B} \mod n; $$</div><div class="mathjax" style="text-align: center;">$$ K_{BA} = (P_B^e + I_B)^{s_A} = (g^{-s_B})^{s_A} = g^{-s_As_B} \mod n; $$</div><div class="mathjax" style="text-align: center;">$$ K = K_{AB} = K_{BA} = g^{-s_As_B} \mod n. $$</div><p>Схема обеспечивает аутентификацию ключа (цель G7), так как только легальные пользователи смогут вычислить корректное значение общего сессионного ключа.</p><p><a name="N102491"><!--схема!Жиро|)--></a></p><h3 data-command-name="subsection" id="11_4_2_Схема_Блома">11.4.2. Схема Блома</h3><p><a name="N102513"><!--схема!Блома|(--></a>
+Схема Блома (англ. <span lang="en"><i>Rolf Blom</i></span>,<span class="nonbreaking-interword-space"> </span>[<a href="Literatura.html#Blom:1984">16</a>, <a href="Literatura.html#Blom:1985">17</a>]) используется в протоколе HDCP<a name="N102539"><!--протокол!HDCP--></a> (англ. <span lang="en"><i>High-bandwidth Digital Content Protection</i></span>) для предотвращения копирования высококачественного видеосигнала. Предполагается, что некоторый доверенный центр распределит ключи таким образом, что легальные производители видеокарт, мониторов высокого разрешения и других компонент будут передавать видеоконтент по защищённому каналу, а &laquo;пиратские&raquo; устройства не смогут эти данные перехватить, и, например, записать на другой носитель.</p><p>На этапе инициализации доверенный центр выбирает симметричную матрицу <span class="mathjax">$D_{m,m}$</span> над конечным полем <span class="mathjax">${{\mathbb{GF}}()}p$</span>. Для присоединения к сети распространения ключей, новый участник либо самостоятельно, либо с помощью доверенного центра выбирает новый открытый ключ (идентификатор) <span class="mathjax">$I_i$</span>, представляющий собой вектор длины <span class="mathjax">$m$</span> над <span class="mathjax">${{\mathbb{GF}}()}p$</span>. Доверенный центр вычисляет для нового участника закрытый ключ <span class="mathjax">$K_i$</span>:</p><command name="equation"><argument required="true">equation</argument><content>
+	K_i = D_m,m I_i.
+	<a name="#eq:blom_center_matrix"></a>
+</content></command><figure style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; width: fit-content; height: fit-content; "><a name="fig:key_distribution-bloms-scheme" style="vertical-align: top; align-self: start;"></a><command name="sequencediagram"><argument required="true">sequencediagram</argument><content>
+		<command name="newinst"><argument required="true">Alice</argument><argument required="true">Alice</argument></command>
+		<command name="newinst"><argument required="false">3</argument><argument required="true">Bob</argument><argument required="true">Bob</argument></command>
+		
+		<command name="mess"><argument required="true">Alice</argument><argument required="true"><span class="mathjax">$ I_A $</span></argument><argument required="true">Bob</argument></command>
+		<command name="mess"><argument required="true">Bob</argument><argument required="true"><span class="mathjax">$I_B $</span></argument><argument required="true">Alice</argument></command>
+		
+		<command name="postlevel"></command>
+		<command name="callself"><argument required="true">callself</argument><argument required="true">Alice</argument><argument required="true"><span class="mathjax">$K_{AB} = K^T_A I_B$</span></argument><argument required="true"></argument><content></content></command>
+		<command name="prelevel"></command><command name="prelevel"></command>
+		<command name="callself"><argument required="true">callself</argument><argument required="true">Bob</argument><argument required="true"><span class="mathjax">$K_{BA} = K^T_B I_A$</span></argument><argument required="true"></argument><content></content></command>
+	</content></command><figcaption style="flex-basis: 100%; text-align: center;">Рис. 11.22 &mdash; Схема Блома</figcaption></figure><p>Симметричность матрицы <span class="mathjax">$D_{m,m}$</span> доверенного центра позволяет любым двум участникам сети создать общий сеансовый ключ. Пусть Алиса и Боб &ndash; легальные пользователи сети, то есть они обладают открытыми ключами <span class="mathjax">$I_A$</span> и <span class="mathjax">$I_B$</span> соответственно, а их закрытые ключи <span class="mathjax">$K_A$</span> и <span class="mathjax">$K_B$</span> были вычислены одним и тем же доверенным центром по формуле<span class="nonbreaking-interword-space"> </span><a href="#eq:blom_center_matrix">[eq:blom_center_matrix]</a>. Тогда протокол выработки общего секретного ключа выглядит следующим образом (рис.<span class="nonbreaking-interword-space"> </span><a href="11_4_Shemi_s_doverennim_tsentrom.html#fig:key_distribution-bloms-scheme">11.22</a>).</p><!--%--><command name="samepage"><argument required="true">samepage</argument><content><!--%--><command name="@beginparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><command name="@endparpenalty"></command>=<command name="@lowpenalty"></command><!--%--><ul><li><span class="mathjax">$Alice \to \left\{ I_A \right\} \to Bob$</span></li><li>Боб вычисляет <span class="mathjax">$K_{BA} = K^T_B I_A = I^T_B D_{m,m} I_A$</span>.</li><li><span class="mathjax">$Bob \to \left\{ I_B \right\} \to Alice$</span></li><li>Алиса вычисляет <span class="mathjax">$K_{AB} = K^T_A I_B = I^T_A D_{m,m} I_B$</span>.</li></ul></content></command><p>Из симметричности матрицы <span class="mathjax">$D_{m,m}$</span> следует, что значения <span class="mathjax">$K_{AB}$</span> и <span class="mathjax">$K_{BA}$</span> совпадут, они же и будут являться общим секретным ключом для Алисы и Боба. Этот секретный ключ будет свой для каждой пары легальных пользователей сети.</p><p>Присоединение новых участников к схеме строго контролируется доверенным центром, что позволяет защитить сеть от нелегальных пользователей. Надёжность данной схемы основывается на невозможности восстановить исходную матрицу. Однако для восстановления матрицы доверенного центра размера <span class="mathjax">$m \times m$</span> необходимо и достаточно всего <span class="mathjax">$m$</span> пар линейно независимых открытых и закрытых ключей. В 2010-м году компания Intel, которая является &laquo;доверенным центром&raquo; для пользователей системы защиты HDCP, подтвердила, что криптоаналитикам удалось найти секретную матрицу (точнее, аналогичную ей), используемую для генерации ключей в упомянутой системе предотвращения копирования высококачественного видеосигнала.</p><p><a name="N102790"><!--схема!Блома|)--></a><a name="N102796"><!--схема!распределения ключей|)--></a></p><nav aria-label="Page navigation example"><ul class="pagination justify-content-center"><li class="page-item"><a class="page-link" href="11_3_Kriptosistemi_protokoli_.html">&#129080; 11_3_Kriptosistemi_protokoli_</a></li><li class="page-item"><a class="page-link" href="11_5_Asimmetrichnie_protokoli.html">11_5_Asimmetrichnie_protokoli &#129082;</a></li></ul></nav></div><script>
+window.MathJax = {
+  loader: {
+    load: ['[tex]/tagformat'],
+  },
+  options: {
+    processHtmlClass: 'mathjax'
+  },
+  tex: {
+    packages: {
+      '[+]': ['base', 'ams', 'physics', 'textcomp']
+    },
+    inlineMath: [['$', '$']],
+  },
+};
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="yes" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></body></html>
